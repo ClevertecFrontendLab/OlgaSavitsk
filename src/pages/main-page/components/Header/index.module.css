@@ -1,0 +1,28 @@
+.header {
+    background: #f0f5ff;
+}
+
+.button_trigger {
+    position: fixed;
+    top: 47vh;
+    width: 20px;
+    height: 66px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.trigger {
+    font-size: 13px;
+    line-height: 64px;
+    color: #8c8c8c;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}

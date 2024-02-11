@@ -1,3 +1,5 @@
+@import url('./theme/index.module.css');
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -25,7 +27,4 @@ h1 {
     line-height: 1.1;
 }
 
-.ant-menu-inline,
-.ant-menu-vertical {
-    border-right: none;
-}
+
