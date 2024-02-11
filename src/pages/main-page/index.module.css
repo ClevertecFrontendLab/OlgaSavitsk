@@ -1,0 +1,83 @@
+#root {
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.button_trigger {
+    position: fixed;
+    top: 50vh;
+    width: 20px;
+    height: 66px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.trigger {
+    font-size: 13px;
+    line-height: 64px;
+    color: #8c8c8c;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.logo {
+    text-align: center;
+    margin: 53px 0 46px;
+    padding: 0 46px 0 29px;
+    transition: width 0.3s, padding 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.collapsed {
+    left: 0;
+    margin: 53px 0 46px;
+    padding: 0 calc(50% - 32px / 2);
+    text-overflow: clip;
+}
+
+.site_layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site_layout .layout_background {
+    display: flex;
+    flex: 1 1 auto;
+    background: #fff;
+}
+
+.site_layout .header {
+    height: 168px;
+    padding: 0;
+    background: #f0f5ff;
+}
+
+:global .ant-menu-item-icon {
+    color: #061178;
+}
+
+:global .ant-menu {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+:global .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+}
+
+:global .ant-menu-item-divider {
+    display: flex;
+    flex: 1 1 auto;
+    border-width: 0 0 2px;
+}

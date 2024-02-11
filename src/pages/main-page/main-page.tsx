@@ -1,34 +1,65 @@
 import React, { useState } from 'react';
 
-import reactLogo from '/react.svg';
-import viteLogo from '/vite.svg';
-import tsLogo from '/ts.svg';
-import './main-page.css';
+import 'antd/dist/antd.css';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from '@ant-design/icons';
+import { Layout, Menu, Image, Button } from 'antd';
+
+import { menuItems } from '@constants/menu.constants';
+import classes from './index.module.css';
+
+const { Header, Sider, Content, Footer } = Layout;
 
 export const MainPage: React.FC = () => {
-    const [count, setCount] = useState(0);
+  const [collapsed, setCollapsed] = useState(false);
 
-    return (
-        <>
-            <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                    <img src={reactLogo} className='logo react' alt='React logo' />
-                </a>
-                <a href='https://www.typescriptlang.org/' target='_blank'>
-                    <img src={tsLogo} className='logo' alt='TS logo' />
-                </a>
-            </div>
-            <h1>Vite + React + TS</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/pages/main-page.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-        </>
-    );
+  return (
+    <>
+      <Layout>
+        <Sider theme='light' width={208} trigger={null} collapsible collapsed={collapsed} style={{
+          boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.15)',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+          <div className={collapsed ? classes.collapsed : classes.logo}>
+            <Image
+              src={collapsed ? "../fit.svg" : '../logo.svg'}
+              preview={false}
+              alt='logo'
+            />
+          </div>
+
+          <Menu
+            theme='light'
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            items={menuItems}
+          />
+        </Sider>
+        <Layout className={classes.site_layout}>
+          <Header className={classes.header}>
+            <Button className={classes.button_trigger}>
+              {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                className: classes.trigger,
+                onClick: () => setCollapsed(!collapsed),
+              })}
+            </Button>
+          </Header>
+          <Content
+            className={classes.layout_background}
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+            }}
+          >
+            Content
+          </Content>
+          <Footer />
+        </Layout>
+      </Layout >
+    </>
+  );
 };
