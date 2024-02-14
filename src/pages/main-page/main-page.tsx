@@ -12,8 +12,7 @@ const { Meta } = Card;
 
 export const MainPage: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { lg, xs } = useBreakpoint();
-
+  const { md, xs } = useBreakpoint();
   return (
     <>
       <Layout>
@@ -30,8 +29,8 @@ export const MainPage: React.FC = () => {
               align={xs ? 'center' : 'end'}
               style={{
                 display: 'flex',
-                justifyContent: lg ? 'space-between' :  !lg  ? 'center' : 'center',
-                flexDirection:  lg ? 'row' : !lg ? 'column-reverse' : 'row',
+                justifyContent: md ? 'space-between' :  !md  ? 'center' : 'center',
+                flexDirection:  md ? 'row' : !md ? 'column-reverse' : 'row',
                 gap: xs ? '18px' : '8px'
               }}>
 
