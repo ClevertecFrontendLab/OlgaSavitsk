@@ -16,7 +16,7 @@ interface HeaderProps {
 const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) => {
   const [collapsed, setCollapsed] = useState(false);
   const { lg, xs } = useBreakpoint();
-  console.log(useBreakpoint(), collapsed)
+
   return (
     <>
       <PageHeader
@@ -43,10 +43,11 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
           lg ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
             Настройки
           </Button> :
-            <Button shape="circle" icon={<SettingOutlined />} />
+            <Button key={2} shape="circle" icon={<SettingOutlined />} />
         ]}
       >
-        <Button className={classes.button_trigger} style={{ top: xs ? '3vh' : '47vh', left: xs ? 105 : 'auto', transform:  xs && collapsed ? 'translateX(-104px)' : 'none'}}>
+        {xs ? <Button key={1} data-test-id='sider-switch-mobile' className={classes.button_trigger__mobile}
+          style={{left: xs ? 105 : 'auto', transform: xs && collapsed ? 'translateX(-104px)' : 'none' }}>
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
             className: classes.trigger,
             onClick: () => {
@@ -54,7 +55,16 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
               getCollapted(!collapsed)
             },
           })}
-        </Button>
+        </Button> :
+          <Button key={2} data-test-id='sider-switch' className={classes.button_trigger}>
+            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              className: classes.trigger,
+              onClick: () => {
+                setCollapsed(!collapsed)
+                getCollapted(!collapsed)
+              },
+            })}
+          </Button>}
       </PageHeader>
     </>
   );

@@ -8,6 +8,14 @@
     line-height: 1.4;
 }
 
+.ant-card-meta-title > a {
+    padding: 0;
+}
+
+.ant-card-meta-detail > div:not(:last-child) {
+    margin-bottom: 0;
+}
+
 @media (max-width: 863px) {
     .ant-space-item {
         width: 100%;

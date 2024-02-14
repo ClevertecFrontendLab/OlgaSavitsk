@@ -12,7 +12,7 @@ const { Meta } = Card;
 
 export const MainPage: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { lg, sm, xs } = useBreakpoint();
+  const { lg, xs } = useBreakpoint();
 
   return (
     <>

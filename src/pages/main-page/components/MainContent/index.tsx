@@ -39,7 +39,7 @@ const MainComponent: React.FC = () => {
                   hoverable
                   title={item.title}
                   headStyle={{ textAlign: (lg || xs) ? 'center' : 'left', fontSize: '17px', fontWeight: 400, whiteSpace: 'nowrap' }}
-                  bodyStyle={{ padding: '12px 24px', textAlign: 'center' }}>
+                  bodyStyle={{ padding: '10px 24px 13px', textAlign: 'center' }}>
                   <Button type='link' icon={item.icon} href={item.path} style={{ fontSize: '15px' }}>
                     {item.action}
                   </Button>

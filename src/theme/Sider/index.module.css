@@ -9,12 +9,19 @@
 }
 
 .ant-menu-item {
-    padding-left: 20px;
+    padding-left: 17px !important;
 }
 
 .ant-menu-item-icon {
     color: #061178;
 }
+
+.ant-menu-item-divider ~ .ant-menu-item {
+    margin: 0;
+    & > .ant-menu-title-content {
+        margin-left: 25px;
+    }
+} 
 
 .ant-menu {
     display: flex;
