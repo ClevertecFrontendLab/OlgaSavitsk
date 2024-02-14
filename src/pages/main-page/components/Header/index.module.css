@@ -11,7 +11,7 @@
     border: none;
     border-radius: 0;
     clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
     z-index: 2;
 }
 
@@ -25,4 +25,11 @@
 
 .trigger:hover {
     color: #1890ff;
+}
+
+@media (max-width: 575px) {
+    .button_trigger {
+        width: 32px;
+        height: 48px;
+    }
 }

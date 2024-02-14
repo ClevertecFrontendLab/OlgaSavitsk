@@ -1,0 +1,28 @@
+.ant-typography p {
+    margin: 0;
+}
+
+.ant-card-head-title {
+    padding: 9px 0;
+    white-space: wrap;
+    line-height: 1.4;
+}
+
+@media (max-width: 863px) {
+    .ant-space-item {
+        width: 100%;
+        text-align: center;
+    }
+    .ant-card-actions > li > span {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .ant-card-body {
+        padding: 16px;
+    }
+    .ant-list-grid .ant-col > .ant-list-item {
+        margin-bottom: 6px;
+    }
+    
+}

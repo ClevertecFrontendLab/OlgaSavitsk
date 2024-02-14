@@ -9,9 +9,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-    font-weight: 500;
-    color: #646cff;
+.ant-btn-link {
+    font-weight: 400;
+    color: #2f54eb;
     text-decoration: inherit;
 }
 a:hover {
@@ -26,5 +26,3 @@ h1 {
     font-size: 3.2em;
     line-height: 1.1;
 }
-
-

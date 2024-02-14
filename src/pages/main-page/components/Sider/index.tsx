@@ -1,22 +1,25 @@
 import React from 'react';
-import { Layout, Menu, Image } from 'antd';
+import { Layout, Menu, Image, Grid } from 'antd';
 import 'antd/dist/antd.css';
 
 import { menuItems } from '@constants/menu.constants';
 import classes from './index.module.css';
 
 const { Sider } = Layout;
+const { useBreakpoint } = Grid;
 
 interface SiderProps {
   collapsed: boolean
 }
 
 const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
+  const { lg, xs } = useBreakpoint();
   return (
     <>
       <Sider
         theme='light'
-        collapsedWidth={64}
+        collapsedWidth={lg ? 64 : xs ? 0 : 64}
+        width={xs ? 106 : 208}
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -25,6 +28,7 @@ const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
           <Image
             src={collapsed ? "../fit.svg" : '../logo.svg'}
             preview={false}
+            width={xs ? 72 : collapsed ?  28 : 133}
             alt='logo'
           />
         </div>

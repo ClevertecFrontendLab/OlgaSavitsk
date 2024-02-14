@@ -2,3 +2,47 @@
     position: absolute;
     left: 0;
 }
+
+.ant-page-header {
+    padding: 24px;
+}
+
+.ant-page-header-heading-left {
+    margin: 0;
+}
+
+.ant-breadcrumb + .ant-page-header-heading {
+    margin-top: 11px;
+}
+
+.ant-page-header-compact .ant-page-header-heading {
+    flex-wrap: nowrap;
+}
+
+.ant-page-header-heading-extra {
+    margin: 0;
+}
+.ant-page-header-heading-extra .ant-btn-link {
+    color: #262626;
+    font-size: 15px;
+    padding: 0 10px 0;
+}
+
+.ant-page-header.has-breadcrumb {
+    padding-right: 33px;
+}
+
+@media (max-width: 834px) {
+    .ant-page-header.has-breadcrumb {
+        padding-right: 24px;
+    }
+    .ant-breadcrumb + .ant-page-header-heading {
+        margin-top: 30px;
+    }
+    .ant-breadcrumb + .ant-page-header-heading {
+        margin-top: 29px;
+    }
+    .ant-page-header.has-breadcrumb {
+        padding-right: 25px;
+    }
+}
