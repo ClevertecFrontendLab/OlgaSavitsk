@@ -1,0 +1,32 @@
+.sider {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    z-index: 1;
+}
+
+.logo {
+    text-align: center;
+    margin: 45px 0 61px;
+    padding: 0 40px 0 29px;
+    transition: width 0.3s, padding 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.collapsed {
+    left: 0;
+    margin: 51px 0 65px;
+    padding: 0 calc(50% - 32px / 2);
+    text-overflow: clip;
+}
+
+@media (max-width: 575px) {
+    .logo {
+        padding: 0;
+        margin: 12px 0 27px;
+    }
+    .sider {
+        position: fixed;
+        height: 100vh;
+    }
+}

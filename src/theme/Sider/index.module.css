@@ -1,0 +1,62 @@
+.ant-menu-inline,
+.ant-menu-vertical {
+    border-right: none;
+}
+
+.ant-menu-inline .ant-menu-item:not(:last-child),
+.ant-menu-vertical .ant-menu-item:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.ant-menu-item {
+    padding-left: 17px !important;
+}
+
+.ant-menu-item-icon {
+    color: #061178;
+}
+
+.ant-menu-item-divider ~ .ant-menu-item {
+    margin: 0;
+    & > .ant-menu-title-content {
+        margin-left: 25px;
+    }
+} 
+
+.ant-menu {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-menu-item-divider {
+    display: flex;
+    flex: 1 1 auto;
+    border-width: 0 0 2px;
+}
+
+@media (max-width: 575px) {
+    .ant-menu-item-icon {
+        display: none;
+    }
+    .ant-menu-item {
+        padding-left: 8px !important;
+    }
+    ._logo_1ihpv_17 {
+        padding: 0;
+        margin: 12px 0 27px;
+    }
+    .ant-menu-item .anticon + span {
+        margin-left: 0;
+    }
+    .ant-menu-inline .ant-menu-item:not(:last-child) {
+        margin-bottom: 6px;
+    }
+}
+

@@ -1,0 +1,1 @@
+export { default as IconExit} from './Icon-exit'
