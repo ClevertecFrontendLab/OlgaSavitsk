@@ -9,7 +9,7 @@ const { Content } = Layout;
 const { useBreakpoint } = Grid;
 
 const MainComponent: React.FC = () => {
-  const { lg, xs } = useBreakpoint();
+  const { lg, md, xs } = useBreakpoint();
   return (
     <>
       <Content
@@ -18,14 +18,14 @@ const MainComponent: React.FC = () => {
           padding: xs ? '24px 16px 0' : 24,
         }}
       >
-        <Space direction="vertical" size="middle" style={{ maxWidth: lg ? '752px' : '100%', width: '100%' }}>
+        <Space direction="vertical" size="middle" style={{ maxWidth: lg ? '752px' : 'auto', width: '100%' }}>
           <Space direction="vertical" size="large">
 
-            <Card bordered={false} bodyStyle={{ paddingRight: lg ? '61px' : xs ? '24px' : '30px' }}>
+            <Card bordered={false} bodyStyle={{ paddingRight: md ? '61px' : '32px' }}>
               {CONTENT.MAIN}
             </Card>
 
-            <Card bordered={false} bodyStyle={{ paddingRight: lg ? '61px' : '30px' }}>
+            <Card bordered={false} bodyStyle={{ paddingRight: lg ? '61px' : '32px' }}>
               {CONTENT.SUBMAIN}
             </Card>
 

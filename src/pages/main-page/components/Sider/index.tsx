@@ -35,7 +35,6 @@ const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
 
         <Menu
           theme='light'
-          mode="inline"
           defaultSelectedKeys={['1']}
           items={menuItems}
         />

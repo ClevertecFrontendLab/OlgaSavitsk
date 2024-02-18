@@ -17,20 +17,24 @@
 }
 
 @media (max-width: 863px) {
-    .ant-space-item {
-        width: 100%;
-        text-align: center;
-    }
     .ant-card-actions > li > span {
         display: flex;
         justify-content: space-around;
     }
-
-    .ant-card-body {
-        padding: 16px;
-    }
     .ant-list-grid .ant-col > .ant-list-item {
         margin-bottom: 6px;
     }
-    
+}
+
+@media (max-width: 754px) {
+    .ant-space-item {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .ant-card-body {
+        padding: 16px 21px 16px 16px !important;
+    }
 }

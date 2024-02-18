@@ -15,7 +15,7 @@ interface HeaderProps {
 
 const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) => {
   const [collapsed, setCollapsed] = useState(false);
-  const { lg, xs } = useBreakpoint();
+  const { lg, md, xs } = useBreakpoint();
 
   return (
     <>
@@ -40,7 +40,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
             Приветствуем тебя в CleverFit — приложении,<br /> которое поможет тебе добиться своей мечты!
           </Title>}
         extra={[
-          lg ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
+          md ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
             Настройки
           </Button> :
             <Button key={2} shape="circle" icon={<SettingOutlined />} />

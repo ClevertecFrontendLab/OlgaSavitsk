@@ -5,6 +5,9 @@
     line-height: 1.5;
     font-weight: 400;
     width: 100%;
+    --ant-primary-9: #061178;
+    --ant-primary-1: #f0f5ff;
+    --ant-button-download: #262626;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

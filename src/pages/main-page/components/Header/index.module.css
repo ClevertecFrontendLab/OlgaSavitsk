@@ -1,5 +1,5 @@
 .header {
-    background: #f0f5ff;
+    background: var(--ant-primary-1);
 }
 
 .button_trigger {
@@ -24,7 +24,7 @@
 }
 
 .trigger:hover {
-    color: #1890ff;
+    color: var(--ant-primary-color);
 }
 
 .button_trigger__mobile {

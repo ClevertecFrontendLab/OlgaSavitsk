@@ -12,7 +12,7 @@ const { Meta } = Card;
 
 export const MainPage: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const { lg, xs } = useBreakpoint();
+  const { md, xs } = useBreakpoint();
 
   return (
     <>
@@ -30,8 +30,8 @@ export const MainPage: React.FC = () => {
               align={xs ? 'center' : 'end'}
               style={{
                 display: 'flex',
-                justifyContent: lg ? 'space-between' :  !lg  ? 'center' : 'center',
-                flexDirection:  lg ? 'row' : !lg ? 'column-reverse' : 'row',
+                justifyContent: md ? 'space-between' :  !md  ? 'center' : 'center',
+                flexDirection:  md ? 'row' : !md ? 'column-reverse' : 'row',
                 gap: xs ? '18px' : '8px'
               }}>
 
@@ -43,9 +43,9 @@ export const MainPage: React.FC = () => {
                 hoverable
                 bodyStyle={{ padding: '11px 24px', textAlign: xs ? 'center' : 'left' }}
                 actions={
-                  [<><Button type='link' icon={<AndroidFilled />} href="#" style={{ color: '#262626' }}>
+                  [<><Button type='link' icon={<AndroidFilled />} href="#" style={{ color: 'var(--ant-button-download)' }}>
                     Android OS
-                  </Button><Button type='link' icon={<AppleFilled />} href="#" style={{ color: '#262626' }}>
+                  </Button><Button type='link' icon={<AppleFilled />} href="#" style={{ color: 'var(--ant-button-download)' }}>
                       Apple iOS
                     </Button></>]
                 }
