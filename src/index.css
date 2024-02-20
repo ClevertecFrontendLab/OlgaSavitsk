@@ -7,7 +7,9 @@
     width: 100%;
     --ant-primary-9: #061178;
     --ant-primary-1: #f0f5ff;
+    --ant-primary-6: #2F54EB;
     --ant-button-download: #262626;
+    --ant-form-background: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
