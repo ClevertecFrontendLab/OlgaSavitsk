@@ -1,10 +1,11 @@
 export enum RoutePath {
-    Home = '/',
+    Home = '/main',
     SignUp = '/auth/registration',
+    SignUpSuccess = '/result/success',
+    SignUpFailed = '/result/error-user-exist',
     SignIn = '/auth',
-    Error = '/result/error-login',
-    Success = '/result/success',
-    Failed = '/result/error-user-exist',
+    SignInError = '/result/error-login',
+    Error = '/result/error',
     ConfirmEmail = '/auth/confirm-email',
     ResetPassword = '/auth/change-password',
 }
