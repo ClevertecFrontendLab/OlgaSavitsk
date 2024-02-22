@@ -7,13 +7,11 @@ class ApiClient {
         this._api = axios.create(axiosConfig);
         this._api.interceptors.response.use(
             (response: AxiosResponse) => response.data,
-            // (error) => {
-            //     if (axios.isAxiosError(error) && error.response) {
-            //         const { status, statusText } = error.response || error.code;
-            //         throw new Error(statusText);
-            //     }
-            //     return Promise.reject(error);
-            // },
+            (error) => {
+                if (axios.isCancel(error)) {
+                    throw error;
+                }
+            },
         );
     }
 

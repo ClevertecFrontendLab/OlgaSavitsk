@@ -1,0 +1,9 @@
+.loader_wrapper {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    backdrop-filter: blur(2px);
+    background: rgba(121, 156, 212, 0.5);
+}

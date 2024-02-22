@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Image, Form, Input, Tabs, Space, Grid } from "antd";
 import { GooglePlusOutlined } from '@ant-design/icons';
@@ -6,7 +6,7 @@ import 'antd/dist/antd.css';
 
 import { signUpRequest } from '@redux/auth/actions';
 import { RootState } from '@redux/configure-store';
-import { PASSWORD_REGEX, TIPS, tabItems } from '@constants/index';
+import { PASSWORD_REGEX, RoutePath, TIPS, tabItems } from '@constants/index';
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -22,20 +22,30 @@ type SignUpParams = {
 const { useBreakpoint } = Grid;
 
 export const SignUp: React.FC = () => {
+  const dispatch = useDispatch()
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
 
-  const dispatch = useDispatch()
-  const location = useSelector(({ router }: RootState) => router)
-  console.log('sign', location)
+  const previousLocations = useSelector(({ router }: RootState) =>
+    router.previousLocations?.find(location =>
+      (location.location?.key !== router.location?.key)))
 
-  const onFinish = async (value: SignUpParams) => {
+  const onFinish = useCallback(async (value: SignUpParams | unknown) => {
     dispatch(signUpRequest(value))
-  }
+  }, [dispatch])
+
+  const repeatedRequest = useCallback(() => {
+    if (previousLocations?.location?.pathname === RoutePath.Error) {
+      onFinish(previousLocations.location?.state)
+    }
+  }, [onFinish, previousLocations])
+
+  useEffect(() => {
+    repeatedRequest()
+  }, [repeatedRequest])
 
   return (
-    <Space direction="vertical" align="center" size={xs ? 32 : 48} style={{width: '100%', textAlign: 'center'}}>
-      {/* <> */}
+    <Space direction="vertical" align="center" size={xs ? 32 : 48} style={{ width: '100%', textAlign: 'center' }}>
       <Image
         src='../logo.svg'
         preview={false}
@@ -54,7 +64,7 @@ export const SignUp: React.FC = () => {
           name="email"
           rules={[{ required: true }, { type: 'email' }]}
         >
-          <Input addonBefore="e-mail:" className={classes.input} />
+          <Input data-test-id='registration-email' addonBefore="e-mail:" className={classes.input} />
         </Form.Item>
 
         <Form.Item
@@ -93,6 +103,7 @@ export const SignUp: React.FC = () => {
           ]}
         >
           <Input.Password
+            data-test-id='registration-confirm-password'
             placeholder="Повторите пароль" />
         </Form.Item>
 
@@ -100,6 +111,7 @@ export const SignUp: React.FC = () => {
           {() => (
             <Space direction="vertical" align="center" size={16} className={classes.form_button__item}>
               <Button
+                data-test-id='registration-submit-button'
                 type="primary"
                 htmlType="submit"
                 className={classes.form_button}

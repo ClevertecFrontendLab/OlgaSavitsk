@@ -1,10 +1,11 @@
-import { AuthAction, AuthTypes, SignUpPayload } from '../types';
+import { AuthAction, AuthTypes } from '../types';
 
-export const signUpRequest = (payload: SignUpPayload): AuthAction<SignUpPayload> => ({
+export const signUpRequest = <T> (
+    payload: T,
+): AuthAction<T> => ({
     type: AuthTypes.SIGNUP_REQUEST,
     payload,
-}
-);
+});
 
 export const signUpSuccess = () => ({
     type: AuthTypes.SIGNUP_SUCCESS,

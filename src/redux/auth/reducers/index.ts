@@ -5,11 +5,12 @@ import { authReducer } from './auth.reducer';
 
 const { routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
+    savePreviousLocations: 1
 });
 
 const reducer = combineReducers({
     router: routerReducer,
-    authReducer,
+    authStore: authReducer,
 });
 
 export type State = ReturnType<typeof reducer>;

@@ -5,14 +5,15 @@ import { To } from "react-router-dom"
 
 interface ObjectResult {
     [key: string]: ResultContext;
-  }
+}
 
 interface ResultContext {
     status: ResultStatusType,
     title: string,
     subTitle: ReactNode,
     buttonText: string,
-    redirectPath: To
+    redirectPath: To,
+    dataId?: string
 }
 
 const result: ObjectResult = {
@@ -22,64 +23,71 @@ const result: ObjectResult = {
         subTitle: <p>Регистрация прошла успешно. Зайдите<br />
             в приложение, используя свои e-mail и пароль.</p>,
         buttonText: 'Войти',
-        redirectPath: RoutePath.SignIn
-
+        redirectPath: RoutePath.SignIn,
+        dataId: 'registration-enter-button'
     },
     '/result/error-user-exist': {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.</p>,
         buttonText: 'Назад к регистрации',
-        redirectPath: RoutePath.SignUp
+        redirectPath: RoutePath.SignUp,
+        dataId: 'registration-back-button',
     },
     '/result/error': {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так и ваша регистрация<br /> не завершилась. Попробуйте ещё раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: RoutePath.SignUp
+        redirectPath: '/',
+        dataId: 'registration-retry-button',
     },
     '/result/error-login': {
         status: "warning",
         title: "Вход не выполнен",
         subTitle: <p>Что-то пошло не так. Попробуйте еще раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: ''
+        redirectPath: '',
+        dataId: 'login-retry-button'
     },
     '/result/error-check-email-no-exist': {
         status: "error",
         title: "Такой e-mail не зарегистрирован",
         subTitle: <p>Мы не нашли в базе вашего e-mail. Попробуйте<br />войти с другим e-mail.</p>,
         buttonText: 'Попробовать снова',
-        redirectPath: ''
+        redirectPath: '',
+        dataId: 'check-retry-button'
     },
     '/auth/confirm-email': {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так. Попробуйте ещё раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: ''
+        redirectPath: '',
     },
     '/result/success-change-password': {
         status: "success",
         title: "Пароль успешно изменен",
         subTitle: <p>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль.</p>,
         buttonText: 'Войти',
-        redirectPath: ''
+        redirectPath: '',
+        dataId: 'change-entry-button'
     },
     "/result/error-change-password": {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так. Попробуйте ещё раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: ''
+        redirectPath: '',
+        dataId: 'change-retry-button'
     },
     '/result/error-check-email': {
         status: "500",
         title: "Что-то пошло не так",
         subTitle: <p>Произошла ошибка, попробуйте отправить форму ещё раз.</p>,
         buttonText: 'Назад',
-        redirectPath: ''
+        redirectPath: '',
+        dataId: 'check-back-button'
     }
 }
 

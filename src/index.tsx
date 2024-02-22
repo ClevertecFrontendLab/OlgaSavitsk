@@ -5,6 +5,7 @@ import { HistoryRouter } from 'redux-first-history/rr6'
 
 import { store, history } from '@redux/configure-store';
 import { routes } from '@routes/routes';
+import { Loader } from './components';
 
 import 'normalize.css';
 import './index.css';
@@ -16,6 +17,7 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <HistoryRouter history={history}>{routes}</HistoryRouter>
+            <Loader/>
         </Provider>
     </React.StrictMode>,
 );
