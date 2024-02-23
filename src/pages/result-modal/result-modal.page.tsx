@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Result } from "antd";
 import 'antd/dist/antd.css';
@@ -39,17 +38,3 @@ export const ResultModal: React.FC = () => {
         />
     );
 };
-
-export function ErrorBoundary() {
-    const error = useRouteError();
-    console.log('err', error)
-    if (isRouteErrorResponse(error) && error.status === 401) {
-
-        return (
-            <ResultModal />
-        );
-    }
-
-
-    throw error;
-}

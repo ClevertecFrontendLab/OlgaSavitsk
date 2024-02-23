@@ -6,6 +6,7 @@
     font-size: 12px;
     text-align: left;
     letter-spacing: 0.4px;
+    margin-bottom: 28px;
 }
 
 .ant-input-affix-wrapper-focused,
@@ -24,8 +25,14 @@
     background-color: #fff;
 }
 
-.ant-form-item-explain {
-    margin-bottom: 28px;
+label {
+    & span {
+        font-size: 15px;
+    }
+
+    & ~ a {
+        font-size: 17px;
+    }
 }
 
 @media (max-width: 360px) {

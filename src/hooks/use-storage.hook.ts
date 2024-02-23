@@ -14,10 +14,12 @@ export function getStorageValue<T>(key: string, initialValue: T | (() => T)) {
 export function useStorage<T>(
     key: string,
     initialValue: T | (() => T),
-): [T, Dispatch<SetStateAction<T>>] {
+): [T, Dispatch<SetStateAction<T>>, () => void] {
     const [state, setState] = useState<T>(() => {
         return getStorageValue(key, initialValue);
     });
+
+    console.log('store', state);
 
     const setValue = (value: SetStateAction<T | ((prevState: T) => T)>) => {
         try {
@@ -31,5 +33,13 @@ export function useStorage<T>(
         }
     };
 
-    return [state, setValue];
+    const removeValue = (): void => {
+        try {
+            window.localStorage.removeItem(key);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    return [state, setValue, removeValue];
 }

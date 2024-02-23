@@ -1,0 +1,25 @@
+#root {
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.collapsed {
+    left: 0;
+    margin: 51px 0 65px;
+    padding: 0 calc(50% - 32px / 2);
+    text-overflow: clip;
+}
+
+.site_layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: no-repeat center/cover url('../main.jpg');
+    background-attachment: fixed;
+}
+
+.site_layout .layout_background {
+    display: flex;
+    flex: 1 1 auto;
+}
