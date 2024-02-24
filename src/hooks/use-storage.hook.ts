@@ -19,8 +19,6 @@ export function useStorage<T>(
         return getStorageValue(key, initialValue);
     });
 
-    console.log('store', state);
-
     const setValue = (value: SetStateAction<T | ((prevState: T) => T)>) => {
         try {
             const setedValue = value instanceof Function ? value(state) : value;

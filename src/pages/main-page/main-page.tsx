@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 
 import { Content } from './components';
 
-export const MainPage: React.FC = () => {
+const MainPage: React.FC = () => {
 
   return (
     <>
@@ -11,3 +11,5 @@ export const MainPage: React.FC = () => {
     </>
   );
 };
+
+export default MainPage

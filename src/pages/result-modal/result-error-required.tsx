@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ResultErrorRequired() {
-    const error = useSelector(({ authStore }: RootState) => authStore.error)
+    const statusCode = useSelector(({ authStore }: RootState) => authStore.statusCode)
 
-    if (!error) {
+    if (!statusCode) {
         return <Navigate to={RoutePath.SignUp} replace={true} />
     }
     return <Outlet />

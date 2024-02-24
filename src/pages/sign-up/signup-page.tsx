@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Image, Form, Input, Tabs, Space, Grid } from "antd";
+import { Button, Image, Form, Input, Space, Grid } from "antd";
 import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 import { signUpRequest } from '@redux/auth/actions';
 import { RootState } from '@redux/configure-store';
-import { PASSWORD_REGEX, RoutePath, TIPS, tabItems } from '@constants/index';
+import { Tabs } from '@components/index';
+import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -58,7 +59,7 @@ export const SignUp: React.FC = () => {
           size='large'
           validateMessages={validateMessages}
         >
-        <Tabs items={tabItems} size={xs ? 'small' : 'middle'} />
+        <Tabs />
 
         <Form.Item
           name="email"

@@ -39,7 +39,7 @@ const result: ObjectResult = {
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так и ваша регистрация<br /> не завершилась. Попробуйте ещё раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: '/',
+        redirectPath: RoutePath.SignUp,
         dataId: 'registration-retry-button',
     },
     '/result/error-login': {
@@ -47,7 +47,7 @@ const result: ObjectResult = {
         title: "Вход не выполнен",
         subTitle: <p>Что-то пошло не так. Попробуйте еще раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: '',
+        redirectPath: RoutePath.SignIn,
         dataId: 'login-retry-button'
     },
     '/result/error-check-email-no-exist': {
@@ -55,7 +55,7 @@ const result: ObjectResult = {
         title: "Такой e-mail не зарегистрирован",
         subTitle: <p>Мы не нашли в базе вашего e-mail. Попробуйте<br />войти с другим e-mail.</p>,
         buttonText: 'Попробовать снова',
-        redirectPath: '',
+        redirectPath: RoutePath.SignIn,
         dataId: 'check-retry-button'
     },
     '/auth/confirm-email': {
@@ -70,7 +70,7 @@ const result: ObjectResult = {
         title: "Пароль успешно изменен",
         subTitle: <p>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль.</p>,
         buttonText: 'Войти',
-        redirectPath: '',
+        redirectPath: RoutePath.SignIn,
         dataId: 'change-entry-button'
     },
     "/result/error-change-password": {
@@ -86,7 +86,7 @@ const result: ObjectResult = {
         title: "Что-то пошло не так",
         subTitle: <p>Произошла ошибка, попробуйте отправить форму ещё раз.</p>,
         buttonText: 'Назад',
-        redirectPath: '',
+        redirectPath: RoutePath.SignIn,
         dataId: 'check-back-button'
     }
 }

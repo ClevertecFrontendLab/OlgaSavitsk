@@ -8,9 +8,9 @@ export enum AuthTypes {
 }
 
 export type AuthState = {
-    token: string;
+    token: string | undefined;
     isLoading: boolean;
-    error: string | null;
+    statusCode: number | null;
 };
 
 export type AuthAction<Payload> = {
@@ -28,6 +28,7 @@ export interface SignUpPayload {
 export interface SignInPayload {
     email: string;
     password: string;
+    remember?: boolean
 }
 
 export interface AuthResponse {

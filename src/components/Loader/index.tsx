@@ -14,8 +14,8 @@ const Loader: React.FC = () => {
     return (
         isLoading
             ?
-            (<Space direction="vertical" align="center" className={classes.loader_wrapper}>
-                <Lottie animationData={loader} loop={true} />
+            (<Space data-test-id='loader' direction="vertical" align="center" className={classes.loader_wrapper}>
+                <Lottie data-test-id='loader' animationData={loader} loop={true} />
             </Space>)
             : null
     )
