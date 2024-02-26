@@ -6,13 +6,17 @@ export enum RoutePath {
     SignIn = '/auth',
     SignInError = '/result/error-login',
     Error = '/result/error',
+    CheckemailNoExist = '/result/error-check-email-no-exist',
+    CheckemailError = '/result/error-check-email',
+    ChangePasswordError = '/result/error-change-password',
+    ChangePasswordSuccess = '/result/success-change-password',
     ConfirmEmail = '/auth/confirm-email',
     ResetPassword = '/auth/change-password',
 }
 
 export enum LayoutType {
-    MAIN = 'main',
-    UNAUTH = 'unauth',
+    CONFIRM = 'confirm',
+    RESET = 'reset',
 }
 
 type RoutesLayout = {
@@ -21,14 +25,23 @@ type RoutesLayout = {
     };
 };
 
-export const routesLayout: RoutesLayout = {
-    [RoutePath.Home]: {
-        layout: LayoutType.MAIN,
+export const confirmLayout: RoutesLayout = {
+    [RoutePath.ConfirmEmail]: {
+        layout: LayoutType.CONFIRM,
     },
-    [RoutePath.SignIn]: {
-        layout: LayoutType.UNAUTH,
-    },
-    [RoutePath.SignUp]: {
-        layout: LayoutType.UNAUTH,
+    [RoutePath.ResetPassword]: {
+        layout: LayoutType.RESET,
     },
 };
+
+// export const routesLayout: RoutesLayout = {
+//     [RoutePath.Home]: {
+//         layout: LayoutType.MAIN,
+//     },
+//     [RoutePath.SignIn]: {
+//         layout: LayoutType.UNAUTH,
+//     },
+//     [RoutePath.SignUp]: {
+//         layout: LayoutType.UNAUTH,
+//     },
+// };

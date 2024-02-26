@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 
 import { signUpRequest } from '@redux/auth/actions';
 import { RootState } from '@redux/configure-store';
+import { getPrevLocation } from '@utils/index';
 import { Tabs } from '@components/index';
 import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
 import classes from './index.module.css';
@@ -27,19 +28,17 @@ export const SignUp: React.FC = () => {
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
 
-  const previousLocations = useSelector(({ router }: RootState) =>
-    router.previousLocations?.find(location =>
-      (location.location?.key !== router.location?.key)))
+  const { pathname, state } = useSelector(({ router }: RootState) => getPrevLocation(router))
 
   const onFinish = useCallback(async (value: SignUpParams | unknown) => {
     dispatch(signUpRequest(value))
   }, [dispatch])
 
   const repeatedRequest = useCallback(() => {
-    if (previousLocations?.location?.pathname === RoutePath.Error) {
-      onFinish(previousLocations.location?.state)
+    if (pathname === RoutePath.Error) {
+      onFinish(state)
     }
-  }, [onFinish, previousLocations])
+  }, [onFinish, pathname, state])
 
   useEffect(() => {
     repeatedRequest()

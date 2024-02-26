@@ -3,6 +3,7 @@
 
     & :global(.ant-result-title) {
         font-weight: 500;
+        width: 102%;
     }
 
     & :global(.ant-result-subtitle) {

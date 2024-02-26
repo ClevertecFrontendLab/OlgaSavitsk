@@ -1,11 +1,14 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Image, Form, Input, Space, Grid, Checkbox } from "antd";
 import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import { signInRequest } from '@redux/auth/actions';
 import { Tabs } from '@components/index';
+import { RoutePath } from '@constants/index';
+import { authActions } from '@redux/auth';
+import { RootState } from '@redux/configure-store';
+import { getPrevLocation } from '@utils/index';
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -25,9 +28,25 @@ export const SignIn: React.FC = () => {
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
 
-  const onFinish = useCallback(async (value: SignInParams | unknown) => {
-    dispatch(signInRequest(value))
+  const onFinish = useCallback(async (value: SignInParams) => {
+    dispatch(authActions.signInRequest(value))
   }, [dispatch])
+
+  const checkEmailHandle = useCallback((value: Pick<SignInParams, 'email'> | unknown) => {
+    dispatch(authActions.checkEmailRequest(value))
+  }, [dispatch])
+
+  const { pathname, state } = useSelector(({ router }: RootState) => getPrevLocation(router))
+
+  const repeatedRequest = useCallback(() => {
+    if (pathname === RoutePath.CheckemailError) {
+      checkEmailHandle(state)
+    }
+  }, [checkEmailHandle, pathname, state])
+
+  useEffect(() => {
+    repeatedRequest()
+  }, [form, repeatedRequest])
 
   return (
     <Space direction="vertical" align="center" size={xs ? 32 : 48} style={{ width: '100%', textAlign: 'center' }}>
@@ -69,11 +88,25 @@ export const SignIn: React.FC = () => {
           {() => (
             <><Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
-            </Form.Item><Button
-              data-test-id='login-forgot-button'
-              type='link'
-              disabled={!!form.getFieldsError().filter(({ errors }) => errors.length).length}
-            >
+            </Form.Item>
+              <Button
+                data-test-id='login-forgot-button'
+                type='link'
+                // htmlType="submit"
+                onClick={() => {
+                  // checkEmailHandle(form.getFieldValue([]))
+                  form
+                    .validateFields(['email'])
+                    .then(value => {
+                      form.resetFields();
+                      console.log(value)
+                      checkEmailHandle(value)
+                    }).catch(info => {
+                      console.log('Validate Failed:', info);
+                    });
+                }
+                }
+              >
                 Забыли пароль?
               </Button></>)}
         </Form.Item>

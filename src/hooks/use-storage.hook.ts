@@ -26,16 +26,18 @@ export function useStorage<T>(
             if (typeof window !== 'undefined') {
                 window.localStorage.setItem(key, JSON.stringify(setedValue));
             }
-        } catch (error) {
-            console.log(error);
+        } catch (error: unknown) {
+            console.error(error);
         }
     };
 
     const removeValue = (): void => {
         try {
-            window.localStorage.removeItem(key);
+            if (typeof window !== 'undefined') {
+                window.localStorage.removeItem(key);
+            }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 

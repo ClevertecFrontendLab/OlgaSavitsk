@@ -8,7 +8,7 @@ interface ObjectResult {
 }
 
 interface ResultContext {
-    status: ResultStatusType,
+    status?: ResultStatusType,
     title: string,
     subTitle: ReactNode,
     buttonText: string,
@@ -58,13 +58,6 @@ const result: ObjectResult = {
         redirectPath: RoutePath.SignIn,
         dataId: 'check-retry-button'
     },
-    '/auth/confirm-email': {
-        status: "error",
-        title: "Данные не сохранились",
-        subTitle: <p>Что-то пошло не так. Попробуйте ещё раз.</p>,
-        buttonText: 'Повторить',
-        redirectPath: '',
-    },
     '/result/success-change-password': {
         status: "success",
         title: "Пароль успешно изменен",
@@ -78,7 +71,7 @@ const result: ObjectResult = {
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так. Попробуйте ещё раз.</p>,
         buttonText: 'Повторить',
-        redirectPath: '',
+        redirectPath: RoutePath.ResetPassword,
         dataId: 'change-retry-button'
     },
     '/result/error-check-email': {

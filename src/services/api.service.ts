@@ -29,11 +29,7 @@ class ApiClient {
         );
         this._api.interceptors.response.use(
             (response: AxiosResponse) => response,
-            // (error: AxiosError) => {
-            //     if (axios.isCancel(error)) {
-            //         throw error;
-            //     }
-            // },
+            // (error: AxiosError) => error
         );
     }
 

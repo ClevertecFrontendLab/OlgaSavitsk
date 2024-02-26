@@ -1,15 +1,17 @@
 import { Route, Routes } from "react-router-dom";
+
 import { RoutePath } from "@constants/index";
-import { MainLayout } from "@pages/Page-config/main-layout";
-import { UnauthorizedLayout } from "@pages/Page-config/unauthorized-layout";
 import {
+    ConfirmConfig,
     MainPage,
     PageConfig,
     ResultErrorRequired,
     ResultModal,
     SignIn,
-    SignUp
+    SignUp,
 } from "@pages/index";
+import { MainLayout } from "@pages/Page-config/main-layout";
+import { UnauthorizedLayout } from "@pages/Page-config/unauthorized-layout";
 
 
 export const routes = (
@@ -18,13 +20,13 @@ export const routes = (
             <Route element={<UnauthorizedLayout />} >
                 <Route index path={RoutePath.SignIn} element={<SignIn />} />
                 <Route path={RoutePath.SignUp} element={<SignUp />} />
+                <Route index path='/auth/:type' element={<ConfirmConfig />} />
                 <Route element={<ResultErrorRequired />}>
                     <Route path='/result/:type' element={<ResultModal />} />
                 </Route>
             </Route>
-            <Route element={<MainLayout />} >
-                <Route index path={RoutePath.Home} element={<MainPage />}
-                />
+            <Route element={<MainLayout />}>
+                <Route index path={RoutePath.Home} element={<MainPage />} />
             </Route>
         </Route>
     </Routes >

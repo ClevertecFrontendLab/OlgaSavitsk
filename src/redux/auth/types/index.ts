@@ -3,6 +3,13 @@ export enum AuthTypes {
     SIGNUP_SUCCESS = 'SIGNUP_SUCCESS',
     SIGNIN_REQUEST = 'SIGNIN_REQUEST',
     SIGNIN_SUCCESS = 'SIGNIN_SUCCESS',
+    CHECKEMAIL_REQUEST = 'CHECKEMAIL_REQUEST',
+    CHECKEMAIL_SUCCESS = 'CHECKEMAIL_SUCCESS',
+    CONFIRMEMAIL_REQUEST = 'CONFIRMEMAIL_REQUEST',
+    CONFIRMEMAIL_SUCCESS = 'CONFIRMEMAIL_SUCCESS',
+    CHANGEPASSWORD_REQUEST = 'CHANGEPASSWORD_REQUEST',
+    CHANGEPASSWORD_SUCCESS = 'CHANGEPASSWORD_SUCCESS',
+    RESETLOADING = 'RESETLOADING',
     AUTH_ERROR = 'AUTH_ERROR',
     SIGNOUT = 'SIGNOUT',
 }
@@ -27,8 +34,22 @@ export interface SignUpPayload {
 
 export interface SignInPayload {
     email: string;
-    password: string;
-    remember?: boolean
+    password?: string;
+    remember?: boolean;
+}
+
+export interface CheckAuthResponse {
+    email: string;
+    message: string;
+}
+
+export interface ConfirmEmailRequest {
+    email: string,
+    code: string
+}
+export interface ChangePasswordRequest {
+  password: string,
+  confirmPassword: string
 }
 
 export interface AuthResponse {

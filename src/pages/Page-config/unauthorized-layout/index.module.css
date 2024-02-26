@@ -1,6 +1,7 @@
 .page_layout {
     background: no-repeat center/cover url('../blure.jpg');
     background-attachment: fixed;
+    min-height: 100vh;
 }
 
 .page_wrapper {
@@ -8,11 +9,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 1 1 auto;
     width: 100%;
-    height: 100vh;
     padding: 0 16px;
     -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(4px);
     background: rgba(121, 156, 212, 0.5);
 }
 

@@ -18,7 +18,28 @@ export const authReducer = <T>(state = initialState, { type, payload }: AuthActi
             return { ...state, isLoading: true };
         }
         case AuthTypes.SIGNIN_SUCCESS: {
-            return { ...state, isLoading: false, token: payload };
+            return { ...state, isLoading: true, token: payload };
+        }
+        case AuthTypes.RESETLOADING: {
+            return { ...state, isLoading: payload };
+        }
+        case AuthTypes.CHECKEMAIL_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.CHECKEMAIL_SUCCESS: {
+            return { ...state, isLoading: false };
+        }
+        case AuthTypes.CONFIRMEMAIL_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.CONFIRMEMAIL_SUCCESS: {
+            return { ...state, isLoading: false };
+        }
+        case AuthTypes.CHANGEPASSWORD_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.CHANGEPASSWORD_SUCCESS: {
+            return { ...state, isLoading: false, statusCode: payload };
         }
         case AuthTypes.SIGNOUT: {
             return { ...state, isLoading: false, statusCode: null, token: undefined };
