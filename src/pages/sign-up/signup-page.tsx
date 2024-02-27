@@ -28,17 +28,19 @@ export const SignUp: React.FC = () => {
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
 
-  const { pathname, state } = useSelector(({ router }: RootState) => getPrevLocation(router))
+  const previousLocations = useSelector(({ router }: RootState) => getPrevLocation(router))
 
   const onFinish = useCallback(async (value: SignUpParams | unknown) => {
     dispatch(signUpRequest(value))
   }, [dispatch])
 
   const repeatedRequest = useCallback(() => {
+    if (!previousLocations) return null
+    const { pathname, state } = previousLocations
     if (pathname === RoutePath.Error) {
       onFinish(state)
     }
-  }, [onFinish, pathname, state])
+  }, [onFinish, previousLocations])
 
   useEffect(() => {
     repeatedRequest()

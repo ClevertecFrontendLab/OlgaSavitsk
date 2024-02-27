@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 
 import {
@@ -28,7 +28,9 @@ const PageConfig = () => {
     }, [token.access_token])
 
     return (
-        <Outlet />
+        <Suspense fallback={''}>
+            <Outlet />
+        </Suspense>
     )
 }
 

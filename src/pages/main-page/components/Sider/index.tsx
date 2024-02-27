@@ -2,7 +2,8 @@ import React from 'react';
 import { Layout, Menu, Image, Grid } from 'antd';
 import 'antd/dist/antd.css';
 
-import { menuItems } from '@constants/menu.constants';
+import { menuItems } from '@constants/index';
+import { history } from "@redux/configure-store";
 import classes from './index.module.css';
 
 const { Sider } = Layout;
@@ -14,6 +15,7 @@ interface SiderProps {
 
 const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
   const { lg, xs } = useBreakpoint();
+
   return (
     <>
       <Sider
@@ -35,7 +37,7 @@ const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
 
         <Menu
           theme='light'
-          defaultSelectedKeys={['1']}
+          onClick={({key}) => history.push(key)}
           items={menuItems}
         />
       </Sider>

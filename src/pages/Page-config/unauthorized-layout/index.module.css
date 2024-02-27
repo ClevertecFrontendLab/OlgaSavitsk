@@ -24,7 +24,7 @@
     border-radius: 2px;
     background-color: var(--ant-form-background);
 
-    :global(.ant-space-item) {
+    & :global(.ant-space-item) {
         width: 100%;
     }
 }

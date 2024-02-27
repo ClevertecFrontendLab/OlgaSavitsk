@@ -5,7 +5,7 @@ import {
     LayoutType, RoutePath, confirmLayout,
 } from "@constants/index";
 import { RootState } from "@redux/configure-store";
-import { ConfirmEmailPage } from '..';
+import { ConfirmEmailPage } from './confirm-email.page';
 import { ResetPasswordPage } from './reset-password.page';
 
 const layoutComponent = {

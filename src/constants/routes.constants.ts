@@ -33,15 +33,3 @@ export const confirmLayout: RoutesLayout = {
         layout: LayoutType.RESET,
     },
 };
-
-// export const routesLayout: RoutesLayout = {
-//     [RoutePath.Home]: {
-//         layout: LayoutType.MAIN,
-//     },
-//     [RoutePath.SignIn]: {
-//         layout: LayoutType.UNAUTH,
-//     },
-//     [RoutePath.SignUp]: {
-//         layout: LayoutType.UNAUTH,
-//     },
-// };

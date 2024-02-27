@@ -16,13 +16,6 @@
 .form_button__item {
     padding-top: 30px;
     width: 100%;
-
-    & :global(.ant-form-item) {
-        width: 100%;
-    }
-    & :global(.ant-space-item) {
-        width: 100%;
-    }
 }
 
 @media (max-width: 574px) {

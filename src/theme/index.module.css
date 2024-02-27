@@ -3,3 +3,6 @@
 @import url('./MainContent/index.module.css');
 @import url('./Tabs/index.module.css');
 @import url('./Form/index.module.css');
+@import url('./LoginForm/index.module.css');
+@import url('./Result/index.module.css');
+@import url('./ChangePassword/index.module.css');

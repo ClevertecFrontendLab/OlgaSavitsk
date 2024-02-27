@@ -1,6 +1,6 @@
 import { RoutePath } from "./routes.constants";
 
-export const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\W]{8,}/;
+export const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?!.*\W])[a-zA-Z\d]{8,}/;
 
 export const tabItems = [
     { label: 'Вход', key: RoutePath.SignIn},

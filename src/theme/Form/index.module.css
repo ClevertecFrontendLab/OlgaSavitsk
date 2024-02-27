@@ -39,4 +39,9 @@ label {
     .ant-form-item-explain {
         margin-bottom: 8px;
     }
+    label {
+        & span {
+            font-size: 14px;
+        }
+    }
 }

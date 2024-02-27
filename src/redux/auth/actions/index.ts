@@ -31,10 +31,6 @@ export const resetLoading = (isloading: boolean): AuthAction<boolean> => ({
     payload: isloading,
 });
 
-export const signOut = () => ({
-    type: AuthTypes.SIGNOUT,
-});
-
 export const checkEmailRequest = <T>(payload: T): AuthAction<T> => ({
     type: AuthTypes.CHECKEMAIL_REQUEST,
     payload,

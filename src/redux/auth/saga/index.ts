@@ -1,8 +1,10 @@
 import { isAxiosError } from 'axios';
 import { push } from 'redux-first-history';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayload } from '../types';
+
 import { authApi } from '@services/index';
+import { LocalStorageKey, RoutePath } from '@constants/index';
+import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayload } from '../types';
 import {
     authError,
     changePasswordSuccess,
@@ -11,7 +13,6 @@ import {
     signInSuccess,
     signUpSuccess,
 } from '../actions';
-import { LocalStorageKey, RoutePath } from '@constants/index';
 
 interface ErrorResponse {
     statusCode: number;
@@ -23,7 +24,7 @@ function* signInWorker(action: AuthAction<SignInPayload>) {
         const { data, status } = yield call(authApi.signIn, action.payload);
         yield put(signInSuccess(data.accessToken));
         if (action.payload.remember) {
-            window.localStorage.setItem(
+            yield window.localStorage.setItem(
                 LocalStorageKey.authToken,
                 JSON.stringify({ access_token: data.accessToken }),
             );

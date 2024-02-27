@@ -16,11 +16,11 @@ const FooterComponent: React.FC = () => {
       <Footer style={{ background: 'none', padding: xs ? '10px 16px 42px' : '24px 24px 42px' }}>
         <Space
           align={xs ? 'center' : 'end'}
+          size={[8, 18]}
           style={{
             display: 'flex',
             justifyContent: md ? 'space-between' : !md ? 'center' : 'center',
             flexDirection: md ? 'row' : !md ? 'column-reverse' : 'row',
-            gap: xs ? '18px' : '8px'
           }}>
 
           <Button type='link' href='#' style={{ fontSize: '16px', letterSpacing: '0.9px' }} size='large'>

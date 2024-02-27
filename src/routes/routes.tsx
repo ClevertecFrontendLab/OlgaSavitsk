@@ -10,7 +10,7 @@ import {
     SignIn,
     SignUp,
 } from "@pages/index";
-import { MainLayout } from "@pages/Page-config/main-layout";
+import { MainLayout } from "@pages/Page-config/main-layout/main-layout-page";
 import { UnauthorizedLayout } from "@pages/Page-config/unauthorized-layout";
 
 

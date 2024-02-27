@@ -41,9 +41,6 @@ export const authReducer = <T>(state = initialState, { type, payload }: AuthActi
         case AuthTypes.CHANGEPASSWORD_SUCCESS: {
             return { ...state, isLoading: false, statusCode: payload };
         }
-        case AuthTypes.SIGNOUT: {
-            return { ...state, isLoading: false, statusCode: null, token: undefined };
-        }
         case AuthTypes.AUTH_ERROR: {
             return { ...state, isLoading: false, statusCode: payload };
         }

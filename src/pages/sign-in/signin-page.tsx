@@ -13,6 +13,9 @@ import classes from './index.module.css';
 
 const validateMessages = {
   required: '',
+  types: {
+    email: '${label} is not a valid email!',
+  },
 };
 
 type SignInParams = {
@@ -36,20 +39,23 @@ export const SignIn: React.FC = () => {
     dispatch(authActions.checkEmailRequest(value))
   }, [dispatch])
 
-  const { pathname, state } = useSelector(({ router }: RootState) => getPrevLocation(router))
+  const previousLocations = useSelector(({ router }: RootState) => getPrevLocation(router))
 
   const repeatedRequest = useCallback(() => {
+    if (!previousLocations) return null
+    const { pathname, state } = previousLocations
     if (pathname === RoutePath.CheckemailError) {
       checkEmailHandle(state)
     }
-  }, [checkEmailHandle, pathname, state])
+  }, [checkEmailHandle, previousLocations])
 
   useEffect(() => {
     repeatedRequest()
   }, [form, repeatedRequest])
 
   return (
-    <Space direction="vertical" align="center" size={xs ? 32 : 48} style={{ width: '100%', textAlign: 'center' }}>
+    <Space direction="vertical" align="center" size={xs ? 32 : 48}
+      style={{ width: '100%', textAlign: 'center' }}>
       <Image
         src='../logo.svg'
         preview={false}
@@ -92,17 +98,14 @@ export const SignIn: React.FC = () => {
               <Button
                 data-test-id='login-forgot-button'
                 type='link'
-                // htmlType="submit"
                 onClick={() => {
-                  // checkEmailHandle(form.getFieldValue([]))
                   form
                     .validateFields(['email'])
                     .then(value => {
                       form.resetFields();
-                      console.log(value)
                       checkEmailHandle(value)
                     }).catch(info => {
-                      console.log('Validate Failed:', info);
+                      console.error(info);
                     });
                 }
                 }
@@ -121,7 +124,7 @@ export const SignIn: React.FC = () => {
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} className={classes.form_button}>
+              <Button icon={xs ? '' : <GooglePlusOutlined />} style={{width: '100%'}} className={classes.form_button}>
                 Войти через Google
               </Button>
             </Space>

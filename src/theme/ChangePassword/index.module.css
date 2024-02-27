@@ -1,0 +1,24 @@
+
+.ant-result-title {
+    font-weight: 500;
+    line-height: 130%;
+    white-space: pre-line;
+}
+
+.ant-result-subtitle {
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+}
+
+.ant-space-item {
+    max-width: 368px;
+    width: 100%;
+}
+.ant-result-extra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ant-result-icon {
+    margin: 0;
+}

@@ -1,18 +1,3 @@
 .result_layout {
     padding: 0;
-
-    & :global(.ant-result-title) {
-        font-weight: 500;
-        width: 102%;
-    }
-
-    & :global(.ant-result-subtitle) {
-        line-height: 1.2;
-        letter-spacing: 0.5px;
-    }
-
-    & :global(.ant-space-item) {
-        max-width: 368px;
-        width: 100%;
-    }
 }

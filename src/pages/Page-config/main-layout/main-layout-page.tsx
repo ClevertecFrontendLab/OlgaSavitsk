@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
@@ -14,7 +14,7 @@ export function MainLayout() {
     const [collapsed, setCollapsed] = useState(false);
     const dispatch = useDispatch()
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (isLoading) {
             dispatch(authActions.resetLoading(false))
         }

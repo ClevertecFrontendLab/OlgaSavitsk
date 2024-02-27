@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Input, Result } from "antd";
 import 'antd/dist/antd.css';
 
-import { RoutePath, TIPS, PASSWORD_REGEX } from '@constants/index';
-import { getPrevLocation } from '@utils/index';
 import { RootState } from '@redux/configure-store';
 import { authActions, ChangePasswordRequest } from '@redux/auth';
+import { RoutePath, TIPS, PASSWORD_REGEX } from '@constants/index';
+import { getPrevLocation } from '@utils/index';
 import classes from './index.module.css';
 
 
@@ -18,13 +18,15 @@ export const ResetPasswordPage: React.FC = () => {
         dispatch(authActions.changePasswordRequest(value))
     }, [dispatch])
 
-    const { pathname, state } = useSelector(({ router }: RootState) => getPrevLocation(router))
+    const previousLocations = useSelector(({ router }: RootState) => getPrevLocation(router))
 
     const repeatedRequest = useCallback(() => {
+        if (!previousLocations) return null
+        const { pathname, state } = previousLocations
         if (pathname === RoutePath.ChangePasswordError) {
             onFinish(state as ChangePasswordRequest)
         }
-    }, [onFinish, pathname, state])
+    }, [onFinish, previousLocations])
 
     useEffect(() => {
         repeatedRequest()
