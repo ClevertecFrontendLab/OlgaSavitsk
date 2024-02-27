@@ -1,0 +1,116 @@
+import { isAxiosError } from 'axios';
+import { push } from 'redux-first-history';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
+
+import { authApi } from '@services/index';
+import { LocalStorageKey, RoutePath } from '@constants/index';
+import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayload } from '../types';
+import {
+    authError,
+    changePasswordSuccess,
+    checkEmailSuccess,
+    confirmEmailSuccess,
+    signInSuccess,
+    signUpSuccess,
+} from '../actions';
+
+type ErrorResponse = {
+    statusCode: number;
+    message: string;
+}
+
+function* signInWorker(action: AuthAction<SignInPayload>) {
+    try {
+        const { data, status } = yield call(authApi.signIn, action.payload);
+        yield put(signInSuccess(data.accessToken));
+        if (action.payload.remember) {
+            yield window.localStorage.setItem(
+                LocalStorageKey.authToken,
+                JSON.stringify({ access_token: data.accessToken }),
+            );
+        }
+        if (status === 200) yield put(push(RoutePath.Home));
+    } catch (error: unknown) {
+        if (isAxiosError(error)) {
+            const status = error.response?.status;
+            if (status) yield put(authError(status));
+            yield put(push(RoutePath.SignInError));
+        }
+    }
+}
+
+function* signUpWorker(action: AuthAction<SignUpPayload>) {
+    try {
+        const { status } = yield call(authApi.signUp, action.payload);
+        yield put(signUpSuccess(status));
+        yield put(push(RoutePath.SignUpSuccess));
+    } catch (error: unknown) {
+        if (isAxiosError(error)) {
+            const status = error.response?.status;
+            if (status) yield put(authError(status));
+            if (status === 409) {
+                yield put(push(RoutePath.SignUpFailed));
+            } else {
+                yield put(push(RoutePath.Error, action.payload));
+            }
+        }
+    }
+}
+
+function* checkEmailWorker(action: AuthAction<SignInPayload>) {
+    try {
+        const { status } = yield call(authApi.checkEmail, action.payload);
+        yield put(push(RoutePath.ConfirmEmail, action.payload.email));
+        yield put(checkEmailSuccess(status));
+    } catch (error: unknown) {
+        if (isAxiosError(error)) {
+            const statusCode = error.response?.status;
+            const { message } = error.response?.data as ErrorResponse;
+            if (statusCode) yield put(authError(statusCode));
+            if (statusCode === 404 && message === 'Email не найден') {
+                yield put(push(RoutePath.CheckemailNoExist));
+            } else if (statusCode || (statusCode === 404 && message === '')) {
+                yield put(push(RoutePath.CheckemailError, action.payload));
+            }
+        }
+    }
+}
+
+function* confirmEmailWorker(action: AuthAction<ConfirmEmailRequest>) {
+    try {
+        yield call(authApi.confirmEmail, action.payload);
+        yield put(confirmEmailSuccess());
+        yield put(push(RoutePath.ResetPassword));
+    } catch (error: unknown) {
+        if (isAxiosError(error)) {
+            const status = error.response?.status;
+            if (status) yield put(authError(status));
+        }
+    }
+}
+
+function* changePasswordWorker(action: AuthAction<ConfirmEmailRequest>) {
+    try {
+        const { status } = yield call(authApi.changePassword, action.payload);
+        yield put(push(RoutePath.ChangePasswordSuccess));
+        yield put(changePasswordSuccess(status));
+    } catch (error: unknown) {
+        if (isAxiosError(error)) {
+            const status = error.response?.status;
+            if (status) yield put(authError(status));
+            yield put(push(RoutePath.ChangePasswordError, action.payload));
+        }
+    }
+}
+
+export function* watchAuth() {
+    yield takeLatest(AuthTypes.SIGNUP_REQUEST, signUpWorker);
+    yield takeLatest(AuthTypes.SIGNIN_REQUEST, signInWorker);
+    yield takeLatest(AuthTypes.CHECKEMAIL_REQUEST, checkEmailWorker);
+    yield takeLatest(AuthTypes.CONFIRMEMAIL_REQUEST, confirmEmailWorker);
+    yield takeLatest(AuthTypes.CHANGEPASSWORD_REQUEST, changePasswordWorker);
+}
+
+export default function* rootSaga() {
+    yield all([watchAuth()]);
+}

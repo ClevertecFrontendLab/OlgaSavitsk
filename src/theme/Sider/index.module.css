@@ -8,12 +8,8 @@
     margin-bottom: 14px;
 }
 
-.ant-menu-item {
-    padding-left: 17px !important;
-}
-
 .ant-menu-item-icon {
-    color: #061178;
+    color: var(--ant-primary-9);
 }
 
 .ant-menu-item-divider ~ .ant-menu-item {
@@ -21,7 +17,7 @@
     & > .ant-menu-title-content {
         margin-left: 25px;
     }
-} 
+}
 
 .ant-menu {
     display: flex;
@@ -59,4 +55,3 @@
         margin-bottom: 6px;
     }
 }
-
