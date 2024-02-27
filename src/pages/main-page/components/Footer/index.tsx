@@ -1,7 +1,5 @@
-import React from 'react';
 import 'antd/dist/antd.css';
 import { Button, Card, Grid, Layout, Space } from 'antd';
-
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 
 const { Footer } = Layout;

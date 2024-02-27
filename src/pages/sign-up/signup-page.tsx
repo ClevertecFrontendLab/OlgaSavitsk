@@ -1,14 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Image, Form, Input, Space, Grid } from "antd";
 import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import { signUpRequest } from '@redux/auth/actions';
-import { RootState } from '@redux/configure-store';
-import { getPrevLocation } from '@utils/index';
-import { Tabs } from '@components/index';
+import { authActions, selectPreviousLocations } from '@redux/auth';
 import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
+import { Tabs } from '@components/index';
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -28,10 +26,10 @@ export const SignUp: React.FC = () => {
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
 
-  const previousLocations = useSelector(({ router }: RootState) => getPrevLocation(router))
+  const previousLocations = selectPreviousLocations()
 
   const onFinish = useCallback(async (value: SignUpParams | unknown) => {
-    dispatch(signUpRequest(value))
+    dispatch(authActions.signUpRequest(value))
   }, [dispatch])
 
   const repeatedRequest = useCallback(() => {
@@ -66,7 +64,11 @@ export const SignUp: React.FC = () => {
           name="email"
           rules={[{ required: true }, { type: 'email' }]}
         >
-          <Input data-test-id='registration-email' addonBefore="e-mail:" className={classes.input} />
+          <Input
+            data-test-id='registration-email'
+            addonBefore="e-mail:"
+            className={classes.input}
+            autoComplete='off' />
         </Form.Item>
 
         <Form.Item
@@ -116,6 +118,7 @@ export const SignUp: React.FC = () => {
                 data-test-id='registration-submit-button'
                 type="primary"
                 htmlType="submit"
+                style={{ width: '100%' }}
                 className={classes.form_button}
                 disabled={!!form.getFieldsError().filter(({ errors }) => errors.length).length}
               >

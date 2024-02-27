@@ -24,7 +24,7 @@ export const authReducer = <T>(state = initialState, { type, payload }: AuthActi
             return { ...state, isLoading: payload };
         }
         case AuthTypes.CHECKEMAIL_REQUEST: {
-            return { ...state, isLoading: true };
+            return { ...state, isLoading: true, statusCode: null };
         }
         case AuthTypes.CHECKEMAIL_SUCCESS: {
             return { ...state, isLoading: false };

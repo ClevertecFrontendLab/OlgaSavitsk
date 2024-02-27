@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout, Menu, Image, Grid } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -9,7 +8,7 @@ import classes from './index.module.css';
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
 
-interface SiderProps {
+type SiderProps = {
   collapsed: boolean
 }
 

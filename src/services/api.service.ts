@@ -27,10 +27,7 @@ class ApiClient {
                 return Promise.reject(error);
             },
         );
-        this._api.interceptors.response.use(
-            (response: AxiosResponse) => response,
-            // (error: AxiosError) => error
-        );
+        this._api.interceptors.response.use((response: AxiosResponse) => response);
     }
 
     get(url: string, params: unknown = {}): Promise<void> {

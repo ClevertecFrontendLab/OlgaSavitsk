@@ -3,11 +3,11 @@ import { ResultStatusType } from "antd/lib/result"
 import { ReactNode } from "react"
 import { To } from "react-router-dom"
 
-interface ObjectResult {
+type ObjectResult = {
     [key: string]: ResultContext;
 }
 
-interface ResultContext {
+type ResultContext = {
     status?: ResultStatusType,
     title: string,
     subTitle: ReactNode,

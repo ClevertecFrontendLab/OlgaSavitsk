@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { To } from 'history';
 import { Tabs, Grid } from "antd";

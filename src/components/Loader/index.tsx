@@ -1,23 +1,20 @@
-import React from "react";
 import Lottie from "lottie-react";
-import { useSelector } from "react-redux";
-import { Space } from "antd";
+import { Space, Spin } from "antd";
 import 'antd/dist/antd.css';
 
-import { RootState } from "@redux/configure-store";
+import { selectAuthLoading } from "@redux/auth/selectors";
 import loader from "./loader.json";
 import classes from './index.module.css';
 
 const Loader: React.FC = () => {
-    const isLoading = useSelector(({ authStore }: RootState) => authStore.isLoading)
+    const isLoading = selectAuthLoading()
 
     return (
         isLoading ?
-            <div>
-                <Space data-test-id='loader' direction="vertical" align="center" className={classes.loader_wrapper}>
-                    <Lottie data-test-id='loader' animationData={loader} loop={true} />
-                </Space>
-            </div> : null
+            <Space direction="vertical" align="center" >
+                <Spin indicator={<Lottie data-test-id='loader' animationData={loader} loop={true}/>} className={classes.loader_wrapper}/>
+            </Space>
+            : null
     )
 }
 

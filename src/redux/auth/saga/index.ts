@@ -14,7 +14,7 @@ import {
     signUpSuccess,
 } from '../actions';
 
-interface ErrorResponse {
+type ErrorResponse = {
     statusCode: number;
     message: string;
 }

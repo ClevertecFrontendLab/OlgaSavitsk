@@ -9,7 +9,7 @@ const { Title } = Typography;
 
 const { useBreakpoint } = Grid;
 
-interface HeaderProps {
+type HeaderProps = {
   getCollapted: (collapsed: boolean) => void
 }
 

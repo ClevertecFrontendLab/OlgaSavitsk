@@ -20,19 +20,19 @@
 .form_layout {
     max-width: 539px;
     width: 100%;
-    padding: 64px 85.5px;
+    height: 100%;
     border-radius: 2px;
     background-color: var(--ant-form-background);
+}
 
-    & :global(.ant-space-item) {
-        width: 100%;
-    }
+.form_layout :global .ant-space-item {
+    width: 100%;
 }
 
 @media (max-width: 574px) {
     .form_layout {
-        padding: 32px 16px;
-        max-height: 564px;
+        padding: 32px 16px !important;
+        max-height: 607px;
         min-height: 317px;
         transform: translateY(-3px);
     }

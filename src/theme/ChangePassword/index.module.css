@@ -1,24 +1,13 @@
-._result_layout_rh8iu_1 .ant-result-title {
-    font-weight: 500;
-    line-height: 130%;
-    white-space: pre-line;
-}
-
-._result_layout_rh8iu_1 .ant-result-subtitle {
+.ant-result-subtitle {
     line-height: 1.3;
     letter-spacing: 0.5px;
 }
 
-._result_layout_rh8iu_1 .ant-space-item {
+._result_layout_xuxk8_1 .ant-space-item {
     max-width: 368px;
     width: 100%;
 }
 
-._result_layout_rh8iu_1 .ant-result-extra {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.ant-result-icon {
-    margin: 0;
+.ant-result-500 .ant-result-extra {
+    width: auto;
 }

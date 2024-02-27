@@ -16,20 +16,22 @@
     padding: 0 15px;
 }
 
-._form_button__item_1xqwv_14 .ant-form-item {
-    width: 100%;
-}
-._form_button__item_1xqwv_14 .ant-space-item {
-    width: 100%;
+.ant-spin-dot {
+    width: 20em;
+    height: 20em;
 }
 
-._form_button__item_btbsw_16 .ant-space-item, .ant-form-item {
-    width: 100%;
-}
 
 @media (max-width: 360px) {
     .ant-form-item-explain {
         margin-bottom: 8px;
+    }
+    .ant-checkbox > span {
+        font-size: 14px;
+    }
+    .ant-form-item-control-input-content button {
+        padding: 7px;
+        font-size: 14px;
     }
     label {
         & span {

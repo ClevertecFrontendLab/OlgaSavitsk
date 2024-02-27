@@ -1,6 +1,14 @@
 .result_layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 0;
     text-align: center;
+    height: 332px;
+}
+
+.result_layout :global .ant-result-title {
+    white-space: pre-line;
 }
 
 .character {
@@ -27,12 +35,21 @@
 
 .container {
     height: 40px;
+    margin-bottom: 23px;
 }
 
 .selected {
     outline: none;
     border: 2px solid var(--ant-primary-5);
     box-shadow: 2px 0 0 0 rgba(47, 84, 235, 0.2);
+}
+
+:global .ant-result-icon {
+    margin: 20px 0 20px;
+}
+
+:global .ant-result-title {
+   font-weight: 600;
 }
 
 @media (max-width: 574px) {

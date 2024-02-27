@@ -27,36 +27,36 @@ export type AuthAction<Payload> = {
 
 export type AuthReducer = (state: AuthState, actions: AuthAction<AuthState>) => AuthState;
 
-export interface SignUpPayload {
+export type SignUpPayload = {
     email: string;
     password: string;
 }
 
-export interface SignInPayload {
+export type SignInPayload = {
     email: string;
     password?: string;
     remember?: boolean;
 }
 
-export interface CheckAuthResponse {
+export type CheckAuthResponse = {
     email: string;
     message: string;
 }
 
-export interface ConfirmEmailRequest {
+export type ConfirmEmailRequest = {
     email: string,
     code: string
 }
-export interface ChangePasswordRequest {
+export type ChangePasswordRequest = {
   password: string,
   confirmPassword: string
 }
 
-export interface AuthResponse {
+export type AuthResponse = {
     token: string;
 }
 
-export interface AuthError {
+export type AuthError = {
     statusCode: number;
     error: string;
     message: string;

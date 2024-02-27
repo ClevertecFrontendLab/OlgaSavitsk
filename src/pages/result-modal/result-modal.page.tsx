@@ -17,7 +17,8 @@ export const ResultModal: React.FC = () => {
     }, [locationPathname]);
 
     return (
-        context && <Result
+        context &&
+        <Result
             className={classes.result_layout}
             status={context.status}
             title={context.title}

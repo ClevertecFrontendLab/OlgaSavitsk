@@ -6,6 +6,6 @@ export const DEFAULT_STORAGE_CONFIG: StorageConfig = {
   access_token: '',
 };
 
-interface StorageConfig {
+type StorageConfig = {
   access_token: string;
 }

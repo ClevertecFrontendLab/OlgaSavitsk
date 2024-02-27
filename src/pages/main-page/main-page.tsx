@@ -6,8 +6,6 @@ import { Content } from './components';
 export const MainPage: React.FC = () => {
 
   return (
-    <>
-      <Content />
-    </>
+    <Content />
   );
 };

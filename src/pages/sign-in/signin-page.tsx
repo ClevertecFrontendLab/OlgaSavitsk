@@ -1,14 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Image, Form, Input, Space, Grid, Checkbox } from "antd";
 import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
+import { authActions, selectPreviousLocations } from '@redux/auth';
 import { Tabs } from '@components/index';
 import { RoutePath } from '@constants/index';
-import { authActions } from '@redux/auth';
-import { RootState } from '@redux/configure-store';
-import { getPrevLocation } from '@utils/index';
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -39,7 +37,7 @@ export const SignIn: React.FC = () => {
     dispatch(authActions.checkEmailRequest(value))
   }, [dispatch])
 
-  const previousLocations = useSelector(({ router }: RootState) => getPrevLocation(router))
+  const previousLocations = selectPreviousLocations()
 
   const repeatedRequest = useCallback(() => {
     if (!previousLocations) return null
@@ -54,8 +52,9 @@ export const SignIn: React.FC = () => {
   }, [form, repeatedRequest])
 
   return (
-    <Space direction="vertical" align="center" size={xs ? 32 : 48}
-      style={{ width: '100%', textAlign: 'center' }}>
+    <Space direction="vertical" align="center" size={xs ? 32 : 48} className={classes.form_layout}
+      style={{ width: '100%', textAlign: 'center' }}
+      >
       <Image
         src='../logo.svg'
         preview={false}
@@ -124,7 +123,7 @@ export const SignIn: React.FC = () => {
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} style={{width: '100%'}} className={classes.form_button}>
+              <Button icon={xs ? '' : <GooglePlusOutlined />} style={{ width: '100%' }} className={classes.form_button}>
                 Войти через Google
               </Button>
             </Space>
