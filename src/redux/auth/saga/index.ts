@@ -2,8 +2,8 @@ import { isAxiosError } from 'axios';
 import { push } from 'redux-first-history';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import { authApi } from '@services/index';
 import { LocalStorageKey, RoutePath } from '@constants/index';
+import { authApi } from '@services/index';
 import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayload } from '../types';
 import {
     authError,

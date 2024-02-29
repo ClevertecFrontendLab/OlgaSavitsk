@@ -42,7 +42,8 @@ export const ConfirmEmailPage: React.FC = () => {
                 `Введите код
                  для восстановления аккауанта` :
                 'Неверный код. Введите код для восстановления аккауанта'}
-            subTitle={`Мы отправили вам на e-mail ${email} шестизначный код. Введите его в поле ниже.`}
+            subTitle={<Typography.Text type='secondary'>Мы отправили вам на e-mail
+            <Text strong>{email}</Text> шестизначный код. Введите его в поле ниже.</Typography.Text>}
             extra={[
                 <VerificationInput
                     inputProps={{ ['data-test-id']: 'verification-input' }}
