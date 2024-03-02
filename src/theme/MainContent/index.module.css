@@ -27,7 +27,7 @@
 }
 
 @media (max-width: 754px) {
-    .ant-space-item {
+    footer .ant-space-item {
         width: 100%;
         text-align: center;
         display: flex;

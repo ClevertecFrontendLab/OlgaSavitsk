@@ -1,5 +1,6 @@
 import { DEFAULT_STORAGE_CONFIG, LocalStorageKey } from '@constants/index';
 import { getStorageValue } from '@hooks/index';
+import { store } from '@redux/configure-store';
 import axios, {
     AxiosError,
     AxiosInstance,
@@ -9,9 +10,11 @@ import axios, {
 } from 'axios';
 
 const createHeaderConfig = (config: InternalAxiosRequestConfig) => {
-    const token = getStorageValue(LocalStorageKey.authToken, DEFAULT_STORAGE_CONFIG);
-    if (token.access_token) {
-        config.headers['Authorization'] = `Bearer ${token.access_token}`;
+    const { access_token } = getStorageValue(LocalStorageKey.authToken, DEFAULT_STORAGE_CONFIG);
+    const currentToken = store.getState().authStore.token;
+    const token = currentToken || access_token;
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
 };
@@ -30,7 +33,7 @@ class ApiClient {
         this._api.interceptors.response.use((response: AxiosResponse) => response);
     }
 
-    get(url: string, params: unknown = {}): Promise<void> {
+    get<T>(url: string, params: unknown = {}): Promise<T> {
         return this._api({
             method: 'get',
             url,

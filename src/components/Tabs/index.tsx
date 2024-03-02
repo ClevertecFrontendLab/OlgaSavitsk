@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
-import { To } from 'history';
-import { Tabs, Grid } from "antd";
 import 'antd/dist/antd.css';
 
 import { tabItems } from '@constants/index';
 import { history } from "@redux/configure-store";
+import { Grid,Tabs } from "antd";
+import { To } from 'history';
+import { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const { useBreakpoint } = Grid;
 

@@ -1,7 +1,3 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Result, Grid, Typography } from "antd";
-import VerificationInput from 'react-verification-input';
 import 'antd/dist/antd.css';
 
 import {
@@ -9,12 +5,17 @@ import {
     selectAuthEmail,
     selectAuthStatusCode
 } from '@redux/auth';
+import { Grid, Result, Typography } from "antd";
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import VerificationInput from 'react-verification-input';
+
 import classes from './index.module.css';
 
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
-export const ConfirmEmailPage: React.FC = () => {
+const ConfirmEmailPage: React.FC = () => {
     const dispatch = useDispatch()
     const statusCode = selectAuthStatusCode()
     const email = selectAuthEmail()
@@ -42,7 +43,7 @@ export const ConfirmEmailPage: React.FC = () => {
                 `Введите код
                  для восстановления аккауанта` :
                 'Неверный код. Введите код для восстановления аккауанта'}
-            subTitle={<Typography.Text type='secondary'>Мы отправили вам на e-mail
+            subTitle={<Typography.Text type='secondary'>Мы отправили вам на e-mail{' '}
             <Text strong>{email}</Text> шестизначный код. Введите его в поле ниже.</Typography.Text>}
             extra={[
                 <VerificationInput
@@ -66,3 +67,5 @@ export const ConfirmEmailPage: React.FC = () => {
 
     );
 };
+
+export default ConfirmEmailPage

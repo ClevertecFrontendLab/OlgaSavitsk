@@ -1,8 +1,9 @@
-import { Layout, Menu, Image, Grid } from 'antd';
 import 'antd/dist/antd.css';
 
 import { menuItems } from '@constants/index';
 import { history } from "@redux/configure-store";
+import { Grid,Image, Layout, Menu } from 'antd';
+
 import classes from './index.module.css';
 
 const { Sider } = Layout;
@@ -24,7 +25,15 @@ const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        className={classes.sider}>
+        className={classes.sider}
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          position: "sticky",
+          top: 0,
+          left: 0
+        }}
+        >
         <div className={collapsed ? classes.collapsed : classes.logo}>
           <Image
             src={collapsed ? "../fit.svg" : '../logo.svg'}

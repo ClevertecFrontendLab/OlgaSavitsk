@@ -17,6 +17,8 @@
     min-height: 100vh;
     background: no-repeat center/cover url('../main.jpg');
     background-attachment: fixed;
+    position:sticky;
+    top: 120px
 }
 
 .site_layout .layout_background {

@@ -1,0 +1,9 @@
+.ant-btn-link {
+    font-weight: 400;
+    color: #2f54eb;
+    text-decoration: inherit;
+}
+
+.ant-btn-primary {
+    background-color: var(--ant-primary-6);
+}

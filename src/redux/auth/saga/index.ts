@@ -1,10 +1,9 @@
-import { isAxiosError } from 'axios';
-import { push } from 'redux-first-history';
-import { all, call, put, takeLatest } from 'redux-saga/effects';
-
 import { LocalStorageKey, RoutePath } from '@constants/index';
 import { authApi } from '@services/index';
-import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayload } from '../types';
+import { isAxiosError } from 'axios';
+import { push } from 'redux-first-history';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import {
     authError,
     changePasswordSuccess,
@@ -13,6 +12,7 @@ import {
     signInSuccess,
     signUpSuccess,
 } from '../actions';
+import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayload } from '../types';
 
 type ErrorResponse = {
     statusCode: number;
@@ -109,8 +109,4 @@ export function* watchAuth() {
     yield takeLatest(AuthTypes.CHECKEMAIL_REQUEST, checkEmailWorker);
     yield takeLatest(AuthTypes.CONFIRMEMAIL_REQUEST, confirmEmailWorker);
     yield takeLatest(AuthTypes.CHANGEPASSWORD_REQUEST, changePasswordWorker);
-}
-
-export default function* rootSaga() {
-    yield all([watchAuth()]);
 }

@@ -1,7 +1,9 @@
-import Icon, { CalendarTwoTone, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
-import { MenuProps } from 'antd';
 import 'antd/dist/antd.css';
+
+import Icon, { CalendarTwoTone, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
 import { IconExit } from '@components/index';
+import { MenuProps } from 'antd';
+
 import { RoutePath } from './routes.constants';
 import { LocalStorageKey } from './storage.constants';
 

@@ -1,8 +1,7 @@
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-
 import { RootState } from '@redux/configure-store';
 import { getPrevLocation } from '@utils/index';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 const UseMemmoisedSelector = <T>(selector: (state: RootState) => T) => {
     const result = useSelector(selector);
@@ -11,6 +10,10 @@ const UseMemmoisedSelector = <T>(selector: (state: RootState) => T) => {
 
 export const selectAuthLoading = () => {
     return UseMemmoisedSelector(({ authStore }: RootState) => authStore.isLoading);
+};
+
+export const selectAuthToken = () => {
+    return UseMemmoisedSelector(({ authStore }: RootState) => authStore.token as string);
 };
 
 export const selectLocationPath = () => {

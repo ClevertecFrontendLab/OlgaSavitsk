@@ -32,6 +32,10 @@
     padding-right: 33px;
 }
 
+.ant-page-header.has-breadcrumb {
+    padding-bottom: 16px;
+}
+
 @media (max-width: 834px) {
     .ant-page-header.has-breadcrumb {
         padding-right: 24px;

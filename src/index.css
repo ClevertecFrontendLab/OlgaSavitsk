@@ -12,21 +12,17 @@
     --ant-primary-5: #597EF7;
     --ant-button-download: #262626;
     --ant-form-background: #fff;
+    --ant-rate-color: #faad14;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-.ant-btn-link {
-    font-weight: 400;
-    color: #2f54eb;
-    text-decoration: inherit;
-}
 a:hover {
     color: #535bf2;
 }
 
 body {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Inter, sans-serif;
     margin: 0;
 }
 

@@ -1,16 +1,17 @@
-import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Input, Result } from "antd";
 import 'antd/dist/antd.css';
 
-import { RootState } from '@redux/configure-store';
+import { PASSWORD_REGEX,RoutePath, TIPS } from '@constants/index';
 import { authActions, ChangePasswordRequest } from '@redux/auth';
-import { RoutePath, TIPS, PASSWORD_REGEX } from '@constants/index';
+import { RootState } from '@redux/configure-store';
 import { getPrevLocation } from '@utils/index';
+import { Button, Form, Input, Result } from "antd";
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import classes from './index.module.css';
 
 
-export const ResetPasswordPage: React.FC = () => {
+const ResetPasswordPage: React.FC = () => {
     const dispatch = useDispatch()
     const [form] = Form.useForm();
 
@@ -34,7 +35,7 @@ export const ResetPasswordPage: React.FC = () => {
 
     return (
         <>
-            <Result className={classes.result_layout}
+            <Result className={classes.result_layout__password}
                 icon={' '}
                 title='Восстановление аккауанта'
                 extra={[
@@ -103,3 +104,5 @@ export const ResetPasswordPage: React.FC = () => {
         </>
     );
 };
+
+export default ResetPasswordPage

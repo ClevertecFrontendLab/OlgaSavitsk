@@ -26,11 +26,6 @@ export const signInSuccess = (accessToken: AuthResponse): AuthAction<AuthRespons
     payload: accessToken,
 });
 
-export const resetLoading = (isloading: boolean): AuthAction<boolean> => ({
-    type: AuthTypes.RESETLOADING,
-    payload: isloading,
-});
-
 export const checkEmailRequest = <T>(payload: T): AuthAction<T> => ({
     type: AuthTypes.CHECKEMAIL_REQUEST,
     payload,

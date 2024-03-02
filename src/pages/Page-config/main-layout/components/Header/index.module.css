@@ -1,4 +1,8 @@
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
     background: var(--ant-primary-1);
 }
 
@@ -39,4 +43,3 @@
     transition: transform 0.3s;
     z-index: 2;
 }
-

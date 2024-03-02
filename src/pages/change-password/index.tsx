@@ -1,12 +1,12 @@
+import {
+confirmLayout,
+    LayoutType, RoutePath, } from "@constants/index";
+import { RootState } from "@redux/configure-store";
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-    LayoutType, RoutePath, confirmLayout,
-} from "@constants/index";
-import { RootState } from "@redux/configure-store";
-import { ConfirmEmailPage } from './confirm-email.page';
-import { ResetPasswordPage } from './reset-password.page';
+import ConfirmEmailPage from './confirm-email.page';
+import ResetPasswordPage from './reset-password.page';
 
 const layoutComponent = {
     [LayoutType.CONFIRM]: ConfirmEmailPage,

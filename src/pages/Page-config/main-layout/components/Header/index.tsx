@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
-import { Button, PageHeader, Typography, Grid } from 'antd';
-import { SettingOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
+import { MenuFoldOutlined,MenuUnfoldOutlined, SettingOutlined } from '@ant-design/icons';
+import { RoutePath } from '@constants/routes.constants';
+import { selectLocationPath } from '@redux/auth';
+import { Button, Grid,PageHeader, Typography } from 'antd';
+import React, { useState } from 'react';
+
+import { routes } from './constants';
 import classes from './index.module.css';
 
 const { Title } = Typography;
@@ -14,6 +18,7 @@ type HeaderProps = {
 }
 
 const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) => {
+  const locationPathname = selectLocationPath()
   const [collapsed, setCollapsed] = useState(false);
   const { lg, md, xs } = useBreakpoint();
 
@@ -22,13 +27,10 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
       <PageHeader
         className={classes.header}
         breadcrumb={{
-          routes: [{
-            path: '/',
-            breadcrumbName: 'Главная',
-          }]
+          routes: routes
         }}
         title={
-          <Title
+          locationPathname === RoutePath.Home && <Title
             style={{
               whiteSpace: 'pre-line',
               margin: 0,
@@ -39,7 +41,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
             level={lg ? 1 : xs ? 4 : 3}>
             Приветствуем тебя в CleverFit — приложении,<br /> которое поможет тебе добиться своей мечты!
           </Title>}
-        extra={[
+        extra={locationPathname !== RoutePath.Home && [
           md ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
             Настройки
           </Button> :
@@ -47,7 +49,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
         ]}
       >
         {xs ? <Button key={1} data-test-id='sider-switch-mobile' className={classes.button_trigger__mobile}
-          style={{left: xs ? 105 : 'auto', transform: xs && collapsed ? 'translateX(-104px)' : 'none' }}>
+          style={{ left: xs ? 105 : 'auto', transform: xs && collapsed ? 'translateX(-104px)' : 'none' }}>
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
             className: classes.trigger,
             onClick: () => {

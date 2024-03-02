@@ -1,10 +1,21 @@
-import { MainPage } from './main-page/main-page';
-export { SignIn } from './sign-in/signin-page';
-export { SignUp } from './sign-up/signup-page';
-export { ResultModal } from './result-modal/result-modal.page';
-export { ConfirmEmailPage } from './change-email/confirm-email.page';
-import ResultErrorRequired from './result-modal/result-error-required';
+import ConfirmConfig from './change-password';
+import ConfirmEmailPage from './change-password/confirm-email.page';
+import MainPage from './main-page/main-page';
 import PageConfig from './Page-config/index';
-import ConfirmConfig from './change-email';
+import ResultErrorRequired from './result-modal/result-error-required';
+import ResultModal from './result-modal/result-modal.page';
+import ReviewsPage from './reviews/reviews-page';
+import SignIn from './sign-in/signin-page';
+import SignUp from './sign-up/signup-page';
 
-export { ResultErrorRequired, PageConfig, MainPage, ConfirmConfig };
+export {
+    ConfirmConfig,
+    ConfirmEmailPage,
+    MainPage,
+    PageConfig,
+    ResultErrorRequired,
+    ResultModal,
+    ReviewsPage,
+    SignIn,
+    SignUp,
+};

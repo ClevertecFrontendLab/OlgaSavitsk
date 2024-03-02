@@ -1,12 +1,13 @@
-import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Image, Form, Input, Space, Grid } from "antd";
-import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import { authActions, selectPreviousLocations } from '@redux/auth';
-import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
+import { GooglePlusOutlined } from '@ant-design/icons';
 import { Tabs } from '@components/index';
+import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
+import { authActions, selectPreviousLocations } from '@redux/auth';
+import { Button, Form, Grid,Image, Input, Space } from "antd";
+import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -21,7 +22,7 @@ type SignUpParams = {
 
 const { useBreakpoint } = Grid;
 
-export const SignUp: React.FC = () => {
+const SignUp: React.FC = () => {
   const dispatch = useDispatch()
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
@@ -134,3 +135,5 @@ export const SignUp: React.FC = () => {
     </Space>
   );
 };
+
+export default SignUp
