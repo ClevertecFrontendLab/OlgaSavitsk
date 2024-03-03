@@ -1,0 +1,42 @@
+.modal :global .ant-btn {
+    width: auto;
+}
+
+.modal :global .ant-result-extra {
+    display: flex;
+    justify-content: center;
+}
+
+.modal {
+    padding: 0;
+}
+
+.modal :global .ant-result-title {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.modal :global .ant-result-500 button {
+    flex-basis: 0;
+}
+
+@media (max-width: 470px) {
+    .modal :global .ant-result {
+        padding: 0;
+    }
+
+    .modal :global .ant-result-extra {
+        margin-top: 12px;
+    }
+
+    .modal :global .ant-result-500 .ant-result-subtitle {
+        margin: 0 50px;
+    }
+
+    .modal :global .ant-result-subtitle {
+        letter-spacing: 0;
+    }
+    .modal :global .ant-result-title {
+        line-height: 1.3;
+    }
+}

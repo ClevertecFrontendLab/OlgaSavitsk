@@ -4,10 +4,11 @@ import classes from './index.module.css';
 type ButtonProps = {
     dataId: string;
     style?: React.CSSProperties,
-    setOpenFeedModal: (openFeedModal: boolean) => void
+    setOpenFeedModal: (openFeedModal: boolean) => void,
+    setCloseModalError?: (openFeedModal: boolean) => void
 }
 
-const ButtonModal: React.FC<ButtonProps> = ({dataId, setOpenFeedModal, style} : ButtonProps) => {
+const ButtonModal: React.FC<ButtonProps> = ({ dataId, setOpenFeedModal, setCloseModalError, style }: ButtonProps) => {
 
     return (
         <Button
@@ -16,7 +17,10 @@ const ButtonModal: React.FC<ButtonProps> = ({dataId, setOpenFeedModal, style} : 
             size='middle'
             style={style}
             className={classes.button}
-            onClick={() => setOpenFeedModal(true)}>
+            onClick={() => {
+                if(setCloseModalError) setCloseModalError(false)
+                setOpenFeedModal(true)
+            }}>
             Написать отзыв
         </Button>
     )

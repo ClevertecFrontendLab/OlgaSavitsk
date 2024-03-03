@@ -4,7 +4,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { Tabs } from '@components/index';
 import { RoutePath } from '@constants/index';
 import { authActions, selectPreviousLocations } from '@redux/auth';
-import { Button, Checkbox,Form, Grid, Image, Input, Space } from "antd";
+import { Button, Checkbox, Form, Grid, Image, Input, Space } from "antd";
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -55,7 +55,7 @@ const SignIn: React.FC = () => {
   return (
     <Space direction="vertical" align="center" size={xs ? 32 : 48} className={classes.form_layout}
       style={{ width: '100%', textAlign: 'center' }}
-      >
+    >
       <Image
         src='../logo.svg'
         preview={false}
@@ -124,7 +124,7 @@ const SignIn: React.FC = () => {
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} style={{ width: '100%' }} className={classes.form_button}>
+              <Button icon={xs ? '' : <GooglePlusOutlined />} href={`${import.meta.env.VITE_API_BASE_URL}auth/google`} style={{ width: '100%' }} className={classes.form_button}>
                 Войти через Google
               </Button>
             </Space>

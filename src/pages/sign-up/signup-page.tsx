@@ -126,7 +126,7 @@ const SignUp: React.FC = () => {
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} className={classes.form_button}>
+              <Button icon={xs ? '' : <GooglePlusOutlined />} href={`${import.meta.env.VITE_API_BASE_URL}/auth/google`} className={classes.form_button}>
                 Регистрация через Google
               </Button>
             </Space>

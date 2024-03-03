@@ -6,10 +6,11 @@ import { useCallback } from "react";
 type RateProps = {
     disabled: boolean;
     defaultValue?: number,
+    size?: number
     setRating?: (rate: number) => void
 }
 
-const RateComponent: React.FC<RateProps> = ({ disabled, defaultValue, setRating }: RateProps) => {
+const RateComponent: React.FC<RateProps> = ({ disabled, defaultValue = 0, setRating, size = 16 }: RateProps) => {
 
     const handleRating = useCallback((value: number) => {
         if (setRating) setRating(value)
@@ -22,11 +23,12 @@ const RateComponent: React.FC<RateProps> = ({ disabled, defaultValue, setRating 
             onChange={handleRating}
             character={({ index, value }) => {
                 return index! < value!
-                    ? <StarFilled style={{ color: 'var(--ant-rate-color)' }} />
-                    : <StarOutlined style={{ color: 'var(--ant-rate-color)' }} />
+                    ? <StarFilled style={{ color: 'var(--ant-rate-color)', fontSize: size }} />
+                    : <StarOutlined  style={{ color: 'var(--ant-rate-color)', fontSize: size }} />
             }
 
             }
+            style={{}}
             className={classes.rate}
         />
     )

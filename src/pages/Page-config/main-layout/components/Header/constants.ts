@@ -1,10 +1,3 @@
-export const routes = [
-    {
-        path: '/main',
-        breadcrumbName: 'Главная',
-    },
-    {
-        path: '/feedbacks',
-        breadcrumbName: 'Отзывы пользователей',
-    },
-];
+export const breadcrumbNameMap: Record<string, string> = {
+    '/feedbacks': 'Отзывы пользователей',
+};

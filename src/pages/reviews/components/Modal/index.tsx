@@ -6,8 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { modalContext } from './modal.helper';
 import { ButtonModal } from '@components/index';
-import { useDispatch } from 'react-redux';
-import { feedbacksActions } from '@redux/feedbacks';
+import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;
 
@@ -17,7 +16,6 @@ type ModalProps = {
 }
 
 const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: ModalProps) => {
-    const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
     const { xs } = useBreakpoint();
 
@@ -28,10 +26,9 @@ const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: Moda
     }, [status]);
 
     const handleRedirect = useCallback(() => {
-        dispatch(feedbacksActions.getFeedbacks())
         if (context?.redirectPath) history.push(context.redirectPath)
         setOpen(false)
-    }, [context, dispatch])
+    }, [context])
 
     useEffect(() => {
         setOpen(true)
@@ -44,27 +41,36 @@ const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: Moda
             footer={null}
             onCancel={() => setOpen(false)}
             width={xs ? 328 : 539}
+            closable={false}
+            bodyStyle={{ padding: xs ? '32px 16px' : '38px 85.5px' }}
         >
             {context && <Result
                 status={context.status}
                 title={context.title}
                 subTitle={context.subTitle}
+                className={classes.modal}
                 extra={[
-                    <Button
-                        type="primary"
-                        size="large"
-                        key="console"
-                        style={{ width: '100%' }}
-                        onClick={handleRedirect}
-                    >
-                        {context.buttonText}
-                    </Button>,
-                    status === 'error' &&
-                    <><ButtonModal setOpenFeedModal={setOpenFeedModal} dataId={'write-review-not-saved-modal'} />
-                        <Button key='close' size="large" style={{ width: '100%' }}
-                            onClick={() => setOpen(false)}>
-                            Закрыть
-                        </Button></>,
+                    status === 'error' ?
+                        <><ButtonModal key='write'
+                            style={{ width: '100%' }}
+                            setOpenFeedModal={setOpenFeedModal}
+                            setCloseModalError={(value) => setOpen(value)}
+                            dataId={'write-review-not-saved-modal'} />
+                            <Button key='close' size="large"
+                                onClick={() => setOpen(false)}
+                                style={{ width: '100%' }}>
+                                Закрыть
+                            </Button></>
+                        : <Button
+                            data-test-id={context.dataId}
+                            type="primary"
+                            size="large"
+                            key="console"
+                            style={{ width: status === '500' ? 'auto' : '100%' }}
+                            onClick={handleRedirect}
+                        >
+                            {context.buttonText}
+                        </Button>,
                 ]} />}
         </Modal>
     );

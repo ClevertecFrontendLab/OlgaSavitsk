@@ -34,6 +34,7 @@ const FeedbackModalComponent: React.FC<FeedbackModalProps> = ({ isOpen, setOpenF
     const onFinish = useCallback(async (value: FeedbackParams) => {
         dispatch(feedbacksActions.postFeedbackRequest(value))
         setOpenFeedModal(false)
+        dispatch(feedbacksActions.getFeedbacks())
     }, [dispatch, setOpenFeedModal])
 
     useEffect(() => {
@@ -79,12 +80,12 @@ const FeedbackModalComponent: React.FC<FeedbackModalProps> = ({ isOpen, setOpenF
                         { required: true, message: '' },
                     ]}
                 >
-                    <RateComponent disabled={false} setRating={(rate) => form.setFieldValue('rating', rate)} />
+                    <RateComponent disabled={false} size={24} setRating={(rate) => form.setFieldValue('rating', rate)} />
                 </Form.Item>
                 <Form.Item
                     name="message"
                 >
-                    <TextArea placeholder="Autosize height based on content lines" autoSize={{ minRows: 1, maxRows: 6 }} />
+                    <TextArea placeholder="Ваш отзыв важен для нас" autoSize={{ minRows: 1, maxRows: 6 }} />
                 </Form.Item>
             </Form>
         </Modal>

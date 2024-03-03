@@ -1,13 +1,14 @@
 import 'antd/dist/antd.css';
 
-import { MenuFoldOutlined,MenuUnfoldOutlined, SettingOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined } from '@ant-design/icons';
 import { RoutePath } from '@constants/routes.constants';
 import { selectLocationPath } from '@redux/auth';
-import { Button, Grid,PageHeader, Typography } from 'antd';
+import { Breadcrumb, Button, Grid, PageHeader, Typography } from 'antd';
 import React, { useState } from 'react';
 
-import { routes } from './constants';
+import { breadcrumbNameMap } from './constants';
 import classes from './index.module.css';
+import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -21,14 +22,30 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
   const locationPathname = selectLocationPath()
   const [collapsed, setCollapsed] = useState(false);
   const { lg, md, xs } = useBreakpoint();
+  const pathSnippets = location.pathname.split('/').filter(i => i);
 
+  const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+    const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    return (
+      <Breadcrumb.Item key={url}>
+        <Link to={url}>{breadcrumbNameMap[url]}</Link>
+      </Breadcrumb.Item>
+    );
+  });
+
+  const breadcrumbItems = [
+      <Breadcrumb.Item key="home">
+        <Link to="/main">Главная</Link>
+      </Breadcrumb.Item>,
+    ].concat(extraBreadcrumbItems);
+  
   return (
     <>
       <PageHeader
         className={classes.header}
-        breadcrumb={{
-          routes: routes
-        }}
+        breadcrumb={
+          <Breadcrumb>{breadcrumbItems}</Breadcrumb>
+        }
         title={
           locationPathname === RoutePath.Home && <Title
             style={{

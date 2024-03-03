@@ -18,12 +18,10 @@
 .list :global .ant-list-items {
     max-height: 734px;
     overflow-y: scroll;
-    scrollbar-width: none;
+}
 
-    & > * {
-        scroll-snap-align: start;
-        scroll-padding-top: 50px;
-    }
+::-webkit-scrollbar {
+    display: none;
 }
 
 .comment :global(.ant-comment-content-author-name) {
@@ -56,7 +54,7 @@
     .avatar {
         flex-direction: row;
         padding: 0;
-        max-width: 150px;
+        min-width: 150px;
     }
     .comment :global .ant-comment-inner {
         flex-direction: column;
@@ -75,5 +73,20 @@
         & button {
             width: 100%;
         }
+    }
+
+    .avatar :global(.ant-card-meta-avatar) {
+        margin-bottom: 0;
+    }
+
+    .avatar :global(.ant-card-meta-title) {
+        word-break: keep-all;
+        text-align: start;
+        text-overflow: clip;
+        padding: 0 25px;
+    }
+
+    .comment :global .ant-card-meta {
+        margin-bottom: 12px;
     }
 }

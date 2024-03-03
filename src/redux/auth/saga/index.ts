@@ -9,6 +9,7 @@ import {
     changePasswordSuccess,
     checkEmailSuccess,
     confirmEmailSuccess,
+    setLoadingAuth,
     signInSuccess,
     signUpSuccess,
 } from '../actions';
@@ -21,8 +22,10 @@ type ErrorResponse = {
 
 function* signInWorker(action: AuthAction<SignInPayload>) {
     try {
+        yield put(setLoadingAuth(true));
         const { data, status } = yield call(authApi.signIn, action.payload);
         yield put(signInSuccess(data.accessToken));
+        yield put(setLoadingAuth(false));
         if (action.payload.remember) {
             yield window.localStorage.setItem(
                 LocalStorageKey.authToken,
@@ -36,6 +39,7 @@ function* signInWorker(action: AuthAction<SignInPayload>) {
             if (status) yield put(authError(status));
             yield put(push(RoutePath.SignInError));
         }
+        yield put(setLoadingAuth(false));
     }
 }
 

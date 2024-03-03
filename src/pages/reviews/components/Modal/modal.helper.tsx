@@ -21,7 +21,6 @@ const modal: ObjectResult = {
         status: "success",
         title: "Отзыв успешно опубликован",
         buttonText: 'Отлично',
-        redirectPath: RoutePath.Feedbacks,
         dataId: 'registration-enter-button'
     },
     'error': {

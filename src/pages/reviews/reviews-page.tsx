@@ -19,7 +19,7 @@ const ReviewsPage: React.FC = () => {
     const [open, setOpen] = useState(false);
 
     const { xs } = useBreakpoint();
-  
+
     const list = useMemo(() => {
         const sortFeedbacks = handleSortDate([...feedbacks])
         return isHidden ? sortFeedbacks.slice(0, 4) : sortFeedbacks

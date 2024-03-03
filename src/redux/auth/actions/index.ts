@@ -1,3 +1,4 @@
+import { LoaderAction, LoaderTypes } from '@redux/loader';
 import {
     AuthAction,
     AuthResponse,
@@ -5,6 +6,11 @@ import {
     ChangePasswordRequest,
     ConfirmEmailRequest,
 } from '../types';
+
+export const setLoadingAuth = (payload: boolean): LoaderAction<boolean> => ({
+    type: LoaderTypes.SET_LOADING,
+    payload: payload,
+});
 
 export const signUpRequest = <T>(payload: T): AuthAction<T> => ({
     type: AuthTypes.SIGNUP_REQUEST,
