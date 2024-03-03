@@ -48,7 +48,7 @@ const FooterComponent: React.FC = () => {
               style={{ width: '100%' }}
             >
               <Meta
-                title={<Button type='link' href='#' style={{ fontSize: '16px' }}>
+                title={<Button type='link' href='#' style={{ fontSize: '16px', color: 'var(--ant-primary-6)' }}>
                   Скачать на телефон
                 </Button>}
                 description="Доступно в PRO-тарифе"

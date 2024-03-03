@@ -18,10 +18,7 @@ const authReducer = <T>(state = initialState, { type, payload }: AuthAction<T>) 
             return { ...state, isLoading: true };
         }
         case AuthTypes.SIGNIN_SUCCESS: {
-            return { ...state, isLoading: true, token: payload };
-        }
-        case AuthTypes.RESETLOADING: {
-            return { ...state, isLoading: payload };
+            return { ...state, isLoading: false, token: payload };
         }
         case AuthTypes.CHECKEMAIL_REQUEST: {
             return { ...state, isLoading: true, statusCode: null };

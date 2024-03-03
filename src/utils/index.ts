@@ -1,3 +1,5 @@
 import getPrevLocation from './handle-prev-path.util';
+import handleFormate from './handle-formate-date';
+import handleSortDate from './handle-sort-date';
 
-export { getPrevLocation };
+export { getPrevLocation, handleFormate, handleSortDate };

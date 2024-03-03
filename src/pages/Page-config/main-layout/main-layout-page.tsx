@@ -15,24 +15,22 @@ export function MainLayout() {
     const { xs } = useBreakpoint();
 
     return (
-        <>
-            <Layout>
-                <Sider collapsed={collapsed} />
-                <Layout className={classes.site_layout}>
-                    <Header getCollapted={setCollapsed} />
-                    <Content
-                        className={classes.layout_background}
-                        style={{
-                            padding: xs ? '24px 16px 0' : 24,
-                        }}
-                    >
+        <Layout>
+            <Sider collapsed={collapsed} />
+            <Layout className={classes.site_layout}>
+                <Header getCollapted={setCollapsed} />
+                <Content
+                    className={classes.layout_background}
+                    style={{
+                        padding: xs ? '24px 16px 0' : 24,
+                    }}
+                >
 
-                        <Outlet />
+                    <Outlet />
 
-                    </Content>
-                    <Footer />
-                </Layout>
-            </Layout >
-        </>
+                </Content>
+                <Footer />
+            </Layout>
+        </Layout >
     );
 }

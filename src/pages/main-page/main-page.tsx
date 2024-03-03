@@ -2,13 +2,14 @@ import 'antd/dist/antd.css';
 
 import { CONTENT,  SiderItems} from '@constants/index';
 import { Button, Card, Grid, List, Space } from 'antd';
+import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;
 
 const MainPage: React.FC = () => {
   const { lg, md, xs } = useBreakpoint();
   return (
-      <Space direction="vertical" size="middle" style={{ maxWidth: lg ? '752px' : 'auto', width: '100%' }}>
+      <Space direction="vertical" size="middle" className={classes.main_content} style={{ maxWidth: lg ? '752px' : 'auto' }}>
         <Space direction="vertical" size="large">
 
           <Card bordered={false} bodyStyle={{ paddingRight: md ? '61px' : '32px' }}>
@@ -30,7 +31,7 @@ const MainPage: React.FC = () => {
                 title={item.title}
                 headStyle={{ textAlign: (lg || xs) ? 'center' : 'left', fontSize: '17px', fontWeight: 400, whiteSpace: 'nowrap' }}
                 bodyStyle={{ padding: '10px 24px 13px', textAlign: 'center' }}>
-                <Button type='link' icon={item.icon} href={item.path} style={{ fontSize: '15px' }}>
+                <Button type='link' icon={item.icon} href={item.path} style={{ fontSize: '15px', color: 'var(--ant-primary-6)' }}>
                   {item.action}
                 </Button>
               </Card>

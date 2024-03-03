@@ -4,7 +4,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { Tabs } from '@components/index';
 import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
 import { authActions, selectPreviousLocations } from '@redux/auth';
-import { Button, Form, Grid,Image, Input, Space } from "antd";
+import { Button, Form, Grid, Image, Input, Space } from "antd";
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -51,14 +51,15 @@ const SignUp: React.FC = () => {
         src='../logo.svg'
         preview={false}
         width={xs ? 203 : 309}
-        alt='logo' /><Form
-          form={form}
-          name="normal_login"
-          className={classes.login_form}
-          onFinish={onFinish}
-          size='large'
-          validateMessages={validateMessages}
-        >
+        alt='logo' />
+      <Form
+        form={form}
+        name="normal_login"
+        className={classes.login_form}
+        onFinish={onFinish}
+        size='large'
+        validateMessages={validateMessages}
+      >
         <Tabs />
 
         <Form.Item

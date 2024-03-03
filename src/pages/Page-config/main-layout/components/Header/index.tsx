@@ -41,7 +41,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
             level={lg ? 1 : xs ? 4 : 3}>
             Приветствуем тебя в CleverFit — приложении,<br /> которое поможет тебе добиться своей мечты!
           </Title>}
-        extra={locationPathname !== RoutePath.Home && [
+        extra={locationPathname === RoutePath.Home && [
           md ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
             Настройки
           </Button> :

@@ -12,7 +12,7 @@ type ModalContext = {
     title: string,
     subTitle?: ReactNode,
     buttonText: string,
-    redirectPath: To,
+    redirectPath?: To,
     dataId?: string
 }
 
@@ -29,7 +29,6 @@ const modal: ObjectResult = {
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так. Попробуйте ещё раз.</p>,
         buttonText: 'Написать отзыв',
-        redirectPath: RoutePath.Feedbacks,
         dataId: 'write-review-not-saved-modal'
     },
     '500': {

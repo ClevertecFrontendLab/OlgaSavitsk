@@ -6,6 +6,32 @@
     z-index: 1;
 }
 
+.sider :global .ant-menu-item-divider {
+    display: flex;
+    flex: 1 1 auto;
+    border-width: 0 0 2px;
+}
+
+.sider :global .ant-menu-item:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.sider :global .ant-menu-item-divider ~ .ant-menu-item .ant-menu-title-content {
+    margin-left: 25px;
+}
+
+.sider :global .ant-menu {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.sider :global .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo {
     text-align: center;
     margin: 45px 0 61px;
@@ -28,5 +54,14 @@
     .sider {
         position: fixed;
         height: 100vh;
+    }
+}
+
+@media (max-width: 360px) {
+    .sider :global .anticon {
+       display: none;
+    }
+    .sider :global .anticon + span {
+       margin: 0;
     }
 }

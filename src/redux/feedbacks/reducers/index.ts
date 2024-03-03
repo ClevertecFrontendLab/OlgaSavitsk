@@ -16,6 +16,12 @@ const feedbacksReducer = <T>(state = initialState, { type, payload }: FeedbacksA
                 feedbacks: payload as FeedbacksResponse[],
             };
         }
+        case FeedbacksTypes.POST_FEEDBACK_REQUEST: {
+            return state;
+        }
+        case FeedbacksTypes.POST_FEEDBACK_SUCCESS: {
+            return state;
+        }
         case FeedbacksTypes.FEEDBACKS_ERROR: {
             return { ...state, statusCode: payload };
         }

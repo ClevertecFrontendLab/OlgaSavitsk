@@ -8,11 +8,12 @@
 
     --ant-primary-9: #061178;
     --ant-primary-1: #f0f5ff;
-    --ant-primary-6: #2F54EB;
-    --ant-primary-5: #597EF7;
+    --ant-primary-6: #2f54eb;
+    --ant-primary-5: #597ef7;
     --ant-button-download: #262626;
     --ant-form-background: #fff;
     --ant-rate-color: #faad14;
+    --ant-text-secondary: #bfbfbf;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

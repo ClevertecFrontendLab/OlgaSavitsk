@@ -9,7 +9,7 @@ import classes from './index.module.css';
 import loader from "./loader.json";
 
 const Loader: React.FC = () => {
-    const isLoading = selectAuthLoading() || selectLoading()
+    const isLoading = selectLoading() || selectAuthLoading()
 
     return (
         isLoading ?

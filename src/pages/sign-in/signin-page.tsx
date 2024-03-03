@@ -26,6 +26,7 @@ type SignInParams = {
 const { useBreakpoint } = Grid;
 
 const SignIn: React.FC = () => {
+  const previousLocations = selectPreviousLocations()
   const dispatch = useDispatch()
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
@@ -38,7 +39,6 @@ const SignIn: React.FC = () => {
     dispatch(authActions.checkEmailRequest(value))
   }, [dispatch])
 
-  const previousLocations = selectPreviousLocations()
 
   const repeatedRequest = useCallback(() => {
     if (!previousLocations) return null

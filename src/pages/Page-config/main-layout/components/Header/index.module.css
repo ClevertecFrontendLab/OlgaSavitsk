@@ -43,3 +43,9 @@
     transition: transform 0.3s;
     z-index: 2;
 }
+
+@media (max-width: 370px) {
+    .header :global .ant-page-header-heading {
+        flex-wrap: nowrap !important;
+    }
+}
