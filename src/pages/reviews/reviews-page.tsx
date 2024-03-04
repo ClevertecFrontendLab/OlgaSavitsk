@@ -1,14 +1,13 @@
 import 'antd/dist/antd.css';
 
+import { ButtonModal } from '@components/index';
 import { FeedbacksResponse, selectFeedbacks } from '@redux/feedbacks';
+import { handleSortDate } from '@utils/index';
 import { Button, Grid, Space } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import ModalComponent from './components/Modal';
 import { CommentList, EmptyComponent, FeedbackModal } from './components';
-import { handleSortDate } from '@utils/index';
-
-import { ButtonModal } from '@components/index';
+import ModalComponent from './components/Modal';
 
 const { useBreakpoint } = Grid;
 

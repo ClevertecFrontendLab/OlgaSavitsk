@@ -1,4 +1,5 @@
 import { FeedbacksResponse } from '@redux/feedbacks';
+
 import apiService from './api.service';
 
 export function getFeedbacks(): Promise<FeedbacksResponse[]> {

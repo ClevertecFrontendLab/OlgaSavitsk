@@ -1,9 +1,11 @@
 import 'antd/dist/antd.css';
 
+import { ButtonModal } from '@components/index';
+import { selectLoading } from '@redux/loader';
 import { Card, Grid, Space } from 'antd';
 import Meta from 'antd/lib/card/Meta';
+
 import classes from './index.module.css';
-import { ButtonModal } from '@components/index';
 
 type EmptyProps = {
     setOpenFeedModal: (openFeedModal: boolean) => void
@@ -12,11 +14,11 @@ type EmptyProps = {
 const { useBreakpoint } = Grid;
 
 const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: EmptyProps) => {
+    const isLoading = selectLoading()
     const { xs } = useBreakpoint();
 
     return (
-
-        <Space align='center' direction="vertical" size={[0, xs ? 44 : 17]}
+        !isLoading && <Space align='center' direction="vertical" size={[0, xs ? 44 : 17]}
             className={classes.empty_modal}
         >
             <Card
@@ -30,7 +32,6 @@ const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: EmptyProps) 
                 dataId={'write-review'}
                 style={{ width: xs ? '100%' : 'auto' }} />
         </Space>
-
     );
 };
 

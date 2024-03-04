@@ -1,4 +1,9 @@
 .rate {
+    display: flex;
     color: var(--ant-rate-color);
     padding-right: 12px;
+}
+
+.rate :global .ant-rate-star:not(:last-child) {
+    margin-right: 7px;
 }

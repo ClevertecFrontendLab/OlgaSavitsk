@@ -5,10 +5,10 @@ import { RoutePath } from '@constants/routes.constants';
 import { selectLocationPath } from '@redux/auth';
 import { Breadcrumb, Button, Grid, PageHeader, Typography } from 'antd';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { breadcrumbNameMap } from './constants';
 import classes from './index.module.css';
-import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 

@@ -1,19 +1,14 @@
 import 'antd/dist/antd.css';
 
+import { RateComponent } from '@components/index';
+import { FeedbackPayload, feedbacksActions } from '@redux/feedbacks';
 import { Button, Form, Input, Modal } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { RateComponent } from '@components/index';
 import classes from './index.module.css';
-import { feedbacksActions } from '@redux/feedbacks';
 
 const { TextArea } = Input;
-
-type FeedbackParams = {
-    message: string,
-    rating: number,
-}
 
 type FeedbackModalProps = {
     isOpen: boolean,
@@ -31,7 +26,7 @@ const FeedbackModalComponent: React.FC<FeedbackModalProps> = ({ isOpen, setOpenF
         form.submit()
     }, [form])
 
-    const onFinish = useCallback(async (value: FeedbackParams) => {
+    const onFinish = useCallback(async (value: FeedbackPayload) => {
         dispatch(feedbacksActions.postFeedbackRequest(value))
         setOpenFeedModal(false)
         dispatch(feedbacksActions.getFeedbacks())

@@ -1,11 +1,12 @@
 import 'antd/dist/antd.css';
 
-import { Avatar, List, Typography, Card, Comment } from 'antd';
-import classes from './index.module.css';
 import { UserOutlined } from '@ant-design/icons';
+import { RateComponent } from '@components/index';
 import { FeedbacksResponse } from '@redux/feedbacks';
 import { handleFormate } from '@utils/index';
-import { RateComponent } from '@components/index';
+import { Avatar, Card, Comment, List, Typography } from 'antd';
+
+import classes from './index.module.css';
 
 type ListProps = {
     comments: FeedbacksResponse[] | undefined
@@ -38,9 +39,15 @@ const CommentList: React.FC<ListProps> = ({ comments, loadButton }: ListProps) =
                         />
                     }
                     content={
-                        <Typography.Text style={{ lineHeight: 1.3, display: 'inline-block', color: '#8C8C8C' }}>{item.message}</Typography.Text>
+                        <Typography.Text
+                            style={{ lineHeight: 1.3, display: 'inline-block', color: '#8C8C8C' }}>
+                            {item.message}
+                        </Typography.Text>
                     }
-                    datetime={<Typography.Text style={{ color: 'var(--ant-text-secondary)', fontSize: '14px' }}>{handleFormate(item.createdAt)}</Typography.Text>}
+                    datetime={<Typography.Text
+                        style={{ display: 'flex', color: 'var(--ant-text-secondary)', fontSize: '12px', lineHeight: '12px' }}>
+                        {handleFormate(item.createdAt)}
+                    </Typography.Text>}
                 />
             }
         />

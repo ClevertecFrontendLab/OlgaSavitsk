@@ -1,12 +1,12 @@
 import 'antd/dist/antd.css';
 
+import { ButtonModal } from '@components/index';
 import { history } from '@redux/configure-store';
 import { Button, Grid, Modal, Result } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { modalContext } from './modal.helper';
-import { ButtonModal } from '@components/index';
 import classes from './index.module.css';
+import { modalContext } from './modal.helper';
 
 const { useBreakpoint } = Grid;
 
