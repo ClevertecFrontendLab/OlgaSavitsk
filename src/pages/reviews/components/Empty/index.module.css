@@ -7,10 +7,10 @@
 }
 
 .empty_modal :global .ant-card-meta-detail .ant-card-meta-title {
-    font-size: 25px;
-    font-weight: 500;
-    color: #061178;
-    margin-bottom: 41px;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    color: var(--ant-primary-9);
+    margin-bottom: calc(10 * var(--margin-space));
     white-space: pre-line;
 }
 
@@ -24,21 +24,16 @@
 }
 
 .empty_modal :global .ant-card-meta-description {
-    max-width: 490px;
+    display: inline-block;
+    max-width: 520px;
     width: 100%;
+    color: var(--ant-text);
+    line-height: 1.4;
 }
 
 .empty_modal :global .ant-card-meta {
     min-height: 164px;
     width: 100%;
-}
-
-.card_body {
-    min-height: 245px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 @media (max-width: 360px) {
@@ -50,9 +45,11 @@
     .empty_modal :global .ant-card {
         height: 317px;
     }
+
     .empty_modal :global .ant-card-body {
         padding: 49px 21px 45px 22px !important;
     }
+
     .empty_modal :global .ant-card-body {
         align-items: flex-start;
     }

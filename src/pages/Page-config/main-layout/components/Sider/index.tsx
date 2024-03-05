@@ -13,7 +13,7 @@ type SiderProps = {
   collapsed: boolean
 }
 
-const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
+export const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
   const { lg, xs } = useBreakpoint();
 
   return (
@@ -50,5 +50,3 @@ const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
     </Sider>
   );
 };
-
-export default SiderComponent

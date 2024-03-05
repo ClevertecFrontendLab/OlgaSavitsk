@@ -1,3 +1,4 @@
+import 'antd/dist/antd.css';
 import 'normalize.css';
 import './index.css';
 
@@ -9,9 +10,16 @@ import { Provider } from 'react-redux';
 import { HistoryRouter } from 'redux-first-history/rr6'
 
 import { Loader } from './components';
+import { ConfigProvider } from 'antd';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
+
+ConfigProvider.config({
+    theme: {
+        primaryColor: '#2f54eb'
+    }
+})
 
 root.render(
     <React.StrictMode>

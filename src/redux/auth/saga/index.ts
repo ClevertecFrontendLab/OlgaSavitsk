@@ -1,4 +1,4 @@
-import { LocalStorageKey, RoutePath } from '@constants/index';
+import { HTTP_STATUS_CODE, LocalStorageKey, RoutePath, STATUS_TEXT } from '@constants/index';
 import { authApi } from '@services/index';
 import { isAxiosError } from 'axios';
 import { push } from 'redux-first-history';
@@ -18,7 +18,7 @@ import { AuthAction, AuthTypes, ConfirmEmailRequest, SignInPayload, SignUpPayloa
 type ErrorResponse = {
     statusCode: number;
     message: string;
-}
+};
 
 function* signInWorker(action: AuthAction<SignInPayload>) {
     try {
@@ -32,7 +32,7 @@ function* signInWorker(action: AuthAction<SignInPayload>) {
                 JSON.stringify({ access_token: data.accessToken }),
             );
         }
-        if (status === 200) yield put(push(RoutePath.Home));
+        if (status === HTTP_STATUS_CODE.OK) yield put(push(RoutePath.Home));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
@@ -52,7 +52,7 @@ function* signUpWorker(action: AuthAction<SignUpPayload>) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
             if (status) yield put(authError(status));
-            if (status === 409) {
+            if (status === HTTP_STATUS_CODE.CONFLICT) {
                 yield put(push(RoutePath.SignUpFailed));
             } else {
                 yield put(push(RoutePath.Error, action.payload));
@@ -71,9 +71,12 @@ function* checkEmailWorker(action: AuthAction<SignInPayload>) {
             const statusCode = error.response?.status;
             const { message } = error.response?.data as ErrorResponse;
             if (statusCode) yield put(authError(statusCode));
-            if (statusCode === 404 && message === 'Email не найден') {
+            if (statusCode === HTTP_STATUS_CODE.NOT_FOUND && message === STATUS_TEXT.NOT_FOUND) {
                 yield put(push(RoutePath.CheckemailNoExist));
-            } else if (statusCode || (statusCode === 404 && message === '')) {
+            } else if (
+                statusCode ||
+                (statusCode === HTTP_STATUS_CODE.NOT_FOUND && message === STATUS_TEXT.EMPTY_MESSAGE)
+            ) {
                 yield put(push(RoutePath.CheckemailError, action.payload));
             }
         }

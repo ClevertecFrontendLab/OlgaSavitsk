@@ -18,7 +18,7 @@ type HeaderProps = {
   getCollapted: (collapsed: boolean) => void
 }
 
-const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) => {
+export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) => {
   const locationPathname = selectLocationPath()
   const [collapsed, setCollapsed] = useState(false);
   const { lg, md, xs } = useBreakpoint();
@@ -27,9 +27,10 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
     return (
+      <><Breadcrumb.Separator />
       <Breadcrumb.Item key={url}>
         <Link to={url}>{breadcrumbNameMap[url]}</Link>
-      </Breadcrumb.Item>
+      </Breadcrumb.Item></>
     );
   });
 
@@ -44,7 +45,7 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
       <PageHeader
         className={classes.header}
         breadcrumb={
-          <Breadcrumb>{breadcrumbItems}</Breadcrumb>
+          <Breadcrumb separator=''>{breadcrumbItems}</Breadcrumb>
         }
         title={
           locationPathname === RoutePath.Home && <Title
@@ -88,5 +89,3 @@ const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) =
     </>
   );
 };
-
-export default HeaderComponent

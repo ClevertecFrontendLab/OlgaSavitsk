@@ -1,5 +1,4 @@
-import { LocalStorageKey, RoutePath } from '@constants/index';
-import { RootState } from '@redux/configure-store';
+import { HTTP_STATUS_CODE, LocalStorageKey, RoutePath } from '@constants/index';
 import { feedbacksApi } from '@services/index';
 import { isAxiosError } from 'axios';
 import { LOCATION_CHANGE, push } from 'redux-first-history';
@@ -7,6 +6,7 @@ import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
 
 import { feedbacksError, postFeedbackSuccess, setFeedbacks, setLoadingFeedBacks } from '../actions';
 import { FeedbackPayload, FeedbacksAction, FeedbacksTypes } from '../types';
+import { currentLocation } from '../selectors';
 
 function* feedbacksGetWorker() {
     try {
@@ -15,7 +15,7 @@ function* feedbacksGetWorker() {
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
-            if (status === 403) {
+            if (status === HTTP_STATUS_CODE.FORBIDDEN) {
                 yield window.localStorage.removeItem(LocalStorageKey.authToken);
                 yield put(push(RoutePath.SignIn));
             } else yield put(feedbacksError('500'));
@@ -33,9 +33,9 @@ function* feedbacksPostWorker(action: FeedbacksAction<FeedbackPayload>) {
 }
 
 export function* handleGetFeedbacks() {
-    yield delay(100);
     yield put(setLoadingFeedBacks(true));
-    const { pathname } = yield select(({ router }: RootState) => router.location);
+    yield delay(100);
+    const { pathname } = yield select(currentLocation);
     if (pathname === RoutePath.Feedbacks) {
         yield call(feedbacksGetWorker);
     }

@@ -6,6 +6,7 @@ import { Card, Grid, Space } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 
 import classes from './index.module.css';
+import { CSSProperties } from 'react';
 
 type EmptyProps = {
     setOpenFeedModal: (openFeedModal: boolean) => void
@@ -13,7 +14,15 @@ type EmptyProps = {
 
 const { useBreakpoint } = Grid;
 
-const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: EmptyProps) => {
+const cardBodyStyle: CSSProperties = {
+    minHeight: '245px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
+}
+
+export const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: EmptyProps) => {
     const isLoading = selectLoading()
     const { xs } = useBreakpoint();
 
@@ -23,7 +32,7 @@ const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: EmptyProps) 
         >
             <Card
                 bordered={false}
-                bodyStyle={{ minHeight: '245px', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+                bodyStyle={cardBodyStyle}>
                 <Meta title="Оставьте свой отзыв первым"
                     description=" Вы можете быть первым, кто оставит отзыв об этом фитнесс приложении. Поделитесь своим мнением и опытом с другими пользователями, и помогите им сделать правильный выбор." />
             </Card>
@@ -34,5 +43,3 @@ const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: EmptyProps) 
         </Space>
     );
 };
-
-export default EmptyComponent

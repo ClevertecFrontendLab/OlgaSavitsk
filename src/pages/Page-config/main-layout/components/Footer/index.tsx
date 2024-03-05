@@ -10,7 +10,7 @@ const { Footer } = Layout;
 const { useBreakpoint } = Grid;
 const { Meta } = Card;
 
-const FooterComponent: React.FC = () => {
+export const FooterComponent: React.FC = () => {
   const locationPathname = selectLocationPath()
   const { md, xs } = useBreakpoint();
 
@@ -48,7 +48,7 @@ const FooterComponent: React.FC = () => {
               style={{ width: '100%' }}
             >
               <Meta
-                title={<Button type='link' href='#' style={{ fontSize: '16px', color: 'var(--ant-primary-6)' }}>
+                title={<Button type='link' href='#' style={{ fontSize: '16px' }}>
                   Скачать на телефон
                 </Button>}
                 description="Доступно в PRO-тарифе"
@@ -60,5 +60,3 @@ const FooterComponent: React.FC = () => {
     </>
   );
 };
-
-export default FooterComponent

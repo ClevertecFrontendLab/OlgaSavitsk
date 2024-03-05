@@ -9,7 +9,7 @@ import { Suspense, useCallback, useEffect } from 'react';
 import { Outlet, useSearchParams } from "react-router-dom";
 
 
-const PageConfig = () => {
+export const PageConfig = () => {
     const [searchParams] = useSearchParams();
     const [token, setToken] = useStorage(
         LocalStorageKey.authToken,
@@ -40,5 +40,3 @@ const PageConfig = () => {
         </Suspense>
     )
 }
-
-export default PageConfig

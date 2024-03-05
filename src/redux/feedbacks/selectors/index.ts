@@ -23,3 +23,5 @@ export const select = createSelector(
     (state: RootState) => state.feedbacksStore.statusCode,
     (feedbacks, statusCode) => ({ feedbacks, statusCode }),
 );
+
+export const currentLocation = (state: RootState) => state.router.location

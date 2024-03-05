@@ -15,7 +15,7 @@ type ModalProps = {
     setOpenFeedModal: (openFeedModal: boolean) => void
 }
 
-const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: ModalProps) => {
+export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: ModalProps) => {
     const [open, setOpen] = useState(false);
     const { xs } = useBreakpoint();
 
@@ -43,6 +43,10 @@ const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: Moda
             width={xs ? 328 : 539}
             closable={false}
             bodyStyle={{ padding: xs ? '32px 16px' : '38px 85.5px' }}
+            maskStyle={{
+                backdropFilter: 'blur(4px)',
+                background: 'rgba(121, 156, 212, 0.5)'
+            }}
         >
             {context && <Result
                 status={context.status}
@@ -75,5 +79,3 @@ const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: Moda
         </Modal>
     );
 };
-
-export default ModalComponent

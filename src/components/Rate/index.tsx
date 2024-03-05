@@ -11,7 +11,9 @@ type RateProps = {
     setRating?: (rate: number) => void
 }
 
-const RateComponent: React.FC<RateProps> = ({ disabled, defaultValue = 0, setRating, size = 13 }: RateProps) => {
+export const RateComponent: React.FC<RateProps> = (
+    { disabled, defaultValue = 0, setRating, size = 14 }: RateProps
+) => {
 
     const handleRating = useCallback((value: number) => {
         if (setRating) setRating(value)
@@ -24,13 +26,15 @@ const RateComponent: React.FC<RateProps> = ({ disabled, defaultValue = 0, setRat
             onChange={handleRating}
             character={({ index, value }) => {
                 return value && index! < value
-                    ? <StarFilled style={{ color: 'var(--ant-rate-color)', fontSize: size, lineHeight: size, verticalAlign: 'top' }} />
-                    : <StarOutlined style={{ color: 'var(--ant-rate-color)', fontSize: size, lineHeight: size, verticalAlign: 'top' }} />
+                    ? <StarFilled
+                        className={classes.icon}
+                        style={{fontSize: size, lineHeight: size, verticalAlign: 'top' }} />
+                    : <StarOutlined
+                        className={classes.icon}
+                        style={{ fontSize: size, lineHeight: size, verticalAlign: 'top' }} />
             }
             }
             className={classes.rate}
         />
     )
 }
-
-export default RateComponent

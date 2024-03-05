@@ -1,19 +1,20 @@
 import {
-confirmLayout,
-    LayoutType, RoutePath, } from "@constants/index";
+    confirmLayout,
+    LayoutType, RoutePath,
+} from "@constants/index";
 import { RootState } from "@redux/configure-store";
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 
-import ConfirmEmailPage from './confirm-email.page';
-import ResetPasswordPage from './reset-password.page';
+import { ConfirmEmailPage } from './confirm-email.page';
+import { ResetPasswordPage } from './reset-password.page';
 
 const layoutComponent = {
     [LayoutType.CONFIRM]: ConfirmEmailPage,
     [LayoutType.RESET]: ResetPasswordPage
 }
 
-const ConfirmConfig = () => {
+export const ConfirmConfig = () => {
     const locationPathname = useSelector(({ router }: RootState) => router.location?.pathname)
 
     const { layout } = confirmLayout[locationPathname as RoutePath] || {}
@@ -23,5 +24,3 @@ const ConfirmConfig = () => {
         <Layout />
     )
 }
-
-export default ConfirmConfig

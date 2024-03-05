@@ -6,10 +6,10 @@
     padding: 10px 24px 0;
 }
 .modal_form :global .ant-form-item:first-child {
-    margin-bottom: 13px;
+    margin-bottom: calc(3 * var(--margin-space));
 }
 .modal_form :global .ant-input-lg {
-    font-size: 15px;
+    font-size: var(--font-size-base);
 }
 .modal_form :global .ant-modal-footer {
     padding: 12px 24px

@@ -8,11 +8,11 @@ type ObjectResult = {
 }
 
 type ResultContext = {
-    status?: ResultStatusType,
     title: string,
     subTitle: ReactNode,
     buttonText: string,
     redirectPath: To,
+    status?: ResultStatusType,
     dataId?: string
 }
 

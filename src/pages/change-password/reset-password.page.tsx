@@ -1,6 +1,6 @@
 import 'antd/dist/antd.css';
 
-import { PASSWORD_REGEX,RoutePath, TIPS } from '@constants/index';
+import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
 import { authActions, ChangePasswordRequest } from '@redux/auth';
 import { RootState } from '@redux/configure-store';
 import { getPrevLocation } from '@utils/index';
@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classes from './index.module.css';
 
 
-const ResetPasswordPage: React.FC = () => {
+export const ResetPasswordPage: React.FC = () => {
     const dispatch = useDispatch()
     const [form] = Form.useForm();
 
@@ -104,5 +104,3 @@ const ResetPasswordPage: React.FC = () => {
         </>
     );
 };
-
-export default ResetPasswordPage

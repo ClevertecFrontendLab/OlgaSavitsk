@@ -15,7 +15,8 @@ import classes from './index.module.css';
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
-const ConfirmEmailPage: React.FC = () => {
+
+export const ConfirmEmailPage: React.FC = () => {
     const dispatch = useDispatch()
     const statusCode = selectAuthStatusCode()
     const email = selectAuthEmail()
@@ -44,7 +45,7 @@ const ConfirmEmailPage: React.FC = () => {
                  для восстановления аккауанта` :
                 'Неверный код. Введите код для восстановления аккауанта'}
             subTitle={<Typography.Text type='secondary'>Мы отправили вам на e-mail{' '}
-            <Text strong>{email}</Text> шестизначный код. Введите его в поле ниже.</Typography.Text>}
+                <Text strong>{email}</Text> шестизначный код. Введите его в поле ниже.</Typography.Text>}
             extra={[
                 <VerificationInput
                     inputProps={{ ['data-test-id']: 'verification-input' }}
@@ -54,7 +55,7 @@ const ConfirmEmailPage: React.FC = () => {
                     value={value}
                     classNames={{
                         container: classes.container,
-                        character: statusCode ? classes.failed : classes.character,
+                        character: statusCode ? `${classes.character} ${classes.failed}` : classes.character,
                         characterSelected: classes.selected,
                     }} />,
                 <Text
@@ -67,5 +68,3 @@ const ConfirmEmailPage: React.FC = () => {
 
     );
 };
-
-export default ConfirmEmailPage

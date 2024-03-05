@@ -15,7 +15,9 @@ type FeedbackModalProps = {
     setOpenFeedModal: (openFeedModal: boolean) => void,
 }
 
-const FeedbackModalComponent: React.FC<FeedbackModalProps> = ({ isOpen, setOpenFeedModal }: FeedbackModalProps) => {
+export const FeedbackModalComponent: React.FC<FeedbackModalProps> = (
+    { isOpen, setOpenFeedModal }: FeedbackModalProps
+) => {
     const dispatch = useDispatch()
     const [isError, setError] = useState(false);
     const [form] = Form.useForm();
@@ -38,7 +40,6 @@ const FeedbackModalComponent: React.FC<FeedbackModalProps> = ({ isOpen, setOpenF
     }, [form, formVal])
 
     return (
-
         <Modal
             centered
             title="Ваш отзыв"
@@ -75,17 +76,17 @@ const FeedbackModalComponent: React.FC<FeedbackModalProps> = ({ isOpen, setOpenF
                         { required: true, message: '' },
                     ]}
                 >
-                    <RateComponent disabled={false} size={24} setRating={(rate) => form.setFieldValue('rating', rate)} />
+                    <RateComponent disabled={false} size={24}
+                        setRating={(rate) => form.setFieldValue('rating', rate)} />
                 </Form.Item>
                 <Form.Item
                     name="message"
                 >
-                    <TextArea placeholder="Ваш отзыв важен для нас" autoSize={{ minRows: 1, maxRows: 6 }} />
+                    <TextArea
+                        placeholder="Расскажите, почему Вам понравилось наше приложение"
+                        autoSize={{ minRows: 1 }} />
                 </Form.Item>
             </Form>
         </Modal>
-
     );
 };
-
-export default FeedbackModalComponent

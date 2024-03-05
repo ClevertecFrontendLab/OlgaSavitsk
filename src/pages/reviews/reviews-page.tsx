@@ -6,12 +6,12 @@ import { handleSortDate } from '@utils/index';
 import { Button, Grid, Space } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { CommentList, EmptyComponent, FeedbackModal } from './components';
-import ModalComponent from './components/Modal';
+import { CommentList, EmptyComponent, FeedbackModalComponent, ModalComponent } from './components';
+import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;
 
-const ReviewsPage: React.FC = () => {
+export const ReviewsPage: React.FC = () => {
     const { feedbacks, statusCode } = selectFeedbacks()
     const [isHidden, setHidden] = useState(true);
     const [listData, setListdata] = useState<FeedbacksResponse[]>([]);
@@ -45,11 +45,10 @@ const ReviewsPage: React.FC = () => {
             <Space
                 align="start"
                 size={[11, 17]}
+                className={classes.loadButton_wrapper}
                 style={{
-                    display: 'flex',
                     flexDirection: xs ? 'column' : 'row',
                     paddingTop: xs ? '45px' : '90px',
-                    width: '100%'
                 }}>
 
                 <ButtonModal setOpenFeedModal={(value) => setOpen(value)} dataId={'write-review'} />
@@ -72,11 +71,9 @@ const ReviewsPage: React.FC = () => {
             : <EmptyComponent setOpenFeedModal={(value) => setOpen(value)} />
 
         }
-            <FeedbackModal isOpen={open} setOpenFeedModal={(value) => setOpen(value)} />
+            <FeedbackModalComponent isOpen={open} setOpenFeedModal={(value) => setOpen(value)} />
             {statusCode && <ModalComponent status={statusCode} setOpenFeedModal={(value) => setOpen(value)} />}
         </>
 
     );
 };
-
-export default ReviewsPage

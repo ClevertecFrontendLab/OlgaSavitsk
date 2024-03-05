@@ -8,7 +8,7 @@ import React, { useMemo } from "react";
 import classes from './index.module.css';
 import { resultContext } from "./result.helper";
 
-const ResultModal: React.FC = () => {
+export const ResultModal: React.FC = () => {
     const locationPathname = selectLocationPath()
 
     const context = useMemo(() => {
@@ -41,4 +41,3 @@ const ResultModal: React.FC = () => {
     );
 };
 
-export default ResultModal

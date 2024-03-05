@@ -6,9 +6,11 @@
     top: 0;
     backdrop-filter: blur(2px);
     background: rgba(121, 156, 212, 0.5);
-    z-index: 1000;
+    z-index: 10;
 }
 
-.loader_wrapper :global(.ant-space-item) {
-    height: 100vh;
+.loader_wrapper :global(.ant-spin-dot) {
+    height: 20em;
+    width: 20em;
+    transform: translateY(10vh);
 }

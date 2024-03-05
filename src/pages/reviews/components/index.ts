@@ -1,4 +1,4 @@
-export { default as EmptyComponent } from './Empty';
-export { default as FeedbackModal } from './FeedbackModal';
-export { default as CommentList } from './List';
-export { default as ModalComponent } from './Modal';
+export { EmptyComponent } from './Empty';
+export { FeedbackModalComponent } from './FeedbackModal';
+export { CommentList } from './List';
+export { ModalComponent } from './Modal';

@@ -13,7 +13,10 @@ type MenuItem = Required<MenuProps>['items'][number] & {
 };
 
 export const menuItems: MenuItem[] = [
-    { key: '1', label: 'Календарь', icon: <CalendarTwoTone twoToneColor={['#061178', '#061178']} /> },
+    {
+        key: '1', label: 'Календарь', icon: <CalendarTwoTone
+            twoToneColor={['var(--ant-primary-9)', 'var(--ant-primary-9)']} />
+    },
     { key: '2', label: 'Тренировки', icon: <HeartFilled /> },
     { key: '3', label: 'Достижения', icon: <TrophyFilled /> },
     { key: '4', label: 'Профиль', icon: <IdcardOutlined /> },

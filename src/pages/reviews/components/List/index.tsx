@@ -15,43 +15,41 @@ type ListProps = {
 
 const { Meta } = Card;
 
-const CommentList: React.FC<ListProps> = ({ comments, loadButton }: ListProps) => {
-
-    return (
-        <List
-            className={classes.list}
-            dataSource={comments}
-            itemLayout="horizontal"
-            loadMore={loadButton}
-            renderItem={(item) =>
-                <Comment
-                    className={classes.comment}
-                    author={
-                        <RateComponent disabled={true} defaultValue={item.rating} />
-                    }
-                    avatar={
-                        <Meta
-                            className={classes.avatar}
-                            avatar={item.imageSrc ?
-                                <Avatar size={42} src={item.imageSrc} /> :
-                                <Avatar size={42} icon={<UserOutlined />} style={{ backgroundColor: '#F5F5F5' }} />}
-                            title={item.fullName ?? 'Пользователь'}
-                        />
-                    }
-                    content={
-                        <Typography.Text
-                            style={{ lineHeight: 1.3, display: 'inline-block', color: '#8C8C8C' }}>
-                            {item.message}
-                        </Typography.Text>
-                    }
-                    datetime={<Typography.Text
-                        style={{ display: 'flex', color: 'var(--ant-text-secondary)', fontSize: '12px', lineHeight: '12px' }}>
-                        {handleFormate(item.createdAt)}
-                    </Typography.Text>}
-                />
-            }
-        />
-    );
-};
-
-export default CommentList
+export const CommentList: React.FC<ListProps> = ({ comments, loadButton }: ListProps) => (
+    <List
+        className={classes.list}
+        dataSource={comments}
+        itemLayout="horizontal"
+        loadMore={loadButton}
+        renderItem={(item) =>
+            <Comment
+                className={classes.comment}
+                author={
+                    <RateComponent disabled={true} defaultValue={item.rating} />
+                }
+                avatar={
+                    <Meta
+                        className={classes.avatar}
+                        avatar={item.imageSrc ?
+                            <Avatar src={item.imageSrc} style={{width: 42, height: 42}} /> :
+                            <Avatar
+                                size={42}
+                                icon={<UserOutlined />}
+                                style={{ backgroundColor: '#F5F5F5' }} />}
+                        title={item.fullName ?? 'Пользователь'}
+                    />
+                }
+                content={
+                    <Typography.Text
+                        className={classes.content}>
+                        {item.message}
+                    </Typography.Text>
+                }
+                datetime={<Typography.Text
+                    className={classes.date}>
+                    {handleFormate(item.createdAt)}
+                </Typography.Text>}
+            />
+        }
+    />
+);

@@ -10,8 +10,8 @@ type ObjectResult = {
 type ModalContext = {
     status: ResultStatusType,
     title: string,
-    subTitle?: ReactNode,
     buttonText: string,
+    subTitle?: ReactNode,
     redirectPath?: To,
     dataId?: string
 }

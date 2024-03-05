@@ -4,7 +4,7 @@ import { Grid, Layout } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Footer, Header, Sider } from './components';
+import { FooterComponent, HeaderComponent, SiderComponent } from './components';
 import classes from './index.module.css';
 
 const { Content } = Layout;
@@ -16,9 +16,9 @@ export function MainLayout() {
 
     return (
         <Layout>
-            <Sider collapsed={collapsed} />
+            <SiderComponent collapsed={collapsed} />
             <Layout className={classes.site_layout}>
-                <Header getCollapted={setCollapsed} />
+                <HeaderComponent getCollapted={setCollapsed} />
                 <Content
                     className={classes.layout_background}
                     style={{
@@ -29,7 +29,7 @@ export function MainLayout() {
                     <Outlet />
 
                 </Content>
-                <Footer />
+                <FooterComponent />
             </Layout>
         </Layout >
     );

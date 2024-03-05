@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { Tabs } from '@components/index';
+import { TabsComponent } from '@components/index';
 import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
 import { authActions, selectPreviousLocations } from '@redux/auth';
 import { Button, Form, Grid, Image, Input, Space } from "antd";
@@ -22,7 +22,7 @@ type SignUpParams = {
 
 const { useBreakpoint } = Grid;
 
-const SignUp: React.FC = () => {
+export const SignUp: React.FC = () => {
   const dispatch = useDispatch()
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
@@ -60,7 +60,7 @@ const SignUp: React.FC = () => {
         size='large'
         validateMessages={validateMessages}
       >
-        <Tabs />
+        <TabsComponent />
 
         <Form.Item
           name="email"
@@ -120,13 +120,15 @@ const SignUp: React.FC = () => {
                 data-test-id='registration-submit-button'
                 type="primary"
                 htmlType="submit"
-                style={{ width: '100%' }}
                 className={classes.form_button}
                 disabled={!!form.getFieldsError().filter(({ errors }) => errors.length).length}
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} href={`${import.meta.env.VITE_API_BASE_URL}/auth/google`} className={classes.form_button}>
+              <Button
+                icon={xs ? '' : <GooglePlusOutlined />}
+                href={`${import.meta.env.VITE_API_BASE_URL}/auth/google`}
+                className={classes.form_button}>
                 Регистрация через Google
               </Button>
             </Space>
@@ -136,5 +138,3 @@ const SignUp: React.FC = () => {
     </Space>
   );
 };
-
-export default SignUp

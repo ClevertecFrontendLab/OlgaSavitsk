@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { Tabs } from '@components/index';
+import { TabsComponent } from '@components/index';
 import { RoutePath } from '@constants/index';
 import { authActions, selectPreviousLocations } from '@redux/auth';
 import { Button, Checkbox, Form, Grid, Image, Input, Space } from "antd";
@@ -25,7 +25,7 @@ type SignInParams = {
 
 const { useBreakpoint } = Grid;
 
-const SignIn: React.FC = () => {
+export const SignIn: React.FC = () => {
   const previousLocations = selectPreviousLocations()
   const dispatch = useDispatch()
   const [form] = Form.useForm();
@@ -69,7 +69,7 @@ const SignIn: React.FC = () => {
         size='large'
         validateMessages={validateMessages}
       >
-        <Tabs />
+        <TabsComponent />
 
         <Form.Item
           name="email"
@@ -124,7 +124,10 @@ const SignIn: React.FC = () => {
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} href={`${import.meta.env.VITE_API_BASE_URL}auth/google`} style={{ width: '100%' }} className={classes.form_button}>
+              <Button
+                icon={xs ? '' : <GooglePlusOutlined />}
+                href={`${import.meta.env.VITE_API_BASE_URL}auth/google`}
+                className={classes.form_button}>
                 Войти через Google
               </Button>
             </Space>
@@ -134,5 +137,3 @@ const SignIn: React.FC = () => {
     </Space>
   );
 };
-
-export default SignIn
