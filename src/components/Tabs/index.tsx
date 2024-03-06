@@ -1,15 +1,15 @@
-import { useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
-import { To } from 'history';
-import { Tabs, Grid } from "antd";
 import 'antd/dist/antd.css';
 
 import { tabItems } from '@constants/index';
 import { history } from "@redux/configure-store";
+import { Grid, Tabs } from "antd";
+import { To } from 'history';
+import { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const { useBreakpoint } = Grid;
 
-const TabsComponent: React.FC = () => {
+export const TabsComponent: React.FC = () => {
     const { pathname } = useLocation()
     const { xs } = useBreakpoint();
 
@@ -20,12 +20,10 @@ const TabsComponent: React.FC = () => {
     }, [pathname]);
 
     return (
-        <Tabs 
-        onChange={onChange} 
-        items={tabItems} 
-        activeKey={pathname} 
-        size={xs ? 'small' : 'middle'} />
+        <Tabs
+            onChange={onChange}
+            items={tabItems}
+            activeKey={pathname}
+            size={xs ? 'small' : 'middle'} />
     );
 };
-
-export default TabsComponent

@@ -1,4 +1,4 @@
-const IconExit = () => {
+export const IconExit = () => {
   return (
     <svg
       width='16'
@@ -21,4 +21,3 @@ const IconExit = () => {
     </svg>
   );
 };
-export default IconExit;

@@ -1,37 +1,36 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Outlet } from 'react-router-dom';
-import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 
-import { Footer, Header, Sider } from '@pages/main-page/components';
-import { authActions, selectAuthLoading } from '@redux/auth';
+import { Grid, Layout } from 'antd';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import { FooterComponent, HeaderComponent, SiderComponent } from './components';
 import classes from './index.module.css';
 
-export function MainLayout() {
-    const isLoading = selectAuthLoading()
-    const [collapsed, setCollapsed] = useState(false);
-    const dispatch = useDispatch()
+const { Content } = Layout;
+const { useBreakpoint } = Grid;
 
-    useEffect(() => {
-        if (isLoading) {
-            dispatch(authActions.resetLoading(false))
-        }
-    }, [dispatch, isLoading])
+export function MainLayout() {
+    const [collapsed, setCollapsed] = useState(false);
+    const { xs } = useBreakpoint();
 
     return (
-        <>
-            {!isLoading && <Layout>
-                <Sider collapsed={collapsed} />
-                <Layout className={classes.site_layout}>
-                    <Header getCollapted={setCollapsed} />
+        <Layout>
+            <SiderComponent collapsed={collapsed} />
+            <Layout className={classes.site_layout}>
+                <HeaderComponent getCollapted={setCollapsed} />
+                <Content
+                    className={classes.layout_background}
+                    style={{
+                        padding: xs ? '24px 16px 0' : 24,
+                    }}
+                >
 
                     <Outlet />
 
-                    <Footer />
-                </Layout>
-            </Layout >
-            }
-        </>
+                </Content>
+                <FooterComponent />
+            </Layout>
+        </Layout >
     );
 }

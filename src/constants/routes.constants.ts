@@ -12,6 +12,7 @@ export enum RoutePath {
     ChangePasswordSuccess = '/result/success-change-password',
     ConfirmEmail = '/auth/confirm-email',
     ResetPassword = '/auth/change-password',
+    Feedbacks = '/feedbacks',
 }
 
 export enum LayoutType {

@@ -1,3 +1,5 @@
+import { LoaderAction, LoaderTypes } from '@redux/loader';
+
 import {
     AuthAction,
     AuthResponse,
@@ -5,6 +7,11 @@ import {
     ChangePasswordRequest,
     ConfirmEmailRequest,
 } from '../types';
+
+export const setLoadingAuth = (payload: boolean): LoaderAction<boolean> => ({
+    type: LoaderTypes.SET_LOADING,
+    payload: payload,
+});
 
 export const signUpRequest = <T>(payload: T): AuthAction<T> => ({
     type: AuthTypes.SIGNUP_REQUEST,
@@ -24,11 +31,6 @@ export const signInRequest = <T>(payload: T): AuthAction<T> => ({
 export const signInSuccess = (accessToken: AuthResponse): AuthAction<AuthResponse> => ({
     type: AuthTypes.SIGNIN_SUCCESS,
     payload: accessToken,
-});
-
-export const resetLoading = (isloading: boolean): AuthAction<boolean> => ({
-    type: AuthTypes.RESETLOADING,
-    payload: isloading,
 });
 
 export const checkEmailRequest = <T>(payload: T): AuthAction<T> => ({

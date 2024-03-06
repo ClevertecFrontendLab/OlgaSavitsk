@@ -1,7 +1,6 @@
 .login_form {
-    max-width: 368px;
     width: 100%;
-    height: 490px; 
+    height: 490px;
 }
 
 .form_button {
@@ -28,10 +27,8 @@
     }
 }
 
-@media (max-width: 835px) {
-    :global(.form_layout) {
-        transform: translateY(-25px);
-    }
+.checkbox :global .ant-btn-link {
+    padding: 0;
 }
 
 @media (max-width: 361px) {
@@ -42,9 +39,6 @@
     .checkbox {
         &:global(.ant-form-item) {
             margin-bottom: 11px;
-        }
-        & label ~ a {
-            font-size: 15px;
         }
     }
 }

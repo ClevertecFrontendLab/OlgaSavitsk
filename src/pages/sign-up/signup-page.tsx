@@ -1,12 +1,13 @@
-import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Image, Form, Input, Space, Grid } from "antd";
-import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import { authActions, selectPreviousLocations } from '@redux/auth';
+import { GooglePlusOutlined } from '@ant-design/icons';
+import { TabsComponent } from '@components/index';
 import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
-import { Tabs } from '@components/index';
+import { authActions, selectPreviousLocations } from '@redux/auth';
+import { Button, Form, Grid, Image, Input, Space } from "antd";
+import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -50,15 +51,16 @@ export const SignUp: React.FC = () => {
         src='../logo.svg'
         preview={false}
         width={xs ? 203 : 309}
-        alt='logo' /><Form
-          form={form}
-          name="normal_login"
-          className={classes.login_form}
-          onFinish={onFinish}
-          size='large'
-          validateMessages={validateMessages}
-        >
-        <Tabs />
+        alt='logo' />
+      <Form
+        form={form}
+        name="normal_login"
+        className={classes.login_form}
+        onFinish={onFinish}
+        size='large'
+        validateMessages={validateMessages}
+      >
+        <TabsComponent />
 
         <Form.Item
           name="email"
@@ -118,13 +120,15 @@ export const SignUp: React.FC = () => {
                 data-test-id='registration-submit-button'
                 type="primary"
                 htmlType="submit"
-                style={{ width: '100%' }}
                 className={classes.form_button}
                 disabled={!!form.getFieldsError().filter(({ errors }) => errors.length).length}
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} className={classes.form_button}>
+              <Button
+                icon={xs ? '' : <GooglePlusOutlined />}
+                href={`${import.meta.env.VITE_API_BASE_URL}/auth/google`}
+                className={classes.form_button}>
                 Регистрация через Google
               </Button>
             </Space>

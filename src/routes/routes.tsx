@@ -1,5 +1,3 @@
-import { Route, Routes } from "react-router-dom";
-
 import { RoutePath } from "@constants/index";
 import {
     ConfirmConfig,
@@ -7,11 +5,13 @@ import {
     PageConfig,
     ResultErrorRequired,
     ResultModal,
+    ReviewsPage,
     SignIn,
     SignUp,
 } from "@pages/index";
 import { MainLayout } from "@pages/Page-config/main-layout/main-layout-page";
 import { UnauthorizedLayout } from "@pages/Page-config/unauthorized-layout";
+import { Route, Routes } from "react-router-dom";
 
 
 export const routes = (
@@ -27,6 +27,7 @@ export const routes = (
             </Route>
             <Route element={<MainLayout />}>
                 <Route index path={RoutePath.Home} element={<MainPage />} />
+                <Route path={RoutePath.Feedbacks} element={<ReviewsPage />} />
             </Route>
         </Route>
     </Routes >

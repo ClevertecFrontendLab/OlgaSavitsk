@@ -1,3 +1,7 @@
+:root {
+    --spacing: 40px;
+}
+
 .ant-tabs-nav-wrap {
     width: 100%;
     justify-content: center;
@@ -15,22 +19,17 @@
     font-size: 17px;
 }
 
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: var(--ant-primary-6);
-}
-
 .ant-tabs-tab + .ant-tabs-tab {
     margin: 0;
 }
 
-.ant-tabs-top > .ant-tabs-nav {
-    margin-bottom: 32px;
+:global .ant-tabs-top > .ant-tabs-nav {
+    margin-bottom: calc(4 * var(--margin));
 }
 
 .ant-tabs-ink-bar {
     left: 50%;
     width: 50%;
-    background: var(--ant-primary-6);
 }
 
 @media (max-width: 360px) {
@@ -40,6 +39,6 @@
     }
 
     .ant-tabs-top > .ant-tabs-nav {
-        margin-bottom: 23px;
+        margin-bottom: calc(3 * var(--margin));
     }
 }

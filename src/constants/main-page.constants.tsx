@@ -1,7 +1,7 @@
 import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 
-export const data = [
+export const SiderItems = [
   {
     title: 'Расписать тренировки',
     action: 'Тренировки',

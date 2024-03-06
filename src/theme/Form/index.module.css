@@ -1,11 +1,11 @@
 .ant-form-item {
-    margin-bottom: 32px;
+    margin-bottom: calc(4 * var(--margin-space));
 }
 
 .ant-form-item-explain {
     font-size: 12px;
     text-align: left;
-    margin-bottom: 28px;
+    margin-bottom: calc(7 * var(--margin-space));
 }
 
 .ant-input-affix-wrapper-focused,
@@ -21,7 +21,21 @@
 }
 
 .ant-input-group-wrapper-status-success {
-    background-color: #fff;
+    background-color: var(--ant-form-background);
+}
+
+.ant-form-item-control-input-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless) .ant-input {
+    border-left-color: #d9d9d9;
+}
+
+.input .ant-input-group-addon {
+    padding: 0 15px;
 }
 
 label {
@@ -36,11 +50,18 @@ label {
 
 @media (max-width: 360px) {
     .ant-form-item-explain {
-        margin-bottom: 8px;
+        margin-bottom: calc(2 * var(--margin-space));
+    }
+    .ant-checkbox > span {
+        font-size: var(--font-size-base);
+    }
+    .ant-form-item-control-input-content button {
+        padding: 7px;
+        font-size: var(--font-size-base);
     }
     label {
         & span {
-            font-size: 14px;
+            font-size: var(--font-size-base);
         }
     }
 }

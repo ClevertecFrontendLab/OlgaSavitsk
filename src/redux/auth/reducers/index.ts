@@ -1,18 +1,49 @@
-import { createBrowserHistory } from 'history';
-import { combineReducers } from 'redux';
-import { createReduxHistoryContext } from 'redux-first-history';
-import { authReducer } from './auth.reducer';
+import { AuthAction, AuthState, AuthTypes } from '../types';
 
-const { routerReducer } = createReduxHistoryContext({
-    history: createBrowserHistory(),
-    savePreviousLocations: 1
-});
+const initialState: AuthState = {
+    token: '',
+    isLoading: false,
+    statusCode: null,
+};
 
-const reducer = combineReducers({
-    router: routerReducer,
-    authStore: authReducer,
-});
+const authReducer = <T>(state = initialState, { type, payload }: AuthAction<T>) => {
+    switch (type) {
+        case AuthTypes.SIGNUP_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.SIGNUP_SUCCESS: {
+            return { ...state, isLoading: false, statusCode: payload };
+        }
+        case AuthTypes.SIGNIN_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.SIGNIN_SUCCESS: {
+            return { ...state, isLoading: false, token: payload };
+        }
+        case AuthTypes.CHECKEMAIL_REQUEST: {
+            return { ...state, isLoading: true, statusCode: null };
+        }
+        case AuthTypes.CHECKEMAIL_SUCCESS: {
+            return { ...state, isLoading: false };
+        }
+        case AuthTypes.CONFIRMEMAIL_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.CONFIRMEMAIL_SUCCESS: {
+            return { ...state, isLoading: false };
+        }
+        case AuthTypes.CHANGEPASSWORD_REQUEST: {
+            return { ...state, isLoading: true };
+        }
+        case AuthTypes.CHANGEPASSWORD_SUCCESS: {
+            return { ...state, isLoading: false, statusCode: payload };
+        }
+        case AuthTypes.AUTH_ERROR: {
+            return { ...state, isLoading: false, statusCode: payload };
+        }
+        default:
+            return state;
+    }
+};
 
-export type State = ReturnType<typeof reducer>;
-
-export default reducer;
+export default authReducer

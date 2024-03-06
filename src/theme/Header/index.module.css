@@ -4,7 +4,7 @@
 }
 
 .ant-page-header {
-    padding: 24px;
+    padding: calc(6 * var(--padding-space));
 }
 
 .ant-page-header-heading-left {
@@ -12,7 +12,7 @@
 }
 
 .ant-breadcrumb + .ant-page-header-heading {
-    margin-top: 11px;
+    margin-top: calc(3 * var(--margin-space));
 }
 
 .ant-page-header-compact .ant-page-header-heading {
@@ -29,12 +29,16 @@
 }
 
 .ant-page-header.has-breadcrumb {
-    padding-right: 33px;
+    padding-right: calc(8 * var(--padding-space));
+}
+
+.ant-page-header.has-breadcrumb {
+    padding-bottom: calc(4 * var(--padding-space));
 }
 
 @media (max-width: 834px) {
     .ant-page-header.has-breadcrumb {
-        padding-right: 24px;
+        padding-right: calc(6 * var(--padding-space));
     }
     .ant-breadcrumb + .ant-page-header-heading {
         margin-top: 30px;
@@ -43,6 +47,6 @@
         margin-top: 29px;
     }
     .ant-page-header.has-breadcrumb {
-        padding-right: 25px;
+        padding-right: calc(6 * var(--padding-space));
     }
 }

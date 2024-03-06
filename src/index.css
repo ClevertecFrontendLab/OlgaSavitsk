@@ -1,36 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('antd/dist/antd.css');
 @import url('./theme/index.module.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 :root {
     line-height: 1.5;
     font-weight: 400;
     width: 100%;
 
-    --ant-primary-9: #061178;
     --ant-primary-1: #f0f5ff;
-    --ant-primary-6: #2F54EB;
-    --ant-primary-5: #597EF7;
+    --ant-primary-6: #2f54eb;
+    --ant-primary-5: #597ef7;
+    --ant-primary-9: #061178;
     --ant-button-download: #262626;
     --ant-form-background: #fff;
+    --ant-rate-color: #faad14;
+    --ant-text: #8c8c8c;
+    --ant-text-secondary: #bfbfbf;
+
+    --font-size-base: 14px;
+    --font-size-title: 24px;
+    --font-weight-base: 400;
+    --font-weight-title: 500;
+
+    --spacing: 20px;
+    --margin-space: calc(0.2 * var(--spacing));
+    --padding-space: calc(0.2 * var(--spacing));
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-.ant-btn-link {
-    font-weight: 400;
-    color: #2f54eb;
-    text-decoration: inherit;
-}
 a:hover {
     color: #535bf2;
 }
 
 body {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Inter, sans-serif;
     margin: 0;
 }
 
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
+}
+
+.ant-btn-primary {
+    background: var(--ant-primary-6);
 }

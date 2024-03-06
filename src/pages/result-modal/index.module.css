@@ -10,18 +10,18 @@
     padding: 64px 32px;
 }
 
-:global .ant-result-title {
-    font-size: 24px;
-    font-weight: 600;
+.result_layout :global .ant-result-title {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
     line-height: 130%;
     white-space: pre-line;
 }
 
-:global .ant-result-extra {
+.result_layout :global .ant-result-extra {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: calc(5 * var(--margin-space));
     width: 100%;
 }
 

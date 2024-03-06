@@ -1,14 +1,15 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { Button, Result } from "antd";
 import 'antd/dist/antd.css';
 
-import { RootState, history } from "@redux/configure-store";
-import { resultContext } from "./result.helper";
+import { selectLocationPath } from "@redux/auth";
+import { history } from "@redux/configure-store";
+import { Button, Result } from "antd";
+import React, { useMemo } from "react";
+
 import classes from './index.module.css';
+import { resultContext } from "./result.helper";
 
 export const ResultModal: React.FC = () => {
-    const locationPathname = useSelector(({ router }: RootState) => router.location?.pathname)
+    const locationPathname = selectLocationPath()
 
     const context = useMemo(() => {
         if (locationPathname) {
@@ -39,3 +40,4 @@ export const ResultModal: React.FC = () => {
         />
     );
 };
+

@@ -1,3 +1,5 @@
-export { default as IconExit} from './Icon-exit'
-export { default as Loader} from './Loader'
-export { default as Tabs} from './Tabs'
+export { ButtonModal} from './Button'
+export { IconExit} from './Icon-exit'
+export { Loader} from './Loader'
+export { RateComponent} from './Rate'
+export { TabsComponent } from './Tabs'

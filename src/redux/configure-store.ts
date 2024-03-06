@@ -1,10 +1,10 @@
-import { createReduxHistoryContext } from 'redux-first-history';
 import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
 import { createBrowserHistory } from 'history';
+import { createReduxHistoryContext } from 'redux-first-history';
+import createSagaMiddleware from 'redux-saga';
 
-import rootSaga from './auth/saga';
-import reducer from './auth/reducers';
+import reducer from './reducer';
+import rootSaga from './root-saga';
 
 const { createReduxHistory, routerMiddleware } = createReduxHistoryContext({
     history: createBrowserHistory(),

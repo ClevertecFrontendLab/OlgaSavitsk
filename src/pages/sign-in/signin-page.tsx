@@ -1,12 +1,13 @@
-import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Image, Form, Input, Space, Grid, Checkbox } from "antd";
-import { GooglePlusOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import { authActions, selectPreviousLocations } from '@redux/auth';
-import { Tabs } from '@components/index';
+import { GooglePlusOutlined } from '@ant-design/icons';
+import { TabsComponent } from '@components/index';
 import { RoutePath } from '@constants/index';
+import { authActions, selectPreviousLocations } from '@redux/auth';
+import { Button, Checkbox, Form, Grid, Image, Input, Space } from "antd";
+import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -25,6 +26,7 @@ type SignInParams = {
 const { useBreakpoint } = Grid;
 
 export const SignIn: React.FC = () => {
+  const previousLocations = selectPreviousLocations()
   const dispatch = useDispatch()
   const [form] = Form.useForm();
   const { xs } = useBreakpoint();
@@ -37,7 +39,6 @@ export const SignIn: React.FC = () => {
     dispatch(authActions.checkEmailRequest(value))
   }, [dispatch])
 
-  const previousLocations = selectPreviousLocations()
 
   const repeatedRequest = useCallback(() => {
     if (!previousLocations) return null
@@ -54,7 +55,7 @@ export const SignIn: React.FC = () => {
   return (
     <Space direction="vertical" align="center" size={xs ? 32 : 48} className={classes.form_layout}
       style={{ width: '100%', textAlign: 'center' }}
-      >
+    >
       <Image
         src='../logo.svg'
         preview={false}
@@ -68,7 +69,7 @@ export const SignIn: React.FC = () => {
         size='large'
         validateMessages={validateMessages}
       >
-        <Tabs />
+        <TabsComponent />
 
         <Form.Item
           name="email"
@@ -123,7 +124,10 @@ export const SignIn: React.FC = () => {
               >
                 Войти
               </Button>
-              <Button icon={xs ? '' : <GooglePlusOutlined />} style={{ width: '100%' }} className={classes.form_button}>
+              <Button
+                icon={xs ? '' : <GooglePlusOutlined />}
+                href={`${import.meta.env.VITE_API_BASE_URL}auth/google`}
+                className={classes.form_button}>
                 Войти через Google
               </Button>
             </Space>
