@@ -1,3 +1,4 @@
+import { ErrorAction, ErrorPayloadType, ErrorTypes } from '@redux/error';
 import { LoaderAction, LoaderTypes } from '@redux/loader';
 
 import { FeedbackPayload, FeedbacksAction, FeedbacksResponse, FeedbacksTypes } from '../types';
@@ -29,7 +30,7 @@ export const postFeedbackSuccess = () => ({
     type: FeedbacksTypes.POST_FEEDBACK_SUCCESS,
 });
 
-export const feedbacksError = (status: string): FeedbacksAction<string> => ({
-    type: FeedbacksTypes.FEEDBACKS_ERROR,
-    payload: status,
+export const setErrorFeedbacks = (payload: ErrorPayloadType): ErrorAction<ErrorPayloadType> => ({
+    type: ErrorTypes.SET_ERROR,
+    payload: payload,
 });

@@ -1,8 +1,9 @@
+export { CalendarPage } from './calendar/calendar-page';
+export { ConfirmConfig } from './change-password';
 export { ConfirmEmailPage } from './change-password/confirm-email.page';
 export { MainPage } from './main-page/main-page';
 export { PageConfig } from './Page-config/index';
 export { ResultErrorRequired } from './result-modal/result-error-required';
-export { ConfirmConfig } from './change-password';
 export { ResultModal } from './result-modal/result-modal.page';
 export { ReviewsPage } from './reviews/reviews-page';
 export { SignIn } from './sign-in/signin-page';

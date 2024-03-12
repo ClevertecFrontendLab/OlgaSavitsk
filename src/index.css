@@ -16,18 +16,14 @@
     --ant-rate-color: #faad14;
     --ant-text: #8c8c8c;
     --ant-text-secondary: #bfbfbf;
-
     --font-size-base: 14px;
+    --font-size-text: 16px;
     --font-size-title: 24px;
     --font-weight-base: 400;
     --font-weight-title: 500;
-
     --spacing: 20px;
     --margin-space: calc(0.2 * var(--spacing));
     --padding-space: calc(0.2 * var(--spacing));
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 a:hover {

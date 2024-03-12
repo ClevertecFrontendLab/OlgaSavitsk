@@ -1,18 +1,21 @@
 import { CalendarTwoTone, HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 
+import { RoutePath } from '.';
+
 export const SiderItems = [
   {
     title: 'Расписать тренировки',
     action: 'Тренировки',
     icon: <HeartFilled />,
-    path: '#'
+    path: '#',
   },
   {
     title: 'Назначить календарь',
     action: 'Календарь',
     icon: <CalendarTwoTone twoToneColor={['#2F54EB', '#2F54EB']} />,
-    path: '#',
+    path: RoutePath.Calendar,
+    dataId: 'menu-button-calendar'
   },
   {
     title: 'Заполнить профиль',
@@ -32,5 +35,5 @@ export const CONTENT = {
   SUBMAIN:
     <Typography.Title level={4} style={{ fontWeight: 500, lineHeight: '130%', letterSpacing: '0.5px', margin: 0, whiteSpace: 'pre-wrap', overflowWrap: 'break-word', textAlign: 'left' }}>
       CleverFit — это не просто приложение, а твой личный помощник
-      в мире фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!'</Typography.Title>,
+      в мире фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!</Typography.Title>,
 };

@@ -3,12 +3,11 @@ export enum FeedbacksTypes {
     SET_FEEDBACKS = 'SET_FEEDBACKS',
     POST_FEEDBACK_REQUEST = 'POST_FEEDBACK_REQUEST',
     POST_FEEDBACK_SUCCESS = 'POST_FEEDBACK_SUCCESS',
-    FEEDBACKS_ERROR = 'FEEDBACKS_ERROR',
 }
 
 export type FeedbacksState = {
     feedbacks: FeedbacksResponse[];
-    statusCode?: 'success' | 'error' | '500' | undefined;
+    statusCode?: 'success' | 'error' | '500' | null;
 };
 
 export type FeedbacksAction<Payload> = {

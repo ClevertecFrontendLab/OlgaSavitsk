@@ -2,10 +2,13 @@ import { FeedbacksAction, FeedbacksResponse, FeedbacksState, FeedbacksTypes } fr
 
 const initialState: FeedbacksState = {
     feedbacks: [],
-    statusCode: undefined,
+    statusCode: null,
 };
 
-const feedbacksReducer = <T>(state = initialState, { type, payload }: FeedbacksAction<T>) => {
+export const feedbacksReducer = <T>(
+    state = initialState,
+    { type, payload }: FeedbacksAction<T>,
+) => {
     switch (type) {
         case FeedbacksTypes.GET_FEEDBACKS: {
             return state;
@@ -22,12 +25,7 @@ const feedbacksReducer = <T>(state = initialState, { type, payload }: FeedbacksA
         case FeedbacksTypes.POST_FEEDBACK_SUCCESS: {
             return state;
         }
-        case FeedbacksTypes.FEEDBACKS_ERROR: {
-            return { ...state, statusCode: payload };
-        }
         default:
             return state;
     }
 };
-
-export default feedbacksReducer;

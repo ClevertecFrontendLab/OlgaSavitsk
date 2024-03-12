@@ -1,11 +1,10 @@
 .ant-form-item {
-    margin-bottom: calc(4 * var(--margin-space));
+    margin-bottom: calc(8 * var(--margin-space));
 }
 
 .ant-form-item-explain {
     font-size: 12px;
     text-align: left;
-    margin-bottom: calc(7 * var(--margin-space));
 }
 
 .ant-input-affix-wrapper-focused,

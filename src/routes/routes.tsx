@@ -1,5 +1,6 @@
 import { RoutePath } from "@constants/index";
 import {
+    CalendarPage,
     ConfirmConfig,
     MainPage,
     PageConfig,
@@ -28,6 +29,7 @@ export const routes = (
             <Route element={<MainLayout />}>
                 <Route index path={RoutePath.Home} element={<MainPage />} />
                 <Route path={RoutePath.Feedbacks} element={<ReviewsPage />} />
+                <Route path={RoutePath.Calendar} element={<CalendarPage />} />
             </Route>
         </Route>
     </Routes >

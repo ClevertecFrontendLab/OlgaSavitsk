@@ -12,7 +12,7 @@ const { useBreakpoint } = Grid;
 
 type ModalProps = {
     status: string,
-    setOpenFeedModal: (openFeedModal: boolean) => void
+    setOpenFeedModal?: (openFeedModal: boolean) => void
 }
 
 export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal }: ModalProps) => {
@@ -36,6 +36,7 @@ export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal 
 
     return (
         <Modal
+            data-test-id='modal-no-review'
             centered
             open={open}
             footer={null}
