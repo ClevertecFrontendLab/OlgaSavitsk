@@ -17,8 +17,6 @@ export const MainPage: React.FC = () => {
   const dispatch = useDispatch()
   const { lg, md, xs } = useBreakpoint();
 
-  console.log('statusCode', statusCode)
-
   const handleRequest = useCallback(async () => {
     dispatch(trainingActions.getTraining())
   }, [dispatch])

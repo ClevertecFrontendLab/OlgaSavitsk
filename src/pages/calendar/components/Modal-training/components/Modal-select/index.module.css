@@ -1,0 +1,25 @@
+.overlay {
+    width: 264px;
+}
+.overlay :global .ant-popover-inner-content {
+    width: 100%;
+    padding: 0 12px 16px;
+}
+.overlay :global .ant-popover-title {
+    border: none;
+    padding: 5px 12px 0;
+}
+
+.modal_training {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.events {
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

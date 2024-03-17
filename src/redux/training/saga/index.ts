@@ -44,12 +44,7 @@ function* trainingPostWorker(action: TrainingAction<TrainingPayload>) {
         yield call(trainingApi.postTraining, action.payload);
         yield put(postTrainingSuccess());
     } catch (error: unknown) {
-        if (isAxiosError(error)) {
-            const status = error.response?.status;
-            if (status) {
-                yield put(setErrorTraining(status));
-            }
-        }
+        yield put(setErrorTraining('error'));
     }
 }
 

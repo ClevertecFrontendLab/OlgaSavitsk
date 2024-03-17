@@ -5,10 +5,10 @@ import { LOCATION_CHANGE } from 'redux-first-history';
 import {
     TrainingAction,
     TrainingListResponse,
-    TrainingPayload,
     TrainingResponse,
     TrainingTypes,
 } from '../types';
+import { TrainingFormValue } from '@pages/calendar/types';
 
 export const setLoadingTraining = (payload: boolean): LoaderAction<boolean> => ({
     type: LoaderTypes.SET_LOADING,
@@ -35,7 +35,7 @@ export const setTrainiingList = (
     payload,
 });
 
-export const postTrainingRequest = (payload: TrainingPayload): TrainingAction<TrainingPayload> => ({
+export const postTrainingRequest = (payload: TrainingFormValue): TrainingAction<TrainingFormValue> => ({
     type: TrainingTypes.POST_TRAINING_REQUEST,
     payload,
 });

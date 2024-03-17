@@ -16,6 +16,7 @@
     --ant-rate-color: #faad14;
     --ant-text: #8c8c8c;
     --ant-text-secondary: #bfbfbf;
+    --ant-default: #f0f0f0;
     --font-size-base: 14px;
     --font-size-text: 16px;
     --font-size-title: 24px;
@@ -42,4 +43,8 @@ h1 {
 
 .ant-btn-primary {
     background: var(--ant-primary-6);
+}
+
+.ant-typography.ant-typography-secondary {
+    color: var(--ant-text);
 }

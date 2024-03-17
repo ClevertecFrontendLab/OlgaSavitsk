@@ -8,5 +8,6 @@ export const selectTraining = () => {
 
 export const select = createSelector(
     (state: RootState) => state.trainingStore.trainings,
-    (trainings) => ({ trainings }),
+    (state: RootState) => state.trainingStore.trainingsList,
+    (trainings, trainingsList) => ({ trainings, trainingsList }),
 );

@@ -1,0 +1,6 @@
+.formlist_sign {
+    line-height: 50px;
+    display: flex;
+    align-self: end;
+    margin: 0 auto
+}

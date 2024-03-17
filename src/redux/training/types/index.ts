@@ -29,7 +29,7 @@ export type TrainingResponse = {
     date: number;
     isImplementation: boolean;
     userId: string;
-    parameters: {
+    parameters?: {
         repeat: boolean;
         period: number;
         jointTraining: boolean;
@@ -38,13 +38,13 @@ export type TrainingResponse = {
     exercises: Exercises[];
 };
 
-type Exercises = {
+export type Exercises = {
     _id: string;
     name: string;
     replays: number;
     weight: number;
     approaches: number;
-    isImplementation: boolean;
+    isImplementation?: boolean;
 };
 
 export type TrainingListResponse = {

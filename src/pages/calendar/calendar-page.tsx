@@ -1,78 +1,91 @@
 import 'antd/dist/antd.css';
 import 'dayjs/locale/ru';
 
-import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
-import { RoutePath } from '@constants/routes.constants';
-import { history } from '@redux/configure-store';
 import { selectError } from '@redux/error';
-import { trainingActions } from '@redux/training';
-import { Grid, Layout, Modal } from 'antd';
-import generateCalendar from 'antd/es/calendar/generateCalendar';
+import { Form, Grid, Layout, } from 'antd';
 import locale from 'antd/lib/calendar/locale/ru_RU';
-import dayjs from 'dayjs';
-import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs';
-import { useCallback, useLayoutEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { Dayjs } from 'dayjs';
+import { useCallback, useLayoutEffect, useState } from 'react';
 
 import classes from './index.module.css';
-
-
-const Calendar = generateCalendar<dayjs.Dayjs>({
-    ...dayjsGenerateConfig,
-    locale: {
-        ...dayjsGenerateConfig.locale,
-        getWeekFirstDay: () => 1,
-        getShortMonths: () => ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-        getShortWeekDays: () => ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-    }
-});
+import { CalendarComponent, ModalErrorComponent, PanelAddTraining, TrainingList, TrainingModal } from './components';
+import { TrainingResponse, selectTraining, trainingActions } from '@redux/training';
+import { useDispatch } from 'react-redux';
+import { TrainingForm } from './types/index';
 
 const { useBreakpoint } = Grid;
 
 export const CalendarPage: React.FC = () => {
-    const dispatch = useDispatch()
-    const { statusCode } = selectError()
-    const { xs } = useBreakpoint();
+  const { statusCode } = selectError()
+  const { trainings } = selectTraining()
+  const [dateSelect, setValueselect] = useState<Dayjs>()
+  const [openSelectModal, setOpenSelectModal] = useState(false)
+  const [openTrainingModal, setOpenTrainingModal] = useState(false);
+  const [showDrawer, setShowDrawer] = useState<boolean | TrainingResponse>(false);
+  const [form] = Form.useForm<TrainingForm>()
+  const { xs } = useBreakpoint();
+  const dispatch = useDispatch()
 
-    const handleTrainingList = useCallback(() => {
-        dispatch(trainingActions.getTrainingList())
-    }, [dispatch])
+  const handleTrainingList = useCallback(() => {
+    dispatch(trainingActions.getTrainingList())
+  }, [dispatch])
 
-    const error = useCallback(() => {
-        Modal.error({
-            title: <span data-test-id='modal-error-user-training-title'>При открытии данных произошла ошибка</span>,
-            content: <span data-test-id='modal-error-user-training-subtitle'>Попробуйте ещё раз.</span>,
-            icon: <CloseCircleOutlined style={{ color: 'var(--ant-primary-6)' }} />,
-            okText: <span data-test-id='modal-error-user-training-button'>Обновить</span>,
-            onOk() {
-                handleTrainingList()
-                history.push(RoutePath.Calendar)
-            },
-            okButtonProps: {
-                type: "primary",
-                size: "large"
-            },
-            closeIcon: <CloseOutlined data-test-id='modal-error-user-training-button-close' />,
-            closable: true,
-            centered: true,
-            className: classes.calendar_modal
-        })
-    }, [handleTrainingList]);
+  const dateCellRender = (cellValue: Dayjs) => {
 
-
-    useLayoutEffect(() => {
-        if (statusCode) error()
-    }, [error, statusCode])
+    const trainingCorrespondDay = trainings
+      .filter((training) => cellValue.isSame(training.date, 'day'))
 
     return (
-        <><Layout className={classes.calendar_layout}>
-            <Calendar
-                locale={locale}
-                onPanelChange={(data) => console.log(data)}
-                className={classes.calendar}
-                fullscreen={xs ? false : true}
-            />
-        </Layout>
-        </>
+      < >
+        <TrainingModal
+          openTrainingModal={openTrainingModal}
+          openSelect={openSelectModal}
+          userTraining={trainingCorrespondDay}
+          cellValue={cellValue}
+          selectDate={dateSelect}
+          form={form}
+          setOpenSelectModal={setOpenSelectModal}
+          setOpenTrainingModal={(val) => setOpenTrainingModal(val)}
+          setShowDrawer={setShowDrawer} />
+
+        <TrainingList userTraining={trainingCorrespondDay} setShowDrawer={setShowDrawer} />
+      </>
     );
+  };
+
+  useLayoutEffect(() => {
+    if (statusCode) {
+      ModalErrorComponent(handleTrainingList, statusCode)
+      setOpenTrainingModal(false)
+    }
+  }, [handleTrainingList, statusCode])
+
+  return (
+    <>
+      <Layout className={classes.calendar_layout}>
+        <CalendarComponent
+          locale={locale}
+          className={classes.calendar}
+          fullscreen={xs ? false : true}
+          dateCellRender={dateCellRender}
+          onChange={() => {
+            setOpenTrainingModal(false)
+            setOpenSelectModal(false)
+            setShowDrawer(false)
+          }}
+          onSelect={(date: Dayjs) => {
+            setValueselect(date)
+            setOpenTrainingModal(true)
+          }}
+        />
+      </Layout>
+      {showDrawer &&
+        <PanelAddTraining
+          selectDate={dateSelect}
+          showDrawer={showDrawer}
+          form={form}
+          userTraining={trainings}
+          setShowDrawer={setShowDrawer} />}
+    </>
+  );
 };

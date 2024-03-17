@@ -20,6 +20,23 @@
     width: 70%;
 }
 
+:global .ant-select-selector {
+    padding: 0;
+}
+
+:global .ant-popover-arrow {
+    display: none;
+}
+:global .ant-popover {
+    z-index: 1000;
+}
+:global .ant-popover-placement-bottomLeft {
+    padding-top: 0;
+}
+:global .ant-popover-placement-bottomRight {
+    padding-top: 0;
+}
+
 :global .ant-picker-calendar-full .ant-picker-panel {
     background: transparent;
 }
@@ -43,30 +60,14 @@
     .ant-picker-calendar-date-today {
     background: var(--ant-form-background);
 }
-
 :global .ant-radio-button-wrapper-checked > span {
     border-color: var(--ant-primary-6);
     color: var(--ant-primary-6);
 }
-
-.events {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.events .ant-badge-status {
-    width: 100%;
-    overflow: hidden;
-    font-size: 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.notes-month {
-    font-size: 28px;
-    text-align: center;
-}
-.notes-month section {
-    font-size: 28px;
+:global .ant-drawer-close {
+    position: absolute;
+    right: 10;
+    top: 10;
 }
 
 @media (max-width: 360px) {
@@ -82,9 +83,11 @@
 
     .calendar :global .ant-picker-calendar-header {
         display: flex;
+
         & :global .ant-picker-calendar-mode-switch {
             margin-top: 0;
         }
+
         & :global .ant-picker-calendar-mode-switch {
             text-align: right;
             & > label {
