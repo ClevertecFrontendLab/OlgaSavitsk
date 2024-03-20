@@ -13,6 +13,7 @@ export enum RoutePath {
     ConfirmEmail = '/auth/confirm-email',
     ResetPassword = '/auth/change-password',
     Feedbacks = '/feedbacks',
+    Calendar = '/calendar',
 }
 
 export enum LayoutType {

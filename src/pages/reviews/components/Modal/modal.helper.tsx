@@ -36,7 +36,6 @@ const modal: ObjectResult = {
         subTitle: <p>Произошла ошибка, попробуйте ещё раз.</p>,
         buttonText: 'Назад',
         redirectPath: RoutePath.Home,
-        dataId: 'check-back-button'
     }
 }
 

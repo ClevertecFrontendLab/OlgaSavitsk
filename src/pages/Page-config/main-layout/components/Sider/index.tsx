@@ -22,15 +22,14 @@ export const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) 
       collapsedWidth={lg ? 64 : xs ? 0 : 64}
       width={xs ? 106 : 208}
       trigger={null}
-      collapsible
+      collapsible={false}
       collapsed={collapsed}
       className={classes.sider}
       style={{
-        overflow: 'auto',
-        height: '100vh',
         position: xs ? 'fixed' : 'sticky',
+        width: xs && collapsed ? '105px' : 'auto',
         top: 0,
-        left: 0
+        left: xs && collapsed ? 0 : xs && !collapsed ? '-105px' : 0
       }}
     >
       <div className={collapsed ? classes.collapsed : classes.logo}>

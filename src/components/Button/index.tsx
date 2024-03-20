@@ -4,7 +4,7 @@ import classes from './index.module.css';
 
 type ButtonProps = {
     dataId: string;
-    setOpenFeedModal: (openFeedModal: boolean) => void,
+    setOpenFeedModal?: (openFeedModal: boolean) => void,
     setCloseModalError?: (openFeedModal: boolean) => void
     style?: React.CSSProperties,
 }
@@ -20,7 +20,7 @@ export const ButtonModal: React.FC<ButtonProps> = (
         className={classes.button}
         onClick={() => {
             if (setCloseModalError) setCloseModalError(false);
-            setOpenFeedModal(true);
+            if (setOpenFeedModal) setOpenFeedModal(true);
         }}>
         Написать отзыв
     </Button>

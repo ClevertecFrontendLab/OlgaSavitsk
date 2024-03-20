@@ -56,7 +56,7 @@ export const ReviewsPage: React.FC = () => {
                 <Button
                     data-test-id='all-reviews-button'
                     type='link'
-                    style={{ fontSize: '16px' }} size='large'
+                    style={{ fontSize: 'var(--font-size-text)' }} size='large'
                     onClick={isHidden ? onLoadFeedbacks : onHideFeedbacks}
                 >
                     {isHidden ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}

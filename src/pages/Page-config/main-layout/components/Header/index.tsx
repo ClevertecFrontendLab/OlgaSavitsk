@@ -19,7 +19,7 @@ type HeaderProps = {
 }
 
 export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderProps) => {
-  const locationPathname = selectLocationPath()
+  const locationPathname = selectLocationPath();
   const [collapsed, setCollapsed] = useState(false);
   const { lg, md, xs } = useBreakpoint();
   const pathSnippets = location.pathname.split('/').filter(i => i);
@@ -27,25 +27,24 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
     return (
-      <><Breadcrumb.Separator />
       <Breadcrumb.Item key={url}>
         <Link to={url}>{breadcrumbNameMap[url]}</Link>
-      </Breadcrumb.Item></>
+      </Breadcrumb.Item>
     );
   });
 
   const breadcrumbItems = [
-      <Breadcrumb.Item key="home">
-        <Link to="/main">Главная</Link>
-      </Breadcrumb.Item>,
-    ].concat(extraBreadcrumbItems);
-  
+    <Breadcrumb.Item key="home">
+      <Link to="/main">Главная</Link>
+    </Breadcrumb.Item>,
+  ].concat(extraBreadcrumbItems);
+
   return (
     <>
       <PageHeader
         className={classes.header}
         breadcrumb={
-          <Breadcrumb separator=''>{breadcrumbItems}</Breadcrumb>
+          <Breadcrumb>{breadcrumbItems}</Breadcrumb>
         }
         title={
           locationPathname === RoutePath.Home && <Title
@@ -59,7 +58,7 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
             level={lg ? 1 : xs ? 4 : 3}>
             Приветствуем тебя в CleverFit — приложении,<br /> которое поможет тебе добиться своей мечты!
           </Title>}
-        extra={locationPathname === RoutePath.Home && [
+        extra={locationPathname !== RoutePath.Feedbacks && [
           md ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
             Настройки
           </Button> :
@@ -67,7 +66,7 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
         ]}
       >
         {xs ? <Button key={1} data-test-id='sider-switch-mobile' className={classes.button_trigger__mobile}
-          style={{ left: xs ? 105 : 'auto', transform: xs && collapsed ? 'translateX(-104px)' : 'none' }}>
+          style={{ left: xs ? 0 : 'auto', transform: xs && collapsed ? 'translateX(104px)' : 'none' }}>
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
             className: classes.trigger,
             onClick: () => {

@@ -14,7 +14,7 @@
     font-size: var(--font-size-title);
     font-weight: var(--font-weight-title);
     line-height: 130%;
-    white-space: pre-line;
+    white-space: nowrap;
 }
 
 .result_layout :global .ant-result-extra {
@@ -23,10 +23,6 @@
     align-items: center;
     margin-top: calc(5 * var(--margin-space));
     width: 100%;
-}
-
-:global .ant-result-error > .ant-result-title {
-    white-space: nowrap;
 }
 
 @media (max-width: 574px) {

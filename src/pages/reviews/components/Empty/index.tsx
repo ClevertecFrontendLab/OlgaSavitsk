@@ -4,9 +4,9 @@ import { ButtonModal } from '@components/index';
 import { selectLoading } from '@redux/loader';
 import { Card, Grid, Space } from 'antd';
 import Meta from 'antd/lib/card/Meta';
+import { CSSProperties } from 'react';
 
 import classes from './index.module.css';
-import { CSSProperties } from 'react';
 
 type EmptyProps = {
     setOpenFeedModal: (openFeedModal: boolean) => void

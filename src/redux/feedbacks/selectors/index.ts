@@ -1,27 +1,20 @@
 import { RootState } from '@redux/configure-store';
+import { UseMemmoisedSelector } from '@redux/redux.helper';
 import { createSelector } from '@reduxjs/toolkit';
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-
-const UseMemmoisedSelector = <T>(selector: (state: RootState) => T): T => {
-    const result = useSelector(selector);
-    return useMemo(() => result, [result]);
-};
+import { getPrevLocation } from '@utils/index';
 
 export const selectFeedbacks = () => {
-    return UseMemmoisedSelector(select);
+    return UseMemmoisedSelector(selectorFeedbacks);
 };
 
-export const selectStatusFeedbacks = () => {
-    return UseMemmoisedSelector(
-        ({ feedbacksStore }: RootState) => feedbacksStore.statusCode as string,
-    );
-};
-
-export const select = createSelector(
+export const selectorFeedbacks = createSelector(
     (state: RootState) => state.feedbacksStore.feedbacks,
     (state: RootState) => state.feedbacksStore.statusCode,
     (feedbacks, statusCode) => ({ feedbacks, statusCode }),
 );
 
-export const currentLocation = (state: RootState) => state.router.location
+export const selectLocation = createSelector(
+    (state: RootState) => state.router.location?.pathname,
+    ({ router }: RootState) => getPrevLocation(router),
+    (pathname, previousLocations) => ({ pathname, previousLocations }),
+);

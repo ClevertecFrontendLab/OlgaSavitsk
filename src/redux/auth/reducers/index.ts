@@ -6,7 +6,7 @@ const initialState: AuthState = {
     statusCode: null,
 };
 
-const authReducer = <T>(state = initialState, { type, payload }: AuthAction<T>) => {
+export const authReducer = <T>(state = initialState, { type, payload }: AuthAction<T>) => {
     switch (type) {
         case AuthTypes.SIGNUP_REQUEST: {
             return { ...state, isLoading: true };
@@ -45,5 +45,3 @@ const authReducer = <T>(state = initialState, { type, payload }: AuthAction<T>) 
             return state;
     }
 };
-
-export default authReducer

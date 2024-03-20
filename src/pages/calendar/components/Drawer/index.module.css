@@ -1,0 +1,38 @@
+.drawer :global .ant-drawer-content {
+    border-radius: 6px;
+}
+
+.drawer :global .ant-drawer-header {
+    border: none;
+    padding-bottom: 0;
+}
+
+.drawer_button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: var(--ant-default);
+    border-radius: 0 0 5px 5px;
+}
+
+.drawer_button :global .ant-btn.ant-btn-block {
+    width: 50%;
+}
+
+.drawer_form :global .ant-form-item {
+    margin-bottom: 0;
+}
+
+.drawer_form :global .ant-tag {
+    width: 100%;
+    height: 24px;
+    margin-right: 0;
+    background: var(--ant-default);
+}
+
+@media (max-width: 480px) {
+    .drawer :global .ant-drawer-content {
+        border-radius: 10px;
+    }
+}

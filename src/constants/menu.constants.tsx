@@ -9,12 +9,12 @@ import { LocalStorageKey } from './storage.constants';
 
 type MenuItem = Required<MenuProps>['items'][number] & {
     path?: string;
-    type?: string
+    type?: string;
 };
 
 export const menuItems: MenuItem[] = [
     {
-        key: '1', label: 'Календарь', icon: <CalendarTwoTone
+        key: RoutePath.Calendar, label: 'Календарь', icon: <CalendarTwoTone
             twoToneColor={['var(--ant-primary-9)', 'var(--ant-primary-9)']} />
     },
     { key: '2', label: 'Тренировки', icon: <HeartFilled /> },

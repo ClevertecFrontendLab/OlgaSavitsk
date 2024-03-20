@@ -1,14 +1,26 @@
 import 'antd/dist/antd.css';
 
 import { CONTENT, SiderItems } from '@constants/index';
+import { ModalComponent } from '@pages/reviews/components';
+import { selectError } from '@redux/error';
+import { trainingActions } from '@redux/training';
 import { Button, Card, Grid, List, Space } from 'antd';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;
 
 export const MainPage: React.FC = () => {
+  const { statusCode } = selectError()
+  const dispatch = useDispatch()
   const { lg, md, xs } = useBreakpoint();
+
+  const handleRequest = useCallback(async () => {
+    dispatch(trainingActions.getTraining())
+  }, [dispatch])
+
   return (
     <Space direction="vertical" size="middle"
       className={classes.main_content}
@@ -40,9 +52,10 @@ export const MainPage: React.FC = () => {
               }}
               bodyStyle={{ padding: '10px 24px 13px', textAlign: 'center' }}>
               <Button
+                data-test-id={item.dataId}
                 type='link'
                 icon={item.icon}
-                href={item.path}
+                onClick={handleRequest}
                 style={{ fontSize: '15px' }}>
                 {item.action}
               </Button>
@@ -50,6 +63,7 @@ export const MainPage: React.FC = () => {
           </List.Item>
         )}
       />
+      {statusCode && <ModalComponent status={statusCode} />}
     </Space>
   );
 };

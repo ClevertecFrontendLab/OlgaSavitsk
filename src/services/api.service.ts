@@ -48,6 +48,14 @@ class ApiClient {
             data,
         });
     }
+
+    put(url: string, data: unknown = {}): Promise<void> {
+        return this._api({
+            method: 'put',
+            url,
+            data,
+        });
+    }
 }
 
 const apiClient = new ApiClient({

@@ -4,7 +4,7 @@ import { ReactNode } from "react"
 import { To } from "react-router-dom"
 
 type ObjectResult = {
-    [key: string]: ResultContext;
+    [key in RoutePath]?: ResultContext;
 }
 
 type ResultContext = {
@@ -17,7 +17,7 @@ type ResultContext = {
 }
 
 const result: ObjectResult = {
-    '/result/success': {
+    [RoutePath.SignUpSuccess]: {
         status: "success",
         title: "Регистрация успешна",
         subTitle: <p>Регистрация прошла успешно. Зайдите<br />
@@ -26,7 +26,7 @@ const result: ObjectResult = {
         redirectPath: RoutePath.SignIn,
         dataId: 'registration-enter-button'
     },
-    '/result/error-user-exist': {
+    [RoutePath.SignUpFailed]: {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.</p>,
@@ -34,7 +34,7 @@ const result: ObjectResult = {
         redirectPath: RoutePath.SignUp,
         dataId: 'registration-back-button',
     },
-    '/result/error': {
+    [RoutePath.Error]: {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так и ваша регистрация<br /> не завершилась. Попробуйте ещё раз.</p>,
@@ -42,7 +42,7 @@ const result: ObjectResult = {
         redirectPath: RoutePath.SignUp,
         dataId: 'registration-retry-button',
     },
-    '/result/error-login': {
+    [RoutePath.SignInError]: {
         status: "warning",
         title: "Вход не выполнен",
         subTitle: <p>Что-то пошло не так. Попробуйте еще раз.</p>,
@@ -50,15 +50,15 @@ const result: ObjectResult = {
         redirectPath: RoutePath.SignIn,
         dataId: 'login-retry-button'
     },
-    '/result/error-check-email-no-exist': {
+    [RoutePath.CheckemailNoExist]: {
         status: "error",
         title: "Такой e-mail не зарегистрирован",
-        subTitle: <p>Мы не нашли в базе вашего e-mail. Попробуйте<br />войти с другим e-mail.</p>,
+        subTitle: <p>Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail.</p>,
         buttonText: 'Попробовать снова',
         redirectPath: RoutePath.SignIn,
         dataId: 'check-retry-button'
     },
-    '/result/success-change-password': {
+    [RoutePath.ChangePasswordSuccess]: {
         status: "success",
         title: "Пароль успешно изменен",
         subTitle: <p>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль.</p>,
@@ -66,7 +66,7 @@ const result: ObjectResult = {
         redirectPath: RoutePath.SignIn,
         dataId: 'change-entry-button'
     },
-    "/result/error-change-password": {
+    [RoutePath.ChangePasswordError]: {
         status: "error",
         title: "Данные не сохранились",
         subTitle: <p>Что-то пошло не так. Попробуйте ещё раз.</p>,
@@ -74,7 +74,7 @@ const result: ObjectResult = {
         redirectPath: RoutePath.ResetPassword,
         dataId: 'change-retry-button'
     },
-    '/result/error-check-email': {
+    [RoutePath.CheckemailError]: {
         status: "500",
         title: "Что-то пошло не так",
         subTitle: <p>Произошла ошибка, попробуйте отправить форму ещё раз.</p>,
