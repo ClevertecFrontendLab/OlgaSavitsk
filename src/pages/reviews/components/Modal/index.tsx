@@ -43,6 +43,7 @@ export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal 
             onCancel={() => setOpen(false)}
             width={xs ? 328 : 539}
             closable={false}
+            destroyOnClose
             bodyStyle={{ padding: xs ? '32px 16px' : '38px 85.5px' }}
             maskStyle={{
                 backdropFilter: 'blur(4px)',

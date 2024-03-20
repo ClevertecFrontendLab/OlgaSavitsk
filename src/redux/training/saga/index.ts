@@ -49,7 +49,7 @@ function* trainingPostWorker(action: TrainingAction<TrainingFormValue>) {
         yield put(postTrainingSuccess(data));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
-            yield put(setErrorTraining('error'));
+            yield put(setErrorTraining('500'));
         }
     }
 }
@@ -60,7 +60,7 @@ function* trainingPutWorker(action: TrainingAction<TrainingResponse>) {
         yield put(putTrainingSuccess(data));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
-            yield put(setErrorTraining('error'));
+            yield put(setErrorTraining('500'));
         }
     }
 }
