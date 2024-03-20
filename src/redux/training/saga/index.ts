@@ -9,19 +9,23 @@ import {
     postTrainingSuccess,
     setErrorTraining,
     setLoadingTraining,
-    setTrainiing,
+    setTraining,
     setTrainiingList,
+    putTrainingSuccess,
 } from '../actions';
-import { TrainingAction, TrainingPayload, TrainingTypes } from '../types';
+import { TrainingAction, TrainingResponse, TrainingTypes } from '../types';
+import { TrainingFormValue } from '@pages/calendar/types';
 
 function* trainingGetWorker(action: TrainingAction<string>) {
     try {
         yield put(setErrorTraining(undefined));
         const { data } = yield call(trainingApi.getTraining, action.payload);
-        yield put(setTrainiing(data));
+        yield put(setTraining(data));
         yield put(push(RoutePath.Calendar));
     } catch (error: unknown) {
-        yield put(setErrorTraining('500'));
+        if (isAxiosError(error)) {
+            yield put(setErrorTraining('500'));
+        }
     }
 }
 
@@ -39,12 +43,25 @@ function* trainingListGetWorker() {
     }
 }
 
-function* trainingPostWorker(action: TrainingAction<TrainingPayload>) {
+function* trainingPostWorker(action: TrainingAction<TrainingFormValue>) {
     try {
-        yield call(trainingApi.postTraining, action.payload);
-        yield put(postTrainingSuccess());
+        const { data } = yield call(trainingApi.postTraining, action.payload);
+        yield put(postTrainingSuccess(data));
     } catch (error: unknown) {
-        yield put(setErrorTraining('error'));
+        if (isAxiosError(error)) {
+            yield put(setErrorTraining('error'));
+        }
+    }
+}
+
+function* trainingPutWorker(action: TrainingAction<TrainingResponse>) {
+    try {
+        const { data } = yield call(trainingApi.putTraining, action.payload);
+        yield put(putTrainingSuccess(data));
+    } catch (error: unknown) {
+        if (isAxiosError(error)) {
+            yield put(setErrorTraining('error'));
+        }
     }
 }
 
@@ -66,9 +83,15 @@ export function* handleGetTrainingList() {
     yield put(setLoadingTraining(false));
 }
 
-export function* handlePostTraining(action: TrainingAction<TrainingPayload>) {
+export function* handlePostTraining(action: TrainingAction<TrainingFormValue>) {
     yield put(setLoadingTraining(true));
     yield call(trainingPostWorker, action);
+    yield put(setLoadingTraining(false));
+}
+
+export function* handlePutTraining(action: TrainingAction<TrainingResponse>) {
+    yield put(setLoadingTraining(true));
+    yield call(trainingPutWorker, action);
     yield put(setLoadingTraining(false));
 }
 
@@ -76,4 +99,5 @@ export function* watchTraining() {
     yield takeLatest(TrainingTypes.GET_TRAINING, handleGetTraining);
     yield takeLatest(LOCATION_CHANGE, handleGetTrainingList);
     yield takeLatest(TrainingTypes.POST_TRAINING_REQUEST, handlePostTraining);
+    yield takeLatest(TrainingTypes.PUT_TRAINING_REQUEST, handlePutTraining);
 }

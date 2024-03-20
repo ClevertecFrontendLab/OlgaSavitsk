@@ -1,3 +1,4 @@
+import { updateState } from '@utils/index';
 import {
     TrainingAction,
     TrainingListResponse,
@@ -36,7 +37,13 @@ export const trainingReducer = <T>(state = initialState, { type, payload }: Trai
             return { ...state, statusCode: null };
         }
         case TrainingTypes.POST_TRAINING_SUCCESS: {
-            return state;
+            return { ...state, trainings: [...state.trainings, payload as TrainingResponse] };
+        }
+        case TrainingTypes.PUT_TRAINING_REQUEST: {
+            return { ...state, statusCode: null };
+        }
+        case TrainingTypes.PUT_TRAINING_SUCCESS: {
+            return { ...state, trainings: updateState(state, payload as TrainingResponse) };
         }
         default:
             return state;

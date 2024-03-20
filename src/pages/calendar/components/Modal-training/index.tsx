@@ -6,6 +6,7 @@ import { CreateTrainingModal } from './components/Modal-create-training';
 import { SelectTrainingModal } from './components/Modal-select';
 import { FormInstance } from 'antd';
 import { TrainingForm } from '@pages/calendar/types';
+import { useState } from 'react';
 
 
 type TrainingModalProps = {
@@ -17,7 +18,7 @@ type TrainingModalProps = {
     form: FormInstance<TrainingForm>
     setOpenTrainingModal: (openTrainingModal: boolean) => void,
     setOpenSelectModal: (openSelectModal: boolean) => void,
-    setShowDrawer: (showDrawer: boolean | TrainingResponse) => void,
+    setShowDrawer: (showDrawer: boolean | string) => void,
 }
 
 export const TrainingModal: React.FC<TrainingModalProps> = ({
@@ -29,30 +30,33 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
     form,
     setOpenSelectModal,
     setOpenTrainingModal,
-    setShowDrawer
+    setShowDrawer,
 }) => {
+    const [editTraining, setEditTraining] = useState<TrainingResponse>()
 
     return (
-
         (cellValue.isSame(selectDate, 'day') &&
             <>
-                <CreateTrainingModal
-                    openTrainingModal={openTrainingModal}
-                    userTraining={userTraining}
-                    selectDate={selectDate}
-                    setOpenTrainingModal={setOpenTrainingModal}
-                    setOpenSelectModal={setOpenSelectModal}
-                    setShowDrawer={setShowDrawer}
-                />
-                <SelectTrainingModal
+                {openSelect ? <SelectTrainingModal
                     userTraining={userTraining}
                     openSelectModal={openSelect}
                     form={form}
                     selectDate={selectDate}
+                    editTraining={editTraining}
                     setOpenSelectModal={setOpenSelectModal}
                     setOpenTrainingModal={setOpenTrainingModal}
                     setShowDrawer={setShowDrawer}
-                />
+                /> :
+                    openTrainingModal ? <CreateTrainingModal
+                        userTraining={userTraining}
+                        openTrainingModal={openTrainingModal}
+                        selectDate={selectDate}
+                        setOpenTrainingModal={setOpenTrainingModal}
+                        setOpenSelectModal={setOpenSelectModal}
+                        setEditTraining={setEditTraining}
+                        setShowDrawer={setShowDrawer}
+                    />
+                        : null}
             </>
         )
     )

@@ -5,7 +5,7 @@ import { Divider, Select, Form, Space, FormInstance } from 'antd';
 import { ArrowLeftOutlined, DownOutlined } from '@ant-design/icons';
 import { TrainingResponse, selectTraining } from '@redux/training';
 import { useMemo } from 'react';
-import { TrainingForm, TrainingFormValue } from '@pages/calendar/types';
+import { TrainingForm } from '@pages/calendar/types';
 import { selectOptions } from '../../helper.modal-training';
 
 type CreateTrainingModalProps = {
@@ -13,7 +13,6 @@ type CreateTrainingModalProps = {
   form: FormInstance<TrainingForm>,
   setOpenSelectModal: (openSelectModal: boolean) => void,
   setOpenTrainingModal: (openTrainingModal: boolean) => void,
-  setSelectError: (error: boolean) => void,
   setSelectValue: (selectValue: string) => void,
 }
 
@@ -23,11 +22,8 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
   setOpenSelectModal,
   setOpenTrainingModal,
   setSelectValue,
-  setSelectError
 }) => {
   const { trainingsList } = selectTraining()
-
-  const createdExercisesList: TrainingFormValue[] = form.getFieldValue('name')
 
   const setSelectOptions = useMemo(() => {
     return selectOptions(userTraining, trainingsList)
@@ -40,19 +36,20 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
         size='middle'
         style={{ width: '100%' }}
         initialValues={{
-          name: []
+          trainings: []
         }}
         className={classes.select_form}
       >
         <Form.Item>
           <Space style={{ width: '100%' }}>
-            <ArrowLeftOutlined data-test-id='modal-exercise-training-button-close'
+            <ArrowLeftOutlined
+              data-test-id='modal-exercise-training-button-close'
               onClick={() => {
                 setOpenSelectModal(false);
                 setOpenTrainingModal(true);
               }} />
 
-            <Form.List name='name'>
+            <Form.List name='trainings'>
               {(_subFields, { add }) => (
                 <>
                   <Form.Item
@@ -61,27 +58,21 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
                       { required: true, message: '' },
                     ]}
                     style={{ width: '100%', marginBottom: 0 }}
+                    initialValue={'Выбор типа тренировки'}
                   >
                     <Select
                       data-test-id='modal-create-exercise-select'
-                      defaultValue={'Выбор типа тренировки'}
                       bordered={false}
                       suffixIcon={<DownOutlined />}
                       style={{ width: '100%' }}
                       onChange={(selectValue) => {
                         setSelectValue(selectValue);
-                        setSelectError(false)
-                        const existedTraining = createdExercisesList.filter(((exerc: TrainingFormValue) => exerc.name === selectValue))
-                        if (existedTraining.length) {
-                          form.setFieldsValue({ name: [...createdExercisesList, ...existedTraining] })
-                        } else {
-                          add({
-                            name: selectValue,
-                            exercises: [{
-                              name: ''
-                            }]
-                          });
-                        }
+                        add({
+                          name: selectValue,
+                          exercises: [{
+                            name: ''
+                          }]
+                        });
                       }}
                       options={setSelectOptions.map(
                         (training) => ({ label: training.name, value: training.name }))} />
@@ -90,7 +81,7 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
             </Form.List>
           </Space>
         </Form.Item>
-        <Divider style={{ margin: '12px 0' }} />
+        <Divider style={{ margin: 'calc(1 * var(--margin-space)) 0' }} />
       </Form >
     </div >
   )

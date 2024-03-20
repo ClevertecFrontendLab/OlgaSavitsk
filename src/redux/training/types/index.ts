@@ -5,6 +5,8 @@ export enum TrainingTypes {
     SET_TRAINING_LIST = 'SET_TRAINING_LIST',
     POST_TRAINING_REQUEST = 'POST_TRAINING_REQUEST',
     POST_TRAINING_SUCCESS = 'POST_TRAINING_SUCCESS',
+    PUT_TRAINING_REQUEST = 'PUT_TRAINING_REQUEST',
+    PUT_TRAINING_SUCCESS = 'PUT_TRAINING_SUCCESS',
 }
 
 export type TrainingState = {
@@ -24,11 +26,11 @@ export type TrainingReducer = (
 ) => TrainingState;
 
 export type TrainingResponse = {
-    _id: string;
+    _id?: string;
     name: string;
     date: number;
     isImplementation: boolean;
-    userId: string;
+    userId?: string;
     parameters?: {
         repeat: boolean;
         period: number;

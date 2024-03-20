@@ -27,12 +27,15 @@
 :global .ant-popover-arrow {
     display: none;
 }
+
 :global .ant-popover {
     z-index: 1000;
 }
+
 :global .ant-popover-placement-bottomLeft {
     padding-top: 0;
 }
+
 :global .ant-popover-placement-bottomRight {
     padding-top: 0;
 }
@@ -60,17 +63,25 @@
     .ant-picker-calendar-date-today {
     background: var(--ant-form-background);
 }
+
 :global .ant-radio-button-wrapper-checked > span {
     border-color: var(--ant-primary-6);
     color: var(--ant-primary-6);
 }
+
+:global .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+    border-color: var(--ant-primary-6);
+    background: transparent;
+    color: var(--ant-button-download);
+}
+
 :global .ant-drawer-close {
     position: absolute;
     right: 10;
     top: 10;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
     .calendar_layout {
         height: fit-content;
         margin: -24px -16px 0;
@@ -97,7 +108,29 @@
         }
     }
 
+    .training_exist {
+        position: absolute;
+        top: 0;
+        width: 35px;
+        height: 24px;
+        background-color: #f0f5ff;
+        z-index: -1;
+    }
+
+    .done {
+        background-color: var(--ant-text-secondary);
+    }
+
     :global .ant-breadcrumb + .ant-page-header-heading {
         margin-top: 0;
+    }
+
+    :global .ant-picker-cell-in-view.ant-picker-cell-selected {
+        background: transparent;
+        border-color: var(--ant-primary-6);
+    }
+    :global .ant-picker-calendar-date-today {
+        background: transparent;
+        border-color: var(--ant-primary-6);
     }
 }

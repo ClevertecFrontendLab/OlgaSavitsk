@@ -1,10 +1,12 @@
 .overlay {
     width: 264px;
 }
+
 .overlay :global .ant-popover-inner-content {
     width: 100%;
     padding: 0 12px 16px;
 }
+
 .overlay :global .ant-popover-title {
     border: none;
     padding: 5px 12px 0;
@@ -19,4 +21,27 @@
 
 :global .ant-btn-primary[disabled] > span {
     cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+    .modal_training {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        top: 30px;
+    }
+
+    .overlay {
+        width: 100vh;
+    }
+
+    .overlay :global .ant-popover-inner-content {
+        min-width: 316px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    :global .ant-popover-placement-bottom {
+        padding: 0 calc(5 * var(--padding-space));
+    }
 }

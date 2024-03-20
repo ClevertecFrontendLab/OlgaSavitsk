@@ -1,12 +1,12 @@
-import { Exercises } from '@redux/training';
-import { Dayjs } from 'dayjs';
+import { Exercises, TrainingResponse } from '@redux/training';
 
 export type TrainingForm = {
-   name: TrainingFormValue[]
+    trainings: TrainingFormValue[] | TrainingResponse[]
 };
 
 export type TrainingFormValue = {
     name: string;
-    date: Dayjs | undefined;
+    date: string | number | undefined;
     exercises: Exercises[];
+    isImplementation?: boolean
 };

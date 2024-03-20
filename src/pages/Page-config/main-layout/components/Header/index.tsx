@@ -66,7 +66,7 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
         ]}
       >
         {xs ? <Button key={1} data-test-id='sider-switch-mobile' className={classes.button_trigger__mobile}
-          style={{ left: xs ? 105 : 'auto', transform: xs && collapsed ? 'translateX(-104px)' : 'none' }}>
+          style={{ left: xs ? 0 : 'auto', transform: xs && collapsed ? 'translateX(104px)' : 'none' }}>
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
             className: classes.trigger,
             onClick: () => {

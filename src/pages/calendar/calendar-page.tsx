@@ -8,8 +8,14 @@ import { Dayjs } from 'dayjs';
 import { useCallback, useLayoutEffect, useState } from 'react';
 
 import classes from './index.module.css';
-import { CalendarComponent, ModalErrorComponent, PanelAddTraining, TrainingList, TrainingModal } from './components';
-import { TrainingResponse, selectTraining, trainingActions } from '@redux/training';
+import {
+  CalendarComponent,
+  ModalErrorComponent,
+  PanelAddTraining,
+  TrainingList,
+  TrainingModal
+} from './components';
+import { selectTraining, trainingActions } from '@redux/training';
 import { useDispatch } from 'react-redux';
 import { TrainingForm } from './types/index';
 
@@ -21,9 +27,9 @@ export const CalendarPage: React.FC = () => {
   const [dateSelect, setValueselect] = useState<Dayjs>()
   const [openSelectModal, setOpenSelectModal] = useState(false)
   const [openTrainingModal, setOpenTrainingModal] = useState(false);
-  const [showDrawer, setShowDrawer] = useState<boolean | TrainingResponse>(false);
+  const [showDrawer, setShowDrawer] = useState<boolean | string>(false);
   const [form] = Form.useForm<TrainingForm>()
-  const { xs } = useBreakpoint();
+  const { xs, md } = useBreakpoint();
   const dispatch = useDispatch()
 
   const handleTrainingList = useCallback(() => {
@@ -36,7 +42,7 @@ export const CalendarPage: React.FC = () => {
       .filter((training) => cellValue.isSame(training.date, 'day'))
 
     return (
-      < >
+      <>
         <TrainingModal
           openTrainingModal={openTrainingModal}
           openSelect={openSelectModal}
@@ -48,7 +54,7 @@ export const CalendarPage: React.FC = () => {
           setOpenTrainingModal={(val) => setOpenTrainingModal(val)}
           setShowDrawer={setShowDrawer} />
 
-        <TrainingList userTraining={trainingCorrespondDay} setShowDrawer={setShowDrawer} />
+        {md && <TrainingList userTraining={trainingCorrespondDay} />}
       </>
     );
   };
@@ -67,7 +73,16 @@ export const CalendarPage: React.FC = () => {
           locale={locale}
           className={classes.calendar}
           fullscreen={xs ? false : true}
-          dateCellRender={dateCellRender}
+          dateCellRender={(date) => {
+            const tr = trainings.find(train => date.isSame(train.date, 'day'))
+            return (
+              <div className={tr?.isImplementation
+                ? `${classes.training_exist} ${classes.done}`
+                : tr
+                  ? classes.training_exist : 'undefined'}>
+                {dateCellRender(date)}
+              </div>)
+          }}
           onChange={() => {
             setOpenTrainingModal(false)
             setOpenSelectModal(false)
