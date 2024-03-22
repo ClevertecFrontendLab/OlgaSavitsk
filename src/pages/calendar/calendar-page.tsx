@@ -1,13 +1,11 @@
-import 'antd/dist/antd.css';
-import 'dayjs/locale/ru';
-
+import { Fragment, useCallback, useLayoutEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { selectError } from '@redux/error';
+import { selectTraining, trainingActions } from '@redux/training';
 import { Form, Grid, Layout, } from 'antd';
 import locale from 'antd/lib/calendar/locale/ru_RU';
 import { Dayjs } from 'dayjs';
-import { useCallback, useLayoutEffect, useState } from 'react';
 
-import classes from './index.module.css';
 import {
   CalendarComponent,
   ModalErrorComponent,
@@ -15,9 +13,12 @@ import {
   TrainingList,
   TrainingModal
 } from './components';
-import { selectTraining, trainingActions } from '@redux/training';
-import { useDispatch } from 'react-redux';
-import { TrainingForm } from './types/index';
+import { TrainingForm } from './types';
+
+import 'antd/dist/antd.css';
+import classes from './index.module.css';
+
+import 'dayjs/locale/ru';
 
 const { useBreakpoint } = Grid;
 
@@ -36,13 +37,13 @@ export const CalendarPage: React.FC = () => {
     dispatch(trainingActions.getTrainingList())
   }, [dispatch])
 
-  const dateCellRender = (cellValue: Dayjs) => {
+  const dateCellRender = useCallback((cellValue: Dayjs) => {
 
     const trainingCorrespondDay = trainings
       .filter((training) => cellValue.isSame(training.date, 'day'))
 
     return (
-      <>
+      <Fragment>
         <TrainingModal
           openTrainingModal={openTrainingModal}
           openSelect={openSelectModal}
@@ -55,9 +56,22 @@ export const CalendarPage: React.FC = () => {
           setShowDrawer={setShowDrawer} />
 
         {md && <TrainingList userTraining={trainingCorrespondDay} />}
-      </>
+      </Fragment>
     );
-  };
+  }, [dateSelect, form, md, openSelectModal, openTrainingModal, trainings]);
+
+  const cellRender = useCallback((date: Dayjs) => {
+    const training = trainings.find(train => date.isSame(train.date, 'day'))
+
+    const style = training ? classes.training_exist : classes.calendar_cell
+
+    return (
+      <div className={training?.isImplementation
+        ? `${classes.training_exist} ${classes.done}`
+        : style}>
+        {dateCellRender(date)}
+      </div>)
+  }, [dateCellRender, trainings])
 
   useLayoutEffect(() => {
     if (statusCode) {
@@ -67,22 +81,13 @@ export const CalendarPage: React.FC = () => {
   }, [handleTrainingList, statusCode])
 
   return (
-    <>
+    <Fragment>
       <Layout className={classes.calendar_layout}>
         <CalendarComponent
           locale={locale}
           className={classes.calendar}
-          fullscreen={xs ? false : true}
-          dateCellRender={(date) => {
-            const tr = trainings.find(train => date.isSame(train.date, 'day'))
-            return (
-              <div className={tr?.isImplementation
-                ? `${classes.training_exist} ${classes.done}`
-                : tr
-                  ? classes.training_exist : 'undefined'}>
-                {dateCellRender(date)}
-              </div>)
-          }}
+          fullscreen={!xs}
+          dateCellRender={cellRender}
           onChange={() => {
             setOpenTrainingModal(false)
             setOpenSelectModal(false)
@@ -101,6 +106,6 @@ export const CalendarPage: React.FC = () => {
           form={form}
           userTraining={trainings}
           setShowDrawer={setShowDrawer} />}
-    </>
+    </Fragment>
   );
 };

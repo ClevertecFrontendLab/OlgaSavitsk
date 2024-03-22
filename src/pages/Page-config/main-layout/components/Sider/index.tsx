@@ -1,9 +1,8 @@
-import 'antd/dist/antd.css';
-
 import { menuItems } from '@constants/index';
-import { history } from "@redux/configure-store";
+import { history } from '@redux/configure-store';
 import { Grid, Image, Layout, Menu } from 'antd';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const { Sider } = Layout;
@@ -14,29 +13,29 @@ type SiderProps = {
 }
 
 export const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) => {
-  const { lg, xs } = useBreakpoint();
+  const { xs } = useBreakpoint();
+
+  const imgSize = xs ? 72 : 133
 
   return (
     <Sider
       theme='light'
-      collapsedWidth={lg ? 64 : xs ? 0 : 64}
+      collapsedWidth={xs ? 0 : 64}
       width={xs ? 106 : 208}
       trigger={null}
-      collapsible={false}
+      collapsible={true}
       collapsed={collapsed}
       className={classes.sider}
       style={{
         position: xs ? 'fixed' : 'sticky',
-        width: xs && collapsed ? '105px' : 'auto',
         top: 0,
-        left: xs && collapsed ? 0 : xs && !collapsed ? '-105px' : 0
       }}
     >
       <div className={collapsed ? classes.collapsed : classes.logo}>
         <Image
-          src={collapsed ? "../fit.svg" : '../logo.svg'}
+          src={collapsed ? '../fit.svg' : '../logo.svg'}
           preview={false}
-          width={xs ? 72 : collapsed ? 28 : 133}
+          width={collapsed ? 28 : imgSize}
           alt='logo'
         />
       </div>

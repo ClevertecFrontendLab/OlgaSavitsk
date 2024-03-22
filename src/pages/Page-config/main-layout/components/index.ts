@@ -1,3 +1,3 @@
-export { FooterComponent } from './Footer';
-export { HeaderComponent } from './Header';
-export { SiderComponent } from './Sider';
+export { FooterComponent } from './footer';
+export { HeaderComponent } from './header';
+export { SiderComponent } from './sider';

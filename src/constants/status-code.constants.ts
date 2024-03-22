@@ -1,4 +1,4 @@
-export enum HTTP_STATUS_CODE {
+export enum HttpStatusCode {
     OK = 200,
     FORBIDDEN = 403,
     NOT_FOUND = 404,
@@ -6,7 +6,7 @@ export enum HTTP_STATUS_CODE {
     INTERNAL_SERVER_ERROR = 500,
 }
 
-export enum STATUS_TEXT {
+export enum StatusText {
     NOT_FOUND = 'Email не найден',
     EMPTY_MESSAGE = '',
 }

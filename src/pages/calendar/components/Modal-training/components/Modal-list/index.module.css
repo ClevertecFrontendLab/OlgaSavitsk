@@ -10,7 +10,7 @@
 .events .ant-badge-status {
     width: 100%;
     overflow: hidden;
-    font-size: 12px;
+    font-size: calc(.75 * var(--fs-base));
     white-space: nowrap;
     text-overflow: ellipsis;
 }

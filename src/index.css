@@ -1,12 +1,14 @@
-@import url('antd/dist/antd.css');
 @import url('./theme/index.module.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 :root {
-    line-height: 1.5;
-    font-weight: 400;
-    width: 100%;
-
+    --primary-font: "Inter", sans-serif;
+    --fs-base: 1rem;
+    --fs-title: calc(var(--fs-base) * 1.5);
+    --fw-l: 400;
+    --fw-m: 500;
+    --fw-b: 700;
+    --line-height: 1.3;
     --ant-primary-1: #f0f5ff;
     --ant-primary-6: #2f54eb;
     --ant-primary-5: #597ef7;
@@ -17,14 +19,11 @@
     --ant-text: #8c8c8c;
     --ant-text-secondary: #bfbfbf;
     --ant-default: #f0f0f0;
-    --font-size-base: 14px;
-    --font-size-text: 16px;
-    --font-size-title: 24px;
-    --font-weight-base: 400;
-    --font-weight-title: 500;
     --spacing: 20px;
     --margin-space: calc(0.2 * var(--spacing));
     --padding-space: calc(0.2 * var(--spacing));
+    --border-radius: 4px;
+    --shadow: 0 0 6px rgba(0,0,0,.3)
 }
 
 a:hover {
@@ -32,13 +31,10 @@ a:hover {
 }
 
 body {
-    font-family: Inter, sans-serif;
+    font-family: var(--primary-font);
+    font-weight: var(--fw-l);
     margin: 0;
-}
-
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
+    overflow-x: hidden;
 }
 
 .ant-btn-primary {
@@ -47,4 +43,8 @@ h1 {
 
 .ant-typography.ant-typography-secondary {
     color: var(--ant-text);
+}
+
+.ant-popover  {
+    z-index: 1;
 }

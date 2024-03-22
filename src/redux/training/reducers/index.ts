@@ -1,4 +1,5 @@
 import { updateState } from '@utils/index';
+
 import {
     TrainingAction,
     TrainingListResponse,

@@ -1,12 +1,12 @@
-import 'antd/dist/antd.css';
-
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { ButtonModal } from '@components/index';
 import { FeedbacksResponse, selectFeedbacks } from '@redux/feedbacks';
 import { handleSortDate } from '@utils/index';
 import { Button, Grid, Space } from 'antd';
-import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { CommentList, EmptyComponent, FeedbackModalComponent, ModalComponent } from './components';
+
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;
@@ -21,6 +21,7 @@ export const ReviewsPage: React.FC = () => {
 
     const list = useMemo(() => {
         const sortFeedbacks = handleSortDate([...feedbacks])
+
         return isHidden ? sortFeedbacks.slice(0, 4) : sortFeedbacks
     }, [feedbacks, isHidden])
 
@@ -51,12 +52,12 @@ export const ReviewsPage: React.FC = () => {
                     paddingTop: xs ? '45px' : '90px',
                 }}>
 
-                <ButtonModal setOpenFeedModal={(value) => setOpen(value)} dataId={'write-review'} />
+                <ButtonModal setOpenFeedModal={(value) => setOpen(value)} dataId="write-review" />
 
                 <Button
                     data-test-id='all-reviews-button'
                     type='link'
-                    style={{ fontSize: 'var(--font-size-text)' }} size='large'
+                    style={{ fontSize: 'var(--fs-base)' }} size='large'
                     onClick={isHidden ? onLoadFeedbacks : onHideFeedbacks}
                 >
                     {isHidden ? 'Развернуть все отзывы' : 'Свернуть все отзывы'}
@@ -66,14 +67,14 @@ export const ReviewsPage: React.FC = () => {
         )
 
     return (
-        <>{listData.length ?
+        <Fragment>{listData.length ?
             <CommentList comments={listData} loadButton={loadMore} />
             : <EmptyComponent setOpenFeedModal={(value) => setOpen(value)} />
 
         }
             <FeedbackModalComponent isOpen={open} setOpenFeedModal={(value) => setOpen(value)} />
             {statusCode && <ModalComponent status={statusCode} setOpenFeedModal={(value) => setOpen(value)} />}
-        </>
+        </Fragment>
 
     );
 };

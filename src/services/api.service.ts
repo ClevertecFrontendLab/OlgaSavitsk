@@ -10,31 +10,32 @@ import axios, {
 } from 'axios';
 
 const createHeaderConfig = (config: InternalAxiosRequestConfig) => {
-    const { access_token } = getStorageValue(LocalStorageKey.authToken, DEFAULT_STORAGE_CONFIG);
+    const { accessToken } = getStorageValue(LocalStorageKey.authToken, DEFAULT_STORAGE_CONFIG);
     const currentToken = store.getState().authStore.token;
-    const token = currentToken || access_token;
+    const token = currentToken || accessToken;
+    const configOptions = { ...config };
+
     if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+        configOptions.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
 };
 
 class ApiClient {
-    _api: AxiosInstance;
+    private api: AxiosInstance;
 
     constructor(axiosConfig: AxiosRequestConfig) {
-        this._api = axios.create(axiosConfig);
-        this._api.interceptors.request.use(
+        this.api = axios.create(axiosConfig);
+        this.api.interceptors.request.use(
             (config: InternalAxiosRequestConfig) => createHeaderConfig(config),
-            (error: AxiosError): Promise<AxiosError> => {
-                return Promise.reject(error);
-            },
+            (error: AxiosError): Promise<AxiosError> => Promise.reject(error),
         );
-        this._api.interceptors.response.use((response: AxiosResponse) => response);
+        this.api.interceptors.response.use((response: AxiosResponse) => response);
     }
 
     get<T>(url: string, params: unknown = {}): Promise<T> {
-        return this._api({
+        return this.api({
             method: 'get',
             url,
             params,
@@ -42,7 +43,7 @@ class ApiClient {
     }
 
     post(url: string, data: unknown = {}): Promise<void> {
-        return this._api({
+        return this.api({
             method: 'post',
             url,
             data,
@@ -50,7 +51,7 @@ class ApiClient {
     }
 
     put(url: string, data: unknown = {}): Promise<void> {
-        return this._api({
+        return this.api({
             method: 'put',
             url,
             data,

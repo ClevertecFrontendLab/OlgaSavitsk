@@ -1,12 +1,12 @@
-import 'antd/dist/antd.css';
-import classes from './index.module.css';
-
+import { useMemo } from 'react';
 import { EditTwoTone } from '@ant-design/icons';
+import { setColor } from '@pages/calendar/calendar.helper';
+import { DrawerMode } from '@pages/calendar/components/calendar/constants/trainings';
 import { Exercises, TrainingResponse } from '@redux/training';
 import { Badge, Button, Typography } from 'antd';
-import { setColor } from '@pages/calendar/calendar.helper';
-import { useMemo } from 'react';
-import { DRAWER_MODE } from '@pages/calendar/components/Calendar/constants/trainings';
+
+import 'antd/dist/antd.css';
+import classes from './index.module.css';
 
 type TrainingModalProps = {
   createdExercises?: Exercises[],
@@ -26,13 +26,10 @@ export const ModalList: React.FC<TrainingModalProps> = ({
   setShowDrawer,
 }) => {
 
-  const data = useMemo(() => {
-    return createdExercises ? createdExercises : userTraining
-  }, [createdExercises, userTraining])
+  const data = useMemo(() => createdExercises || userTraining, [createdExercises, userTraining])
 
   return (
-    <>
-      <ul className={classes.events}>
+    <ul className={classes.events}>
         {data && data.map((item: Exercises | TrainingResponse, index) => (
           <li key={item.name}
 
@@ -54,16 +51,15 @@ export const ModalList: React.FC<TrainingModalProps> = ({
                   ? ['var(--ant-text)', 'var(--ant-text)']
                   : undefined} />}
               onClick={() => {
-                if (setShowDrawer) setShowDrawer(DRAWER_MODE.edit);
+                if (setShowDrawer) setShowDrawer(DrawerMode.edit);
                 else {
-                  setOpenSelectModal && setOpenSelectModal(true);
-                  setOpenTrainingModal && setOpenTrainingModal(false);
-                  setEditTraining && setEditTraining(item as TrainingResponse);
+                  if(setOpenSelectModal) setOpenSelectModal(true);
+                  if(setOpenTrainingModal) setOpenTrainingModal(false);
+                  if(setEditTraining) setEditTraining(item as TrainingResponse);
                 }
               }} />
           </li>)
         )}
-      </ul>
-    </>
+    </ul>
   )
 };

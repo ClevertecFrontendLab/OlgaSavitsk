@@ -1,12 +1,12 @@
+import { Suspense, useCallback, useEffect } from 'react';
+import { Outlet, useSearchParams } from 'react-router-dom';
 import {
     DEFAULT_STORAGE_CONFIG,
     LocalStorageKey,
     RoutePath,
-} from "@constants/index";
-import { useStorage } from "@hooks/index";
-import { history } from "@redux/configure-store";
-import { Suspense, useCallback, useEffect } from 'react';
-import { Outlet, useSearchParams } from "react-router-dom";
+} from '@constants/index';
+import { useStorage } from '@hooks/index';
+import { history } from '@redux/configure-store';
 
 
 export const PageConfig = () => {
@@ -19,23 +19,24 @@ export const PageConfig = () => {
 
     const googleAuth = useCallback(() => {
         const googleAuthToken = searchParams.get('accessToken');
-        if (googleAuthToken) setToken({ access_token: googleAuthToken })
+
+        if (googleAuthToken) setToken({ accessToken: googleAuthToken })
     }, [searchParams, setToken]);
 
     useEffect(() => {
         googleAuth()
-        if (!token.access_token) {
+        if (!token.accessToken) {
             history.push(RoutePath.SignIn)
-            return
+            
         } else
-            if (token.access_token) {
+            if (token.accessToken) {
                 history.push(RoutePath.Home)
-                return
+                
             }
-    }, [token.access_token])
+    }, [token.accessToken])
 
     return (
-        <Suspense fallback={''}>
+        <Suspense fallback="">
             <Outlet />
         </Suspense>
     )

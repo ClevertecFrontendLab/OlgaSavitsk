@@ -3,10 +3,6 @@ import { UseMemmoisedSelector } from '@redux/redux.helper';
 import { createSelector } from '@reduxjs/toolkit';
 import { getPrevLocation } from '@utils/index';
 
-export const selectFeedbacks = () => {
-    return UseMemmoisedSelector(selectorFeedbacks);
-};
-
 export const selectorFeedbacks = createSelector(
     (state: RootState) => state.feedbacksStore.feedbacks,
     (state: RootState) => state.feedbacksStore.statusCode,
@@ -18,3 +14,5 @@ export const selectLocation = createSelector(
     ({ router }: RootState) => getPrevLocation(router),
     (pathname, previousLocations) => ({ pathname, previousLocations }),
 );
+
+export const selectFeedbacks = () => UseMemmoisedSelector(selectorFeedbacks);

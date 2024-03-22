@@ -1,8 +1,8 @@
-import { HTTP_STATUS_CODE, LocalStorageKey, RoutePath } from '@constants/index';
-import { feedbacksApi } from '@services/index';
-import { isAxiosError } from 'axios';
 import { LOCATION_CHANGE, push } from 'redux-first-history';
 import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
+import { HttpStatusCode, LocalStorageKey, RoutePath } from '@constants/index';
+import { feedbacksApi } from '@services/index';
+import { isAxiosError } from 'axios';
 
 import {
     postFeedbackSuccess,
@@ -16,11 +16,13 @@ import { FeedbackPayload, FeedbacksAction, FeedbacksTypes } from '../types';
 function* feedbacksGetWorker() {
     try {
         const { data } = yield call(feedbacksApi.getFeedbacks);
+
         yield put(setFeedbacks(data));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
-            if (status === HTTP_STATUS_CODE.FORBIDDEN) {
+
+            if (status === HttpStatusCode.FORBIDDEN) {
                 yield window.localStorage.removeItem(LocalStorageKey.authToken);
                 yield put(push(RoutePath.SignIn));
             } else yield put(setErrorFeedbacks('500'));
@@ -41,6 +43,7 @@ export function* handleGetFeedbacks() {
     yield put(setLoadingFeedBacks(true));
     yield delay(100);
     const { pathname } = yield select(selectLocation);
+
     if (pathname === RoutePath.Feedbacks) {
         yield call(feedbacksGetWorker);
     }

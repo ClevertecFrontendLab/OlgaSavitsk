@@ -1,9 +1,11 @@
+import { Fragment } from 'react';
+import { Checkbox, Col, Form, Input, InputNumber, Space, Tag, Typography } from 'antd';
+import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+
+import { DrawerMode } from '../calendar/constants/trainings';
+
 import 'antd/dist/antd.css';
 import classes from './index.module.css';
-
-import { Space, Input, Col, Tag, InputNumber, Typography, Form, Checkbox } from 'antd';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { DRAWER_MODE } from '../Calendar/constants/trainings';
 
 type ModalListProps = {
     name: number,
@@ -12,18 +14,18 @@ type ModalListProps = {
 }
 
 export const FormList: React.FC<ModalListProps> = ({ name, edit, setChecked }: ModalListProps) => (
-    <>
+    <Fragment>
         <Col span={24}>
             <Form.Item
                 name={[name, 'name']}
             >
                 <Input data-test-id={`modal-drawer-right-input-exercise${name}`}
                     placeholder='Упражнение'
-                    addonAfter={edit === DRAWER_MODE.edit
+                    addonAfter={edit === DrawerMode.edit
                         ? <Checkbox
                             data-test-id={`modal-drawer-right-checkbox-exercise${name}`}
                             onChange={(e: CheckboxChangeEvent) => {
-                                if (e.target.checked) setChecked({ isChecked: e.target.checked, name: name })
+                                if (e.target.checked) setChecked({ isChecked: e.target.checked, name })
                             }} />
                         : null}
                 />
@@ -80,5 +82,5 @@ export const FormList: React.FC<ModalListProps> = ({ name, edit, setChecked }: M
                 </Space>
             </Form.Item>
         </Col>
-    </>
+    </Fragment>
 )

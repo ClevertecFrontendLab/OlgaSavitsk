@@ -1,11 +1,10 @@
-import 'antd/dist/antd.css';
-
+import { CSSProperties } from 'react';
 import { ButtonModal } from '@components/index';
 import { selectLoading } from '@redux/loader';
 import { Card, Grid, Space } from 'antd';
 import Meta from 'antd/lib/card/Meta';
-import { CSSProperties } from 'react';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 type EmptyProps = {
@@ -38,7 +37,7 @@ export const EmptyComponent: React.FC<EmptyProps> = ({ setOpenFeedModal }: Empty
             </Card>
             <ButtonModal
                 setOpenFeedModal={setOpenFeedModal}
-                dataId={'write-review'}
+                dataId="write-review"
                 style={{ width: xs ? '100%' : 'auto' }} />
         </Space>
     );

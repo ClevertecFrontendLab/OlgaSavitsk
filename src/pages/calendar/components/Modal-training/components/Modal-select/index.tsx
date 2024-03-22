@@ -1,15 +1,17 @@
-import 'antd/dist/antd.css';
-import classes from './index.module.css';
-
-import { Button, Popover, Divider, FormInstance, Grid, Empty } from 'antd';
-import { TrainingResponse, trainingActions } from '@redux/training';
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TrainingForm, TrainingFormValue } from '@pages/calendar/types';
+import { trainingActions, TrainingResponse } from '@redux/training';
+import { Button, Divider, Empty, FormInstance, Grid, Popover } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
+
+import { ModalList } from '../modal-list';
+
+import { SelectForm } from './components/select-form';
 import { setCreatedExercises, setCreatedTraining } from './helper.modal-training';
-import { SelectForm } from './components/Select-form';
-import { ModalList } from '../Modal-list';
+
+import 'antd/dist/antd.css';
+import classes from './index.module.css';
 
 type CreateTrainingModalProps = {
   openSelectModal: boolean
@@ -41,12 +43,11 @@ export const SelectTrainingModal: React.FC<CreateTrainingModalProps> = ({
   const createdTraining: TrainingFormValue | TrainingResponse = useMemo(() => {
     const select = editTraining ? editTraining.name : selectValue
     const [training] = setCreatedTraining(createdExercisesList, select, selectDate) || []
+
     return training
   }, [editTraining, selectValue, createdExercisesList, selectDate])
 
-  const createdExercises = useMemo(() => {
-    return setCreatedExercises(createdTraining)
-  }, [createdTraining])
+  const createdExercises = useMemo(() => setCreatedExercises(createdTraining), [createdTraining])
 
   const onCreate = useCallback(async () => {
     dispatch(trainingActions.postTrainingRequest(createdTraining))
@@ -55,6 +56,7 @@ export const SelectTrainingModal: React.FC<CreateTrainingModalProps> = ({
 
   const onUpdate = useCallback(async () => {
     let updatedTraining = { ...createdTraining }
+
     if (selectDate?.isBefore(dayjs())) {
       updatedTraining = {
         ...createdTraining,
@@ -96,12 +98,12 @@ export const SelectTrainingModal: React.FC<CreateTrainingModalProps> = ({
                 marginTop: 'calc(6 * var(--margin-space))'
               }}
               description={null}
-            ></Empty>}
+            />}
           <Divider style={{ marginTop: 'calc(3 * var(--margin-space))' }} />
 
           <Button
             size={xs ? 'middle' : 'large'}
-            block
+            block={true}
             onClick={() => setShowDrawer(true)}
             disabled={!selectValue}
           >
@@ -112,11 +114,12 @@ export const SelectTrainingModal: React.FC<CreateTrainingModalProps> = ({
             htmlType='submit'
             disabled={!createdExercises?.find(ex => ex.name)}
             onClick={() => {
-              editTraining ? onUpdate() : onCreate()
+              if (editTraining) { onUpdate() }
+              else onCreate()
               setOpenSelectModal(false)
               form.resetFields()
             }}
-            block
+            block={true}
           >
             {selectDate?.isBefore(dayjs()) ? 'Сохранить изменения' : 'Сохранить'}
           </Button>

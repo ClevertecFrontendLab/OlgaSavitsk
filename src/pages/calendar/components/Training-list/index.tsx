@@ -1,9 +1,9 @@
+import { setColor } from '@pages/calendar/calendar.helper';
+import { TrainingResponse } from '@redux/training';
+import { Badge } from 'antd';
+
 import 'antd/dist/antd.css';
 import classes from './index.module.css';
-
-import { Badge } from 'antd';
-import { TrainingResponse } from '@redux/training';
-import { setColor } from '@pages/calendar/calendar.helper';
 
 type TrainingListProps = {
   userTraining: TrainingResponse[]

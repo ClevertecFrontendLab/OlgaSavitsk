@@ -1,4 +1,4 @@
-import { RoutePath } from "./routes.constants";
+import { RoutePath } from './routes.constants';
 
 export const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?!.*\W])[a-zA-Z\d]{8,}/;
 

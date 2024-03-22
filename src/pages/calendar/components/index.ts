@@ -1,6 +1,6 @@
-export { ModalErrorComponent } from './Modal-error';
-export { CalendarComponent } from './Calendar';
-export { FormList } from './Form-list';
-export { PanelAddTraining } from './Drawer';
-export { TrainingList } from './Training-list';
-export { TrainingModal } from './Modal-training';
+export { ModalErrorComponent } from './modal-error';
+export { CalendarComponent } from './calendar';
+export { FormList } from './form-list';
+export { PanelAddTraining } from './drawer';
+export { TrainingList } from './training-list';
+export { TrainingModal } from './modal-training';

@@ -13,11 +13,13 @@
 }
 
 .sider :global .ant-menu-item:not(:last-child) {
-    margin-bottom: 14px;
+    margin: 0;
+    margin-bottom: calc(4.5 * var(--margin-space));
+    padding-left: calc(4 * var(--padding-space));
 }
 
 .sider :global .ant-menu-item-divider ~ .ant-menu-item .ant-menu-title-content {
-    margin-left: calc(6 * var(--margin-space));
+    margin-left: calc(4 * var(--margin-space));
 }
 
 .sider :global .ant-menu {
@@ -35,14 +37,14 @@
 .sider :global .ant-menu-item-icon {
     color: var(--ant-primary-9);
 }
+
 .sider :global .ant-menu-vertical {
     border-right: none;
 }
 
 .logo {
-    text-align: center;
-    margin: 45px 0 61px;
-    padding: 0 40px 0 29px;
+    margin: 45px 0 66px;
+    padding-left: calc(7 * var(--padding-space));
     transition: width 0.3s, padding 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -53,18 +55,25 @@
     text-overflow: clip;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 480px) {
     .logo {
-        padding: 0;
-        margin: 12px 0 27px;
+        margin: calc(3 * var(--margin-space)) 0 calc(8 * var(--margin-space));
+        padding-left: var(--spacing);
     }
-}
 
-@media (max-width: 360px) {
     .sider :global .anticon {
-       display: none;
+        display: none;
     }
     .sider :global .anticon + span {
-       margin: 0;
+        margin: 0;
+    }
+
+    .sider :global .ant-menu-item:not(:last-child) {
+        margin-bottom: calc(2.5 * var(--margin-space));
+        padding-left: calc(2* var(--padding-space));
+    }
+   
+    .sider :global .ant-menu-item .anticon + span {
+        margin-left: 0;
     }
 }

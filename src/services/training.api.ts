@@ -1,7 +1,7 @@
+import { TrainingFormValue } from '@pages/calendar/types';
 import { TrainingListResponse, TrainingResponse } from '@redux/training';
 
 import apiService from './api.service';
-import { TrainingFormValue } from '@pages/calendar/types';
 
 export function getTraining<T>(params: T): Promise<TrainingResponse[]> {
     return apiService.get('/training', params);

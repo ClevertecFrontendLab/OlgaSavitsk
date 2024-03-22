@@ -1,11 +1,13 @@
+import { Fragment } from 'react';
+import { CloseOutlined } from '@ant-design/icons';
+import { selectTraining, TrainingResponse } from '@redux/training';
+import { Button, Divider, Empty, Grid, Popover, Space, Typography } from 'antd';
+import dayjs, { Dayjs } from 'dayjs';
+
+import { ModalList } from '../modal-list';
+
 import 'antd/dist/antd.css';
 import classes from './index.module.css';
-
-import { Space, Typography, Button, Popover, Empty, Divider, Grid } from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
-import { TrainingResponse, selectTraining } from '@redux/training';
-import dayjs, { Dayjs } from 'dayjs';
-import { ModalList } from '../Modal-list';
 
 type TrainingModalProps = {
   userTraining: TrainingResponse[]
@@ -40,9 +42,10 @@ export const CreateTrainingModal: React.FC<TrainingModalProps> = ({
         open={openTrainingModal}
         overlayClassName={classes.overlay}
         title={
-          <Space direction='horizontal' align='start' size={30}>
+          <Space direction='horizontal' align='start' size={30}
+            style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Space direction='vertical' align='start' size={0}>
-              <Typography.Text strong>
+              <Typography.Text strong={true}>
                 Тренировки на {selectDate && selectDate.add(0, 'month').format('DD.MM.YYYY')}
               </Typography.Text>
             </Space>
@@ -61,8 +64,8 @@ export const CreateTrainingModal: React.FC<TrainingModalProps> = ({
                 setOpenTrainingModal={setOpenTrainingModal}
                 setEditTraining={setEditTraining} />
               :
-              <>
-                <Typography.Text type="secondary" style={{ fontWeight: 'var(--font-weight-base)' }}>
+              <Fragment>
+                <Typography.Text type="secondary" style={{ fontWeight: 'var(--fw-l)' }}>
                   Нет активных тренировок
                 </Typography.Text>
                 <Empty
@@ -72,14 +75,14 @@ export const CreateTrainingModal: React.FC<TrainingModalProps> = ({
                     marginTop: 'calc(6 * var(--margin-space))'
                   }}
                   description={null}
-                ></Empty>
-              </>
+                />
+              </Fragment>
             }
             <Divider style={{ marginTop: 'calc(3 * var(--margin-space))' }} />
             <Button
               type='primary'
               size='large'
-              block
+              block={true}
               disabled={
                 userTraining?.length === trainingsList.length || selectDate?.isBefore(dayjs())}
               onClick={() => {

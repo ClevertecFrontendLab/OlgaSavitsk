@@ -1,13 +1,13 @@
-import 'antd/dist/antd.css';
-
-import { TrainingResponse } from '@redux/training';
-import { Dayjs } from 'dayjs';
-import { CreateTrainingModal } from './components/Modal-create-training';
-import { SelectTrainingModal } from './components/Modal-select';
-import { FormInstance } from 'antd';
+import { useCallback, useState } from 'react';
 import { TrainingForm } from '@pages/calendar/types';
-import { useState } from 'react';
+import { TrainingResponse } from '@redux/training';
+import { FormInstance } from 'antd';
+import { Dayjs } from 'dayjs';
 
+import { CreateTrainingModal } from './components/modal-create-training';
+import { SelectTrainingModal } from './components/modal-select';
+
+import 'antd/dist/antd.css';
 
 type TrainingModalProps = {
     userTraining: TrainingResponse[]
@@ -34,30 +34,38 @@ export const TrainingModal: React.FC<TrainingModalProps> = ({
 }) => {
     const [editTraining, setEditTraining] = useState<TrainingResponse>()
 
+    const isOpenModal = useCallback(() => {
+        if (openTrainingModal)
+            return (
+                <CreateTrainingModal
+                    userTraining={userTraining}
+                    openTrainingModal={openTrainingModal}
+                    selectDate={selectDate}
+                    setOpenTrainingModal={setOpenTrainingModal}
+                    setOpenSelectModal={setOpenSelectModal}
+                    setEditTraining={setEditTraining}
+                    setShowDrawer={setShowDrawer}
+                />
+            )
+            
+            return null
+    }, [openTrainingModal, selectDate, setOpenSelectModal, setOpenTrainingModal, setShowDrawer, userTraining])
+
     return (
         (cellValue.isSame(selectDate, 'day') &&
-            <>
-                {openSelect ? <SelectTrainingModal
-                    userTraining={userTraining}
-                    openSelectModal={openSelect}
-                    form={form}
-                    selectDate={selectDate}
-                    editTraining={editTraining}
-                    setOpenSelectModal={setOpenSelectModal}
-                    setOpenTrainingModal={setOpenTrainingModal}
-                    setShowDrawer={setShowDrawer}
-                /> :
-                    openTrainingModal ? <CreateTrainingModal
+            <div>
+                {openSelect
+                    ? <SelectTrainingModal
                         userTraining={userTraining}
-                        openTrainingModal={openTrainingModal}
+                        openSelectModal={openSelect}
+                        form={form}
                         selectDate={selectDate}
-                        setOpenTrainingModal={setOpenTrainingModal}
+                        editTraining={editTraining}
                         setOpenSelectModal={setOpenSelectModal}
-                        setEditTraining={setEditTraining}
+                        setOpenTrainingModal={setOpenTrainingModal}
                         setShowDrawer={setShowDrawer}
-                    />
-                        : null}
-            </>
+                    /> : isOpenModal()}
+            </div>
         )
     )
 };

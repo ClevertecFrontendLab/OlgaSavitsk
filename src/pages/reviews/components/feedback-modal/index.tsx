@@ -1,11 +1,10 @@
-import 'antd/dist/antd.css';
-
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { RateComponent } from '@components/index';
 import { FeedbackPayload, feedbacksActions } from '@redux/feedbacks';
 import { Button, Form, Input, Modal } from 'antd';
-import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const { TextArea } = Input;
@@ -41,12 +40,12 @@ export const FeedbackModalComponent: React.FC<FeedbackModalProps> = (
 
     return (
         <Modal
-            centered
+            centered={true}
             title="Ваш отзыв"
             open={isOpen}
             onCancel={() => setOpenFeedModal(false)}
             footer={[
-                isError ? <Button key="ok" disabled size='large'
+                isError ? <Button key="ok" disabled={true} size='large'
                 >
                     Опубликовать
                 </Button> :

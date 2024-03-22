@@ -5,7 +5,7 @@ import { FeedbackPayload, FeedbacksAction, FeedbacksResponse, FeedbacksTypes } f
 
 export const setLoadingFeedBacks = (payload: boolean): LoaderAction<boolean> => ({
     type: LoaderTypes.SET_LOADING,
-    payload: payload,
+    payload,
 });
 
 export const getFeedbacks = () => ({
@@ -32,5 +32,5 @@ export const postFeedbackSuccess = () => ({
 
 export const setErrorFeedbacks = (payload: ErrorPayloadType): ErrorAction<ErrorPayloadType> => ({
     type: ErrorTypes.SET_ERROR,
-    payload: payload,
+    payload,
 });

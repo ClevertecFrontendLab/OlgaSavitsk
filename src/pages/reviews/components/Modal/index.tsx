@@ -1,12 +1,12 @@
-import 'antd/dist/antd.css';
-
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { ButtonModal } from '@components/index';
 import { history } from '@redux/configure-store';
 import { Button, Grid, Modal, Result } from 'antd';
-import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import classes from './index.module.css';
 import { modalContext } from './modal.helper';
+
+import 'antd/dist/antd.css';
+import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;
 
@@ -20,9 +20,9 @@ export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal 
     const { xs } = useBreakpoint();
 
     const context = useMemo(() => {
-        if (status) {
-            return modalContext.get(status);
-        }
+        if (status) return modalContext.get(status);
+
+        return undefined
     }, [status]);
 
     const handleRedirect = useCallback(() => {
@@ -37,13 +37,13 @@ export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal 
     return (
         <Modal
             data-test-id='modal-no-review'
-            centered
+            centered={true}
             open={open}
             footer={null}
             onCancel={() => setOpen(false)}
             width={xs ? 328 : 539}
             closable={false}
-            destroyOnClose
+            destroyOnClose={true}
             bodyStyle={{ padding: xs ? '32px 16px' : '38px 85.5px' }}
             maskStyle={{
                 backdropFilter: 'blur(4px)',
@@ -57,16 +57,16 @@ export const ModalComponent: React.FC<ModalProps> = ({ status, setOpenFeedModal 
                 className={classes.modal}
                 extra={[
                     status === 'error' ?
-                        <><ButtonModal key='write'
+                        <Fragment><ButtonModal key='write'
                             style={{ width: '100%' }}
                             setOpenFeedModal={setOpenFeedModal}
                             setCloseModalError={(value) => setOpen(value)}
-                            dataId={'write-review-not-saved-modal'} />
+                            dataId="write-review-not-saved-modal" />
                             <Button key='close' size="large"
                                 onClick={() => setOpen(false)}
                                 style={{ width: '100%' }}>
                                 Закрыть
-                            </Button></>
+                            </Button></Fragment>
                         : <Button
                             data-test-id={context.dataId}
                             type="primary"

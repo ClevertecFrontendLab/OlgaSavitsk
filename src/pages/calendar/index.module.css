@@ -1,9 +1,13 @@
+:root {
+    --padding: calc(6 * var(--padding-space));
+}
+
 .calendar_layout {
     position: relative;
     background: var(--ant-primary-1);
     margin: -24px;
     margin-bottom: 42px;
-    padding: 0 24px;
+    padding: 0 var(--padding);
 }
 
 .calendar {
@@ -14,10 +18,6 @@
 .calendar :global .ant-picker-content {
     border-collapse: separate;
     border-spacing: 8px 0;
-}
-
-.calendar_modal :global .ant-modal-confirm-title {
-    width: 70%;
 }
 
 :global .ant-select-selector {
@@ -51,7 +51,6 @@
 }
 
 :global .ant-picker-calendar-full .ant-picker-panel .ant-picker-body th {
-    background: #ffccc7;
     padding: 0 6px;
     color: var(--ant-text);
 }
@@ -83,9 +82,10 @@
 
 @media (max-width: 480px) {
     .calendar_layout {
+        --padding: calc(5 * var(--padding-space));
         height: fit-content;
         margin: -24px -16px 0;
-        padding: 0 22px 22px;
+        padding-top: var(--padding);
     }
 
     .calendar {
@@ -101,6 +101,7 @@
 
         & :global .ant-picker-calendar-mode-switch {
             text-align: right;
+
             & > label {
                 width: 40%;
                 padding: 0;
@@ -108,10 +109,15 @@
         }
     }
 
+    .calendar_cell {
+        position: absolute;
+        top: 0;
+    }
+
     .training_exist {
         position: absolute;
         top: 0;
-        width: 35px;
+        width: 37px;
         height: 24px;
         background-color: #f0f5ff;
         z-index: -1;
@@ -124,11 +130,15 @@
     :global .ant-breadcrumb + .ant-page-header-heading {
         margin-top: 0;
     }
+    :global .ant-picker-cell .ant-picker-cell-inner {
+        min-width: 37px;
+    }
 
     :global .ant-picker-cell-in-view.ant-picker-cell-selected {
         background: transparent;
         border-color: var(--ant-primary-6);
     }
+
     :global .ant-picker-calendar-date-today {
         background: transparent;
         border-color: var(--ant-primary-6);

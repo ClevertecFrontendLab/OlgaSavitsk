@@ -1,15 +1,14 @@
-import 'antd/dist/antd.css';
-
+import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import VerificationInput from 'react-verification-input';
 import {
     authActions,
     selectAuthEmail,
     selectAuthStatusCode
 } from '@redux/auth';
-import { Grid, Result, Typography } from "antd";
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import VerificationInput from 'react-verification-input';
+import { Grid, Result, Typography } from 'antd';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const { Text } = Typography;
@@ -24,31 +23,32 @@ export const ConfirmEmailPage: React.FC = () => {
     const { xs } = useBreakpoint();
 
 
-    const onConfirmHandle = useCallback(async (value: string) => {
+    const onConfirmHandle = useCallback(async (confirmValue: string) => {
         if (email) {
             dispatch(
                 authActions.confirmEmailRequest(
-                    { email: email, code: value, }))
+                    { email, code: confirmValue, }))
             setValue('')
         }
     }, [dispatch, email])
 
-    const onChange = useCallback((value: string) => {
-        setValue(value)
+    const onChange = useCallback((inpuValue: string) => {
+        setValue(inpuValue)
     }, [])
 
     return (
         <Result className={classes.result_layout}
-            status={!statusCode ? 'info' : 'error'}
-            title={!statusCode ?
-                `Введите код
-                 для восстановления аккауанта` :
-                'Неверный код. Введите код для восстановления аккауанта'}
+            status={statusCode ? 'error' : 'info'}
+            title={statusCode ?
+                'Неверный код. Введите код для восстановления аккауанта'
+                : `Введите код
+                 для восстановления аккауанта`
+            }
             subTitle={<Typography.Text type='secondary'>Мы отправили вам на e-mail{' '}
-                <Text strong>{email}</Text> шестизначный код. Введите его в поле ниже.</Typography.Text>}
+                <Text strong={true}>{email}</Text> шестизначный код. Введите его в поле ниже.</Typography.Text>}
             extra={[
                 <VerificationInput
-                    inputProps={{ ['data-test-id']: 'verification-input' }}
+                    inputProps={{ 'data-test-id': 'verification-input' }}
                     key='confirm-input' placeholder='' length={6}
                     onComplete={onConfirmHandle}
                     onChange={onChange}

@@ -3,9 +3,9 @@ export enum LocalStorageKey {
 }
 
 export const DEFAULT_STORAGE_CONFIG: StorageConfig = {
-  access_token: '',
+  accessToken: '',
 };
 
 type StorageConfig = {
-  access_token: string;
+  accessToken: string;
 }

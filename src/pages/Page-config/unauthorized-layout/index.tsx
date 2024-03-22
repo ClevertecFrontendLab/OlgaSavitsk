@@ -1,10 +1,9 @@
-import 'antd/dist/antd.css';
-
+import { Outlet } from 'react-router-dom';
 import { RoutePath } from '@constants/routes.constants';
 import { selectLocationPath } from '@redux/auth';
-import { Grid,Layout, Space } from "antd";
-import { Outlet } from 'react-router-dom';
+import { Grid,Layout, Space } from 'antd';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const { useBreakpoint } = Grid;

@@ -10,7 +10,7 @@ import {
 
 export const setLoadingAuth = (payload: boolean): LoaderAction<boolean> => ({
     type: LoaderTypes.SET_LOADING,
-    payload: payload,
+    payload,
 });
 
 export const signUpRequest = <T>(payload: T): AuthAction<T> => ({

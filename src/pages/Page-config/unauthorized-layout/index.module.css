@@ -21,7 +21,7 @@
     max-width: 539px;
     width: 100%;
     height: 100%;
-    border-radius: 2px;
+    border-radius: calc(0.5 * var(--border-radius));
     background-color: var(--ant-form-background);
 }
 

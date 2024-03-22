@@ -1,13 +1,12 @@
-import 'antd/dist/antd.css';
-
+import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { TabsComponent } from '@components/index';
 import { PASSWORD_REGEX, RoutePath, TIPS } from '@constants/index';
 import { authActions, selectPreviousLocations } from '@redux/auth';
-import { Button, Form, Grid, Image, Input, Space } from "antd";
-import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { Button, Form, Grid, Image, Input, Space } from 'antd';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const validateMessages = {
@@ -34,11 +33,12 @@ export const SignUp: React.FC = () => {
   }, [dispatch])
 
   const repeatedRequest = useCallback(() => {
-    if (!previousLocations) return null
+    if (!previousLocations) return
     const { pathname, state } = previousLocations
+
     if (pathname === RoutePath.Error) {
       onFinish(state)
-    }
+    } 
   }, [onFinish, previousLocations])
 
   useEffect(() => {
@@ -103,6 +103,7 @@ export const SignUp: React.FC = () => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
+
                 return Promise.reject(new Error('Пароли не совпадают'));
               },
             }),
@@ -113,7 +114,7 @@ export const SignUp: React.FC = () => {
             placeholder="Повторите пароль" />
         </Form.Item>
 
-        <Form.Item shouldUpdate>
+        <Form.Item shouldUpdate={true}>
           {() => (
             <Space direction="vertical" align="center" size={16} className={classes.form_button__item}>
               <Button

@@ -1,12 +1,12 @@
-import { createBrowserHistory } from 'history';
 import { combineReducers } from 'redux';
 import { createReduxHistoryContext } from 'redux-first-history';
+import { createBrowserHistory } from 'history';
 
 import { authReducer } from './auth';
+import { errorReducer } from './error';
 import { feedbacksReducer } from './feedbacks';
 import { loaderReducer } from './loader';
 import { trainingReducer } from './training';
-import { errorReducer } from './error';
 
 const { routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),

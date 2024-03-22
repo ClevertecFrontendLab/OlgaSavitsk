@@ -1,9 +1,9 @@
+import { Fragment } from 'react';
 import {
     confirmLayout,
     LayoutType, RoutePath,
-} from "@constants/index";
-import { selectLocationPath } from "@redux/auth";
-import { Fragment } from 'react';
+} from '@constants/index';
+import { selectLocationPath } from '@redux/auth';
 
 import { ConfirmEmailPage } from './confirm-email.page';
 import { ResetPasswordPage } from './reset-password.page';

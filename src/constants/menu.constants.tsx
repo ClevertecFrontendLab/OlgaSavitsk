@@ -1,11 +1,11 @@
-import 'antd/dist/antd.css';
-
 import Icon, { CalendarTwoTone, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
 import { IconExit } from '@components/index';
 import { MenuProps } from 'antd';
 
 import { RoutePath } from './routes.constants';
 import { LocalStorageKey } from './storage.constants';
+
+import 'antd/dist/antd.css';
 
 type MenuItem = Required<MenuProps>['items'][number] & {
     path?: string;

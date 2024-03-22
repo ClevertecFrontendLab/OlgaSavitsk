@@ -12,8 +12,8 @@
 }
 
 .modal :global .ant-result-title {
-    font-weight: var(--font-weight-title);
-    font-size: var(--font-size-title);
+    font-weight: var(--fw-m);
+    font-size: var(--fs-title);
 }
 
 .modal :global .ant-result-500 button {
@@ -46,7 +46,7 @@
     }
 
     .modal :global .ant-result-title {
-        line-height: 1.3;
+        line-height: var(--line-height);
         letter-spacing: -0.2px;
     }
 

@@ -11,8 +11,8 @@
 }
 
 .result_layout :global .ant-result-title {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-title);
+    font-size: var(--fs-title);
+    font-weight: var(--fw-m);
     line-height: 130%;
     white-space: nowrap;
 }

@@ -1,5 +1,5 @@
 .ant-btn-link {
-    font-weight: var(--font-weight-base);
+    font-weight: var(--fw-l);
     color: var(--ant-primary-6);
     text-decoration: inherit;
 } 

@@ -1,13 +1,13 @@
+import { LOCATION_CHANGE } from 'redux-first-history';
+import { TrainingFormValue } from '@pages/calendar/types';
 import { ErrorAction, ErrorPayloadType, ErrorTypes } from '@redux/error';
 import { LoaderAction, LoaderTypes } from '@redux/loader';
-import { LOCATION_CHANGE } from 'redux-first-history';
 
 import { TrainingAction, TrainingListResponse, TrainingResponse, TrainingTypes } from '../types';
-import { TrainingFormValue } from '@pages/calendar/types';
 
 export const setLoadingTraining = (payload: boolean): LoaderAction<boolean> => ({
     type: LoaderTypes.SET_LOADING,
-    payload: payload,
+    payload,
 });
 
 export const getTraining = () => ({
@@ -58,5 +58,5 @@ export const putTrainingSuccess = (payload: TrainingResponse) => ({
 
 export const setErrorTraining = (payload: ErrorPayloadType): ErrorAction<ErrorPayloadType> => ({
     type: ErrorTypes.SET_ERROR,
-    payload: payload,
+    payload,
 });

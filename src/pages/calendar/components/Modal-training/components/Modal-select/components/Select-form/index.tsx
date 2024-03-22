@@ -1,12 +1,13 @@
+import { useMemo } from 'react';
+import { ArrowLeftOutlined, DownOutlined } from '@ant-design/icons';
+import { TrainingForm } from '@pages/calendar/types';
+import { selectTraining,TrainingResponse } from '@redux/training';
+import { Divider, Form, FormInstance,Select, Space } from 'antd';
+
+import { selectOptions } from '../../helper.modal-training';
+
 import 'antd/dist/antd.css';
 import classes from './index.module.css';
-
-import { Divider, Select, Form, Space, FormInstance } from 'antd';
-import { ArrowLeftOutlined, DownOutlined } from '@ant-design/icons';
-import { TrainingResponse, selectTraining } from '@redux/training';
-import { useMemo } from 'react';
-import { TrainingForm } from '@pages/calendar/types';
-import { selectOptions } from '../../helper.modal-training';
 
 type CreateTrainingModalProps = {
   userTraining: TrainingResponse[]
@@ -25,9 +26,7 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
 }) => {
   const { trainingsList } = selectTraining()
 
-  const setSelectOptions = useMemo(() => {
-    return selectOptions(userTraining, trainingsList)
-  }, [trainingsList, userTraining])
+  const setSelectOptions = useMemo(() => selectOptions(userTraining, trainingsList), [trainingsList, userTraining])
 
   return (
     <div style={{ display: 'flex' }}>
@@ -51,17 +50,16 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
 
             <Form.List name='trainings'>
               {(_subFields, { add }) => (
-                <>
-                  <Form.Item
+                <Form.Item
                     name='name'
                     rules={[
                       { required: true, message: '' },
                     ]}
                     style={{ width: '100%', marginBottom: 0 }}
-                    initialValue={'Выбор типа тренировки'}
                   >
                     <Select
                       data-test-id='modal-create-exercise-select'
+                      placeholder='Выбор типа тренировки'
                       bordered={false}
                       suffixIcon={<DownOutlined />}
                       style={{ width: '100%' }}
@@ -76,7 +74,7 @@ export const SelectForm: React.FC<CreateTrainingModalProps> = ({
                       }}
                       options={setSelectOptions.map(
                         (training) => ({ label: training.name, value: training.name }))} />
-                  </Form.Item></>
+                  </Form.Item>
               )}
             </Form.List>
           </Space>

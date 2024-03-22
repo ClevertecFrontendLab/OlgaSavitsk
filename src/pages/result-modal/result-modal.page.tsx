@@ -1,12 +1,12 @@
+import { useMemo } from 'react';
+import { selectLocationPath } from '@redux/auth';
+import { history } from '@redux/configure-store';
+import { Button, Result } from 'antd';
+
+import { resultContext } from './result.helper';
+
 import 'antd/dist/antd.css';
-
-import { selectLocationPath } from "@redux/auth";
-import { history } from "@redux/configure-store";
-import { Button, Result } from "antd";
-import React, { useMemo } from "react";
-
 import classes from './index.module.css';
-import { resultContext } from "./result.helper";
 
 export const ResultModal: React.FC = () => {
     const locationPathname = selectLocationPath()
@@ -15,6 +15,8 @@ export const ResultModal: React.FC = () => {
         if (locationPathname) {
             return resultContext.get(locationPathname);
         }
+
+        return undefined
     }, [locationPathname]);
 
     return (

@@ -1,9 +1,10 @@
-import 'antd/dist/antd.css';
-import 'dayjs/locale/ru';
-
+import generateCalendar from 'antd/es/calendar/generateCalendar';
 import dayjs from 'dayjs';
 import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs';
-import generateCalendar from 'antd/es/calendar/generateCalendar';
+
+import 'antd/dist/antd.css';
+
+import 'dayjs/locale/ru';
 
 export const CalendarComponent = generateCalendar<dayjs.Dayjs>({
     ...dayjsGenerateConfig,

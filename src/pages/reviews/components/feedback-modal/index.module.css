@@ -9,7 +9,7 @@
     margin-bottom: calc(3 * var(--margin-space));
 }
 .modal_form :global .ant-input-lg {
-    font-size: var(--font-size-base);
+    font-size: calc(.8 * var(--fs-base));
 }
 .modal_form :global .ant-modal-footer {
     padding: 12px 24px

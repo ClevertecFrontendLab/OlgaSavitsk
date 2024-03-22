@@ -1,11 +1,10 @@
-import 'antd/dist/antd.css';
-
 import { UserOutlined } from '@ant-design/icons';
 import { RateComponent } from '@components/index';
 import { FeedbacksResponse } from '@redux/feedbacks';
 import { handleFormate } from '@utils/index';
 import { Avatar, Card, Comment, List, Typography } from 'antd';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 type ListProps = {

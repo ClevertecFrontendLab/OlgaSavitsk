@@ -1,15 +1,21 @@
+:root {
+    --paddingRight: calc(3 * var(--padding-space));
+    --padding: calc(4 * var(--padding-space))
+}
+
 .overlay {
     width: 264px;
+    z-index: 0;
 }
 
 .overlay :global .ant-popover-inner-content {
     width: 100%;
-    padding: 0 12px 16px;
+    padding: 0 var(--paddingRight) var(--padding);
 }
 
 .overlay :global .ant-popover-title {
     border: none;
-    padding: 5px 12px 0;
+    padding: var(--padding) var(--paddingRight) 0;
 }
 
 .modal_training {
@@ -28,7 +34,8 @@
         position: relative;
         display: flex;
         justify-content: center;
-        top: 30px;
+        top: 40px;
+        z-index: 0;
     }
 
     .overlay {

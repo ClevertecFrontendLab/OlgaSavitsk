@@ -1,7 +1,5 @@
-#root {
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+:root {
+    --padding: calc(6 * var(--padding-space));
 }
 
 .collapsed {
@@ -17,11 +15,19 @@
     min-height: 100vh;
     background: no-repeat center/cover url('../main.jpg');
     background-attachment: fixed;
-    position:sticky;
+    position: sticky;
     top: 120px;
 }
 
 .site_layout .layout_background {
     display: flex;
     flex: 1 1 auto;
+    max-width: 1183px;
+    padding: var(--padding);
+}
+
+@media (max-width: 480px) {
+    .site_layout .layout_background {
+        --padding: calc(6 * var(--padding-space)) calc(4 * var(--padding-space));
+    }
 }

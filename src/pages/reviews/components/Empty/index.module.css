@@ -7,8 +7,8 @@
 }
 
 .empty_modal :global .ant-card-meta-detail .ant-card-meta-title {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-title);
+    font-size: var(--fs-title);
+    font-weight: var(--fw-m);
     color: var(--ant-primary-9);
     margin-bottom: calc(10 * var(--margin-space));
     white-space: pre-line;
@@ -28,7 +28,7 @@
     max-width: 520px;
     width: 100%;
     color: var(--ant-text);
-    line-height: 1.4;
+    line-height: var(--line-height);
 }
 
 .empty_modal :global .ant-card-meta {

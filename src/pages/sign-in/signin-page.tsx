@@ -1,19 +1,18 @@
-import 'antd/dist/antd.css';
-
+import { Fragment, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { TabsComponent } from '@components/index';
 import { RoutePath } from '@constants/index';
 import { authActions, selectPreviousLocations } from '@redux/auth';
-import { Button, Checkbox, Form, Grid, Image, Input, Space } from "antd";
-import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { Button, Checkbox, Form, Grid, Image, Input, Space } from 'antd';
 
+import 'antd/dist/antd.css';
 import classes from './index.module.css';
 
 const validateMessages = {
   required: '',
   types: {
-    email: '${label} is not a valid email!',
+    email: 'Is not a valid email!',
   },
 };
 
@@ -41,8 +40,9 @@ export const SignIn: React.FC = () => {
 
 
   const repeatedRequest = useCallback(() => {
-    if (!previousLocations) return null
+    if (!previousLocations) return
     const { pathname, state } = previousLocations
+
     if (pathname === RoutePath.CheckemailError) {
       checkEmailHandle(state)
     }
@@ -90,9 +90,9 @@ export const SignIn: React.FC = () => {
             placeholder="Пароль"
             data-test-id='login-password' />
         </Form.Item>
-        <Form.Item className={classes.checkbox} shouldUpdate>
+        <Form.Item className={classes.checkbox} shouldUpdate={true}>
           {() => (
-            <><Form.Item name="remember" valuePropName="checked" noStyle>
+            <Fragment><Form.Item name="remember" valuePropName="checked" noStyle={true}>
               <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
             </Form.Item>
               <Button
@@ -111,9 +111,9 @@ export const SignIn: React.FC = () => {
                 }
               >
                 Забыли пароль?
-              </Button></>)}
+              </Button></Fragment>)}
         </Form.Item>
-        <Form.Item shouldUpdate>
+        <Form.Item shouldUpdate={true}>
           {() => (
             <Space direction="vertical" align="center" size={16} className={classes.form_button__item}>
               <Button

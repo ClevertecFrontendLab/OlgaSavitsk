@@ -1,74 +1,43 @@
-import 'antd/dist/antd.css';
-
-import classes from './index.module.css';
-import { Modal, Typography } from 'antd';
-import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
 import { RoutePath } from '@constants/routes.constants';
 import { history } from '@redux/configure-store';
+import { Modal } from 'antd';
+
+import { modal } from './modal-error.helper';
+
+import 'antd/dist/antd.css';
+import classes from './index.module.css';
 
 export const ModalErrorComponent = (fn: () => void, statusCode: string) => {
     Modal.destroyAll()
 
-    return statusCode === '500' ?
-        Modal.error({
-            title: <Typography.Text strong data-test-id='modal-error-user-training-title'>
-                При сохранении данных произошла ошибка
-            </Typography.Text>,
-            content: <Typography.Text type='secondary' data-test-id='modal-error-user-training-subtitle'>
-                Придётся попробовать ещё раз
-            </Typography.Text>,
-            icon: <CloseCircleOutlined style={{ color: 'red' }} />,
-            okText: <span data-test-id='modal-error-user-training-button'>
-                'Закрыть'
-            </span>,
-            onOk() {
-                fn()
-                history.push(RoutePath.Calendar)
-            },
-            okButtonProps: {
-                type: "primary",
-                size: "large"
-            },
-            closable: true,
-            centered: true,
-            bodyStyle: {
-                padding: '32px'
-            },
-            maskStyle: {
-                backdropFilter: 'blur(3px)',
-                background: 'rgba(121, 156, 212, 0.1)'
-            },
-            className: classes.calendar_modal
-        })
-        : Modal.error({
-            title: <Typography.Text strong data-test-id='modal-error-user-training-title'>
-                При открытии данных произошла ошибка
-            </Typography.Text>,
-            content: <Typography.Text type='secondary' data-test-id='modal-error-user-training-subtitle'>
-                Попробуйте ещё раз
-            </Typography.Text>,
-            icon: <CloseCircleOutlined style={{ color: 'var(--ant-primary-6)' }} />,
-            okText: <span data-test-id='modal-error-user-training-button'>
-                'Обновить'
-            </span>,
-            onOk() {
-                fn()
-                history.push(RoutePath.Calendar)
-            },
-            okButtonProps: {
-                type: "primary",
-                size: "large"
-            },
-            closeIcon: <CloseOutlined data-test-id='modal-error-user-training-button-close' />,
-            closable: true,
-            centered: true,
-            bodyStyle: {
-                padding: '32px'
-            },
-            maskStyle: {
-                backdropFilter: 'blur(3px)',
-                background: 'rgba(121, 156, 212, 0.1)'
-            },
-            className: classes.calendar_modal
-        })
+    const modalContext = new Map(Object.entries(modal))
+    const context = modalContext.get(statusCode);
+
+    return Modal.error({
+        title: context?.title,
+        content: context?.content,
+        icon: context?.icon,
+        okText: <span data-test-id='modal-error-user-training-button'>
+            {context?.buttonText}
+        </span>,
+        onOk() {
+            fn()
+            history.push(RoutePath.Calendar)
+        },
+        okButtonProps: {
+            type: 'primary',
+            size: 'large'
+        },
+        closeIcon: context?.closeIcon,
+        closable: true,
+        centered: true,
+        bodyStyle: {
+            padding: 'calc(8 * var(--margin-space))'
+        },
+        maskStyle: {
+            backdropFilter: 'blur(3px)',
+            background: 'rgba(121, 156, 212, 0.1)'
+        },
+        className: classes.calendar_modal
+    })
 };

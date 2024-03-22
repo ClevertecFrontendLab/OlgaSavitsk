@@ -1,4 +1,4 @@
-export enum DRAWER_MODE {
+export enum DrawerMode {
     edit = 'edit',
     create = 'create',
 }

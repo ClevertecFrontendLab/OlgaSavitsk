@@ -1,7 +1,11 @@
-import { TrainingState, TrainingResponse } from "@redux/training";
+import { TrainingResponse,TrainingState } from '@redux/training';
 
 export const updateState = (state: TrainingState, payload: TrainingResponse) => {
     const index: number = state.trainings.findIndex((val) => val._id === payload._id);
-    state.trainings[index] = { ...payload };
-    return state.trainings;
+
+    const updatedState = {...state}
+
+    updatedState.trainings[index] = { ...payload };
+
+    return updatedState.trainings;
 };

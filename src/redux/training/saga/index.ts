@@ -1,25 +1,26 @@
+import { LOCATION_CHANGE, push } from 'redux-first-history';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { RoutePath } from '@constants/index';
+import { TrainingFormValue } from '@pages/calendar/types';
 import { selectLocation } from '@redux/feedbacks';
 import { trainingApi } from '@services/index';
 import { isAxiosError } from 'axios';
-import { LOCATION_CHANGE, push } from 'redux-first-history';
-import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import {
     postTrainingSuccess,
+    putTrainingSuccess,
     setErrorTraining,
     setLoadingTraining,
-    setTraining,
     setTrainiingList,
-    putTrainingSuccess,
+    setTraining,
 } from '../actions';
 import { TrainingAction, TrainingResponse, TrainingTypes } from '../types';
-import { TrainingFormValue } from '@pages/calendar/types';
 
 function* trainingGetWorker(action: TrainingAction<string>) {
     try {
         yield put(setErrorTraining(undefined));
         const { data } = yield call(trainingApi.getTraining, action.payload);
+
         yield put(setTraining(data));
         yield put(push(RoutePath.Calendar));
     } catch (error: unknown) {
@@ -32,12 +33,14 @@ function* trainingGetWorker(action: TrainingAction<string>) {
 function* trainingListGetWorker() {
     try {
         const { data } = yield call(trainingApi.getTrainingList);
+
         yield put(setTrainiingList(data));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
+
             if (status) {
-                yield put(setErrorTraining(status));
+                yield put(setErrorTraining('500'));
             }
         }
     }
@@ -46,10 +49,11 @@ function* trainingListGetWorker() {
 function* trainingPostWorker(action: TrainingAction<TrainingFormValue>) {
     try {
         const { data } = yield call(trainingApi.postTraining, action.payload);
+
         yield put(postTrainingSuccess(data));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
-            yield put(setErrorTraining('500'));
+            yield put(setErrorTraining('error'));
         }
     }
 }
@@ -57,10 +61,11 @@ function* trainingPostWorker(action: TrainingAction<TrainingFormValue>) {
 function* trainingPutWorker(action: TrainingAction<TrainingResponse>) {
     try {
         const { data } = yield call(trainingApi.putTraining, action.payload);
+
         yield put(putTrainingSuccess(data));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
-            yield put(setErrorTraining('500'));
+            yield put(setErrorTraining('error'));
         }
     }
 }

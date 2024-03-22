@@ -12,7 +12,5 @@ const trainingBadgeColor: TrainingBadgeColor[] = [
 ]
 
 
-export const setColor = (trainingName: string) => {
-    return trainingBadgeColor
+export const setColor = (trainingName: string) => trainingBadgeColor
         .find((training: TrainingBadgeColor) => training.name === trainingName)?.color
-}

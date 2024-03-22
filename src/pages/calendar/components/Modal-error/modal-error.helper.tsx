@@ -1,6 +1,6 @@
-import { CloseCircleOutlined, CloseOutlined } from "@ant-design/icons"
-import { Typography } from "antd"
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
+import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons'
+import { Typography } from 'antd'
 
 type ObjectResult = Record<string, ModalContext>
 
@@ -8,13 +8,13 @@ export type ModalContext = {
     title: ReactNode,
     buttonText: string,
     content: ReactNode,
-    icon?: ReactNode,
+    icon: ReactNode,
     closeIcon?: ReactNode
 }
 
-const modal: ObjectResult = {
+export const modal: ObjectResult = {
     '500': {
-        title: <Typography.Text strong data-test-id='modal-error-user-training-title'>
+        title: <Typography.Text strong={true} data-test-id='modal-error-user-training-title'>
             При открытии данных произошла ошибка
         </Typography.Text>,
         content: <Typography.Text type='secondary' data-test-id='modal-error-user-training-subtitle'>
@@ -25,7 +25,7 @@ const modal: ObjectResult = {
         closeIcon: <CloseOutlined data-test-id='modal-error-user-training-button-close' />,
     },
     'error': {
-        title: <Typography.Text strong data-test-id='modal-error-user-training-title'>
+        title: <Typography.Text strong={true} data-test-id='modal-error-user-training-title'>
             При сохранении данных произошла ошибка
         </Typography.Text>,
         content: <Typography.Text type='secondary' data-test-id='modal-error-user-training-subtitle'>
@@ -35,7 +35,3 @@ const modal: ObjectResult = {
         buttonText: 'Закрыть',
     },
 }
-
-export const modalContext = new Map(Object.entries(modal))
-
-

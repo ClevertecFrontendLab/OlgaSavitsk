@@ -1,8 +1,8 @@
-import { HTTP_STATUS_CODE, LocalStorageKey, RoutePath, STATUS_TEXT } from '@constants/index';
-import { authApi } from '@services/index';
-import { isAxiosError } from 'axios';
 import { push } from 'redux-first-history';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { HttpStatusCode, LocalStorageKey, RoutePath, StatusText } from '@constants/index';
+import { authApi } from '@services/index';
+import { isAxiosError } from 'axios';
 
 import {
     authError,
@@ -24,18 +24,20 @@ function* signInWorker(action: AuthAction<SignInPayload>) {
     try {
         yield put(setLoadingAuth(true));
         const { data, status } = yield call(authApi.signIn, action.payload);
+
         yield put(signInSuccess(data.accessToken));
         yield put(setLoadingAuth(false));
         if (action.payload.remember) {
             yield window.localStorage.setItem(
                 LocalStorageKey.authToken,
-                JSON.stringify({ access_token: data.accessToken }),
+                JSON.stringify({ accessToken: data.accessToken }),
             );
         }
-        if (status === HTTP_STATUS_CODE.OK) yield put(push(RoutePath.Home));
+        if (status === HttpStatusCode.OK) yield put(push(RoutePath.Home));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
+
             if (status) yield put(authError(status));
             yield put(push(RoutePath.SignInError));
         }
@@ -46,13 +48,15 @@ function* signInWorker(action: AuthAction<SignInPayload>) {
 function* signUpWorker(action: AuthAction<SignUpPayload>) {
     try {
         const { status } = yield call(authApi.signUp, action.payload);
+
         yield put(signUpSuccess(status));
         yield put(push(RoutePath.SignUpSuccess));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
+
             if (status) yield put(authError(status));
-            if (status === HTTP_STATUS_CODE.CONFLICT) {
+            if (status === HttpStatusCode.CONFLICT) {
                 yield put(push(RoutePath.SignUpFailed));
             } else {
                 yield put(push(RoutePath.Error, action.payload));
@@ -64,18 +68,20 @@ function* signUpWorker(action: AuthAction<SignUpPayload>) {
 function* checkEmailWorker(action: AuthAction<SignInPayload>) {
     try {
         const { status } = yield call(authApi.checkEmail, action.payload);
+
         yield put(push(RoutePath.ConfirmEmail, action.payload.email));
         yield put(checkEmailSuccess(status));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const statusCode = error.response?.status;
             const { message } = error.response?.data as ErrorResponse;
+
             if (statusCode) yield put(authError(statusCode));
-            if (statusCode === HTTP_STATUS_CODE.NOT_FOUND && message === STATUS_TEXT.NOT_FOUND) {
+            if (statusCode === HttpStatusCode.NOT_FOUND && message === StatusText.NOT_FOUND) {
                 yield put(push(RoutePath.CheckemailNoExist));
             } else if (
                 statusCode ||
-                (statusCode === HTTP_STATUS_CODE.NOT_FOUND && message === STATUS_TEXT.EMPTY_MESSAGE)
+                (statusCode === HttpStatusCode.NOT_FOUND && message === StatusText.EMPTY_MESSAGE)
             ) {
                 yield put(push(RoutePath.CheckemailError, action.payload));
             }
@@ -91,6 +97,7 @@ function* confirmEmailWorker(action: AuthAction<ConfirmEmailRequest>) {
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
+
             if (status) yield put(authError(status));
         }
     }
@@ -99,11 +106,13 @@ function* confirmEmailWorker(action: AuthAction<ConfirmEmailRequest>) {
 function* changePasswordWorker(action: AuthAction<ConfirmEmailRequest>) {
     try {
         const { status } = yield call(authApi.changePassword, action.payload);
+
         yield put(push(RoutePath.ChangePasswordSuccess));
         yield put(changePasswordSuccess(status));
     } catch (error: unknown) {
         if (isAxiosError(error)) {
             const status = error.response?.status;
+
             if (status) yield put(authError(status));
             yield put(push(RoutePath.ChangePasswordError, action.payload));
         }
