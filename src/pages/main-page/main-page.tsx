@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { CONTENT, SiderItems } from '@constants/index';
+import { CONTENT, RoutePath, SiderItems } from '@constants/index';
 import { ModalComponent } from '@pages/reviews/components';
+import { history } from '@redux/configure-store';
 import { selectError } from '@redux/error';
 import { trainingActions } from '@redux/training';
 import { Button, Card, Grid, List, Space } from 'antd';
@@ -16,8 +17,11 @@ export const MainPage: React.FC = () => {
   const dispatch = useDispatch()
   const { lg, md, xs } = useBreakpoint();
 
-  const handleRequest = useCallback(async () => {
-    dispatch(trainingActions.getTraining())
+  const handleRequest = useCallback(async (path: string) => {
+    if (path === RoutePath.Calendar) {
+      dispatch(trainingActions.getTraining())
+    }
+    history.push(path)
   }, [dispatch])
 
   return (
@@ -54,8 +58,8 @@ export const MainPage: React.FC = () => {
                 data-test-id={item.dataId}
                 type='link'
                 icon={item.icon}
-                onClick={handleRequest}
-                style={{ fontSize: '15px' }}>
+                onClick={() => handleRequest(item.path)}
+                style={{ fontSize: 'var(--fs-text)' }}>
                 {item.action}
               </Button>
             </Card>

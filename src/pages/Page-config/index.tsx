@@ -16,7 +16,6 @@ export const PageConfig = () => {
         DEFAULT_STORAGE_CONFIG,
     );
 
-
     const googleAuth = useCallback(() => {
         const googleAuthToken = searchParams.get('accessToken');
 

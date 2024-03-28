@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined } from '@ant-design/icons';
-import { breadcrumbNameMap } from '@constants/index';
+import { breadcrumbNameMap, headerTitle } from '@constants/index';
 import { RoutePath } from '@constants/routes.constants';
 import { selectLocationPath } from '@redux/auth';
-import { Breadcrumb, Button, Grid, PageHeader, Typography } from 'antd';
+import { Breadcrumb, Button, Grid, PageHeader } from 'antd';
 
 import 'antd/dist/antd.css';
 import classes from './index.module.css';
-
-const { Title } = Typography;
 
 const { useBreakpoint } = Grid;
 
@@ -21,9 +19,11 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
   const locationPathname = selectLocationPath();
   const location = useLocation()
   const [collapsed, setCollapsed] = useState(false);
-  const { lg, md, xs } = useBreakpoint();
-  const pathSnippets = location.pathname.split('/').filter(i => i);
+  const { md, xs } = useBreakpoint();
 
+  const { title, extra } = headerTitle[locationPathname as RoutePath] || {}
+
+  const pathSnippets = location.pathname.split('/').filter(i => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
 
@@ -35,7 +35,7 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
   });
 
   const breadcrumbItems = [
-    <Breadcrumb.Item key="home">
+    locationPathname !== RoutePath.Profile && <Breadcrumb.Item key="home">
       <Link to="/main">Главная</Link>
     </Breadcrumb.Item>,
   ].concat(extraBreadcrumbItems);
@@ -43,22 +43,12 @@ export const HeaderComponent: React.FC<HeaderProps> = ({ getCollapted }: HeaderP
   return (
     <PageHeader
       breadcrumb={
-        <Breadcrumb>{breadcrumbItems}</Breadcrumb>
+        <Breadcrumb>{breadcrumbItems}</ Breadcrumb>
       }
       ghost={false}
       className={classes.header}
-      title={
-        locationPathname === RoutePath.Home && <Title
-          className={classes.header_title}
-          >
-          Приветствуем тебя в CleverFit — приложении,<br /> которое поможет тебе добиться своей мечты!
-        </Title>}
-      extra={locationPathname !== RoutePath.Feedbacks && [
-        md ? <Button key={1} type="link" icon={lg ? <SettingOutlined /> : ''} size='small'>
-          Настройки
-        </Button> :
-          <Button key={2} shape="circle" icon={<SettingOutlined />} />
-      ]}
+      title={title}
+      extra={[md ? extra : <Button key={2} shape="circle" icon={<SettingOutlined />} />]}
     >
       {xs ? <Button key={1} data-test-id='sider-switch-mobile' className={classes.button_trigger__mobile}
         style={{ left: xs ? 0 : 'auto', transform: xs && collapsed ? 'translateX(104px)' : 'none' }}>

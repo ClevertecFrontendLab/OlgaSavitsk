@@ -42,6 +42,7 @@ export const SiderComponent: React.FC<SiderProps> = ({ collapsed }: SiderProps) 
 
       <Menu
         theme='light'
+        mode='inline'
         onClick={({ key }) => history.push(key)}
         items={menuItems}
       />

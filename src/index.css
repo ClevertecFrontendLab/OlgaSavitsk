@@ -5,6 +5,7 @@
     --primary-font: "Inter", sans-serif;
     --fs-base: 1rem;
     --fs-title: calc(var(--fs-base) * 1.5);
+    --fs-text: calc(var(--fs-base) * .875);
     --fw-l: 400;
     --fw-m: 500;
     --fw-b: 700;

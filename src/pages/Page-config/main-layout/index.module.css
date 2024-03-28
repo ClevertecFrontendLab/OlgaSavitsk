@@ -21,8 +21,6 @@
 
 .site_layout .layout_background {
     display: flex;
-    flex: 1 1 auto;
-    max-width: 1183px;
     padding: var(--padding);
 }
 

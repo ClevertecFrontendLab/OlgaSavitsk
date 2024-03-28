@@ -2,13 +2,6 @@
     --fs-title-main: calc(var(--fs-base) * 1.5);
 }
 
-:global h1.ant-typography {
-    white-space: pre-line;
-    margin: 0;
-    font-weight: var(--fw-b);
-    line-height: 130%;
-}
-
 .header {
     position: sticky;
     top: 0;
@@ -55,10 +48,10 @@
     z-index: 2;
 }
 
-@media (max-width: 835px) {
-    :global h1.ant-typography {
-        font-size: var(--fs-title-main);
-        font-weight: var(--fw-m);
+@media (max-width: 834px) {
+
+    :global .ant-btn > .anticon[data-header-title=home-title] {
+        display: none;
     }
 }
 

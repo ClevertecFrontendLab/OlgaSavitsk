@@ -1,3 +1,7 @@
+.ant-menu > .ant-menu-item:not(:last-child) {
+    padding-left: calc(4 * var(--padding-space)) !important;
+}
+
 @media (max-width: 480px) {
     .ant-menu-item-icon {
         display: none;

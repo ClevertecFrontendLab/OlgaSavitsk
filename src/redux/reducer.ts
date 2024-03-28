@@ -7,6 +7,7 @@ import { errorReducer } from './error';
 import { feedbacksReducer } from './feedbacks';
 import { loaderReducer } from './loader';
 import { trainingReducer } from './training';
+import { userReducer } from './user';
 
 const { routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -20,6 +21,7 @@ const reducer = combineReducers({
     loader: loaderReducer,
     error: errorReducer,
     trainingStore: trainingReducer,
+    userStore: userReducer
 });
 
 export default reducer;

@@ -19,7 +19,7 @@ export const menuItems: MenuItem[] = [
     },
     { key: '2', label: 'Тренировки', icon: <HeartFilled /> },
     { key: '3', label: 'Достижения', icon: <TrophyFilled /> },
-    { key: '4', label: 'Профиль', icon: <IdcardOutlined /> },
+    { key: RoutePath.Profile, label: 'Профиль', icon: <IdcardOutlined /> },
     { key: '5', label: 'Выход', icon: <IdcardOutlined />, type: 'divider' },
     {
         key: RoutePath.SignIn, label: 'Выход', icon: <Icon component={IconExit} />,

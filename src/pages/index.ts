@@ -8,3 +8,4 @@ export { ResultModal } from './result-modal/result-modal.page';
 export { ReviewsPage } from './reviews/reviews-page';
 export { SignIn } from './sign-in/signin-page';
 export { SignUp } from './sign-up/signup-page';
+export { ProfilePage } from './profile/profile-page';

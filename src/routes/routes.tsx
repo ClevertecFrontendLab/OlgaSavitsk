@@ -5,6 +5,7 @@ import {
     ConfirmConfig,
     MainPage,
     PageConfig,
+    ProfilePage,
     ResultErrorRequired,
     ResultModal,
     ReviewsPage,
@@ -30,6 +31,7 @@ export const routes = (
                 <Route index={true} path={RoutePath.Home} element={<MainPage />} />
                 <Route path={RoutePath.Feedbacks} element={<ReviewsPage />} />
                 <Route path={RoutePath.Calendar} element={<CalendarPage />} />
+                <Route path={RoutePath.Profile} element={<ProfilePage />} />
             </Route>
         </Route>
     </Routes >

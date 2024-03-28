@@ -42,11 +42,12 @@ class ApiClient {
         });
     }
 
-    post(url: string, data: unknown = {}): Promise<void> {
+    post(url: string, data: unknown = {}, requestConfig?: AxiosRequestConfig): Promise<void> {
         return this.api({
             method: 'post',
             url,
             data,
+            ...requestConfig
         });
     }
 

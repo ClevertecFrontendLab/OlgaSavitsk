@@ -1,0 +1,74 @@
+:root {
+    --padding: calc(6 * var(--padding-space));
+    --borderRadius: calc(2 * var(--border-radius));
+}
+
+.profile_layout {
+    position: relative;
+    background: var(--ant-form-background);
+    padding: var(--padding);
+    border-radius: var(--borderRadius);
+}
+
+.profile_form {
+    max-width: 480px;
+    width: 100%;
+}
+
+.profile_form :global .ant-col-18 > .ant-form-item {
+    margin-bottom: 16px;
+}
+
+.profile_form :global .ant-form-item-with-help {
+    margin-bottom: 27px;
+}
+
+.upload_button {
+    margin-top: 8px;
+    padding: 0 10px;
+    color: var(--ant-text);
+}
+
+:global .ant-upload.ant-upload-select-picture-card {
+    margin: 0;
+}
+
+:global .ant-upload {
+    line-height: var(--line-height);
+}
+
+@media (max-width: 480px) {
+    :root {
+        --borderRadius: 0;
+    }
+
+    .profile_layout {
+        padding: calc(4 * var(--padding-space)) var(--padding);
+        margin: 0 -16px;
+    }
+
+    .upload_item {
+        margin-bottom: 0;
+    }
+
+    .upload_item :global .ant-row > .ant-form-item-control {
+        flex-basis: 50%;
+    }
+
+    .profile_form :global label > span {
+        font-size: calc(0.75 * var(--fs-base));
+    }
+
+    .profile_form :global .ant-form-item-with-help {
+        margin-bottom: 16px;
+    }
+
+    .upload_item :global .ant-form-item-control-input-content > span {
+        width: 100%;
+        font-size: var(--fs-text);
+    }
+
+    :global .ant-upload {
+        width: 100%;
+    }
+}

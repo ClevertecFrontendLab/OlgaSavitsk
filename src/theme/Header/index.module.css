@@ -1,3 +1,15 @@
+h1.ant-typography {
+    white-space: pre-line;
+    margin: 0;
+    font-weight: var(--fw-b);
+    line-height: 130%;
+}
+
+h5.ant-typography {
+    font-weight: var(--fw-m);
+    margin: 0;
+}
+
 .ant-page-header-content {
     position: absolute;
     left: 0;
@@ -30,17 +42,31 @@
 
 .ant-page-header.has-breadcrumb {
     padding-right: calc(8 * var(--padding-space));
-    padding-bottom: calc(6 * var(--padding-space));
+    padding-bottom: calc(3 * var(--padding-space));
 }
 
 @media (max-width: 834px) {
     .ant-page-header.has-breadcrumb {
         padding-right: calc(6 * var(--padding-space));
     }
+
     .ant-breadcrumb + .ant-page-header-heading {
         margin-top: 30px;
     }
+
     .ant-breadcrumb + .ant-page-header-heading {
         margin-top: 29px;
+    }
+}
+
+
+@media (max-width: 835px) {
+    h1.ant-typography {
+        font-size: var(--fs-title-main);
+        font-weight: var(--fw-m);
+    }
+    
+    h4.ant-typography {
+        font-size: var(--fs-text);
     }
 }

@@ -14,6 +14,7 @@ export enum RoutePath {
     ResetPassword = '/auth/change-password',
     Feedbacks = '/feedbacks',
     Calendar = '/calendar',
+    Profile = '/profile'
 }
 
 export enum LayoutType {
