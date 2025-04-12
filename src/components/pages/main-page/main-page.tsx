@@ -6,6 +6,7 @@ import {
     Flex,
     Heading,
     HStack,
+    Show,
     Spacer,
     Stack,
     useBreakpointValue,
@@ -25,7 +26,7 @@ import { additionalInfo, Blog, blogPosts, recipies, sliders } from './helpers';
 
 export const MainPage = () => {
     const navigate = useNavigate();
-    const headingSize = useBreakpointValue({ base: 'lg', md: 'lg', lg: '2xl', '2xl': '2xl' });
+    const headingSize = useBreakpointValue({ base: 24, md: 24, lg: 48, '2xl': 48 });
     const titleSize = useBreakpointValue({ base: 'lg', md: 'md', lg: 'xl', '2xl': '2xl' });
     const titleBlog = useBreakpointValue({ base: 'lg', md: 'md', lg: 'lg', '2xl': 'xl' });
     const isMobile = useBreakpointValue({ base: true, lg: false });
@@ -57,19 +58,18 @@ export const MainPage = () => {
                     Самое сочное
                 </Heading>
                 <Spacer />
-                <Box order={{ base: 2, md: 2, lg: 0, '2xl': 0 }}>
+                <Show above='lg'>
                     <Button
+                        display={isMobile ? 'none' : 'flex'}
                         size={{ base: 'md', lg: 'md', '2xl': 'lg' }}
                         rightIcon={<ArrowForwardIcon />}
                         bg='lime.400'
                         onClick={() => navigate(RoutePath.delicious)}
-                        data-test-id={
-                            isMobile ? DATA_TEST_ID.juiciestLinkMobile : DATA_TEST_ID.juiciestLink
-                        }
+                        data-test-id={DATA_TEST_ID.juiciestLink}
                     >
                         Вся подборка
                     </Button>
-                </Box>
+                </Show>
                 <Flex flexDirection='row' flexWrap='wrap' gap={{ base: 3, md: 4, lg: 4, '2xl': 6 }}>
                     {recipies.map((recipe, index) => (
                         <Fragment key={index}>
@@ -77,6 +77,16 @@ export const MainPage = () => {
                         </Fragment>
                     ))}
                 </Flex>
+                <Button
+                    display={isMobile ? 'flex' : 'none'}
+                    size={{ base: 'md', lg: 'md', '2xl': 'lg' }}
+                    rightIcon={<ArrowForwardIcon />}
+                    bg='lime.400'
+                    onClick={() => navigate(RoutePath.delicious)}
+                    data-test-id={DATA_TEST_ID.juiciestLinkMobile}
+                >
+                    Вся подборка
+                </Button>
             </HStack>
 
             <Box pt={isMobile ? 8 : 10}>

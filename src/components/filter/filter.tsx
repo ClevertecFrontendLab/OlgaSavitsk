@@ -17,7 +17,7 @@ import filterIcon from '~/assets/icons/filter.svg';
 import { CustomIcon } from '../custom-icon/custom-icon';
 
 export const Filter = () => (
-    <Stack spacing={4} pt={{ base: 4, lg: 8 }} maxW={{ sm: '100%', md: 448 }} w='full'>
+    <Stack spacing={4} pt={{ base: 4, lg: 8 }} maxW={{ sm: '100%', md: 448, lg: 'full' }} w='full'>
         <HStack spacing={3}>
             <IconButton
                 aria-label='Sort'

@@ -46,23 +46,25 @@ export const SideBar = () => {
         >
             <Flex direction='column' h='full'>
                 <VStack align='stretch' flex={1} className={classes.active}>
-                    {menuItems.map(({ route: path, subItems, id, ...item }) => (
-                        <Box key={id}>
+                    {menuItems.map(({ route: path, subItems, dataTestId, id, ...item }) => (
+                        <Box key={id} data-test-id={dataTestId}>
                             <NavItem
                                 href={`${RoutePath.veganPage}/0`}
                                 isOpen={openState[id]}
+                                dataTestId={dataTestId}
                                 rightIcon
                                 onClick={() => handleMenuItem(id)}
                                 {...item}
                             />
                             <Collapse in={openState[id]} animateOpacity>
-                                <VStack pl='8' align='stretch' spacing='1'>
+                                <VStack pl='8' align='stretch' spacing='2' pt={2}>
                                     {subItems?.map(({ title, route }) => (
                                         <NavItem
                                             key={route}
                                             href={`${path}/${route}`}
                                             label={title}
                                             active={title === active}
+                                            isSubmenu
                                             onClick={() => setActive(title)}
                                         />
                                     ))}

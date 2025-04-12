@@ -14,15 +14,11 @@ export const Slider: FC<SliderProps> = ({ sliders }) => {
     const side = useBreakpointValue({ base: '30%', md: '-8px' });
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const titleSize = useBreakpointValue({ base: 'lg', md: 'md', lg: 'xl', '2xl': '2xl' });
+    const sliderWidth = useBreakpointValue({ base: 344, sm: 344, md: '100%' });
 
     return (
         <Box position='relative'>
-            <Heading
-                as='h2'
-                size={titleSize}
-                pb={{ base: 2, lg: 6 }}
-                letterSpacing={{ base: 0, md: 1.2 }}
-            >
+            <Heading as='h2' size={titleSize} pb={{ base: 2, lg: 6 }}>
                 Новые рецепты
             </Heading>
             {!isMobile && (
@@ -51,7 +47,7 @@ export const Slider: FC<SliderProps> = ({ sliders }) => {
                     />
                 </>
             )}
-            <HStack overflow='hidden' align='stretch'>
+            <HStack overflow='hidden' align='stretch' maxW={sliderWidth} w='fit-content'>
                 <HStack spacing={{ base: 3, lg: 3, '2xl': 6 }}>
                     {sliders.map((slide, index) => (
                         <SliderCard key={index} {...slide} />

@@ -19,6 +19,7 @@ import { FC } from 'react';
 
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
+import { TRUNCATE_STYLES } from '~/constants/menu.constants';
 
 import { IconCounter } from '../count-icon/count-icon';
 import { CustomIcon } from '../custom-icon/custom-icon';
@@ -35,6 +36,11 @@ export const DishCard: FC<Recipie> = ({
     recommended,
 }) => {
     const isMobile = useBreakpointValue({ base: true, lg: false });
+    const truncateStyles = useBreakpointValue({
+        base: {},
+        lg: {},
+        '2xl': TRUNCATE_STYLES,
+    });
 
     return (
         <Card
@@ -82,6 +88,8 @@ export const DishCard: FC<Recipie> = ({
                         size={{ base: 'sm', lg: 'md' }}
                         fontWeight={500}
                         noOfLines={isMobile ? 2 : 1}
+                        maxW={{ base: 'auto', '2xl': 280 }}
+                        sx={truncateStyles}
                     >
                         {title}
                     </Heading>
@@ -92,7 +100,7 @@ export const DishCard: FC<Recipie> = ({
                     )}
                 </CardBody>
 
-                <CardFooter justifyContent='end' gap={2} p={{ base: 1, md: 1, lg: 6 }}>
+                <CardFooter justifyContent='end' gap={2} p={{ base: 1, md: 2, lg: 6 }}>
                     {isMobile ? (
                         <IconButton
                             aria-label='save'

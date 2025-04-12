@@ -121,3 +121,11 @@ export const menuItems = Object.values(Category).map((categoryId) => ({
     dataTestId: categoryMap[categoryId].dataTestId,
     subItems: subMenus[categoryId],
 }));
+
+export const TRUNCATE_STYLES = {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: 'auto',
+    display: 'block',
+};

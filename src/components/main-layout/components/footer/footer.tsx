@@ -11,9 +11,12 @@ import classes from './index.module.css';
 export const FooterComponent = () => (
     <Show below='md'>
         <Box
+            position='fixed'
+            bottom={0}
             display={{ base: 'flex', md: 'flex', '2xl': 'none' }}
             pt={6}
             data-test-id={DATA_TEST_ID.footer}
+            w='full'
         >
             <HStack className={classes.footer} bg='lime.50'>
                 <VStack
