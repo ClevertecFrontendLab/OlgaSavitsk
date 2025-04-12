@@ -1,0 +1,23 @@
+.navitem {
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    gap: 16px;
+    background: lime.100;
+}
+
+.navitemborder {
+    border-left: 1px solid;
+    border-color: var(--chakra-colors-lime-300);
+}
+
+.navitemborderactive {
+    border-left-width: 8px;
+    margin-left: -8px;
+    border-color: var(--chakra-colors-lime-300);
+}
+
+.navitemborderinactive {
+    border-left-width: 1px;
+    margin-left: -1px;
+}

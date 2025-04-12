@@ -1,0 +1,29 @@
+:root {
+    --primary-font: 'Inter', sans-serif;
+    --fs-base: 1rem;
+    --fs-xs: calc(var(--fs-base) * 1.5);
+    --fs-s: calc(var(--fs-base) * 0.875);
+    --fs-m: calc(var(--fs-base) * 0.75);
+    --fs-l: calc(var(--fs-base) * 0.75);
+    --fs-xl: calc(var(--fs-base) * 2.25);
+    --fs-2xl: calc(var(--fs-base) * 3);
+    --fw-m: 400;
+    --fw-l: 500;
+    --fw-xl: 700;
+    --line-height: 1.3;
+    --max-width: 1440px;
+    --min-height: 100vh;
+    --header-min-height: 80px;
+    --spacing: 20px;
+    --margin-space: calc(0.2 * var(--spacing));
+    --padding-space: calc(0.2 * var(--spacing));
+    --pd-2: 2px;
+    --pd-4: 4px;
+    --pd-6: 6px;
+    --pd-8: 8px;
+    --pd-10: 10px;
+    --pd-24: 24px;
+    --border-radius-xs: 2px;
+    --border-radius-s: 4px;
+    --border-radius-m: 8px;
+}
