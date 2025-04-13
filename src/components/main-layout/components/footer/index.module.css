@@ -1,6 +1,6 @@
 .footer {
     justify-content: space-around;
-    padding: var(--pd-10);
+    padding: var(--pd-14);
     width: 100%;
 
     & > div {

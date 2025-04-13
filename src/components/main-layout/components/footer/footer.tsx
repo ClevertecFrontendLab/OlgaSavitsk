@@ -1,7 +1,8 @@
-import { EditIcon, SearchIcon } from '@chakra-ui/icons';
 import { Avatar, Box, HStack, IconButton, Show, Text, VStack } from '@chakra-ui/react';
 
+import EditIcon from '~/assets/icons/edit-icon.svg';
 import homeIcon from '~/assets/icons/home.svg';
+import SearchIcon from '~/assets/icons/search.svg';
 import avatar from '~/assets/images/avatar.png';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 
@@ -14,51 +15,55 @@ export const FooterComponent = () => (
             position='fixed'
             bottom={0}
             display={{ base: 'flex', md: 'flex', '2xl': 'none' }}
-            pt={6}
             data-test-id={DATA_TEST_ID.footer}
             w='full'
+            h={84}
         >
-            <HStack className={classes.footer} bg='lime.50'>
-                <VStack
-                    w={90}
-                    justifyContent='center'
-                    bg='radial-gradient(circle at 50% 50%, rgba(196, 255, 97, 0.72) 0%, rgba(255, 255, 255, 0) 50%)'
-                >
+            <HStack className={classes.footer} bg='lime.50' paddingInline={0}>
+                <VStack h='full' justify='space-between'>
                     <IconButton
                         isRound={true}
                         bg='black'
-                        aria-label='Search'
+                        aria-label='Home'
                         icon={<CustomIcon icon={homeIcon} />}
                         size='md'
+                        boxShadow='0 0 10px 15px rgba(196, 255, 97, 0.25)'
                     />
-                    <Text fontSize='xs' color='blackAlpha.700'>
+                    <Text fontSize='xs' color='black' fontWeight={500} zIndex={10}>
                         Главная
                     </Text>
                 </VStack>
 
-                <VStack>
+                <VStack justify='space-between'>
                     <IconButton
                         aria-label='Search'
-                        icon={<SearchIcon boxSize={6} />}
+                        icon={<CustomIcon icon={SearchIcon} boxSize={6} />}
                         variant='ghost'
+                        size='md'
                     />
                     <Text fontSize='xs' color='blackAlpha.700'>
                         Поиск
                     </Text>
                 </VStack>
-                <VStack>
+                <VStack justify='space-between'>
                     <IconButton
-                        aria-label='Search'
-                        icon={<EditIcon boxSize={6} />}
-                        size='lg'
+                        aria-label='Edit'
+                        icon={<CustomIcon icon={EditIcon} boxSize={6} />}
+                        size='md'
                         variant='ghost'
                     />
                     <Text fontSize='xs' color='blackAlpha.700'>
                         Записать
                     </Text>
                 </VStack>
-                <VStack>
-                    <Avatar size='m' src={avatar} />
+                <VStack justify='space-between' h='full'>
+                    <IconButton
+                        isRound={true}
+                        bg='black'
+                        aria-label='Profile'
+                        icon={<Avatar h={10} w={10} src={avatar} />}
+                        size='md'
+                    />
                     <Text fontSize='xs' color='blackAlpha.700'>
                         Мой профиль
                     </Text>
