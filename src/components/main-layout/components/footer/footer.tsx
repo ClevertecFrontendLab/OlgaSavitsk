@@ -19,8 +19,8 @@ export const FooterComponent = () => (
             w='full'
             h={84}
         >
-            <HStack className={classes.footer} bg='lime.50' paddingInline={0}>
-                <VStack h='full' justify='space-between'>
+            <HStack className={classes.footer} bg='lime.50'>
+                <VStack h='full' justify='space-between' w={90}>
                     <IconButton
                         isRound={true}
                         bg='black'
@@ -34,7 +34,7 @@ export const FooterComponent = () => (
                     </Text>
                 </VStack>
 
-                <VStack justify='space-between'>
+                <VStack justify='space-between' w={90}>
                     <IconButton
                         aria-label='Search'
                         icon={<CustomIcon icon={SearchIcon} boxSize={6} />}
@@ -45,7 +45,7 @@ export const FooterComponent = () => (
                         Поиск
                     </Text>
                 </VStack>
-                <VStack justify='space-between'>
+                <VStack justify='space-between' w={90}>
                     <IconButton
                         aria-label='Edit'
                         icon={<CustomIcon icon={EditIcon} boxSize={6} />}
@@ -56,7 +56,7 @@ export const FooterComponent = () => (
                         Записать
                     </Text>
                 </VStack>
-                <VStack justify='space-between' h='full'>
+                <VStack justify='space-between' h='full' w={90}>
                     <IconButton
                         isRound={true}
                         bg='black'
@@ -64,7 +64,7 @@ export const FooterComponent = () => (
                         icon={<Avatar h={10} w={10} src={avatar} />}
                         size='md'
                     />
-                    <Text fontSize='xs' color='blackAlpha.700'>
+                    <Text fontSize='xs' color='blackAlpha.700' whiteSpace='nowrap'>
                         Мой профиль
                     </Text>
                 </VStack>
