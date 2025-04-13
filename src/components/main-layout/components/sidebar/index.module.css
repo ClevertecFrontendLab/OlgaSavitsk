@@ -1,0 +1,4 @@
+.active {
+    border-radius: var(--border-radius-l);
+    overflow-y: auto;
+}

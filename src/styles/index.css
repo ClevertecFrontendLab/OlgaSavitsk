@@ -1,0 +1,29 @@
+@import url('./variables/global.css');
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+
+body {
+    font-family: var(--primary-font);
+    position: relative;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}

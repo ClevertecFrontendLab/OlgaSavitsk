@@ -1,0 +1,16 @@
+.iconButton {
+    position: absolute;
+    background-color: black;
+    transform: translate(0%, -50%);
+    z-index: 1;
+}
+
+.leftArrow {
+    left: -8px;
+    top: 50%;
+}
+
+.rightArrow {
+    right: -8px;
+    top: 50%;
+}
