@@ -39,7 +39,7 @@ export const SideBar = () => {
             left={0}
             position='fixed'
             h='calc(100vh - 80px)'
-            w={250}
+            maxW={256}
             borderRightWidth={1}
             zIndex='sticky'
             py={9}

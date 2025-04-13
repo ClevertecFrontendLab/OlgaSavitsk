@@ -30,10 +30,6 @@ export const NavItem: FC<NavItemProps> = ({
     <NavLink to={href || '#'} style={{ textDecoration: 'none' }} onClick={onClick}>
         <Flex
             className={`${classes.navitem} ${isSubmenu ? classes.navitemborder : undefined} ${isOpen ? classes.openItem : classes.navitem} ${active ? `${classes.navitemborderactive}` : undefined}`}
-            _hover={{
-                bg: 'lime.50',
-                color: 'black',
-            }}
         >
             {icon && <Image src={icon} alt={label} />}
             <Text whiteSpace='nowrap'>{label}</Text>

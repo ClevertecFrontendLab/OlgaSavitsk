@@ -46,8 +46,8 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
     const titleSize = useBreakpointValue({ base: 'lg', md: 'lg', lg: 'xl', '2xl': '2xl' });
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const truncateStyles = useBreakpointValue({
-        base: {},
-        sm: TRUNCATE_STYLES,
+        base: TRUNCATE_STYLES,
+        md: TRUNCATE_STYLES,
     });
 
     return (
@@ -62,7 +62,7 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
             </Box>
             <Box gridColumn={{ base: 'span 1', md: 'span 3', lg: 'span 2', '2xl': 'span 2' }}>
                 <Text
-                    color='blackAlpha.700'
+                    color='blackAlpha.600'
                     letterSpacing={isMobile ? 0 : 0.9}
                     pt={{ base: 0, lg: 8 }}
                 >
@@ -93,7 +93,13 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
                             >
                                 {title}
                             </Heading>
-                            <Text fontSize='sm' noOfLines={3} letterSpacing={0.6} pt={3}>
+                            <Text
+                                fontSize='sm'
+                                noOfLines={3}
+                                letterSpacing={0.6}
+                                pt={{ base: 2, md: 2, lg: 3 }}
+                                lineHeight={1.43}
+                            >
                                 {content}
                             </Text>
                         </CardBody>
@@ -110,7 +116,7 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
             </Box>
             <VStack
                 align='stretch'
-                spacing={3}
+                spacing={{ base: 2, lg: 3 }}
                 gridColumn={{ base: 'span 1', md: 'span 1', xl: 'span 1', '2xl': 'span 2' }}
             >
                 {recipiesInfo.additionalRecipes.map(({ title, category }) => (

@@ -37,7 +37,13 @@ export const VeganPage = () => {
                     <Heading as='h1' size={headingSize} textAlign='center' fontWeight={700}>
                         Веганская кухня
                     </Heading>
-                    <Text color='blackAlpha.600' maxW={700} textAlign='center' fontWeight={500}>
+                    <Text
+                        color='blackAlpha.600'
+                        maxW={700}
+                        textAlign='center'
+                        fontWeight={500}
+                        letterSpacing={-0.2}
+                    >
                         Интересны не только убеждённым вегетарианцам, но и тем, кто хочет
                         попробовать вегетарианскую диету и готовить вкусные вегетарианские блюда.
                     </Text>
@@ -58,6 +64,7 @@ export const VeganPage = () => {
                             to={`/vegan/${route}`}
                             whiteSpace='nowrap'
                             fontSize={{ base: 'sm', md: 'sm', lg: 'md' }}
+                            sx={{ marginBottom: 0 }}
                         >
                             {title}
                         </Tab>

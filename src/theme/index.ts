@@ -4,6 +4,10 @@ import { colors } from './colors';
 
 export const theme = extendTheme({
     colors,
+    fonts: {
+        heading: `'Inter', sans-serif`,
+        body: `'Inter', sans-serif`,
+    },
     components: {
         Text: {
             baseStyle: {

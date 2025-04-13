@@ -38,7 +38,6 @@ export const DishCard: FC<Recipie> = ({
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const truncateStyles = useBreakpointValue({
         base: {},
-        lg: {},
         '2xl': TRUNCATE_STYLES,
     });
 

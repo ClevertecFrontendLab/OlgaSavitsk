@@ -126,6 +126,5 @@ export const TRUNCATE_STYLES = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    maxWidth: 'auto',
     display: 'block',
 };

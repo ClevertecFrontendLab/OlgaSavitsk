@@ -40,6 +40,7 @@ export const MainPage = () => {
                     fontWeight={700}
                     letterSpacing={0.5}
                     textAlign='center'
+                    whiteSpace='nowrap'
                 >
                     Приятного аппетита!
                 </Heading>

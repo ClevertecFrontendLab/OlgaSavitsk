@@ -17,6 +17,7 @@ a {
 }
 
 body {
+    font-family: var(--primary-font);
     position: relative;
     margin: 0;
     overflow-x: hidden;

@@ -24,7 +24,7 @@ export const DeliciousPage = () => {
     return (
         <>
             <Center>
-                <VStack w='full'>
+                <VStack w={{ base: 'full', md: 'full', lg: 'auto' }}>
                     <Heading as='h1' size={headingSize} textAlign='center' fontWeight={700}>
                         Самое сочное
                     </Heading>
