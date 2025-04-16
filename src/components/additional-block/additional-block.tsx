@@ -16,33 +16,13 @@ import { FC } from 'react';
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { Category, categoryMap, TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { AdditionalInfo } from '~/shared/types/page-config.types';
 
 import { IconCounter } from '../count-icon/count-icon';
 import { CustomIcon } from '../custom-icon/custom-icon';
 import { CustomTag } from '../custom-tag/custom-tag';
 
-type RecipiesInfo = {
-    recipies: Array<{
-        title: string;
-        content: string;
-        favorites: number;
-        likes: number;
-        category: string;
-    }>;
-    additionalRecipes: Array<{ title: string; category: string }>;
-};
-
-type AdditionalBlockProps = {
-    title: string;
-    descriptions: string;
-    recipiesInfo: RecipiesInfo;
-};
-
-export const AdditionalBlock: FC<AdditionalBlockProps> = ({
-    title,
-    descriptions,
-    recipiesInfo,
-}) => {
+export const AdditionalBlock: FC<AdditionalInfo> = ({ title, description, recipes }) => {
     const titleSize = useBreakpointValue({ base: 'lg', md: 'lg', lg: 'xl', '2xl': '2xl' });
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const truncateStyles = useBreakpointValue({
@@ -66,7 +46,7 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
                     letterSpacing={isMobile ? 0 : 0.9}
                     pt={{ base: 0, lg: 8 }}
                 >
-                    {descriptions}
+                    {description}
                 </Text>
             </Box>
 
@@ -76,7 +56,7 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
                 gap={{ base: 3, md: 3, lg: 4, '2xl': 6 }}
                 gridColumn={{ base: 'span 1', md: 'span 2', xl: 'span 2', '2xl': 'span 2' }}
             >
-                {recipiesInfo.recipies.map(({ title, content, favorites, likes, category }) => (
+                {recipes.recipies.map(({ title, content, favorites, likes, category }) => (
                     <Card
                         h='100%'
                         borderRadius='lg'
@@ -119,7 +99,7 @@ export const AdditionalBlock: FC<AdditionalBlockProps> = ({
                 spacing={{ base: 2, lg: 3 }}
                 gridColumn={{ base: 'span 1', md: 'span 1', xl: 'span 1', '2xl': 'span 2' }}
             >
-                {recipiesInfo.additionalRecipes.map(({ title, category }) => (
+                {recipes.additionalRecipes.map(({ title, category }) => (
                     <Card borderRadius='lg' variant='outline'>
                         <CardBody
                             px={{ base: 3, md: 3, lg: 4, '2xl': 6 }}

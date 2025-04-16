@@ -2,20 +2,25 @@ import { Avatar, Flex, Tag, TagLabel } from '@chakra-ui/react';
 import { FC } from 'react';
 
 import { Category, categoryMap } from '~/constants/menu.constants';
+import { Blog } from '~/shared/types/page-config.types';
 
 import { CustomIcon } from '../custom-icon/custom-icon';
-import { Blog } from '../pages/main-page/helpers';
 
 type PositionType = 'static' | 'absolute' | undefined;
 
-type CustomTag = {
+type CustomTagProps = {
     category?: string;
     color: string;
     position?: PositionType;
     blog?: Blog;
 };
 
-export const CustomTag: FC<CustomTag> = ({ category, blog = null, color, position = 'static' }) => {
+export const CustomTag: FC<CustomTagProps> = ({
+    category,
+    blog = null,
+    color,
+    position = 'static',
+}) => {
     const isBlog = Object.values({ ...blog }).length;
 
     if (!isBlog && !category) {

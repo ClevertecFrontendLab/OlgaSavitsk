@@ -1,3 +1,5 @@
+import { CategoryType, SubCategoryType } from '~/shared/types/navigation.types';
+
 import beveragesIcon from '../assets/icons/beverages.svg';
 import childTastyIcon from '../assets/icons/child-tasty.svg';
 import dessertsIcon from '../assets/icons/desserts.svg';
@@ -27,22 +29,6 @@ export enum Category {
     Beverages = '12',
     Preserves = '13',
 }
-
-type CategoryType = {
-    [key in Category]: {
-        label: string;
-        icon: string;
-        route?: string;
-        dataTestId?: string;
-    };
-};
-
-type SubCategoryType = {
-    [key in Category]?: {
-        title: string;
-        route: string;
-    }[];
-};
 
 export const categoryMap: CategoryType = {
     [Category.Salads]: { label: 'Салаты', icon: saladIcon },

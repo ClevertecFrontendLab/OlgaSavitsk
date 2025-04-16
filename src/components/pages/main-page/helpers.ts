@@ -10,15 +10,7 @@ import recipe6 from '~/assets/images/recipe6.png';
 import recipe7 from '~/assets/images/recipe7.png';
 import recipe8 from '~/assets/images/recipe8.png';
 import { Category } from '~/constants/menu.constants';
-
-export type SliderType = {
-    title: string;
-    description: string;
-    category: string;
-    image: string;
-    heartCount?: number;
-    peopleCount?: number;
-};
+import { Blog, SliderType } from '~/shared/types/page-config.types';
 
 export const sliders: Array<SliderType> = [
     {
@@ -110,14 +102,6 @@ export const recipies = [
         peopleCount: 324,
     },
 ];
-
-export type Blog = {
-    id?: number;
-    name: string;
-    avatar: string;
-    username?: string;
-    content?: string;
-};
 
 export const blogPosts: Array<Blog> = [
     {

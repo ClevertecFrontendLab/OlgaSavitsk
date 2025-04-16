@@ -19,6 +19,20 @@ export type Recipie = {
     };
 };
 
+export type AdditionalRecipieInfo = {
+    recipies: {
+        title: string;
+        content: string;
+        favorites: number;
+        likes: number;
+        category: Category;
+    }[];
+    additionalRecipes: {
+        title: string;
+        category: Category;
+    }[];
+};
+
 export const recipies = [
     {
         title: 'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе',

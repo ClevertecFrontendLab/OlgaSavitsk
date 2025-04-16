@@ -16,40 +16,30 @@ import { useNavigate } from 'react-router';
 
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
 import { DishCard } from '~/components/dish-card/dish-card';
-import { Filter } from '~/components/filter/filter';
 import { BlogCard } from '~/components/pages/main-page/blog-card/blog-card';
 import { Slider } from '~/components/pages/main-page/slider/slider';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { RoutePath } from '~/constants/routes.constants';
+import { HeaderPage } from '~/shared/components/header-page';
+import { Blog } from '~/shared/types/page-config.types';
 
-import { additionalInfo, Blog, blogPosts, recipies, sliders } from './helpers';
+import { additionalInfo, blogPosts, recipies, sliders } from './helpers';
 
 export const MainPage = () => {
     const navigate = useNavigate();
-    const headingSize = useBreakpointValue({ base: 24, md: 24, lg: 48, '2xl': 48 });
     const titleSize = useBreakpointValue({ base: 'lg', md: 'md', lg: 'xl', '2xl': '2xl' });
     const titleBlog = useBreakpointValue({ base: 'lg', md: 'md', lg: 'lg', '2xl': 'xl' });
     const isMobile = useBreakpointValue({ base: true, lg: false });
 
     return (
         <>
-            <Box mx='auto' maxW='lg' pb={{ base: 8, lg: 14 }}>
-                <Heading
-                    as='h1'
-                    fontSize={headingSize}
-                    fontWeight={700}
-                    letterSpacing={0.5}
-                    textAlign='center'
-                    whiteSpace='nowrap'
-                >
-                    Приятного аппетита!
-                </Heading>
-                <Filter />
+            <HeaderPage title='Приятного аппетита!' />
+
+            <Box position='relative' pt={{ base: 0, lg: 6 }}>
+                <Slider sliders={sliders} />
             </Box>
 
-            <Slider sliders={sliders} />
-
-            <HStack pt={{ base: 8, md: 10 }} flexWrap='wrap' justify='center'>
+            <HStack pt={{ base: 8, lg: 10 }} flexWrap='wrap' justify='center'>
                 <Heading
                     as='h2'
                     size={titleSize}
@@ -130,8 +120,8 @@ export const MainPage = () => {
                 <Divider pb={{ md: 2 }} />
                 <AdditionalBlock
                     title='Веганская кухня'
-                    descriptions='Интересны не только убеждённым вегетарианцам, но и тем, кто хочет  попробовать вегетарианскую диету и готовить вкусные вегетарианские блюда.'
-                    recipiesInfo={additionalInfo}
+                    description='Интересны не только убеждённым вегетарианцам, но и тем, кто хочет  попробовать вегетарианскую диету и готовить вкусные вегетарианские блюда.'
+                    recipes={additionalInfo}
                 />
             </Box>
         </>

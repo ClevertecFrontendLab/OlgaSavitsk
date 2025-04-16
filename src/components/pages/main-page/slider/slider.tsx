@@ -1,8 +1,9 @@
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { Box, Heading, HStack, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import { Heading, HStack, IconButton, useBreakpointValue } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { SliderType } from '../helpers';
+import { SliderType } from '~/shared/types/page-config.types';
+
 import { SliderCard } from './slider-card';
 
 type SliderProps = {
@@ -17,7 +18,7 @@ export const Slider: FC<SliderProps> = ({ sliders }) => {
     const sliderWidth = useBreakpointValue({ base: 344, sm: 344, md: '100%' });
 
     return (
-        <Box position='relative'>
+        <>
             <Heading as='h2' size={titleSize} pb={{ base: 2, lg: 6 }}>
                 Новые рецепты
             </Heading>
@@ -54,6 +55,6 @@ export const Slider: FC<SliderProps> = ({ sliders }) => {
                     ))}
                 </HStack>
             </HStack>
-        </Box>
+        </>
     );
 };

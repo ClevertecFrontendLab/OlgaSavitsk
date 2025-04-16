@@ -24,7 +24,7 @@ import { TRUNCATE_STYLES } from '~/constants/menu.constants';
 import { IconCounter } from '../count-icon/count-icon';
 import { CustomIcon } from '../custom-icon/custom-icon';
 import { CustomTag } from '../custom-tag/custom-tag';
-import { Recipie } from '../pages/vegan-page/helpers';
+import { Recipie } from '../pages/category-page/helpers';
 
 export const DishCard: FC<Recipie> = ({
     title,
