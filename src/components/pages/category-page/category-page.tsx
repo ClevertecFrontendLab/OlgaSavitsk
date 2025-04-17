@@ -45,7 +45,7 @@ export const CategoryPage: FC<PageConfig> = ({
                         <Tab
                             key={index}
                             as={Link}
-                            to={`/${path}/${route}`}
+                            to={`${path}/${route}`}
                             whiteSpace='nowrap'
                             fontSize={{ base: 'sm', md: 'sm', lg: 'md' }}
                             sx={{ marginBottom: 0 }}

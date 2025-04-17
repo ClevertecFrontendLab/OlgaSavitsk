@@ -3,17 +3,14 @@ import { ChakraProps, Flex, Icon, Image, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { NavLink } from 'react-router';
 
-import classes from './index.module.css';
-
 type NavItemProps = {
     href: string;
     icon?: string;
     label?: string;
     rightIcon?: boolean;
     isOpen?: boolean;
-    active?: boolean;
     dataTestId?: string;
-    isSubmenu?: boolean;
+    className?: string;
     onClick?: () => void;
 } & ChakraProps;
 
@@ -23,14 +20,11 @@ export const NavItem: FC<NavItemProps> = ({
     label,
     rightIcon,
     isOpen,
-    active,
-    isSubmenu,
+    className,
     onClick,
 }) => (
     <NavLink to={href || '#'} style={{ textDecoration: 'none' }} onClick={onClick}>
-        <Flex
-            className={`${classes.navitem} ${isSubmenu ? classes.navitemborder : undefined} ${isOpen ? classes.openItem : classes.navitem} ${active ? `${classes.navitemborderactive}` : undefined}`}
-        >
+        <Flex className={className}>
             {icon && <Image src={icon} alt={label} />}
             <Text whiteSpace='nowrap'>{label}</Text>
             {rightIcon && (

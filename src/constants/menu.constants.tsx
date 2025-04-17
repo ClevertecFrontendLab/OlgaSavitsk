@@ -40,7 +40,7 @@ export const categoryMap: CategoryType = {
     [Category.Vegan]: {
         label: 'Веганская кухня',
         icon: veganIcon,
-        route: '/vegan',
+        route: 'vegan',
         dataTestId: DATA_TEST_ID.veganCuisine,
     },
     [Category.Kids]: { label: 'Детские блюда', icon: childTastyIcon },
