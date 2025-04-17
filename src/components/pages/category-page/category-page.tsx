@@ -35,7 +35,12 @@ export const CategoryPage: FC<PageConfig> = ({
         <>
             <HeaderPage title={title} subTitle={subTitle} />
 
-            <Tabs index={+id! || 0} colorScheme='lime' display='flex' flexDirection='column'>
+            <Tabs
+                index={subMenus?.find(({ route }) => route === id)?.id || 0}
+                colorScheme='lime'
+                display='flex'
+                flexDirection='column'
+            >
                 <TabList
                     overflowX={{ base: 'auto', md: 'auto', lg: 'auto', '2xl': 'unset' }}
                     maxW={{ base: 360, md: 768, lg: '4xl' }}
@@ -49,6 +54,7 @@ export const CategoryPage: FC<PageConfig> = ({
                             whiteSpace='nowrap'
                             fontSize={{ base: 'sm', md: 'sm', lg: 'md' }}
                             sx={{ marginBottom: 0 }}
+                            _focus={{ boxShadow: 'none' }}
                         >
                             {title}
                         </Tab>

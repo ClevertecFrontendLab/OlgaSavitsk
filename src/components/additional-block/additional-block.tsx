@@ -56,8 +56,9 @@ export const AdditionalBlock: FC<AdditionalInfo> = ({ title, description, recipe
                 gap={{ base: 3, md: 3, lg: 4, '2xl': 6 }}
                 gridColumn={{ base: 'span 1', md: 'span 2', xl: 'span 2', '2xl': 'span 2' }}
             >
-                {recipes.recipies.map(({ title, content, favorites, likes, category }) => (
+                {recipes.recipies.map(({ title, content, favorites, likes, category }, index) => (
                     <Card
+                        key={index}
                         h='100%'
                         borderRadius='lg'
                         variant='outline'
@@ -99,8 +100,8 @@ export const AdditionalBlock: FC<AdditionalInfo> = ({ title, description, recipe
                 spacing={{ base: 2, lg: 3 }}
                 gridColumn={{ base: 'span 1', md: 'span 1', xl: 'span 1', '2xl': 'span 2' }}
             >
-                {recipes.additionalRecipes.map(({ title, category }) => (
-                    <Card borderRadius='lg' variant='outline'>
+                {recipes.additionalRecipes.map(({ title, category }, index) => (
+                    <Card key={index} borderRadius='lg' variant='outline'>
                         <CardBody
                             px={{ base: 3, md: 3, lg: 4, '2xl': 6 }}
                             py={{ base: 2, md: 2, lg: 2 }}

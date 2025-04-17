@@ -13,5 +13,6 @@ export type SubCategoryType = {
     [key in Category]?: {
         title: string;
         route: string;
+        id: number;
     }[];
 };

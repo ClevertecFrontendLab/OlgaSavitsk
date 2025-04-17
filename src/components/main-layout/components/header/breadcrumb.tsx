@@ -14,7 +14,7 @@ export const Breadcrumbs = () => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         const mainMenu = breadcrumbNameMap[url];
         const category = Object.values(Category).find(
-            (cat) => categoryMap[cat].route === `/${pathSnippets[0]}`,
+            (cat) => categoryMap[cat].route === `${pathSnippets[0]}`,
         );
         const subMenu = getSubMenuLabel(category, snippet);
         const isLast = index === pathSnippets.length - 1;
