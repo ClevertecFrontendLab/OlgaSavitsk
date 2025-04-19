@@ -2,9 +2,9 @@ import { Box, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Outlet } from 'react-router';
 
-import { HeaderComponent } from '..';
 import { Aside } from './components/aside/aside';
 import { FooterComponent } from './components/footer/footer';
+import { HeaderComponent } from './components/header/header';
 import { SideBar } from './components/sidebar/sidebar';
 
 export const MainLayout = () => {
@@ -19,14 +19,12 @@ export const MainLayout = () => {
     });
 
     const templateAreas = isMobile
-        ? `"header"
-        "main"
-        "footer"`
+        ? `"header" "main" "footer"`
         : `"header header header"
         "nav main aside"
         "nav footer aside"`;
 
-    const templateRows = '80px 1fr 84px';
+    const templateRows = isMobile ? '64px 1fr 84px' : '80px 1fr 84px';
     const templateColumns = isMobile ? '1fr' : '256px 1fr 208px';
 
     return (

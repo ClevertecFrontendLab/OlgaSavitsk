@@ -2,10 +2,9 @@ import { Avatar, Box, Card, Flex, Heading, Text, useBreakpointValue } from '@cha
 import { FC } from 'react';
 
 import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { Blog } from '~/shared/types/page-config.types';
 
-import { Blog } from '../helpers';
-
-export const BlogCard: FC<Blog> = ({ id, avatar, username, name, content }) => {
+export const BlogCard: FC<Blog> = ({ avatar, username, name, content }) => {
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const truncateStyles = useBreakpointValue({
         base: TRUNCATE_STYLES,
@@ -14,7 +13,6 @@ export const BlogCard: FC<Blog> = ({ id, avatar, username, name, content }) => {
 
     return (
         <Card
-            key={id}
             borderRadius='lg'
             p={{ base: 4, md: 4, '2xl': 6 }}
             variant='outline'

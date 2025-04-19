@@ -28,7 +28,7 @@ export const NavItem: FC<NavItemProps> = ({
             {icon && <Image src={icon} alt={label} />}
             <Text whiteSpace='nowrap'>{label}</Text>
             {rightIcon && (
-                <Icon ml='auto' as={isOpen ? ChevronUpIcon : ChevronDownIcon} boxSize={6} />
+                <Icon ml='auto' as={isOpen ? ChevronUpIcon : ChevronDownIcon} boxSize={7} />
             )}
         </Flex>
     </NavLink>

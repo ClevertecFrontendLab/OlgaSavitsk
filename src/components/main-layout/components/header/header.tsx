@@ -8,6 +8,7 @@ import {
     Spacer,
     Text,
     useBreakpointValue,
+    useDisclosure,
     VStack,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -28,6 +29,7 @@ type HeaderProps = {
 };
 
 export const HeaderComponent: React.FC<HeaderProps> = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const logoSrc = useBreakpointValue({
         base: logoMobile,
         md: logo,
@@ -35,7 +37,7 @@ export const HeaderComponent: React.FC<HeaderProps> = () => {
 
     return (
         <Box
-            className={classes.header}
+            className={isOpen ? `${classes.header} ${classes.headerMobile}` : classes.header}
             h={{ base: 16, md: 16, lg: 20 }}
             px={5}
             data-test-id={DATA_TEST_ID.header}
@@ -43,7 +45,7 @@ export const HeaderComponent: React.FC<HeaderProps> = () => {
             <Flex align='center'>
                 <Image src={logoSrc} alt='logo' />
             </Flex>
-            <Flex align='center' flex='1' px={{ base: 0, lg: 16 }}>
+            <HStack align='center' flex='1' px={{ base: 0, lg: 16 }}>
                 <Hide below='md'>
                     <Breadcrumbs />
                 </Hide>
@@ -63,12 +65,10 @@ export const HeaderComponent: React.FC<HeaderProps> = () => {
                     </Hide>
                 </HStack>
                 <HStack px={0}>
-                    <Hide above='lg'>
-                        <StatisticsComponent direction='row' />
-                    </Hide>
-                    <MobileSideBar />
+                    <Hide above='lg'>{!isOpen && <StatisticsComponent direction='row' />}</Hide>
+                    <MobileSideBar isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
                 </HStack>
-            </Flex>
+            </HStack>
         </Box>
     );
 };

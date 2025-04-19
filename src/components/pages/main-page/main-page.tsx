@@ -110,7 +110,9 @@ export const MainPage = () => {
                         align='stretch'
                     >
                         {blogPosts.map((blog: Blog) => (
-                            <BlogCard {...blog} />
+                            <Fragment key={blog.id}>
+                                <BlogCard {...blog} />
+                            </Fragment>
                         ))}
                     </Stack>
                 </HStack>

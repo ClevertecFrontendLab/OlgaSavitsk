@@ -1,4 +1,5 @@
 .activeContainer {
+    width: calc(100% - 4px);
     border-radius: var(--border-radius-l);
     overflow-y: auto;
 }

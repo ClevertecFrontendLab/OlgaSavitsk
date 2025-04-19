@@ -12,7 +12,7 @@ export const HeaderPage: FC<HeaderPageProps> = ({ title, subTitle }) => {
     const headingSize = useBreakpointValue({ base: 'lg', md: 'lg', lg: '2xl' });
 
     return (
-        <Center pb={8}>
+        <Center pb={8} pt={4}>
             <VStack w={{ base: 'full', md: 'full', lg: 'auto' }}>
                 <Heading as='h1' size={headingSize} textAlign='center' fontWeight={700}>
                     {title}

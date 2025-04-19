@@ -26,6 +26,10 @@ export const theme = extendTheme({
                     color: 'blackAlpha.700',
                     fontWeight: 400,
                 },
+                list: {
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                },
             },
         },
         Tag: {

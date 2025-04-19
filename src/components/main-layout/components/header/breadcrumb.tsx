@@ -21,7 +21,12 @@ export const Breadcrumbs = () => {
 
         return (
             <BreadcrumbItem key={url}>
-                <BreadcrumbLink href={url} color={isLast ? 'black' : 'blackAlpha.700'}>
+                <BreadcrumbLink
+                    href={url}
+                    color={isLast ? 'black' : 'blackAlpha.700'}
+                    fontSize={{ base: 'md', lg: 'lg' }}
+                    whiteSpace='nowrap'
+                >
                     {index === 0 ? mainMenu : subMenu}
                 </BreadcrumbLink>
             </BreadcrumbItem>
@@ -29,9 +34,15 @@ export const Breadcrumbs = () => {
     });
 
     return (
-        <Breadcrumb separator={<ChevronRightIcon color='gray.500' />} ml={16}>
+        <Breadcrumb separator={<ChevronRightIcon color='gray.500' />} ml={{ base: 0, lg: 16 }}>
             <BreadcrumbItem>
-                <BreadcrumbLink href={RoutePath.mainPage}>Главная</BreadcrumbLink>
+                <BreadcrumbLink
+                    href={RoutePath.mainPage}
+                    fontSize={{ base: 'md', lg: 'lg' }}
+                    whiteSpace='nowrap'
+                >
+                    Главная
+                </BreadcrumbLink>
             </BreadcrumbItem>
             {breadcrumbItems}
         </Breadcrumb>
