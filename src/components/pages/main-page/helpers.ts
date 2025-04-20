@@ -10,9 +10,9 @@ import recipe6 from '~/assets/images/recipe6.png';
 import recipe7 from '~/assets/images/recipe7.png';
 import recipe8 from '~/assets/images/recipe8.png';
 import { Category } from '~/constants/menu.constants';
-import { Blog, SliderType } from '~/shared/types/page-config.types';
+import { Blog } from '~/shared/types/page-config.types';
 
-export const sliders: Array<SliderType> = [
+export const sliders = [
     {
         title: 'Солянка с грибами',
         description:

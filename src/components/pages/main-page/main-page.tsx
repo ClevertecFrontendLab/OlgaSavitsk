@@ -23,7 +23,8 @@ import { RoutePath } from '~/constants/routes.constants';
 import { HeaderPage } from '~/shared/components/header-page';
 import { Blog } from '~/shared/types/page-config.types';
 
-import { additionalInfo, blogPosts, recipies, sliders } from './helpers';
+import { additionalInfo, blogPosts, recipies } from './helpers';
+import { recipes } from './slider/helpers';
 
 export const MainPage = () => {
     const navigate = useNavigate();
@@ -35,8 +36,8 @@ export const MainPage = () => {
         <>
             <HeaderPage title='Приятного аппетита!' />
 
-            <Box position='relative' pt={{ base: 0, lg: 6 }}>
-                <Slider sliders={sliders} />
+            <Box pt={{ base: 0, lg: 6 }}>
+                <Slider sliders={recipes} />
             </Box>
 
             <HStack pt={{ base: 8, lg: 10 }} flexWrap='wrap' justify='center'>

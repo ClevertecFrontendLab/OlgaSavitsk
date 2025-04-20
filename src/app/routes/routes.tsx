@@ -1,15 +1,16 @@
 import { type RouteObject } from 'react-router';
 
+import { CategoryPage } from '~/components/pages/category-page/category-page';
 import { DeliciousPage } from '~/components/pages/delicious-page/delicious-page';
-import { VeganPage } from '~/components/pages/vegan-page/vegan-page';
 import { RoutePath } from '~/constants/routes.constants';
 
 export const veganRoot: RouteObject = {
-    path: RoutePath.veganPage,
-    element: <VeganPage />,
+    path: '/:category',
+    element: <CategoryPage />,
     children: [
         {
-            path: ':id',
+            path: ':subcategory',
+            element: <CategoryPage />,
         },
     ],
 };

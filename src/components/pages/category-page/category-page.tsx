@@ -10,33 +10,34 @@ import {
     TabPanels,
     Tabs,
 } from '@chakra-ui/react';
-import { FC, Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link, useParams } from 'react-router';
 
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
 import { DishCard } from '~/components/dish-card/dish-card';
+import { Category } from '~/constants/menu.constants';
 import { HeaderPage } from '~/shared/components/header-page';
-import { PageConfig } from '~/shared/types/page-config.types';
 
+import { pageConfig } from '../constants/page-config';
 import { Recipie } from './helpers';
 import classes from './index.module.css';
 
-export const CategoryPage: FC<PageConfig> = ({
-    path,
-    title,
-    subTitle,
-    subMenus,
-    recipes,
-    additionalInfo,
-}) => {
-    const { id } = useParams();
+export const CategoryPage = () => {
+    const { category } = useParams();
+    const config = pageConfig[category as Category];
+
+    if (!config) {
+        return <div>Category not found</div>;
+    }
+
+    const { path, title, subTitle, subMenus, recipes, additionalInfo } = config;
 
     return (
         <>
             <HeaderPage title={title} subTitle={subTitle} />
 
             <Tabs
-                index={subMenus?.find(({ route }) => route === id)?.id || 0}
+                index={subMenus?.find(({ route }) => route === category)?.id || 0}
                 colorScheme='lime'
                 display='flex'
                 flexDirection='column'
@@ -53,6 +54,7 @@ export const CategoryPage: FC<PageConfig> = ({
                             to={`${path}/${route}`}
                             whiteSpace='nowrap'
                             fontSize={{ base: 'sm', md: 'sm', lg: 'md' }}
+                            color='lime.800'
                             sx={{ marginBottom: 0 }}
                             _focus={{ boxShadow: 'none' }}
                         >

@@ -7,33 +7,30 @@ import {
     Image,
     Text,
     useBreakpointValue,
+    VStack,
 } from '@chakra-ui/react';
 import { FC } from 'react';
+import { useNavigate } from 'react-router';
 
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { SliderType } from '~/shared/types/page-config.types';
 
 import { IconCounter } from '../../../count-icon/count-icon';
 import { CustomTag } from '../../../custom-tag/custom-tag';
 
-type SliderCardProps = {
-    title: string;
-    description: string;
-    category: string;
-    image: string;
-    heartCount?: number;
-    peopleCount?: number;
-};
-
-export const SliderCard: FC<SliderCardProps> = ({
+export const SliderCard: FC<SliderType> = ({
+    id,
     title,
     description,
     category,
+    subcategory,
     image,
-    heartCount,
-    peopleCount,
+    bookmarks,
+    likes,
 }) => {
+    const navigate = useNavigate();
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const sliderWidth = useBreakpointValue({ base: '158px', lg: '277px', '2xl': '322px' });
     const imageHeight = useBreakpointValue({ base: '128px', lg: '230px' });
@@ -42,8 +39,21 @@ export const SliderCard: FC<SliderCardProps> = ({
         lg: TRUNCATE_STYLES,
     });
 
+    const handleRecipeClick = () => {
+        const categoryRoute = category[0];
+        const subCategory = subcategory[0];
+        navigate(`/${categoryRoute}/${subCategory}/${id}`);
+    };
+
     return (
-        <Card w={sliderWidth} borderRadius='lg' overflow='hidden' variant='outline' h='full'>
+        <Card
+            w={sliderWidth}
+            borderRadius='lg'
+            overflow='hidden'
+            variant='outline'
+            h='full'
+            onClick={handleRecipeClick}
+        >
             <Image objectFit='cover' src={image} height={imageHeight} alt='recipe' />
             <CardBody px={{ base: 2, md: 2, lg: 3, '2xl': 6 }} py={{ base: 2, lg: 4 }}>
                 <Heading
@@ -64,22 +74,21 @@ export const SliderCard: FC<SliderCardProps> = ({
 
             <CardFooter
                 justify='space-between'
-                flexWrap='wrap'
                 px={{ base: 3, md: 2, lg: 4, '2xl': 6 }}
                 py={{ base: 3, md: 2, lg: 2, '2xl': 4 }}
             >
-                <CustomTag
-                    category={category}
-                    color='lime.150'
-                    position={isMobile ? 'absolute' : 'static'}
-                />
-                <HStack spacing={5}>
-                    {heartCount && (
-                        <IconCounter fontSize='sm' icon={heartIcon} count={heartCount} />
-                    )}
-                    {peopleCount && (
-                        <IconCounter fontSize='sm' icon={peopleIcon} count={peopleCount} />
-                    )}
+                <VStack alignItems='start'>
+                    {category.map((cat) => (
+                        <CustomTag
+                            category={cat}
+                            color='lime.150'
+                            position={isMobile ? 'absolute' : 'static'}
+                        />
+                    ))}
+                </VStack>
+                <HStack spacing={5} align='end'>
+                    {bookmarks && <IconCounter fontSize='sm' icon={heartIcon} count={bookmarks} />}
+                    {likes && <IconCounter fontSize='sm' icon={peopleIcon} count={likes} />}
                 </HStack>
             </CardFooter>
         </Card>

@@ -27,10 +27,12 @@ export type Blog = {
 };
 
 export type SliderType = {
+    id: string;
     title: string;
     description: string;
-    category: string;
+    category: Array<string>;
+    subcategory: Array<string>;
     image: string;
-    heartCount?: number;
-    peopleCount?: number;
+    bookmarks?: number;
+    likes?: number;
 };

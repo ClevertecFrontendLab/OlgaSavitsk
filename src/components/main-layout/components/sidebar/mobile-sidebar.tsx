@@ -77,7 +77,7 @@ export const MobileSideBar: FC<MobileSideBarProps> = ({ isOpen, onClose, onOpen 
                     height={{ base: 652, sm: 652, md: 868, lg: '100vh' }}
                     bg={bgColor}
                     zIndex='modal'
-                    transform={isOpen ? 'translateX(0)' : 'translateX(100%)'}
+                    display={isOpen ? 'flex' : 'none'}
                     borderBottomRadius='lg'
                     mx={2}
                 >
