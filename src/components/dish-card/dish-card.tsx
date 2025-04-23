@@ -20,10 +20,10 @@ import { FC } from 'react';
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
+import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
+import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
 
-import { IconCounter } from '../count-icon/count-icon';
-import { CustomIcon } from '../custom-icon/custom-icon';
-import { CustomTag } from '../custom-tag/custom-tag';
 import { Recipie } from '../pages/category-page/helpers';
 
 export const DishCard: FC<Recipie> = ({
@@ -73,10 +73,10 @@ export const DishCard: FC<Recipie> = ({
                         {!isMobile && <Spacer />}
                         <HStack spacing={{ base: 6, md: 2, lg: 6 }}>
                             {heartCount && (
-                                <IconCounter fontSize='xs' icon={heartIcon} count={heartCount} />
+                                <StatBadge fontSize='xs' icon={heartIcon} count={heartCount} />
                             )}
                             {peopleCount && (
-                                <IconCounter fontSize='xs' icon={peopleIcon} count={peopleCount} />
+                                <StatBadge fontSize='xs' icon={peopleIcon} count={peopleCount} />
                             )}
                         </HStack>
                     </Flex>

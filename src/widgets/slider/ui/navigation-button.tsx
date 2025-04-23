@@ -12,6 +12,7 @@ export const NavigationButton: FC<NavigationButtonProps> = ({ direction, ...prop
         zIndex={10}
         bg='black'
         size='lg'
+        transform='translateY(-50%)'
         icon={
             direction === 'prev' ? (
                 <ArrowBackIcon color='lime.50' />

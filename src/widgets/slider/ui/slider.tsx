@@ -2,19 +2,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Heading, HStack, useBreakpointValue } from '@chakra-ui/react';
-import { FC } from 'react';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { SliderType } from '~/shared/types/page-config.types';
+import { recipes } from '~/shared/mock-data/recipes';
 
-import { recipes } from './helpers';
 import { NavigationButton } from './navigation-button';
 import { SliderCard } from './slider-card';
-
-type SliderProps = {
-    sliders: Array<SliderType>;
-};
 
 const BREAKPOINT_CONFIG = {
     top: { base: '90%', md: '50%' },
@@ -43,7 +37,7 @@ const SWIPER_BREAKPOINTS = {
     },
 };
 
-export const Slider: FC<SliderProps> = () => {
+export const Slider = () => {
     const top = useBreakpointValue(BREAKPOINT_CONFIG.top);
     const side = useBreakpointValue(BREAKPOINT_CONFIG.side);
     const isMobile = useBreakpointValue(BREAKPOINT_CONFIG.isMobile);
@@ -63,14 +57,12 @@ export const Slider: FC<SliderProps> = () => {
                             direction='prev'
                             left={side}
                             top={top}
-                            transform='translateY(-50%)'
                         />
                         <NavigationButton
                             aria-label='right-arrow'
                             direction='next'
                             right={side}
                             top={top}
-                            transform='translateY(-50%)'
                         />
                     </>
                 )}

@@ -11,8 +11,8 @@ import {
 import { FC, useRef } from 'react';
 
 import exitIcon from '~/assets/icons/exit.svg';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
-import { CustomIcon } from '../../../custom-icon/custom-icon';
 import { Breadcrumbs } from '../header/breadcrumb';
 import { Menu } from './menu';
 

@@ -3,8 +3,7 @@ import { HStack, Stack, Text } from '@chakra-ui/react';
 import heartIcon from '~/assets/icons/heart.svg';
 import hearteyesIcon from '~/assets/icons/hearteyes.svg';
 import peopleIcon from '~/assets/icons/people.svg';
-
-import { CustomIcon } from '../../../custom-icon/custom-icon';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 export const StatisticsComponent = ({ ...rest }) => (
     <Stack spacing={{ base: 2, md: 10 }} {...rest}>

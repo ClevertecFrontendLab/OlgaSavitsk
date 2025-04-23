@@ -1,8 +1,8 @@
 import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
 
 import exitIcon from '~/assets/icons/exit.svg';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
-import { CustomIcon } from '../../../custom-icon/custom-icon';
 import { Menu } from './menu';
 
 export const SideBar = () => (

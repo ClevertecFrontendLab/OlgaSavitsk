@@ -10,7 +10,7 @@ import {
     TabPanels,
     Tabs,
 } from '@chakra-ui/react';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { Link, useParams } from 'react-router';
 
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
@@ -23,8 +23,16 @@ import { Recipie } from './helpers';
 import classes from './index.module.css';
 
 export const CategoryPage = () => {
-    const { category } = useParams();
+    const { category, subcategory } = useParams();
     const config = pageConfig[category as Category];
+
+    const tabIndex = useMemo(() => {
+        if (!config || !config.subMenus) {
+            return 0;
+        }
+        const foundMenu = config.subMenus.find(({ route }) => route === subcategory);
+        return foundMenu ? foundMenu.id : 0;
+    }, [config, subcategory]);
 
     if (!config) {
         return <div>Category not found</div>;
@@ -36,12 +44,7 @@ export const CategoryPage = () => {
         <>
             <HeaderPage title={title} subTitle={subTitle} />
 
-            <Tabs
-                index={subMenus?.find(({ route }) => route === category)?.id || 0}
-                colorScheme='lime'
-                display='flex'
-                flexDirection='column'
-            >
+            <Tabs index={tabIndex} colorScheme='lime' display='flex' flexDirection='column'>
                 <TabList
                     overflowX={{ base: 'auto', md: 'auto', lg: 'auto', '2xl': 'unset' }}
                     maxW={{ base: 360, md: 768, lg: '4xl' }}

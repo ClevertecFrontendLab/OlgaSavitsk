@@ -14,17 +14,16 @@ import {
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router';
 
+import { RoutePath } from '~/app/routes/routes.constants';
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
+import { BlogCard } from '~/components/blog-card/blog-card';
 import { DishCard } from '~/components/dish-card/dish-card';
-import { BlogCard } from '~/components/pages/main-page/blog-card/blog-card';
-import { Slider } from '~/components/pages/main-page/slider/slider';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
-import { RoutePath } from '~/constants/routes.constants';
 import { HeaderPage } from '~/shared/components/header-page';
 import { Blog } from '~/shared/types/page-config.types';
+import { Slider } from '~/widgets/slider/ui/slider';
 
 import { additionalInfo, blogPosts, recipies } from './helpers';
-import { recipes } from './slider/helpers';
 
 export const MainPage = () => {
     const navigate = useNavigate();
@@ -37,7 +36,7 @@ export const MainPage = () => {
             <HeaderPage title='Приятного аппетита!' />
 
             <Box pt={{ base: 0, lg: 6 }}>
-                <Slider sliders={recipes} />
+                <Slider />
             </Box>
 
             <HStack pt={{ base: 8, lg: 10 }} flexWrap='wrap' justify='center'>

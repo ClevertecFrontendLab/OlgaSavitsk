@@ -48,6 +48,14 @@ export const theme = extendTheme({
                 },
             },
         },
+        Table: {
+            sizes: {
+                xl: {
+                    th: { py: '8px', pl: '24px' },
+                    td: { py: '8px', px: '24px' },
+                },
+            },
+        },
     },
     fontSize: {
         18: '18px',

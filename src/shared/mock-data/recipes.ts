@@ -5,6 +5,11 @@ import recipe4 from '~/assets/images/recipe4.png';
 import recipe5 from '~/assets/images/recipe5.png';
 import recipe6 from '~/assets/images/recipe6.png';
 import recipe7 from '~/assets/images/recipe7.png';
+import step1 from '~/assets/images/step1.png';
+import step2 from '~/assets/images/step2.png';
+import step3 from '~/assets/images/step3.png';
+import step4 from '~/assets/images/step4.png';
+import step5 from '~/assets/images/step5.png';
 
 export const recipes = [
     {
@@ -33,22 +38,22 @@ export const recipes = [
             {
                 stepNumber: 1,
                 description: 'Нарезать картошку и перец.',
-                image: 'url',
+                image: step1,
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить лук до золотистого цвета.',
-                image: 'url',
+                image: step2,
             },
             {
                 stepNumber: 3,
                 description: 'Добавить картошку, перец и фасоль, залить соусом.',
-                image: 'url',
+                image: step3,
             },
             {
                 stepNumber: 4,
                 description: 'Тушить на медленном огне 30 минут.',
-                image: 'url',
+                image: step4,
             },
         ],
         meat: '',
@@ -83,6 +88,11 @@ export const recipes = [
             {
                 stepNumber: 2,
                 description: 'Обжарить грибы до готовности.',
+                image: 'url',
+            },
+            {
+                stepNumber: 3,
+                description: 'Сформировать рулетики и обжарить.',
                 image: 'url',
             },
             {
@@ -280,6 +290,60 @@ export const recipes = [
                 stepNumber: 3,
                 description: 'Добавить специи и тушить до готовности.',
                 image: 'url',
+            },
+        ],
+    },
+    {
+        id: '7',
+        title: 'Лапша с курицей и шафраном',
+        description:
+            'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+        category: ['second-dish', 'national', 'kids'],
+        subcategory: ['poultry-dish'],
+        image: recipe7,
+        bookmarks: 258,
+        likes: 1342,
+        date: '2024-03-08T00:00:00Z',
+        time: '40 минут',
+        portions: 4,
+        nutritionValue: { calories: 400, proteins: 30, fats: 15, carbohydrates: 50 },
+        ingredients: [
+            { title: 'лапша', count: '200', measureUnit: 'г' },
+            { title: 'курица', count: '300', measureUnit: 'г' },
+            { title: 'шафран', count: '1', measureUnit: 'ч. л.' },
+            { title: 'лук', count: '1', measureUnit: 'шт.' },
+        ],
+        steps: [
+            {
+                stepNumber: 1,
+                description: 'Отварить лапшу.',
+                image: step1,
+            },
+            {
+                stepNumber: 2,
+                description: 'Обжарить курицу с луком и шафраном.',
+                image: step2,
+            },
+            {
+                stepNumber: 3,
+                description: 'Смешать лапшу с курицей и подавать.',
+                image: step3,
+            },
+            {
+                stepNumber: 4,
+                description:
+                    'В сковороде, на оставшемся жире поджарить лук до золотистого цвета, добавить чеснок и прожарить ещё около 1 минуты.',
+                image: step4,
+            },
+            {
+                stepNumber: 5,
+                description: 'Всыпать шафран, корицу и муки, перемешать и коротко прожарить.',
+            },
+            {
+                stepNumber: 6,
+                description:
+                    'В сковороде, на оставшемся жире поджарить лук до золотистого цвета, добавить чеснок и прожарить ещё около 1 минуты.',
+                image: step5,
             },
         ],
     },

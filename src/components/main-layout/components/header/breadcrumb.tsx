@@ -2,8 +2,8 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 import { useLocation } from 'react-router';
 
+import { breadcrumbNameMap, RoutePath } from '~/app/routes/routes.constants';
 import { Category, categoryMap } from '~/constants/menu.constants';
-import { breadcrumbNameMap, RoutePath } from '~/constants/routes.constants';
 import { getSubMenuLabel } from '~/utils/get-label';
 
 export const Breadcrumbs = () => {

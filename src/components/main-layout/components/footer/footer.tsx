@@ -5,8 +5,8 @@ import homeIcon from '~/assets/icons/home.svg';
 import SearchIcon from '~/assets/icons/search.svg';
 import avatar from '~/assets/images/avatar.png';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
-import { CustomIcon } from '../../../custom-icon/custom-icon';
 import classes from './index.module.css';
 
 export const FooterComponent = () => (

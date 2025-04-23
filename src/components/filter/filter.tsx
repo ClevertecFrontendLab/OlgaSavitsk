@@ -13,8 +13,7 @@ import {
 } from '@chakra-ui/react';
 
 import filterIcon from '~/assets/icons/filter.svg';
-
-import { CustomIcon } from '../custom-icon/custom-icon';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 export const Filter = () => (
     <Stack

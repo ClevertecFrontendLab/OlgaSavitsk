@@ -16,11 +16,10 @@ import { FC } from 'react';
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { Category, categoryMap, TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
+import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
+import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
 import { AdditionalInfo } from '~/shared/types/page-config.types';
-
-import { IconCounter } from '../count-icon/count-icon';
-import { CustomIcon } from '../custom-icon/custom-icon';
-import { CustomTag } from '../custom-tag/custom-tag';
 
 export const AdditionalBlock: FC<AdditionalInfo> = ({ title, description, recipes }) => {
     const titleSize = useBreakpointValue({ base: 'lg', md: 'lg', lg: 'xl', '2xl': '2xl' });
@@ -88,8 +87,8 @@ export const AdditionalBlock: FC<AdditionalInfo> = ({ title, description, recipe
                         <CardFooter justify='space-between' flexWrap='nowrap' p={0} pt={6}>
                             <CustomTag category={category} color='lime.50' />
                             <HStack spacing={4}>
-                                <IconCounter fontSize='sm' icon={heartIcon} count={favorites} />
-                                <IconCounter fontSize='sm' icon={peopleIcon} count={likes} />
+                                <StatBadge fontSize='sm' icon={heartIcon} count={favorites} />
+                                <StatBadge fontSize='sm' icon={peopleIcon} count={likes} />
                             </HStack>
                         </CardFooter>
                     </Card>

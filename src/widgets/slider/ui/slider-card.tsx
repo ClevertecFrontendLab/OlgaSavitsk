@@ -15,10 +15,9 @@ import { useNavigate } from 'react-router';
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
+import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
 import { SliderType } from '~/shared/types/page-config.types';
-
-import { IconCounter } from '../../../count-icon/count-icon';
-import { CustomTag } from '../../../custom-tag/custom-tag';
 
 export const SliderCard: FC<SliderType> = ({
     id,
@@ -78,8 +77,9 @@ export const SliderCard: FC<SliderType> = ({
                 py={{ base: 3, md: 2, lg: 2, '2xl': 4 }}
             >
                 <VStack alignItems='start'>
-                    {category.map((cat) => (
+                    {category.map((cat, index) => (
                         <CustomTag
+                            key={index}
                             category={cat}
                             color='lime.150'
                             position={isMobile ? 'absolute' : 'static'}
@@ -87,8 +87,8 @@ export const SliderCard: FC<SliderType> = ({
                     ))}
                 </VStack>
                 <HStack spacing={5} align='end'>
-                    {bookmarks && <IconCounter fontSize='sm' icon={heartIcon} count={bookmarks} />}
-                    {likes && <IconCounter fontSize='sm' icon={peopleIcon} count={likes} />}
+                    {bookmarks && <StatBadge fontSize='sm' icon={heartIcon} count={bookmarks} />}
+                    {likes && <StatBadge fontSize='sm' icon={peopleIcon} count={likes} />}
                 </HStack>
             </CardFooter>
         </Card>

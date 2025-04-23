@@ -40,7 +40,7 @@ export const MainLayout = () => {
                 <SideBar />
             </GridItem>
             <GridItem area='main' maxW={{ lg: '1408px' }} w='full'>
-                <Box px={{ base: 4, md: 5, '2xl': 6 }} pt={{ base: 0, lg: 8 }} maxW={maxW}>
+                <Box px={{ base: 4, md: 5, '2xl': 6 }} pt={{ base: 0, lg: 8 }} maxW={maxW} h='full'>
                     <Outlet />
                 </Box>
             </GridItem>
