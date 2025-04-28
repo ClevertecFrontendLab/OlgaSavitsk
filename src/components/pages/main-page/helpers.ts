@@ -1,68 +1,12 @@
 import avatar from '~/assets/images/avatar.png';
 import avatar2 from '~/assets/images/avatar2.png';
 import avatar3 from '~/assets/images/avatar3.png';
-import recipe1 from '~/assets/images/recipe1.png';
-import recipe2 from '~/assets/images/recipe2.png';
-import recipe3 from '~/assets/images/recipe3.png';
-import recipe4 from '~/assets/images/recipe4.png';
 import recipe5 from '~/assets/images/recipe5.png';
 import recipe6 from '~/assets/images/recipe6.png';
 import recipe7 from '~/assets/images/recipe7.png';
 import recipe8 from '~/assets/images/recipe8.png';
 import { Category } from '~/constants/menu.constants';
-
-export type SliderType = {
-    title: string;
-    description: string;
-    category: string;
-    image: string;
-    heartCount?: number;
-    peopleCount?: number;
-};
-
-export const sliders: Array<SliderType> = [
-    {
-        title: 'Солянка с грибами',
-        description:
-            'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
-        category: Category.FirstCourses,
-        image: recipe1,
-        heartCount: 1,
-    },
-    {
-        title: 'Капустные котлеты',
-        description:
-            'Капустные котлеты по этому рецепту получаются необычайно пышными и  невероятно вкусными. Мягкий вкус и лёгкая пряная нотка наверняка помогут сделать эти чудесные котлеты из капусты одним из ваших любимых овощных  блюд.',
-        category: Category.Vegan,
-        image: recipe2,
-        heartCount: 2,
-        peopleCount: 1,
-    },
-    {
-        title: 'Оладьи на кефире "Пышные"',
-        description:
-            'Очень вкусные и нежные оладьи на кефире. Настоятельно рекомендую пышные кефирные оладьи на завтрак.',
-        category: Category.Desserts,
-        image: recipe3,
-        peopleCount: 1,
-    },
-    {
-        title: 'Салат "Здоровье"',
-        description:
-            'Сельдерей очень полезен для здоровья, пора набираться витаминов. Не  салат, а сплошное удовольствие:) Вкусный, необычный, а главное быстрый.',
-        category: Category.Salads,
-        image: recipe4,
-        peopleCount: 1,
-    },
-    {
-        title: 'Салат "Здоровье"',
-        description:
-            'Сельдерей очень полезен для здоровья, пора набираться витаминов. Не  салат, а сплошное удовольствие:) Вкусный, необычный, а главное быстрый.',
-        category: Category.Salads,
-        image: recipe4,
-        peopleCount: 1,
-    },
-];
+import { Blog } from '~/shared/types/page-config.types';
 
 export const recipies = [
     {
@@ -71,8 +15,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.SecondCourses,
         image: recipe5,
-        heartCount: 85,
-        peopleCount: 152,
+        bookmarks: 85,
+        likes: 152,
     },
     {
         title: 'Пряная ветчина по итальянски',
@@ -80,8 +24,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.SecondCourses,
         image: recipe6,
-        heartCount: 159,
-        peopleCount: 257,
+        bookmarks: 159,
+        likes: 257,
         recommended: {
             name: 'Елена Высоцкая',
             avatar: avatar2,
@@ -93,8 +37,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.SecondCourses,
         image: recipe7,
-        heartCount: 258,
-        peopleCount: 342,
+        bookmarks: 258,
+        likes: 342,
         recommended: {
             name: 'Елена Высоцкая',
             avatar: avatar3,
@@ -106,18 +50,10 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.National,
         image: recipe8,
-        heartCount: 124,
-        peopleCount: 324,
+        bookmarks: 124,
+        likes: 324,
     },
 ];
-
-export type Blog = {
-    id?: number;
-    name: string;
-    avatar: string;
-    username?: string;
-    content?: string;
-};
 
 export const blogPosts: Array<Blog> = [
     {

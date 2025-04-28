@@ -1,64 +1,73 @@
-import { SearchIcon } from '@chakra-ui/icons';
-import {
-    FormLabel,
-    HStack,
-    Icon,
-    IconButton,
-    Input,
-    InputGroup,
-    InputRightElement,
-    Select,
-    Stack,
-    Switch,
-} from '@chakra-ui/react';
+import { HStack, IconButton, Stack, useDisclosure } from '@chakra-ui/react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import filterIcon from '~/assets/icons/filter.svg';
+import { DATA_TEST_ID } from '~/constants/data-test-id';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
+import {
+    applyFilters,
+    resetFilters,
+    searchTextSelector,
+    setAllergen,
+    setSearchText,
+} from '~/store/filter-slice';
+import { useAppSelector } from '~/store/hooks';
+import { SearchComponent } from '~/widgets/search/search';
 
-import { CustomIcon } from '../custom-icon/custom-icon';
+import { AllergensFilter } from './components/allergens-filter';
+import { FilterDrawer } from './components/drawer-filter';
 
-export const Filter = () => (
-    <Stack
-        spacing={4}
-        pt={{ base: 4, lg: 8 }}
-        maxW={{ sm: '100%', md: 448, lg: 'full' }}
-        w='full'
-        mx='auto'
-    >
-        <HStack spacing={3}>
-            <IconButton
-                aria-label='Sort'
-                variant='outline'
-                borderColor='blackAlpha.600'
-                size={{ base: 'sm', lg: 'lg', '2xl': 'lg' }}
-                p={{ base: 0, md: 0 }}
-                icon={<CustomIcon icon={filterIcon} boxSize={{ base: 4, lg: 6 }} />}
-            />
+export const Filter = () => {
+    const dispatch = useDispatch();
+    const searchText = useAppSelector(searchTextSelector);
+    const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const btnRef = useRef<HTMLButtonElement>(null);
 
-            <InputGroup pointerEvents='none' size={{ base: 'sm', lg: 'lg', '2xl': 'lg' }}>
-                <Input
-                    placeholder='Название или ингредиент...'
-                    borderColor='blackAlpha.600'
-                    borderRadius={6}
-                    _placeholder={{ color: 'lime.800' }}
+    const handleSearch = (text: string | null) => dispatch(setSearchText(text));
+
+    const handleOpenFilter = () => {
+        onOpen();
+        dispatch(resetFilters());
+    };
+
+    useEffect(() => {
+        dispatch(setAllergen(selectedAllergens));
+        dispatch(applyFilters());
+    }, [selectedAllergens, dispatch]);
+
+    return (
+        <>
+            <Stack
+                spacing={4}
+                pt={{ base: 4, lg: 8 }}
+                maxW={{ sm: 344, md: 448, lg: 'full' }}
+                w='full'
+                mx='auto'
+            >
+                <HStack spacing={3}>
+                    <IconButton
+                        ref={btnRef}
+                        onClick={handleOpenFilter}
+                        aria-label='Sort'
+                        variant='outline'
+                        borderColor='blackAlpha.600'
+                        size={{ base: 'sm', lg: 'lg', '2xl': 'lg' }}
+                        p={{ base: 0, md: 0 }}
+                        icon={<CustomIcon icon={filterIcon} boxSize={{ base: 4, lg: 6 }} />}
+                        data-test-id={DATA_TEST_ID.FILTER_BUTTON}
+                    />
+                    <FilterDrawer isOpen={isOpen} onClose={onClose} />
+
+                    <SearchComponent onSearch={handleSearch} initialValue={searchText} />
+                </HStack>
+
+                <AllergensFilter
+                    selectedAllergens={selectedAllergens}
+                    setSelectedAllergens={setSelectedAllergens}
                 />
-                <InputRightElement>
-                    <Icon as={SearchIcon} color='gray.400' />
-                </InputRightElement>
-            </InputGroup>
-        </HStack>
-
-        <HStack spacing={4} display={{ base: 'none', lg: 'flex' }}>
-            <HStack>
-                <FormLabel htmlFor='allergens' whiteSpace='nowrap' mb={0}>
-                    Исключить мои аллергены
-                </FormLabel>
-                <Switch id='allergens' />
-            </HStack>
-            <Select placeholder='Выберите из списка...' _placeholder={{ color: 'blackAlpha.700' }}>
-                <option value='option1'>Option 1</option>
-                <option value='option2'>Option 2</option>
-                <option value='option3'>Option 3</option>
-            </Select>
-        </HStack>
-    </Stack>
-);
+            </Stack>
+        </>
+    );
+};

@@ -1,7 +1,7 @@
 import { Box, IconButton, Show, Spacer, Text, VStack } from '@chakra-ui/react';
 
 import EditIcon from '~/assets/icons/edit.svg';
-import { CustomIcon } from '~/components/custom-icon/custom-icon';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 import { StatisticsComponent } from './statistics';
 
@@ -15,7 +15,7 @@ export const Aside = () => (
         position='fixed'
         pt={6}
     >
-        <Show above='md'>
+        <Show above='xl'>
             <StatisticsComponent direction='column' />
         </Show>
         <Spacer />

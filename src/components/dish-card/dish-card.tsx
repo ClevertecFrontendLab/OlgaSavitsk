@@ -5,7 +5,6 @@ import {
     CardFooter,
     CardHeader,
     Flex,
-    Heading,
     HStack,
     IconButton,
     Image,
@@ -16,30 +15,44 @@ import {
     useBreakpointValue,
 } from '@chakra-ui/react';
 import { FC } from 'react';
+import { useNavigate } from 'react-router';
 
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
-import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
+import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
+import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
+import { Recipe } from '~/shared/types/recipe.types';
+import { isArrayWithItems } from '~/shared/utils/common';
+import { searchTextSelector } from '~/store/filter-slice';
+import { useAppSelector } from '~/store/hooks';
 
-import { IconCounter } from '../count-icon/count-icon';
-import { CustomIcon } from '../custom-icon/custom-icon';
-import { CustomTag } from '../custom-tag/custom-tag';
-import { Recipie } from '../pages/vegan-page/helpers';
+import { HighlightText } from '../filter/components/highlight-text';
+import { Recipie } from '../pages/category-page/helpers';
 
-export const DishCard: FC<Recipie> = ({
+type DishCardProps = (Recipe | Recipie) & { dataTestId?: number };
+
+export const DishCard: FC<DishCardProps> = ({
+    id,
     title,
     description,
     category,
+    subcategory,
     image,
-    heartCount,
-    peopleCount,
+    bookmarks,
+    likes,
     recommended,
+    dataTestId,
 }) => {
+    const navigate = useNavigate();
+    const searchText = useAppSelector(searchTextSelector);
     const isMobile = useBreakpointValue({ base: true, lg: false });
-    const truncateStyles = useBreakpointValue({
-        base: {},
-        '2xl': TRUNCATE_STYLES,
-    });
+
+    const handleRecipeClick = () => {
+        const categoryRoute = category[0];
+        const subCategory = isArrayWithItems(subcategory) && subcategory[0];
+        navigate(`/${categoryRoute}/${subCategory}/${id}`);
+    };
 
     return (
         <Card
@@ -49,6 +62,7 @@ export const DishCard: FC<Recipie> = ({
             variant='outline'
             maxW={{ base: '100%', md: 356, lg: '100%', '2xl': 668 }}
             w='full'
+            data-test-id={`food-card-${dataTestId}`}
         >
             <Image
                 objectFit='cover'
@@ -65,33 +79,38 @@ export const DishCard: FC<Recipie> = ({
             <Stack w='full' spacing={{ md: 0 }}>
                 <CardHeader py={{ base: 2, md: 2, lg: 4 }} px={isMobile ? 2 : 6}>
                     <Flex>
-                        <CustomTag
-                            category={category}
-                            color='lime.50'
+                        <Flex
+                            flexDirection={isMobile ? 'column' : 'row'}
+                            wrap='wrap'
                             position={isMobile ? 'absolute' : 'static'}
-                        />
+                            left={1}
+                            gap={1}
+                        >
+                            {Array.isArray(category) ? (
+                                category.map((cat, index) => (
+                                    <CustomTag key={index} category={cat} color='lime.50' />
+                                ))
+                            ) : (
+                                <CustomTag
+                                    category={category}
+                                    color='lime.50'
+                                    position={isMobile ? 'absolute' : 'static'}
+                                />
+                            )}
+                        </Flex>
+
                         {!isMobile && <Spacer />}
                         <HStack spacing={{ base: 6, md: 2, lg: 6 }}>
-                            {heartCount && (
-                                <IconCounter fontSize='xs' icon={heartIcon} count={heartCount} />
+                            {bookmarks && (
+                                <StatBadge fontSize='xs' icon={heartIcon} count={bookmarks} />
                             )}
-                            {peopleCount && (
-                                <IconCounter fontSize='xs' icon={peopleIcon} count={peopleCount} />
-                            )}
+                            {likes && <StatBadge fontSize='xs' icon={peopleIcon} count={likes} />}
                         </HStack>
                     </Flex>
                 </CardHeader>
-                <CardBody py={0} px={isMobile ? 2 : 6}>
-                    <Heading
-                        as='h4'
-                        size={{ base: 'sm', lg: 'md' }}
-                        fontWeight={500}
-                        noOfLines={isMobile ? 2 : 1}
-                        maxW={{ base: 'auto', '2xl': 280 }}
-                        sx={truncateStyles}
-                    >
-                        {title}
-                    </Heading>
+                <CardBody py={0} px={isMobile ? 2 : 6} lineHeight={1}>
+                    <HighlightText title={title} searchText={searchText} />
+
                     {!isMobile && (
                         <Text fontSize='sm' noOfLines={3} letterSpacing={0.6} pt={3}>
                             {description}
@@ -123,6 +142,8 @@ export const DishCard: FC<Recipie> = ({
                         bg='blackAlpha.900'
                         color='white'
                         size={isMobile ? 'xs' : 'sm'}
+                        onClick={handleRecipeClick}
+                        data-test-id={`card-link-${dataTestId}`}
                     >
                         Готовить
                     </Button>
