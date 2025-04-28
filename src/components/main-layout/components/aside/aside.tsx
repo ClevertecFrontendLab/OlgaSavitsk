@@ -15,7 +15,7 @@ export const Aside = () => (
         position='fixed'
         pt={6}
     >
-        <Show above='md'>
+        <Show above='xl'>
             <StatisticsComponent direction='column' />
         </Show>
         <Spacer />

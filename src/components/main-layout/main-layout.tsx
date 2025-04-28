@@ -9,7 +9,7 @@ import { SideBar } from './components/sidebar/sidebar';
 
 export const MainLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const isMobile = useBreakpointValue({ base: true, lg: false });
+    const isMobile = useBreakpointValue({ base: true, xl: false });
     const maxW = useBreakpointValue({
         '2xl': '1408px',
         lg: '928px',

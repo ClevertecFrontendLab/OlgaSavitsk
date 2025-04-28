@@ -5,11 +5,12 @@ import { NavLink } from 'react-router';
 
 type NavItemProps = {
     href: string;
+    attr?: boolean;
     icon?: string;
     label?: string;
     rightIcon?: boolean;
     isOpen?: boolean;
-    dataTestId?: string;
+    dataTestId?: string | null;
     className?: string;
     onClick?: () => void;
 } & ChakraProps;
@@ -21,9 +22,17 @@ export const NavItem: FC<NavItemProps> = ({
     rightIcon,
     isOpen,
     className,
+    attr,
+    dataTestId = null,
     onClick,
 }) => (
-    <NavLink to={href || '#'} style={{ textDecoration: 'none' }} onClick={onClick}>
+    <NavLink
+        to={href || '#'}
+        style={{ textDecoration: 'none' }}
+        onClick={onClick}
+        data-test-id={dataTestId}
+        aria-selected={attr}
+    >
         <Flex className={className}>
             {icon && <Image src={icon} alt={label} />}
             <Text whiteSpace='nowrap'>{label}</Text>

@@ -38,6 +38,34 @@ export const theme = extendTheme({
                     textBox: 'cap alphabetic',
                 },
             },
+            variants: {
+                filterOutline: {
+                    container: {
+                        size: 'sm',
+                        variant: 'outline',
+                        boxShadow: 'inset 0 0 0px 1px var(--chakra-colors-lime-400)',
+                        _hover: {
+                            bg: 'lime.50',
+                        },
+                    },
+                    label: {
+                        color: 'lime.600',
+                        fontWeight: 'medium',
+                    },
+                },
+                filterSolid: {
+                    container: {
+                        size: 'sm',
+                        variant: 'solid',
+                        bg: 'lime.100',
+                        boxShadow: 'inset 0 0 0px 1px var(--chakra-colors-lime-400)',
+                    },
+                    label: {
+                        color: 'lime.700',
+                        fontWeight: 'medium',
+                    },
+                },
+            },
         },
         Tabs: {
             baseStyle: {
@@ -53,6 +81,15 @@ export const theme = extendTheme({
                 xl: {
                     th: { py: '8px', pl: '24px' },
                     td: { py: '8px', px: '24px' },
+                },
+            },
+        },
+        Switch: {
+            baseStyle: {
+                track: {
+                    _checked: {
+                        bg: 'lime.400',
+                    },
                 },
             },
         },

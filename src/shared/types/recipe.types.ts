@@ -12,17 +12,27 @@ export type RecipeStep = {
     image?: string;
 };
 
+export type RecommendedInfo = {
+    name: string;
+    avatar: string;
+};
+
 export type Recipe = {
     id: string;
     title: string;
     description: string;
     category: string[];
     image: string;
-    bookmarks?: number;
-    likes?: number;
     time: string;
     portions: number;
     nutritionValue: Record<NutritionKey, number>;
     ingredients: Ingredient[];
+    bookmarks?: number;
     steps: RecipeStep[];
+    subcategory?: string[];
+    likes?: number;
+    meat?: string;
+    side?: string;
+    author?: string;
+    recommended?: RecommendedInfo;
 };

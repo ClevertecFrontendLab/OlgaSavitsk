@@ -31,7 +31,7 @@ export const SliderCard: FC<SliderType> = ({
 }) => {
     const navigate = useNavigate();
     const isMobile = useBreakpointValue({ base: true, lg: false });
-    const sliderWidth = useBreakpointValue({ base: '158px', lg: '277px', '2xl': '322px' });
+    const sliderWidth = useBreakpointValue({ base: '158px', xl: '277px', '2xl': '322px' });
     const imageHeight = useBreakpointValue({ base: '128px', lg: '230px' });
     const truncateStyles = useBreakpointValue({
         base: {},
@@ -52,6 +52,7 @@ export const SliderCard: FC<SliderType> = ({
             variant='outline'
             h='full'
             onClick={handleRecipeClick}
+            data-test-id={`carousel-card-${id}`}
         >
             <Image objectFit='cover' src={image} height={imageHeight} alt='recipe' />
             <CardBody px={{ base: 2, md: 2, lg: 3, '2xl': 6 }} py={{ base: 2, lg: 4 }}>

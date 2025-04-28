@@ -15,8 +15,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.SecondCourses,
         image: recipe5,
-        heartCount: 85,
-        peopleCount: 152,
+        bookmarks: 85,
+        likes: 152,
     },
     {
         title: 'Пряная ветчина по итальянски',
@@ -24,8 +24,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.SecondCourses,
         image: recipe6,
-        heartCount: 159,
-        peopleCount: 257,
+        bookmarks: 159,
+        likes: 257,
         recommended: {
             name: 'Елена Высоцкая',
             avatar: avatar2,
@@ -37,8 +37,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.SecondCourses,
         image: recipe7,
-        heartCount: 258,
-        peopleCount: 342,
+        bookmarks: 258,
+        likes: 342,
         recommended: {
             name: 'Елена Высоцкая',
             avatar: avatar3,
@@ -50,8 +50,8 @@ export const recipies = [
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
         category: Category.National,
         image: recipe8,
-        heartCount: 124,
-        peopleCount: 324,
+        bookmarks: 124,
+        likes: 324,
     },
 ];
 

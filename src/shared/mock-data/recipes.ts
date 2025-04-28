@@ -56,11 +56,65 @@ export const recipes = [
                 image: step4,
             },
         ],
-        meat: '',
+        meat: 'Курица',
         side: 'potatoes',
     },
     {
         id: '1',
+        title: 'Лапша с курицей и шафраном',
+        description:
+            'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+        category: ['second-dish', 'national', 'kids'],
+        subcategory: ['poultry-dish'],
+        image: recipe7,
+        bookmarks: 258,
+        likes: 1342,
+        date: '2024-03-08T00:00:00Z',
+        time: '40 минут',
+        portions: 4,
+        nutritionValue: { calories: 400, proteins: 30, fats: 15, carbohydrates: 50 },
+        ingredients: [
+            { title: 'лапша', count: '200', measureUnit: 'г' },
+            { title: 'курица', count: '300', measureUnit: 'г' },
+            { title: 'шафран', count: '1', measureUnit: 'ч. л.' },
+            { title: 'лук', count: '1', measureUnit: 'шт.' },
+        ],
+        steps: [
+            {
+                stepNumber: 1,
+                description: 'Отварить лапшу.',
+                image: step1,
+            },
+            {
+                stepNumber: 2,
+                description: 'Обжарить курицу с луком и шафраном.',
+                image: step2,
+            },
+            {
+                stepNumber: 3,
+                description: 'Смешать лапшу с курицей и подавать.',
+                image: step3,
+            },
+            {
+                stepNumber: 4,
+                description:
+                    'В сковороде, на оставшемся жире поджарить лук до золотистого цвета, добавить чеснок и прожарить ещё около 1 минуты.',
+                image: step4,
+            },
+            {
+                stepNumber: 5,
+                description: 'Всыпать шафран, корицу и муки, перемешать и коротко прожарить.',
+            },
+            {
+                stepNumber: 6,
+                description:
+                    'В сковороде, на оставшемся жире поджарить лук до золотистого цвета, добавить чеснок и прожарить ещё около 1 минуты.',
+                image: step5,
+            },
+        ],
+    },
+    {
+        id: '2',
         title: 'Картофельные рулетики с грибами',
         description:
             'Рекомендую всем приготовить постное блюдо из картофеля и грибов. Готовится это блюдо без яиц, без мяса и без сыра, из самых простых ингредиентов, а получается очень вкусно и сытно. Постный рецепт картофельных рулетиков с грибами, в томатном соусе, - на обед, ужин и даже на праздничный стол!',
@@ -102,9 +156,10 @@ export const recipes = [
             },
         ],
         side: 'potatoes',
+        author: '',
     },
     {
-        id: '2',
+        id: '3',
         title: 'Овощная лазанья из лаваша',
         description:
             'Большое, сытное блюдо для ценителей блюд без мяса! Такая лазанья готовится с овощным соусом и соусом бешамель, а вместо листов для лазаньи используется тонкий лаваш.',
@@ -142,7 +197,7 @@ export const recipes = [
         ],
     },
     {
-        id: '3',
+        id: '4',
         title: 'Тефтели из булгура и чечевицы, запечённые в томатном соусе',
         description:
             'Тефтели из булгура и чечевицы – яркие и питательные, отлично подходят для постного и вегетарианского меню. Тефтели получаются нежными, а также сочными и ароматными благодаря использованию томатного соуса и душистых пряностей.',
@@ -180,7 +235,7 @@ export const recipes = [
         ],
     },
     {
-        id: '4',
+        id: '5',
         title: 'Чесночная картошка',
         description:
             'Такая картошечка украсит любой семейный обед! Все будут в полном восторге, очень вкусно! Аромат чеснока, хрустящая корочка на картошечке - просто объедение! Отличная идея для обеда или ужина, готовится просто!',
@@ -219,7 +274,7 @@ export const recipes = [
         side: 'potatoes',
     },
     {
-        id: '5',
+        id: '6',
         title: 'Капустные котлеты',
         description:
             'Капустные котлеты по этому рецепту получаются необычайно пышными и невероятно вкусными. Мягкий вкус и лёгкая пряная нотка наверняка помогут сделать эти чудесные котлеты из капусты одним из ваших любимых овощных блюд.',
@@ -256,7 +311,7 @@ export const recipes = [
         ],
     },
     {
-        id: '6',
+        id: '7',
         title: 'Овощное рагу',
         description: 'Сытное рагу из сезонных овощей, приправленное травами.',
         category: ['vegan', 'second-dish'],
@@ -274,6 +329,7 @@ export const recipes = [
             { title: 'морковь', count: '1', measureUnit: 'шт.' },
             { title: 'картошка', count: '2', measureUnit: 'шт.' },
             { title: 'специи', count: '0', measureUnit: 'по вкусу' },
+            { title: 'молоко', count: '0', measureUnit: 'по вкусу' },
         ],
         steps: [
             {
@@ -294,7 +350,7 @@ export const recipes = [
         ],
     },
     {
-        id: '7',
+        id: '8',
         title: 'Лапша с курицей и шафраном',
         description:
             'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
@@ -302,8 +358,8 @@ export const recipes = [
         subcategory: ['poultry-dish'],
         image: recipe7,
         bookmarks: 258,
-        likes: 1342,
-        date: '2024-03-08T00:00:00Z',
+        likes: 342,
+        date: '2023-03-08T00:00:00Z',
         time: '40 минут',
         portions: 4,
         nutritionValue: { calories: 400, proteins: 30, fats: 15, carbohydrates: 50 },
@@ -311,7 +367,59 @@ export const recipes = [
             { title: 'лапша', count: '200', measureUnit: 'г' },
             { title: 'курица', count: '300', measureUnit: 'г' },
             { title: 'шафран', count: '1', measureUnit: 'ч. л.' },
-            { title: 'лук', count: '1', measureUnit: 'шт.' },
+        ],
+        steps: [
+            {
+                stepNumber: 1,
+                description: 'Отварить лапшу.',
+                image: step1,
+            },
+            {
+                stepNumber: 2,
+                description: 'Обжарить курицу с луком и шафраном.',
+                image: step2,
+            },
+            {
+                stepNumber: 3,
+                description: 'Смешать лапшу с курицей и подавать.',
+                image: step3,
+            },
+            {
+                stepNumber: 4,
+                description:
+                    'В сковороде, на оставшемся жире поджарить лук до золотистого цвета, добавить чеснок и прожарить ещё около 1 минуты.',
+                image: step4,
+            },
+            {
+                stepNumber: 5,
+                description: 'Всыпать шафран, корицу и муки, перемешать и коротко прожарить.',
+            },
+            {
+                stepNumber: 6,
+                description:
+                    'В сковороде, на оставшемся жире поджарить лук до золотистого цвета, добавить чеснок и прожарить ещё около 1 минуты.',
+                image: step5,
+            },
+        ],
+    },
+    {
+        id: '9',
+        title: 'Лапша с курицей и шафраном',
+        description:
+            'Как раз после праздников, когда мясные продукты еще остались, но никто их уже не хочет, время варить солянку.',
+        category: ['second-dish', 'national', 'kids'],
+        subcategory: ['poultry-dish'],
+        image: recipe7,
+        bookmarks: 258,
+        likes: 342,
+        date: '2023-03-08T00:00:00Z',
+        time: '40 минут',
+        portions: 4,
+        nutritionValue: { calories: 400, proteins: 30, fats: 15, carbohydrates: 50 },
+        ingredients: [
+            { title: 'лапша', count: '200', measureUnit: 'г' },
+            { title: 'курица', count: '300', measureUnit: 'г' },
+            { title: 'шафран', count: '1', measureUnit: 'ч. л.' },
         ],
         steps: [
             {

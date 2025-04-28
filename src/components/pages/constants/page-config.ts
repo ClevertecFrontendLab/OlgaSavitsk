@@ -1,7 +1,8 @@
 import { Category, subMenus } from '~/constants/menu.constants';
+import { recipes } from '~/shared/mock-data/recipes';
 import { PageConfig } from '~/shared/types/page-config.types';
 
-import { additionalInfo, recipies } from '../category-page/helpers';
+import { additionalInfo } from '../category-page/helpers';
 
 type PageConfigType = {
     [key in Category]?: PageConfig;
@@ -14,7 +15,7 @@ export const pageConfig: PageConfigType = {
         subTitle:
             'Интересны не только убеждённым вегетарианцам, но и тем, кто хочет попробовать вегетарианскую диету и готовить вкусные вегетарианские блюда.',
         subMenus: subMenus[Category.Vegan],
-        recipes: recipies,
+        recipes: recipes.filter((recipe) => recipe.category.includes(Category.Vegan)),
         additionalInfo: {
             title: 'Десерты, выпечка',
             description:

@@ -1,7 +1,7 @@
 export const RoutePath = {
     mainPage: '/',
     veganPage: '/vegan',
-    delicious: '/delicious',
+    delicious: '/the-juiciest',
     category: '/:category/:subcategory',
     recipe: '/:category/:subcategory/:id',
 };

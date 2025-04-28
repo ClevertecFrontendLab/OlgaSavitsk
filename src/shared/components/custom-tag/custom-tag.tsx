@@ -9,7 +9,7 @@ import { CustomIcon } from '../custom-icon/custom-icon';
 type PositionType = 'static' | 'absolute' | undefined;
 
 type CustomTagProps = {
-    category?: string;
+    category?: string | string[];
     color: string;
     position?: PositionType;
     blog?: Blog;

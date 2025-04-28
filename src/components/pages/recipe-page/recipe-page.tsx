@@ -2,7 +2,7 @@ import { Container, VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router';
 
 import { recipes } from '~/shared/mock-data/recipes';
-import { Slider } from '~/widgets/slider/ui/slider';
+import { Slider } from '~/widgets/slider/slider';
 
 import { RecipeAuthor } from './components/recipe-author';
 import { RecipeHeader } from './components/recipe-header';

@@ -5,12 +5,15 @@ import {
     Flex,
     IconButton,
     Text,
+    useBreakpointValue,
     useColorModeValue,
     useOutsideClick,
 } from '@chakra-ui/react';
 import { FC, useRef } from 'react';
 
 import exitIcon from '~/assets/icons/exit.svg';
+import { DATA_TEST_ID } from '~/constants/data-test-id';
+import { menuItems } from '~/constants/menu.constants';
 import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 import { Breadcrumbs } from '../header/breadcrumb';
@@ -26,6 +29,11 @@ export const MobileSideBar: FC<MobileSideBarProps> = ({ isOpen, onClose, onOpen 
     const menuRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const bgColor = useColorModeValue('white', 'gray.800');
+    const isTablet = useBreakpointValue({
+        base: false,
+        md: false,
+        lg: true,
+    });
 
     const handleToggle = () => {
         if (isOpen) {
@@ -54,9 +62,17 @@ export const MobileSideBar: FC<MobileSideBarProps> = ({ isOpen, onClose, onOpen 
                     variant='ghost'
                     onClick={handleToggle}
                     aria-label='open menu'
-                    icon={isOpen ? <CloseIcon boxSize={3} /> : <HamburgerIcon boxSize={6} />}
+                    icon={
+                        isOpen ? (
+                            <CloseIcon boxSize={3} data-test-id={DATA_TEST_ID.CLOSE_ICON} />
+                        ) : (
+                            <HamburgerIcon boxSize={6} data-test-id={DATA_TEST_ID.HUMB_ICON} />
+                        )
+                    }
                     size='lg'
                 />
+            </Box>
+            {isOpen && (
                 <Box
                     position='fixed'
                     top='64px'
@@ -65,41 +81,41 @@ export const MobileSideBar: FC<MobileSideBarProps> = ({ isOpen, onClose, onOpen 
                     h='100vh'
                     bg='blackAlpha.300'
                     backdropFilter='blur(2px)'
-                    display={isOpen ? 'block' : 'none'}
                 />
-                <Flex
-                    ref={menuRef}
-                    direction='column'
-                    position='fixed'
-                    top={16}
-                    right='0'
-                    w={344}
-                    height={{ base: 652, sm: 652, md: 868, lg: '100vh' }}
-                    bg={bgColor}
-                    zIndex='modal'
-                    display={isOpen ? 'flex' : 'none'}
-                    borderBottomRadius='lg'
-                    mx={2}
-                >
-                    <Box p={4}>
-                        <Breadcrumbs />
-                    </Box>
+            )}
+            <Flex
+                ref={menuRef}
+                direction='column'
+                position='fixed'
+                top={16}
+                right='0'
+                w={344}
+                height={{ base: 652, sm: 652, md: 868, lg: '100vh' }}
+                bg={bgColor}
+                zIndex='modal'
+                display={isOpen ? 'flex' : 'none'}
+                borderBottomRadius='lg'
+                mx={2}
+                data-test-id={isTablet || isOpen ? 'nav' : ''}
+            >
+                <Box p={4}>
+                    <Breadcrumbs />
+                </Box>
 
-                    <Menu />
+                {isOpen && <Menu menuItems={menuItems} />}
 
-                    <Box px={6} w='full'>
-                        <Text fontSize='xs' color='blackAlpha.400'>
-                            Версия программы 03.25
-                        </Text>
-                        <Text fontSize='xs' color='blackAlpha.700'>
-                            Все права защищены, ученический файл, ©Клевер Технолоджи, 2025
-                        </Text>
-                        <Button leftIcon={<CustomIcon icon={exitIcon} />} variant='ghost' p={0}>
-                            Выйти
-                        </Button>
-                    </Box>
-                </Flex>
-            </Box>
+                <Box px={6} w='full'>
+                    <Text fontSize='xs' color='blackAlpha.400'>
+                        Версия программы 03.25
+                    </Text>
+                    <Text fontSize='xs' color='blackAlpha.700'>
+                        Все права защищены, ученический файл, ©Клевер Технолоджи, 2025
+                    </Text>
+                    <Button leftIcon={<CustomIcon icon={exitIcon} />} variant='ghost' p={0}>
+                        Выйти
+                    </Button>
+                </Box>
+            </Flex>
         </>
     );
 };

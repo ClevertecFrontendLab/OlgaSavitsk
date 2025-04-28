@@ -55,8 +55,8 @@ export const RecipeIngredients = ({ recipe }: RecipeIngredientsProps) => {
                                 >
                                     <NumberInputField />
                                     <NumberInputStepper>
-                                        <NumberIncrementStepper />
-                                        <NumberDecrementStepper />
+                                        <NumberIncrementStepper data-test-id='increment-stepper' />
+                                        <NumberDecrementStepper data-test-id='decrement-stepper' />
                                     </NumberInputStepper>
                                 </NumberInput>
                             </HStack>
@@ -64,12 +64,12 @@ export const RecipeIngredients = ({ recipe }: RecipeIngredientsProps) => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {ingredients.map(({ title, count, measureUnit }: Ingredient) => (
+                    {ingredients.map(({ title, count, measureUnit }: Ingredient, index) => (
                         <Tr key={title}>
                             <Td fontSize='sm' fontWeight={500}>
                                 {title}
                             </Td>
-                            <Td textAlign='end'>
+                            <Td textAlign='end' data-test-id={`ingredient-quantity-${index}`}>
                                 {((parseInt(count) * selectedPortions) / portions).toFixed(2)}{' '}
                                 {measureUnit}
                             </Td>

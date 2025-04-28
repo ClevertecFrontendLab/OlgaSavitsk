@@ -12,7 +12,6 @@ import preserves from '../assets/icons/preserves.svg';
 import saladIcon from '../assets/icons/salad.svg';
 import saucesIcon from '../assets/icons/sauces.svg';
 import veganIcon from '../assets/icons/vegan.svg';
-import { DATA_TEST_ID } from './data-test-id';
 
 export enum Category {
     Salads = 'salads',
@@ -41,7 +40,6 @@ export const categoryMap: CategoryType = {
         label: 'Веганская кухня',
         icon: veganIcon,
         route: 'vegan',
-        dataTestId: DATA_TEST_ID.veganCuisine,
     },
     [Category.Kids]: { label: 'Детские блюда', icon: childTastyIcon, route: 'kids' },
     [Category.Healthy]: { label: 'Лечебное питание', icon: healthyIcon, route: 'healthy' },
@@ -74,7 +72,7 @@ export const subMenus: SubCategoryType = {
         { title: 'Диетические супы', route: 'dietary', id: 4 },
     ],
     [Category.SecondCourses]: [
-        { title: 'Мясные', route: 'meat', id: 0 },
+        { title: 'Мясные', route: 'poultry-dish', id: 0 },
         { title: 'Рыбные', route: 'fish', id: 1 },
         { title: 'Овощные', route: 'vegetable', id: 2 },
         { title: 'Из птицы', route: 'poultry', id: 3 },
@@ -90,7 +88,7 @@ export const subMenus: SubCategoryType = {
     [Category.Vegan]: [
         { title: 'Закуски', route: 'snacks', id: 0 },
         { title: 'Первые блюда', route: 'first', id: 1 },
-        { title: 'Вторые блюда', route: 'second', id: 2 },
+        { title: 'Вторые блюда', route: 'second-dish', id: 2 },
         { title: 'Гарниры', route: 'side', id: 3 },
         { title: 'Десерты', route: 'desserts', id: 4 },
         { title: 'Выпечка', route: 'bakery', id: 5 },
@@ -104,7 +102,6 @@ export const menuItems = Object.values(Category).map((categoryId) => ({
     label: categoryMap[categoryId].label,
     icon: categoryMap[categoryId].icon,
     route: categoryMap[categoryId].route,
-    dataTestId: categoryMap[categoryId].dataTestId,
     subItems: subMenus[categoryId],
 }));
 
