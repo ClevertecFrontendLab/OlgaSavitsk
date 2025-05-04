@@ -1,12 +1,13 @@
 import { Box, Button, Flex, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
 
 import exitIcon from '~/assets/icons/exit.svg';
-import { menuItems } from '~/constants/menu.constants';
+import { useGetCategoriesQuery } from '~/query/services/categories';
 import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 import { Menu } from './menu';
 
 export const SideBar = () => {
+    const { data } = useGetCategoriesQuery();
     const isTablet = useBreakpointValue({
         base: false,
         md: false,
@@ -26,7 +27,7 @@ export const SideBar = () => {
             py={9}
         >
             <Flex direction='column' h='full'>
-                {isTablet && <Menu menuItems={menuItems} />}
+                {isTablet && <Menu menuItems={data} />}
 
                 <VStack px={6} w='full' gap={4} align='start'>
                     <Text fontSize='xs' color='blackAlpha.400'>

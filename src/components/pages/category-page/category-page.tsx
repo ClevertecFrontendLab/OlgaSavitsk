@@ -42,8 +42,8 @@ export const CategoryPage = () => {
         if (!config || !config.subMenus) {
             return 0;
         }
-        const foundMenu = config.subMenus.find(({ route }) => route === subcategory);
-        return foundMenu ? foundMenu.id : 0;
+        // const foundMenu = config.subMenus.find(({ route }) => route === subcategory);
+        // return foundMenu ? foundMenu.id : 0;
     }, [config, subcategory]);
 
     if (!config) {
@@ -70,17 +70,17 @@ export const CategoryPage = () => {
                         maxW={{ base: 360, md: 768, lg: '4xl' }}
                         className={classes.tabList}
                     >
-                        {subMenus!.map(({ title, route }, index) => (
+                        {subMenus?.map(({ title, category }, index) => (
                             <Tab
                                 key={index}
                                 as={Link}
-                                to={`${path}/${route}`}
+                                to={`${path}/${category}`}
                                 whiteSpace='nowrap'
                                 fontSize={{ base: 'sm', md: 'sm', lg: 'md' }}
                                 color='lime.800'
                                 sx={{ marginBottom: 0 }}
                                 _focus={{ boxShadow: 'none' }}
-                                data-test-id={`tab-${route}-${index}`}
+                                data-test-id={`tab-${category}-${index}`}
                                 aria-selected={tabIndex === index}
                             >
                                 {title}
@@ -88,7 +88,7 @@ export const CategoryPage = () => {
                         ))}
                     </TabList>
                     <TabPanels>
-                        {subMenus!.map((_, index) => (
+                        {subMenus?.map((_, index) => (
                             <TabPanel p={0} key={index}>
                                 <HStack pt={6} flexWrap='wrap' justify='center'>
                                     <Flex

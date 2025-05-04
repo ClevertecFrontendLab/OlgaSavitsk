@@ -3,11 +3,13 @@ import { ChakraProps, Flex, Icon, Image, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { NavLink } from 'react-router';
 
+import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+
 type NavItemProps = {
     href: string;
+    title: string;
     attr?: boolean;
     icon?: string;
-    label?: string;
     rightIcon?: boolean;
     isOpen?: boolean;
     dataTestId?: string | null;
@@ -18,7 +20,7 @@ type NavItemProps = {
 export const NavItem: FC<NavItemProps> = ({
     href,
     icon,
-    label,
+    title,
     rightIcon,
     isOpen,
     className,
@@ -27,15 +29,17 @@ export const NavItem: FC<NavItemProps> = ({
     onClick,
 }) => (
     <NavLink
-        to={href || '#'}
+        to={href}
         style={{ textDecoration: 'none' }}
         onClick={onClick}
         data-test-id={dataTestId}
         aria-selected={attr}
     >
         <Flex className={className}>
-            {icon && <Image src={icon} alt={label} />}
-            <Text whiteSpace='nowrap'>{label}</Text>
+            {icon && <Image src={icon} alt={title} />}
+            <Text whiteSpace='nowrap' sx={TRUNCATE_STYLES}>
+                {title}
+            </Text>
             {rightIcon && (
                 <Icon ml='auto' as={isOpen ? ChevronUpIcon : ChevronDownIcon} boxSize={7} />
             )}

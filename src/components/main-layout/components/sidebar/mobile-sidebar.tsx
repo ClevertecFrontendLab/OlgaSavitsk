@@ -13,7 +13,7 @@ import { FC, useRef } from 'react';
 
 import exitIcon from '~/assets/icons/exit.svg';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
-import { menuItems } from '~/constants/menu.constants';
+import { useGetCategoriesQuery } from '~/query/services/categories';
 import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 import { Breadcrumbs } from '../header/breadcrumb';
@@ -26,6 +26,7 @@ type MobileSideBarProps = {
 };
 
 export const MobileSideBar: FC<MobileSideBarProps> = ({ isOpen, onClose, onOpen }) => {
+    const { data } = useGetCategoriesQuery();
     const menuRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const bgColor = useColorModeValue('white', 'gray.800');
@@ -102,7 +103,7 @@ export const MobileSideBar: FC<MobileSideBarProps> = ({ isOpen, onClose, onOpen 
                     <Breadcrumbs />
                 </Box>
 
-                {isOpen && <Menu menuItems={menuItems} />}
+                {isOpen && <Menu menuItems={data} />}
 
                 <Box px={6} w='full'>
                     <Text fontSize='xs' color='blackAlpha.400'>

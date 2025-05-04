@@ -1,7 +1,6 @@
 import { AdditionalRecipieInfo } from '~/components/pages/category-page/helpers';
-import { Category } from '~/constants/menu.constants';
 
-import { SubCategoryType } from './navigation.types';
+import { SubCategory } from './navigation.types';
 import { Recipe } from './recipe.types';
 
 export type AdditionalInfo = {
@@ -14,7 +13,7 @@ export type PageConfig = {
     path: string;
     title: string;
     subTitle: string;
-    subMenus?: SubCategoryType[Category];
+    subMenus?: SubCategory[];
     recipes: Recipe[];
     additionalInfo: AdditionalInfo;
 };

@@ -3,68 +3,52 @@ import { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
-import { Category, subMenus } from '~/constants/menu.constants';
+import { Category } from '~/constants/menu.constants';
+import { CategoryItem, SubCategory } from '~/shared/types/navigation.types';
 import { isArrayWithItems } from '~/shared/utils/common';
+import { getCurrentRoute } from '~/shared/utils/get-current-route';
 
 import { NavItem } from '../../../nav-item/nav-item';
 import classes from './index.module.css';
 
 type MenuProps = {
-    menuItems?: {
-        id: Category;
-        label: string;
-        icon: string;
-        route: string | undefined;
-        subItems:
-            | {
-                  title: string;
-                  route: string;
-                  id: number;
-              }[]
-            | undefined;
-    }[];
-    dataTestId?: string;
+    menuItems: CategoryItem[];
+    dataTestId: string;
 };
 
-export const Menu: FC<MenuProps> = ({ menuItems, dataTestId }) => {
+export const Menu: FC<Partial<MenuProps>> = ({ menuItems, dataTestId }) => {
     const location = useLocation();
 
     const navigate = useNavigate();
     const [expandedCategory, setExpandedCategory] = useState<string | null>(() => {
-        const path = location.pathname.split('/')[1] as Category;
+        const currentCategoryPath = getCurrentRoute(location).at(1);
         return (
-            (isArrayWithItems(menuItems) && menuItems.find((cat) => cat.id === path)?.id) || null
+            (isArrayWithItems(menuItems) &&
+                menuItems.find((cat) => cat.category === currentCategoryPath)?.category) ||
+            null
         );
     });
 
-    const handleCategoryClick = (category: Category, route: string) => {
+    const getCurrentSubCategoryRoute = () => getCurrentRoute(location).at(2);
+
+    const handleCategoryClick = (subCategories: SubCategory[], category: string) => {
         if (expandedCategory === category) {
             setExpandedCategory(null);
         } else {
             setExpandedCategory(category);
-            const firstSubmenuRoute = subMenus[category]?.[0]?.route || '0';
-            navigate(`/${route}/${firstSubmenuRoute}`);
+            const firstSubmenuRoute = subCategories?.[0]?.category || '0';
+            navigate(`/${category}/${firstSubmenuRoute}`);
         }
     };
 
-    const handleSubmenuClick = (category: string, route: string) => {
+    const handleSubmenuClick = (category: string, route: string) =>
         navigate(`${category}/${route}`);
-    };
 
-    const getCurrentRoute = () => {
-        const pathParts = location.pathname.split('/');
-        return pathParts[2] || '0';
-    };
+    const getNavItemClass = (id: string) =>
+        `${classes.navitem} ${expandedCategory === id ? classes.active : ''}`;
 
-    const getNavItemClass = (id: string) => {
-        const baseClass = classes.navitem;
-        return expandedCategory === id ? `${baseClass} ${classes.active}` : baseClass;
-    };
-
-    const getSubItemClass = (route: string) => {
-        const baseClass = classes.navitemborder;
-        return getCurrentRoute() === route ? `${baseClass} ${classes.active} ` : baseClass;
-    };
+    const getSubItemClass = (route: string) =>
+        `${classes.navitemborder} ${getCurrentSubCategoryRoute() === route ? classes.active : ''}`;
 
     return (
         <VStack
@@ -74,30 +58,34 @@ export const Menu: FC<MenuProps> = ({ menuItems, dataTestId }) => {
             data-test-id={dataTestId}
         >
             {isArrayWithItems(menuItems) &&
-                menuItems.map(({ route: path, subItems, id, ...item }) => (
-                    <Box key={id}>
+                menuItems.map(({ _id, category: mainCategory, subCategories, ...item }) => (
+                    <Box key={_id}>
                         <NavItem
-                            href={`${path}/${isArrayWithItems(subItems) && subItems[0].route}`}
-                            isOpen={expandedCategory === id}
-                            dataTestId={path === Category.Vegan ? DATA_TEST_ID.veganCuisine : ''}
+                            href={`${mainCategory}/${subCategories[0].category}`}
+                            isOpen={expandedCategory === _id}
+                            dataTestId={
+                                mainCategory === Category.Vegan ? DATA_TEST_ID.veganCuisine : ''
+                            }
                             rightIcon
-                            className={getNavItemClass(id)}
-                            onClick={() => handleCategoryClick(id, path!)}
+                            className={getNavItemClass(_id)}
+                            onClick={() => handleCategoryClick(subCategories, mainCategory)}
                             {...item}
                         />
-                        <Collapse in={expandedCategory === id} animateOpacity>
-                            <VStack pl='8' align='stretch' spacing='2' pt={2}>
-                                {subItems?.map(({ title, route }) => (
+                        <Collapse in={expandedCategory === mainCategory} animateOpacity>
+                            <VStack pl={10} align='stretch' spacing={2} pt={2}>
+                                {subCategories?.map(({ title, category }) => (
                                     <NavItem
-                                        key={route}
-                                        href={`${path}/${route}`}
-                                        label={title}
-                                        className={getSubItemClass(route)}
-                                        onClick={() => handleSubmenuClick(route!, route)}
+                                        key={category}
+                                        href={`${mainCategory}/${category}`}
+                                        title={title}
+                                        className={getSubItemClass(category)}
+                                        onClick={() => handleSubmenuClick(category, category)}
                                         dataTestId={
-                                            getCurrentRoute() === route ? `${route}-active` : ''
+                                            getCurrentSubCategoryRoute() === category
+                                                ? `${category}-active`
+                                                : ''
                                         }
-                                        attr={getCurrentRoute() === route}
+                                        attr={getCurrentSubCategoryRoute() === category}
                                     />
                                 ))}
                             </VStack>
