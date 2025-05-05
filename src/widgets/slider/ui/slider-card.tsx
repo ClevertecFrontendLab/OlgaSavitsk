@@ -10,26 +10,24 @@ import {
     VStack,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useNavigate } from 'react-router';
 
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { TRUNCATE_STYLES } from '~/constants/menu.constants';
 import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
 import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
-import { SliderType } from '~/shared/types/page-config.types';
+import useDishNavigation from '~/shared/hooks/category.hook';
+import { Recipe } from '~/shared/types/recipe.types';
 
-export const SliderCard: FC<SliderType> = ({
-    id,
+export const SliderCard: FC<Recipe> = ({
+    _id,
     title,
     description,
-    category,
-    subcategory,
+    categoriesIds,
     image,
     bookmarks,
     likes,
 }) => {
-    const navigate = useNavigate();
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const sliderWidth = useBreakpointValue({ base: '158px', xl: '277px', '2xl': '322px' });
     const imageHeight = useBreakpointValue({ base: '128px', lg: '230px' });
@@ -38,11 +36,7 @@ export const SliderCard: FC<SliderType> = ({
         lg: TRUNCATE_STYLES,
     });
 
-    const handleRecipeClick = () => {
-        const categoryRoute = category[0];
-        const subCategory = subcategory[0];
-        navigate(`/${categoryRoute}/${subCategory}/${id}`);
-    };
+    const { currentCategories, handleRecipeClick } = useDishNavigation(categoriesIds, _id);
 
     return (
         <Card
@@ -52,7 +46,7 @@ export const SliderCard: FC<SliderType> = ({
             variant='outline'
             h='full'
             onClick={handleRecipeClick}
-            data-test-id={`carousel-card-${id}`}
+            data-test-id={`carousel-card-${_id}`}
         >
             <Image objectFit='cover' src={image} height={imageHeight} alt='recipe' />
             <CardBody px={{ base: 2, md: 2, lg: 3, '2xl': 6 }} py={{ base: 2, lg: 4 }}>
@@ -78,10 +72,10 @@ export const SliderCard: FC<SliderType> = ({
                 py={{ base: 3, md: 2, lg: 2, '2xl': 4 }}
             >
                 <VStack alignItems='start'>
-                    {category.map((cat, index) => (
+                    {currentCategories.map((category, index) => (
                         <CustomTag
                             key={index}
-                            category={cat}
+                            category={category}
                             color='lime.150'
                             position={isMobile ? 'absolute' : 'static'}
                         />

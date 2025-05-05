@@ -11,7 +11,8 @@ import {
     Stack,
     useBreakpointValue,
 } from '@chakra-ui/react';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { RoutePath } from '~/app/routes/routes.constants';
@@ -19,23 +20,38 @@ import { AdditionalBlock } from '~/components/additional-block/additional-block'
 import { BlogCard } from '~/components/blog-card/blog-card';
 import { DishCard } from '~/components/dish-card/dish-card';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
+import { JUCIEST_PER_PAGE, RELEVANT_PER_PAGE } from '~/constants/recipes.constants';
+import { useGetRecipesQuery } from '~/query/services/recipes';
 import { HeaderPage } from '~/shared/components/header-page';
 import { useFilteredData } from '~/shared/hooks/filter.hook';
-import { recipes } from '~/shared/mock-data/recipes';
 import { Blog } from '~/shared/types/page-config.types';
+import { getRandomCategory } from '~/shared/utils/category';
+import { isArrayWithItems } from '~/shared/utils/common';
+import { selectCategories } from '~/store/category-slice';
 import { hasActiveFiltersSelector } from '~/store/filter-slice';
 import { useAppSelector } from '~/store/hooks';
 import { Slider } from '~/widgets/slider/slider';
 
-import { additionalInfo, blogPosts } from './helpers';
+import { blogPosts } from './helpers';
 
 export const MainPage = () => {
+    const { categories } = useSelector(selectCategories);
     const navigate = useNavigate();
     const filteredRecipes = useFilteredData();
     const titleSize = useBreakpointValue({ base: 'lg', md: 'md', lg: 'xl', '2xl': '2xl' });
     const titleBlog = useBreakpointValue({ base: 'lg', md: 'md', lg: 'lg', '2xl': 'xl' });
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const hasActiveFilters = useAppSelector(hasActiveFiltersSelector);
+
+    const randomCategory = useMemo(() => getRandomCategory(categories), [categories]);
+    const { data } = useGetRecipesQuery({
+        limit: RELEVANT_PER_PAGE,
+        subcategoriesIds: randomCategory?.subCategories.map((subCat) => subCat._id),
+    });
+    const { data: juciestRecipes } = useGetRecipesQuery({
+        limit: JUCIEST_PER_PAGE,
+        sortBy: 'likes',
+    });
 
     return (
         <>
@@ -84,12 +100,11 @@ export const MainPage = () => {
                         <Flex
                             flexDirection='row'
                             flexWrap='wrap'
-                            maxW={{ base: 328, md: 728, lg: 880, xl: 600, '2xl': 1360 }}
+                            maxW={{ base: 328, md: 728, lg: 880, '2xl': 1360 }}
                             gap={{ base: 3, md: 4, lg: 4, '2xl': 6 }}
                         >
-                            {[...recipes]
-                                .sort((a, b) => b.likes - a.likes)
-                                .map((recipe, index) => (
+                            {isArrayWithItems(juciestRecipes?.data) &&
+                                juciestRecipes.data.map((recipe, index) => (
                                     <Fragment key={index}>
                                         <DishCard {...recipe} dataTestId={index} />
                                     </Fragment>
@@ -146,9 +161,9 @@ export const MainPage = () => {
                     <Box pt={{ base: 8, lg: 10 }}>
                         <Divider pb={{ md: 2 }} />
                         <AdditionalBlock
-                            title='Веганская кухня'
-                            description='Интересны не только убеждённым вегетарианцам, но и тем, кто хочет  попробовать вегетарианскую диету и готовить вкусные вегетарианские блюда.'
-                            recipes={additionalInfo}
+                            title={randomCategory?.title}
+                            description={randomCategory?.description}
+                            recipes={data?.data}
                         />
                     </Box>
                 </>

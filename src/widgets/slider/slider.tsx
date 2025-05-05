@@ -6,7 +6,9 @@ import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
-import { recipes } from '~/shared/mock-data/recipes';
+import { SLIDES_PER_PAGE } from '~/constants/recipes.constants';
+import { useGetRecipesQuery } from '~/query/services/recipes';
+import { isArrayWithItems } from '~/shared/utils/common';
 
 import { useBreakpointConfig } from './config/breakpoints';
 import { SWIPER_BREAKPOINTS } from './config/swiper-config';
@@ -15,7 +17,7 @@ import { SliderCard } from './ui/slider-card';
 
 export const Slider = () => {
     const { titleSize, sliderWidth, sliderTop, sliderSide, isMobile } = useBreakpointConfig();
-    const sortedByDate = [...recipes].sort((a, b) => b.date.localeCompare(a.date));
+    const { data: sliderRecipes } = useGetRecipesQuery({ limit: SLIDES_PER_PAGE });
 
     return (
         <>
@@ -53,11 +55,12 @@ export const Slider = () => {
                     breakpoints={SWIPER_BREAKPOINTS}
                     data-test-id={DATA_TEST_ID.CAROUSEL}
                 >
-                    {sortedByDate.map((recipe) => (
-                        <SwiperSlide key={recipe.id} style={{ height: 'auto' }}>
-                            <SliderCard {...recipe} />
-                        </SwiperSlide>
-                    ))}
+                    {isArrayWithItems(sliderRecipes?.data) &&
+                        sliderRecipes.data.map((recipe) => (
+                            <SwiperSlide key={recipe._id} style={{ height: 'auto' }}>
+                                <SliderCard {...recipe} />
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </HStack>
         </>

@@ -11,50 +11,70 @@ import {
     Tabs,
 } from '@chakra-ui/react';
 import { Fragment, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router';
 
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
 import { DishCard } from '~/components/dish-card/dish-card';
-import { Category } from '~/constants/menu.constants';
+import { RELEVANT_PER_PAGE } from '~/constants/recipes.constants';
+import { useGetRecipeByCategoryQuery, useGetRecipesQuery } from '~/query/services/recipes';
 import { HeaderPage } from '~/shared/components/header-page';
 import { useFilteredData } from '~/shared/hooks/filter.hook';
-import { recipes as recipesInfo } from '~/shared/mock-data/recipes';
+import { CategoryItem, SubCategory } from '~/shared/types/category.types';
 import { Recipe } from '~/shared/types/recipe.types';
+import { isArrayWithItems } from '~/shared/utils/common';
+import { selectCategories } from '~/store/category-slice';
 import { hasActiveFiltersSelector } from '~/store/filter-slice';
 import { useAppSelector } from '~/store/hooks';
 
-import { pageConfig } from '../constants/page-config';
 import classes from './index.module.css';
 
 export const CategoryPage = () => {
     const { category, subcategory } = useParams();
-    const config = pageConfig[category as Category];
+    const { categories } = useSelector(selectCategories);
 
-    const filteredBySubcategory = useMemo(() => {
-        if (!subcategory || !config?.recipes) return config?.recipes || [];
-        return recipesInfo.filter((recipe) => recipe.subcategory.includes(subcategory));
-    }, [subcategory, recipesInfo]);
+    const { currentCategory, currentSubCategory } = useMemo(() => {
+        const foundCategory =
+            categories.find((cat) => cat.category === category) || ({} as CategoryItem);
+        const foundSubCategory = foundCategory.subCategories?.find(
+            (subCat: SubCategory) => subCat.category === subcategory,
+        );
 
-    const filteredRecipes = useFilteredData(filteredBySubcategory);
+        return {
+            currentCategory: foundCategory,
+            currentSubCategory: foundSubCategory,
+        };
+    }, [categories, category, subcategory]);
+
+    const { data } = useGetRecipesQuery({
+        limit: RELEVANT_PER_PAGE,
+        subcategoriesIds: currentCategory?.subCategories.map((subCat: SubCategory) => subCat._id),
+    });
+
+    const { data: subCategoryRecipesData } = useGetRecipeByCategoryQuery(
+        currentSubCategory ? currentSubCategory._id : '',
+        {
+            skip: !currentSubCategory,
+        },
+    );
+
+    const filteredRecipes = useFilteredData(subCategoryRecipesData);
     const hasActiveFilters = useAppSelector(hasActiveFiltersSelector);
 
     const tabIndex = useMemo(() => {
-        if (!config || !config.subMenus) {
-            return 0;
-        }
-        // const foundMenu = config.subMenus.find(({ route }) => route === subcategory);
-        // return foundMenu ? foundMenu.id : 0;
-    }, [config, subcategory]);
+        if (!currentCategory.subCategories) return 0;
+        return currentCategory.subCategories.findIndex(
+            (sub) => sub._id === currentSubCategory?._id,
+        );
+    }, [currentCategory.subCategories, currentSubCategory]);
 
-    if (!config) {
+    if (!currentCategory.subCategories) {
         return <div>Category not found</div>;
     }
 
-    const { path, title, subTitle, subMenus, additionalInfo } = config;
-
     return (
         <>
-            <HeaderPage title={title} subTitle={subTitle} />
+            <HeaderPage title={currentCategory?.title} subTitle={currentCategory?.description} />
             {hasActiveFilters ? (
                 <Flex flexDirection='row' flexWrap='wrap' gap={{ base: 3, md: 4, lg: 4, '2xl': 6 }}>
                     {filteredRecipes.map((recipe, index) => (
@@ -70,11 +90,11 @@ export const CategoryPage = () => {
                         maxW={{ base: 360, md: 768, lg: '4xl' }}
                         className={classes.tabList}
                     >
-                        {subMenus?.map(({ title, category }, index) => (
+                        {currentCategory?.subCategories?.map(({ title, category }, index) => (
                             <Tab
                                 key={index}
                                 as={Link}
-                                to={`${path}/${category}`}
+                                to={`/${currentCategory?.category}/${category}`}
                                 whiteSpace='nowrap'
                                 fontSize={{ base: 'sm', md: 'sm', lg: 'md' }}
                                 color='lime.800'
@@ -88,7 +108,7 @@ export const CategoryPage = () => {
                         ))}
                     </TabList>
                     <TabPanels>
-                        {subMenus?.map((_, index) => (
+                        {currentCategory?.subCategories?.map((_, index) => (
                             <TabPanel p={0} key={index}>
                                 <HStack pt={6} flexWrap='wrap' justify='center'>
                                     <Flex
@@ -98,13 +118,14 @@ export const CategoryPage = () => {
                                         rowGap={4}
                                         pb={4}
                                     >
-                                        {filteredBySubcategory.map(
-                                            (recipe: Recipe, index: number) => (
-                                                <Fragment key={index}>
-                                                    <DishCard {...recipe} dataTestId={index} />
-                                                </Fragment>
-                                            ),
-                                        )}
+                                        {isArrayWithItems(subCategoryRecipesData) &&
+                                            subCategoryRecipesData.map(
+                                                (recipe: Recipe, index: number) => (
+                                                    <Fragment key={index}>
+                                                        <DishCard {...recipe} dataTestId={index} />
+                                                    </Fragment>
+                                                ),
+                                            )}
                                     </Flex>
                                     <Button size={{ base: 'md', md: 'md', lg: 'lg' }} bg='lime.400'>
                                         Загрузить ещё
@@ -119,9 +140,9 @@ export const CategoryPage = () => {
             <Box pt={{ base: 8, md: 8, lg: 10 }}>
                 <Divider pb={{ md: 2 }} />
                 <AdditionalBlock
-                    title={additionalInfo.title}
-                    description={additionalInfo.description}
-                    recipes={additionalInfo.recipes}
+                    title={currentCategory?.title}
+                    description={currentCategory?.description}
+                    recipes={data?.data}
                 />
             </Box>
         </>

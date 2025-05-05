@@ -2,6 +2,9 @@ import { Box, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Outlet } from 'react-router';
 
+import { AlertComponent } from '~/shared/components/alert/alert';
+import { SpinnerComponent } from '~/shared/components/spinner/spinner';
+
 import { Aside } from './components/aside/aside';
 import { FooterComponent } from './components/footer/footer';
 import { HeaderComponent } from './components/header/header';
@@ -50,6 +53,9 @@ export const MainLayout = () => {
             <GridItem area='footer'>
                 <FooterComponent />
             </GridItem>
+            <SpinnerComponent />
+
+            <AlertComponent />
         </Grid>
     );
 };

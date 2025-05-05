@@ -5,6 +5,7 @@ import { apiSlice } from '~/query/create-api';
 import appReducer, { appSlice } from './app-slice';
 import categoryReducer, { categorySlice } from './category-slice';
 import filterReducer, { filtersSlice } from './filter-slice';
+import recipeReducer, { recipeSlice } from './recipe-slice';
 
 const isProduction = false;
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     [apiSlice.reducerPath]: apiSlice.reducer,
     [filtersSlice.name]: filterReducer,
     [categorySlice.name]: categoryReducer,
+    [recipeSlice.name]: recipeReducer,
 });
 
 export type ApplicationState = ReturnType<typeof rootReducer>;

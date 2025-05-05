@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { Category } from '~/constants/menu.constants';
-import { CategoryItem, SubCategory } from '~/shared/types/navigation.types';
+import { CategoryItem, SubCategory } from '~/shared/types/category.types';
 import { isArrayWithItems } from '~/shared/utils/common';
 import { getCurrentRoute } from '~/shared/utils/get-current-route';
 

@@ -23,7 +23,6 @@ export const SideBar = () => {
             h='calc(100vh - 80px)'
             maxW={256}
             borderRightWidth={1}
-            zIndex='sticky'
             py={9}
         >
             <Flex direction='column' h='full'>

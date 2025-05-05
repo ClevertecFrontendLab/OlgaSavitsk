@@ -93,6 +93,19 @@ export const theme = extendTheme({
                 },
             },
         },
+        Alert: {
+            variants: {
+                errorToast: {
+                    container: {
+                        variant: 'solid',
+                        width: { base: 328, lg: 400 },
+                        bg: 'red.500',
+                        color: 'white',
+                        height: 24,
+                    },
+                },
+            },
+        },
     },
     fontSize: {
         18: '18px',

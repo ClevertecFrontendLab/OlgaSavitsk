@@ -1,14 +1,9 @@
 import { useMemo } from 'react';
 
 import { Category, categoryMap } from '~/constants/menu.constants';
-import {
-    searchTextSelector,
-    selectAppliedFilters,
-    selectFilterAllergens,
-} from '~/store/filter-slice';
+import { searchTextSelector, selectAppliedFilters } from '~/store/filter-slice';
 import { useAppSelector } from '~/store/hooks';
 
-import { recipes } from '../mock-data/recipes';
 import { Recipe } from '../types/recipe.types';
 import { isArrayWithItems } from '../utils/common';
 
@@ -40,9 +35,7 @@ export const useFilteredData = (data: Recipe[] | null = null) => {
         category: allCategories,
     } = useAppSelector(selectAppliedFilters);
 
-    const filterAllergens = useAppSelector(selectFilterAllergens);
-
-    const baseData = data?.length ? data : recipes;
+    const baseData = useMemo(() => (data?.length ? data : []), [data]);
 
     return useMemo(() => {
         const textFilteredData = searchText
@@ -75,36 +68,14 @@ export const useFilteredData = (data: Recipe[] | null = null) => {
 
             const matchesSideDish =
                 !isArrayWithItems(sideDishes) ||
-                (item.side && sideDishes.some((side) => containsKeyword(item.side!, [side])));
-
-            const matchesAuthor =
-                !isArrayWithItems(authors) ||
-                (item.author &&
-                    authors.some((author) =>
-                        item.author?.toLowerCase().includes(author.toLowerCase()),
-                    ));
+                (item.garnish && sideDishes.some((side) => containsKeyword(item.garnish!, [side])));
 
             const itemCategories = item.category.map((cat) => categoryMap[cat as Category].label);
             const matchesCategory =
                 !isArrayWithItems(allCategories) ||
                 allCategories.some((category) => itemCategories.includes(category));
 
-            return (
-                matchesAllergens &&
-                matchesMeatType &&
-                matchesSideDish &&
-                matchesAuthor &&
-                matchesCategory
-            );
+            return matchesAllergens && matchesMeatType && matchesSideDish && matchesCategory;
         });
-    }, [
-        baseData,
-        searchText,
-        allergens,
-        meatTypes,
-        sideDishes,
-        authors,
-        filterAllergens,
-        allCategories,
-    ]);
+    }, [baseData, searchText, allergens, meatTypes, sideDishes, authors, allCategories]);
 };

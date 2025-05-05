@@ -1,6 +1,7 @@
 import { Box, IconButton, Show, Spacer, Text, VStack } from '@chakra-ui/react';
 
 import EditIcon from '~/assets/icons/edit.svg';
+import { GRADIENT_STYLES } from '~/constants/menu.constants';
 import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 
 import { StatisticsComponent } from './statistics';
@@ -19,12 +20,7 @@ export const Aside = () => (
             <StatisticsComponent direction='column' />
         </Show>
         <Spacer />
-        <VStack
-            h={180}
-            w={208}
-            justifyContent='center'
-            bg='radial-gradient(circle at 50% 50%, rgba(196, 255, 97, 0.72) 0%, rgba(255, 255, 255, 0) 50%)'
-        >
+        <VStack h={180} w={208} justifyContent='center' {...GRADIENT_STYLES}>
             <IconButton
                 isRound={true}
                 bg='black'

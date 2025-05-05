@@ -16,6 +16,7 @@ import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
 import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
+import useDishNavigation from '~/shared/hooks/category.hook';
 import { Recipe } from '~/shared/types/recipe.types';
 
 interface RecipeHeaderProps {
@@ -23,7 +24,10 @@ interface RecipeHeaderProps {
 }
 
 export const RecipeHeader = ({ recipe }: RecipeHeaderProps) => {
-    const { title, description, category, image, bookmarks, likes, time } = recipe;
+    const { _id, title, description, categoriesIds, image, bookmarks, likes, time } = recipe;
+
+    const { currentCategories } = useDishNavigation(categoriesIds, _id);
+
     return (
         <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: 4, lg: 6 }} w='full'>
             <Image
@@ -37,8 +41,8 @@ export const RecipeHeader = ({ recipe }: RecipeHeaderProps) => {
             <VStack w='full' h='full' align='start' minH={{ base: 224, md: 224, lg: 410 }}>
                 <HStack align='start' w='full' h='full' pb={7}>
                     <HStack wrap='wrap'>
-                        {category.map((cat, index) => (
-                            <CustomTag key={index} category={cat} color='lime.50' />
+                        {currentCategories.map((category, index) => (
+                            <CustomTag key={index} category={category} color='lime.50' />
                         ))}
                     </HStack>
                     <Spacer />

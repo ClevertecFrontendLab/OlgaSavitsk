@@ -75,7 +75,7 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
         if (!isActive) {
             onSelect([]);
         }
-    }, [isMenuOpen]);
+    }, [isActive, onSelect]);
 
     return (
         <Box>

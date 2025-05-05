@@ -1,7 +1,8 @@
 import { Container, VStack } from '@chakra-ui/react';
-import { useParams } from 'react-router';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
 
-import { recipes } from '~/shared/mock-data/recipes';
+import { useGetRecipeByIdQuery } from '~/query/services/recipes';
 import { Slider } from '~/widgets/slider/slider';
 
 import { RecipeAuthor } from './components/recipe-author';
@@ -12,9 +13,21 @@ import { RecipeSteps } from './components/recipe-steps';
 
 export const RecipePage = () => {
     const { id } = useParams();
-    const config = recipes.find((recipe) => recipe.id === id);
+    const navigate = useNavigate();
+    const { data, isError } = useGetRecipeByIdQuery(id || '', {
+        skip: !id,
+        refetchOnMountOrArgChange: true,
+    });
 
-    if (!config) {
+    useEffect(() => {
+        if (isError) {
+            setTimeout(() => {
+                navigate(-1);
+            }, 500);
+        }
+    }, [isError, navigate]);
+
+    if (!data) {
         return <div>Category not found</div>;
     }
 
@@ -28,15 +41,15 @@ export const RecipePage = () => {
                 gap={{ base: 6, lg: 10 }}
                 centerContent
             >
-                <RecipeHeader recipe={config} />
+                <RecipeHeader recipe={data} />
                 <VStack w={{ base: 'full', md: 'full', lg: 578, '2xl': 668 }}>
-                    <RecipeNutrition nutritionValue={config.nutritionValue} />
+                    <RecipeNutrition nutritionValue={data.nutritionValue} />
                     <VStack
                         maxW={{ base: 'full', md: 608, lg: 578, '2xl': 668 }}
                         gap={{ base: 6, lg: 10 }}
                     >
-                        <RecipeIngredients recipe={config} />
-                        <RecipeSteps steps={config.steps} />
+                        <RecipeIngredients recipe={data} />
+                        <RecipeSteps steps={data.steps} />
                         <RecipeAuthor />
                     </VStack>
                 </VStack>

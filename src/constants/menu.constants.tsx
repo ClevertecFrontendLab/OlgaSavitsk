@@ -53,3 +53,7 @@ export const TRUNCATE_STYLES = {
     textOverflow: 'ellipsis',
     display: 'block',
 };
+
+export const GRADIENT_STYLES = {
+    bg: 'radial-gradient(circle at 50% 50%, rgba(196, 255, 97, 0.72) 0%, rgba(255, 255, 255, 0) 50%)',
+};
