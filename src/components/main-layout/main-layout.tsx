@@ -27,7 +27,7 @@ export const MainLayout = () => {
         "nav main aside"
         "nav footer aside"`;
 
-    const templateRows = isMobile ? '64px 1fr 84px' : '80px 1fr 84px';
+    const templateRows = isMobile ? '64px 1fr 84px' : '80px 80vh 84px';
     const templateColumns = isMobile ? '1fr' : '256px 1fr 208px';
 
     return (

@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
+import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { userErrorSelector } from '~/store/app-slice';
 
 export const AlertComponent = () => {
@@ -25,7 +26,7 @@ export const AlertComponent = () => {
             transform='translate(-50%, -50%)'
             zIndex='toast'
         >
-            <Alert variant='errorToast'>
+            <Alert variant='errorToast' data-test-id={DATA_TEST_ID.ERROR_NOTIFICATION}>
                 <AlertIcon />
                 <Box flex='1'>
                     <AlertTitle>Ошибка сервера</AlertTitle>
@@ -37,6 +38,7 @@ export const AlertComponent = () => {
                     right={-1}
                     top={-1}
                     onClick={onClose}
+                    data-test-id={DATA_TEST_ID.CLOSE_ALERT}
                 />
             </Alert>
         </Box>

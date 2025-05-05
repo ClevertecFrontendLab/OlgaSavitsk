@@ -3,6 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
 import { DishCard } from '~/components/dish-card/dish-card';
+import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { ITEMS_PER_PAGE } from '~/constants/recipes.constants';
 import { useGetRecipesQuery } from '~/query/services/recipes';
 import { HeaderPage } from '~/shared/components/header-page';
@@ -49,6 +50,7 @@ export const DeliciousPage = () => {
                         bg='lime.400'
                         onClick={handleLoadMore}
                         disabled={isFetching}
+                        data-test-id={DATA_TEST_ID.LOAD_MORE_BTN}
                     >
                         Загрузить ещё
                     </Button>

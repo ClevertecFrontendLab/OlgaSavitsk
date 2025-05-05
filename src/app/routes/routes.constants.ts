@@ -4,6 +4,7 @@ export const RoutePath = {
     delicious: '/the-juiciest',
     category: '/:category/:subcategory',
     recipe: '/:category/:subcategory/:id',
+    notFound: '/not-found',
 };
 
 export const breadcrumbNameMap: Record<string, string> = {
