@@ -19,7 +19,7 @@ import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
 import useDishNavigation from '~/shared/hooks/category.hook';
 import { Recipe } from '~/shared/types/recipe.types';
 
-export const SliderCard: FC<Recipe> = ({
+export const SliderCard: FC<Recipe & { index: number }> = ({
     _id,
     title,
     description,
@@ -27,6 +27,7 @@ export const SliderCard: FC<Recipe> = ({
     image,
     bookmarks,
     likes,
+    index,
 }) => {
     const isMobile = useBreakpointValue({ base: true, lg: false });
     const sliderWidth = useBreakpointValue({ base: '158px', xl: '277px', '2xl': '322px' });
@@ -46,7 +47,7 @@ export const SliderCard: FC<Recipe> = ({
             variant='outline'
             h='full'
             onClick={handleRecipeClick}
-            data-test-id={`carousel-card-${_id}`}
+            data-test-id={`carousel-card-${index}`}
         >
             <Image objectFit='cover' src={image} height={imageHeight} alt='recipe' />
             <CardBody px={{ base: 2, md: 2, lg: 3, '2xl': 6 }} py={{ base: 2, lg: 4 }}>

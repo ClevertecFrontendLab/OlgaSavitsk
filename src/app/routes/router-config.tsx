@@ -5,7 +5,7 @@ import { MainLayout } from '~/components/main-layout/main-layout';
 import { MainPage } from '~/components/pages/main-page/main-page';
 import { NotFoundPage } from '~/components/pages/not-found/not-found-page';
 
-import { deliciousRoot, notFoundRoot, recipeRoot, veganRoot } from './routes';
+import { categoryRoot, deliciousRoot, notFoundRoot, recipeRoot } from './routes';
 
 export const routerConfig: RouteObject = {
     path: RoutePath.mainPage,
@@ -15,7 +15,7 @@ export const routerConfig: RouteObject = {
             index: true,
             element: <MainPage />,
         },
-        veganRoot,
+        categoryRoot,
         deliciousRoot,
         recipeRoot,
         notFoundRoot,

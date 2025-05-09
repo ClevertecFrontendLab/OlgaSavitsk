@@ -6,10 +6,15 @@ export const getRandomCategory = (categories: CategoryItem[] | undefined) => {
     return categories[randomIndex];
 };
 
-export const getCurrentCategories = (categories: CategoryItem[], categoriesIds: string[]) =>
-    categories.filter((category) =>
-        category.subCategories.some((subCategory) => categoriesIds.includes(subCategory._id)),
+export const getCurrentCategories = (
+    categories: CategoryItem[],
+    categoriesIds?: string[] | null,
+): CategoryItem[] => {
+    if (!categories?.length || !categoriesIds?.length) return [];
+    return categories.filter((category) =>
+        category.subCategories?.some((subCategory) => categoriesIds.includes(subCategory._id)),
     );
+};
 
 export const getCategoryRoute = (currentCategories: CategoryItem[], recipeId: string) => {
     if (currentCategories.length > 0) {
@@ -17,5 +22,4 @@ export const getCategoryRoute = (currentCategories: CategoryItem[], recipeId: st
         const subCategory = currentCategories[0].subCategories[0].category;
         return `/${categoryRoute}/${subCategory}/${recipeId}`;
     }
-    return '';
 };

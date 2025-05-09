@@ -6,7 +6,7 @@ import { DeliciousPage } from '~/components/pages/delicious-page/delicious-page'
 import { NotFoundPage } from '~/components/pages/not-found/not-found-page';
 import { RecipePage } from '~/components/pages/recipe-page/recipe-page';
 
-export const veganRoot: RouteObject = {
+export const categoryRoot: RouteObject = {
     path: RoutePath.category,
     element: <CategoryPage />,
 };

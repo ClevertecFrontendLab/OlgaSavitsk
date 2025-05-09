@@ -7,6 +7,7 @@ import {
     CloseButton,
     useDisclosure,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
@@ -14,9 +15,15 @@ import { userErrorSelector } from '~/store/app-slice';
 
 export const AlertComponent = () => {
     const isError = useSelector(userErrorSelector);
-    const { onClose } = useDisclosure({ defaultIsOpen: true });
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-    if (!isError) return null;
+    useEffect(() => {
+        if (isError) {
+            onOpen();
+        }
+    }, [isError, onOpen]);
+
+    if (!isOpen) return null;
 
     return (
         <Box

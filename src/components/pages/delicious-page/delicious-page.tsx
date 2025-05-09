@@ -7,7 +7,7 @@ import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { ITEMS_PER_PAGE } from '~/constants/recipes.constants';
 import { useGetRecipesQuery } from '~/query/services/recipes';
 import { HeaderPage } from '~/shared/components/header-page';
-import { Recipe } from '~/shared/types/recipe.types';
+import { Recipe, RecipeParams } from '~/shared/types/recipe.types';
 import { isArrayWithItems } from '~/shared/utils/common';
 import { useAppSelector } from '~/store/hooks';
 import { selectHasMore, selectRecipes } from '~/store/recipe-slice';
@@ -15,17 +15,23 @@ import { selectHasMore, selectRecipes } from '~/store/recipe-slice';
 export const DeliciousPage = () => {
     const recipes = useAppSelector(selectRecipes);
     const hasMore = useAppSelector(selectHasMore);
-    const [pageParams, setPageParams] = useState({ page: 1, limit: ITEMS_PER_PAGE });
+    const [pageParams, setPageParams] = useState<RecipeParams>({
+        page: 1,
+        limit: ITEMS_PER_PAGE,
+        sortBy: 'likes',
+        sortOrder: 'desc',
+    });
 
     const { isFetching } = useGetRecipesQuery(pageParams);
 
     const handleLoadMore = () => {
-        setPageParams((prev) => ({ ...prev, page: prev.page + 1 }));
+        setPageParams((prev) => ({ ...prev, page: prev.page! + 1 }));
     };
 
     useEffect(() => {
-        setPageParams({ page: 1, limit: ITEMS_PER_PAGE });
-    }, []);
+        setPageParams({ ...pageParams, page: 1, limit: ITEMS_PER_PAGE });
+    }, [pageParams]);
+
     return (
         <>
             <HeaderPage title='Самое сочное' />
@@ -52,7 +58,7 @@ export const DeliciousPage = () => {
                         disabled={isFetching}
                         data-test-id={DATA_TEST_ID.LOAD_MORE_BTN}
                     >
-                        Загрузить ещё
+                        Загрузка
                     </Button>
                 )}
             </HStack>

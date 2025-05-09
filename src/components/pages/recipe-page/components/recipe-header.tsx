@@ -24,7 +24,7 @@ interface RecipeHeaderProps {
 }
 
 export const RecipeHeader = ({ recipe }: RecipeHeaderProps) => {
-    const { _id, title, description, categoriesIds, image, bookmarks, likes, time } = recipe;
+    const { _id, title, description, categoriesIds, image, bookmarks, likes, time } = { ...recipe };
 
     const { currentCategories } = useDishNavigation(categoriesIds, _id);
 

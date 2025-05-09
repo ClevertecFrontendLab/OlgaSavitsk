@@ -23,6 +23,7 @@ import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
 import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
 import useDishNavigation from '~/shared/hooks/category.hook';
 import { Recipe } from '~/shared/types/recipe.types';
+import { isArrayWithItems } from '~/shared/utils/common';
 import { searchTextSelector } from '~/store/filter-slice';
 import { useAppSelector } from '~/store/hooks';
 
@@ -76,14 +77,15 @@ export const DishCard: FC<DishCardProps> = ({
                             left={1}
                             gap={1}
                         >
-                            {currentCategories.map((category, index) => (
-                                <CustomTag
-                                    key={index}
-                                    category={category}
-                                    color='lime.50'
-                                    position={isMobile ? 'absolute' : 'static'}
-                                />
-                            ))}
+                            {isArrayWithItems(currentCategories) &&
+                                currentCategories.map((category, index) => (
+                                    <CustomTag
+                                        key={index}
+                                        category={category}
+                                        color='lime.50'
+                                        position={isMobile ? 'absolute' : 'static'}
+                                    />
+                                ))}
                         </Flex>
 
                         {!isMobile && <Spacer />}

@@ -6,8 +6,21 @@ import { Tags } from '~/query/constants/tags.ts';
 import { apiSlice } from '~/query/create-api.ts';
 import { ApiResponse, Recipe, RecipeParams } from '~/shared/types/recipe.types';
 import { setAppLoader } from '~/store/app-slice';
+import { setFilterLoader, setRecipes } from '~/store/recipe-slice';
 
 import { IMAGE_URL } from '../constants/common';
+
+const getParams = (params: RecipeParams, defaultSortOrder = params.sortOrder) => ({
+    page: params.page || 1,
+    limit: params.limit || ITEMS_PER_PAGE,
+    allergens: params.allergens?.join(','),
+    searchString: params.searchString,
+    meat: params.meat?.join(','),
+    garnish: params.garnish?.join(','),
+    subcategoriesIds: params.subcategoriesIds?.join(','),
+    sortBy: params.sortBy || 'createdAt',
+    sortOrder: defaultSortOrder || 'asc',
+});
 
 export const RecipeapiSlice = apiSlice
     .enhanceEndpoints({
@@ -21,17 +34,7 @@ export const RecipeapiSlice = apiSlice
                     method: 'GET',
                     apiGroupName: ApiGroupNames.RECIPES,
                     name: EndpointNames.GET_RECIPES,
-                    params: {
-                        page: params.page || 1,
-                        limit: params.limit || ITEMS_PER_PAGE,
-                        allergens: params.allergens?.join(','),
-                        searchString: params.searchString,
-                        meat: params.meat?.join(','),
-                        garnish: params.garnish?.join(','),
-                        subcategoriesIds: params.subcategoriesIds?.join(','),
-                        sortBy: params.sortBy || 'createdAt',
-                        sortOrder: params.sortOrder || 'desc',
-                    },
+                    params: getParams(params),
                 }),
                 async onQueryStarted(_, { dispatch, queryFulfilled }) {
                     try {
@@ -47,13 +50,12 @@ export const RecipeapiSlice = apiSlice
                     data: data.map(transformRecipe),
                     meta: meta,
                 }),
-
-                providesTags: [Tags.RECIPE],
             }),
-            getRecipeByCategory: builder.query<Recipe[], string>({
-                query: (id) => ({
+            getRecipeByCategory: builder.query<Recipe[], RecipeParams>({
+                query: ({ id, ...params }) => ({
                     url: `/recipe/category/${id}`,
                     method: 'GET',
+                    params: getParams(params),
                     name: EndpointNames.GET_RECIPE_BY_CATEGORY,
                 }),
                 async onQueryStarted(_, { dispatch, queryFulfilled }) {
@@ -84,22 +86,34 @@ export const RecipeapiSlice = apiSlice
                 },
                 transformResponse: (data: Recipe) => transformRecipe(data),
             }),
-            getNewestRecipes: builder.query<Recipe[], number>({
-                query: (limit = 10) => ({
+            getRecipesWithFilters: builder.query<Recipe[], RecipeParams>({
+                query: (params) => ({
                     url: ApiEndpoints.RECIPES,
-                    params: {
-                        limit,
-                        sortBy: 'createdAt',
-                        sortOrder: 'desc',
-                    },
+                    method: 'GET',
+                    params: getParams(params),
+                    name: EndpointNames.GET_RECIPE_BY_FILTERS,
                 }),
-                transformResponse: (response: ApiResponse<Recipe>) => response.data,
+                async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                    try {
+                        dispatch(setFilterLoader(true));
+                        const { data } = await queryFulfilled;
+                        dispatch(setFilterLoader(false));
+                        dispatch(setRecipes(data));
+                    } finally {
+                        dispatch(setFilterLoader(false));
+                    }
+                },
+                transformResponse: ({ data }: ApiResponse<Recipe>) => data.map(transformRecipe),
             }),
         }),
     });
 
-export const { useGetRecipesQuery, useGetRecipeByIdQuery, useGetRecipeByCategoryQuery } =
-    RecipeapiSlice;
+export const {
+    useGetRecipesQuery,
+    useGetRecipeByIdQuery,
+    useGetRecipeByCategoryQuery,
+    useLazyGetRecipesWithFiltersQuery,
+} = RecipeapiSlice;
 
 const getImageUrl = (imageUrl: string) => (imageUrl ? `${IMAGE_URL}${imageUrl}` : '');
 

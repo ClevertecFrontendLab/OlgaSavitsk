@@ -1,8 +1,6 @@
 import {
     Box,
     Button,
-    Checkbox,
-    CheckboxGroup,
     Drawer,
     DrawerBody,
     DrawerCloseButton,
@@ -10,16 +8,16 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
-    FormLabel,
     HStack,
-    Stack,
     useBreakpointValue,
     VStack,
 } from '@chakra-ui/react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { FilterType } from '~/shared/types/filters';
+import { selectCategories } from '~/store/category-slice';
 import {
     applyFilters,
     removeAllergen,
@@ -37,8 +35,9 @@ import {
 } from '~/store/filter-slice';
 
 import { MultiSelectFilter } from '../../../shared/components/multi-select';
-import { authors, categories, meatOptions, sideDishOptions } from '../constants';
+import { meatOptions, sideDishOptions } from '../constants';
 import { AllergensFilter } from './allergens-filter';
+import { FilterCheckboxGroup } from './filter-checkbox';
 import { ActiveFilterTags } from './filter-tag';
 
 export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
@@ -48,6 +47,12 @@ export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
     const sideDishes = useSelector(selectSideDishes);
     const selectedAuthors = useSelector(selectAuthors);
     const selectedCategories = useSelector(selectCategory);
+    const { categories } = useSelector(selectCategories);
+
+    const categoryOptions = useMemo(
+        () => categories.map((category) => ({ label: category.title, value: category._id })),
+        [categories],
+    );
 
     const styles = useBreakpointValue({
         base: {
@@ -136,8 +141,9 @@ export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                             isActive={true}
                             selectedItems={selectedCategories}
                             onSelect={(category) => dispatch(setCategory(category))}
-                            options={categories}
+                            options={categoryOptions}
                             mode='drawer'
+                            isCategory={true}
                             placeholder='Категория'
                             dataTestId='filter-menu-button-категория'
                         />
@@ -146,7 +152,6 @@ export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                             isActive={true}
                             selectedItems={selectedAuthors}
                             onSelect={(authors) => dispatch(setAuthors(authors))}
-                            options={authors}
                             mode='drawer'
                             placeholder='Поиск по автору'
                         />
@@ -205,46 +210,3 @@ export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
         </Drawer>
     );
 };
-
-const FilterCheckboxGroup = ({
-    title,
-    options,
-    selected,
-    onChange,
-}: {
-    title: string;
-    options: string[];
-    selected: string[];
-    onChange: (values: string[]) => void;
-}) => (
-    <Box>
-        <FormLabel fontWeight='medium'>{title}</FormLabel>
-        <CheckboxGroup value={selected} onChange={(values: string[]) => onChange(values)}>
-            <Stack spacing={2}>
-                {options.map((option) => (
-                    <Checkbox
-                        size='sm'
-                        colorScheme='lime'
-                        borderColor='lime.150'
-                        key={option}
-                        value={option}
-                        sx={{
-                            '& > span:first-of-type': {
-                                '&[data-checked]': {
-                                    borderColor: 'lime.400',
-                                    backgroundColor: 'lime.400',
-                                },
-                            },
-                            '& > span:first-of-type > span': {
-                                color: 'black',
-                            },
-                        }}
-                        data-test-id={option === sideDishOptions[0] ? 'checkbox-картошка' : ''}
-                    >
-                        {option}
-                    </Checkbox>
-                ))}
-            </Stack>
-        </CheckboxGroup>
-    </Box>
-);

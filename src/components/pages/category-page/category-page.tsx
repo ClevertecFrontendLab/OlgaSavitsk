@@ -10,9 +10,9 @@ import {
     TabPanels,
     Tabs,
 } from '@chakra-ui/react';
-import { Fragment, useEffect, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, Navigate, useParams } from 'react-router';
 
 import { RoutePath } from '~/app/routes/routes.constants';
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
@@ -32,11 +32,12 @@ import classes from './index.module.css';
 
 export const CategoryPage = () => {
     const { category, subcategory } = useParams();
-    const navigate = useNavigate();
     const { categories } = useSelector(selectCategories);
 
     const { currentCategory, currentSubCategory } = useMemo(() => {
-        const foundCategory = categories.find((cat) => cat.category === category);
+        const foundCategory = isArrayWithItems(categories)
+            ? categories.find((cat) => cat.category === category)
+            : undefined;
         const foundSubCategory = foundCategory?.subCategories?.find(
             (subCat: SubCategory) => subCat.category === subcategory,
         );
@@ -53,13 +54,13 @@ export const CategoryPage = () => {
     });
 
     const { data: subCategoryRecipesData } = useGetRecipeByCategoryQuery(
-        currentSubCategory ? currentSubCategory._id : '',
+        { id: currentSubCategory?._id },
         {
             skip: !currentSubCategory,
         },
     );
 
-    const filteredRecipes = useFilteredData(subCategoryRecipesData);
+    const { filteredData } = useFilteredData();
     const hasActiveFilters = useAppSelector(hasActiveFiltersSelector);
 
     const tabIndex = useMemo(() => {
@@ -69,15 +70,8 @@ export const CategoryPage = () => {
         );
     }, [currentCategory?.subCategories, currentSubCategory]);
 
-    useEffect(() => {
-        if (!currentCategory) {
-            navigate(RoutePath.notFound);
-            return;
-        }
-    }, [currentCategory, navigate]);
-
-    if (!currentCategory?.subCategories) {
-        return <div>Category not found</div>;
+    if (!currentCategory || !currentSubCategory) {
+        return <Navigate to={RoutePath.notFound} replace />;
     }
 
     return (
@@ -85,7 +79,7 @@ export const CategoryPage = () => {
             <HeaderPage title={currentCategory?.title} subTitle={currentCategory?.description} />
             {hasActiveFilters ? (
                 <Flex flexDirection='row' flexWrap='wrap' gap={{ base: 3, md: 4, lg: 4, '2xl': 6 }}>
-                    {filteredRecipes.map((recipe, index) => (
+                    {filteredData.map((recipe, index) => (
                         <Fragment key={index}>
                             <DishCard {...recipe} dataTestId={index} />
                         </Fragment>

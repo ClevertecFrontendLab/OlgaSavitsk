@@ -27,16 +27,14 @@ export const CategoryapiSlice = apiSlice
                         dispatch(setAppLoader(true));
                         const { data } = await queryFulfilled;
 
-                        dispatch(setAppLoader(false));
                         dispatch(setCategories(data));
+                        dispatch(setAppLoader(false));
                     } catch {
                         dispatch(setAppLoader(false));
                     }
                 },
                 transformResponse: (response: CategoryItem[]) =>
                     response.filter((item) => Boolean(item.subCategories)).map(transformCategory),
-
-                providesTags: [Tags.CATEGORY],
             }),
         }),
     });

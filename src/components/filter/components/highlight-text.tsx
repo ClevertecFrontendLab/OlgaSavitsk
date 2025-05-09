@@ -11,6 +11,7 @@ type HighlightTextProps = {
 };
 
 export const HighlightText: FC<HighlightTextProps> = ({ title, searchText }) => {
+    if (!title) return <Text fontWeight={500}>{title}</Text>;
     const regEx = new RegExp(searchText!, 'ig');
     const parts = title.split(regEx);
     const matchValue = title.match(regEx);

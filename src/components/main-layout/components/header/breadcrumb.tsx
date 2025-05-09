@@ -35,7 +35,7 @@ export const Breadcrumbs = () => {
                 return (
                     <BreadcrumbItem key={url}>
                         <BreadcrumbLink
-                            href={url}
+                            href={`${url}/${category?.subCategories[0].category}`}
                             color={isLast ? 'black' : 'blackAlpha.700'}
                             fontSize={{ base: 'md', lg: 'lg' }}
                             whiteSpace='nowrap'

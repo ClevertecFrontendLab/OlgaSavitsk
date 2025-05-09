@@ -5,3 +5,8 @@ export enum FilterType {
     AUTHOR = 'author',
     CATEGORY = 'category',
 }
+
+export type Option = {
+    label: string;
+    value: string;
+};

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -6,17 +5,14 @@ import { selectCategories } from '~/store/category-slice';
 
 import { getCategoryRoute, getCurrentCategories } from '../utils/category';
 
-const useDishNavigation = (categoriesIds: string[], _id: string) => {
+const useDishNavigation = (categoriesIds: string[], id: string) => {
     const { categories } = useSelector(selectCategories);
     const navigate = useNavigate();
 
-    const currentCategories = useMemo(
-        () => getCurrentCategories(categories, categoriesIds),
-        [categories, categoriesIds],
-    );
+    const currentCategories = getCurrentCategories(categories, categoriesIds);
 
     const handleRecipeClick = () => {
-        const categoryRoute = getCategoryRoute(currentCategories, _id);
+        const categoryRoute = getCategoryRoute(currentCategories, id);
         if (categoryRoute) {
             navigate(categoryRoute);
         }

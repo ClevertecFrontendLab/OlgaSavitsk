@@ -58,13 +58,14 @@ export type ApiResponse<T> = {
 };
 
 export type RecipeParams = Partial<{
+    id: string;
     page: number;
     limit: number;
     allergens: string[];
-    searchString: string;
+    searchString: string | null;
     meat: string[];
     garnish: string[];
     subcategoriesIds: string[];
     sortBy: 'createdAt' | 'likes';
-    sortOrder: 'asc' | 'desc';
+    sortOrder: string;
 }>;
