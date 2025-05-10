@@ -5,14 +5,14 @@ import { selectCategories } from '~/store/category-slice';
 
 import { getCategoryRoute, getCurrentCategories } from '../utils/category';
 
-const useDishNavigation = (categoriesIds: string[], id: string) => {
+const useDishNavigation = (categoriesIds: string[], id?: string) => {
     const { categories } = useSelector(selectCategories);
     const navigate = useNavigate();
 
     const currentCategories = getCurrentCategories(categories, categoriesIds);
 
     const handleRecipeClick = () => {
-        const categoryRoute = getCategoryRoute(currentCategories, id);
+        const categoryRoute = getCategoryRoute(currentCategories, id!);
         if (categoryRoute) {
             navigate(categoryRoute);
         }

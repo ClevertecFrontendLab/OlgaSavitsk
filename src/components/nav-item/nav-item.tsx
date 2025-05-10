@@ -36,7 +36,7 @@ export const NavItem: FC<NavItemProps> = ({
         aria-selected={attr}
     >
         <Flex className={className}>
-            {icon && <Image src={icon} alt={title} />}
+            {icon && <Image src={icon} />}
             <Text whiteSpace='nowrap' sx={TRUNCATE_STYLES}>
                 {title}
             </Text>

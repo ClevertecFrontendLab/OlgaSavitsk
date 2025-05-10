@@ -22,7 +22,7 @@ import { FilterTag } from '../../components/filter/components/filter-tag';
 import { Option } from '../types/filters';
 import { isArrayWithItems } from '../utils/common';
 
-interface MultiSelectFilterProps {
+type MultiSelectFilterProps = {
     isActive: boolean;
     selectedItems: string[];
     options?: Option[];
@@ -31,7 +31,7 @@ interface MultiSelectFilterProps {
     placeholder?: string;
     dataTestId?: string;
     onSelect: (items: string[]) => void;
-}
+};
 
 export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
     isActive,

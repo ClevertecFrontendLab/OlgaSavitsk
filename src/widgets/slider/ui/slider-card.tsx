@@ -72,14 +72,14 @@ export const SliderCard: FC<Recipe & { index: number }> = ({
                 px={{ base: 3, md: 2, lg: 4, '2xl': 6 }}
                 py={{ base: 3, md: 2, lg: 2, '2xl': 4 }}
             >
-                <VStack alignItems='start'>
+                <VStack
+                    alignItems='start'
+                    position={isMobile ? 'absolute' : 'static'}
+                    top={2}
+                    left={2}
+                >
                     {currentCategories.map((category, index) => (
-                        <CustomTag
-                            key={index}
-                            category={category}
-                            color='lime.150'
-                            position={isMobile ? 'absolute' : 'static'}
-                        />
+                        <CustomTag key={index} category={category} color='lime.150' />
                     ))}
                 </VStack>
                 <HStack spacing={5} align='end'>

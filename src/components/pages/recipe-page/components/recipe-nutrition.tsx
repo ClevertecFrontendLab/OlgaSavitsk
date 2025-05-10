@@ -4,9 +4,9 @@ import { NutritionKey } from '~/shared/types/recipe.types';
 
 import { NUTRITION_INFO } from '../constants';
 
-interface RecipeNutritionProps {
+type RecipeNutritionProps = {
     nutritionValue: Record<NutritionKey, number>;
-}
+};
 
 export const RecipeNutrition = ({ nutritionValue }: RecipeNutritionProps) => (
     <Box w='full'>

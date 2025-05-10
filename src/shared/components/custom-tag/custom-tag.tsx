@@ -1,6 +1,7 @@
 import { Avatar, Flex, Tag, TagLabel } from '@chakra-ui/react';
 import { FC } from 'react';
 
+import { TRUNCATE_STYLES } from '~/constants/menu.constants';
 import { CategoryItem } from '~/shared/types/category.types';
 import { Blog } from '~/shared/types/page-config.types';
 
@@ -36,17 +37,14 @@ export const CustomTag: FC<CustomTagProps> = ({
     }
 
     return (
-        <Tag
-            size='md'
-            variant='subtle'
-            bg={color}
-            position={position}
-            top={2}
-            left={2}
-            borderRadius={4}
-        >
+        <Tag size='md' variant='subtle' bg={color} borderRadius={4}>
             <CustomIcon icon={category?.icon} boxSize={4} />
-            <TagLabel pl={{ md: 0.5, lg: 2 }} fontWeight={400} whiteSpace='nowrap'>
+            <TagLabel
+                pl={{ md: 0.5, lg: 2 }}
+                fontWeight={400}
+                whiteSpace='nowrap'
+                sx={TRUNCATE_STYLES}
+            >
                 {category?.title}
             </TagLabel>
         </Tag>

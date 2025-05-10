@@ -2,9 +2,9 @@ import { Box, Divider, HStack, useBreakpointValue } from '@chakra-ui/react';
 import { useMemo } from 'react';
 
 import { AdditionalBlock } from '~/components/additional-block/additional-block';
-import { RELEVANT_PER_PAGE } from '~/constants/recipes.constants';
+import { JUCIEST_PER_PAGE, RELEVANT_PER_PAGE } from '~/constants/recipes.constants';
 import { useGetCategoriesQuery } from '~/query/services/categories';
-import { useGetRecipeByCategoryQuery } from '~/query/services/recipes';
+import { useGetRecipeByCategoryQuery, useGetRecipesQuery } from '~/query/services/recipes';
 import { HeaderPage } from '~/shared/components/header-page';
 import { getRandomCategory } from '~/shared/utils/category';
 import { hasActiveFiltersSelector } from '~/store/filter-slice';
@@ -20,6 +20,12 @@ export const MainPage = () => {
     const isMobile = useBreakpointValue({ base: true, lg: false });
 
     const { data: categories } = useGetCategoriesQuery();
+
+    const { data: juciestRecipes } = useGetRecipesQuery({
+        limit: JUCIEST_PER_PAGE,
+        sortBy: 'likes',
+        sortOrder: 'desc',
+    });
 
     const randomCategory = useMemo(
         () => (categories ? getRandomCategory(categories) : null),
@@ -48,7 +54,7 @@ export const MainPage = () => {
                         <Slider />
                     </Box>
                     <HStack pt={{ base: 8, lg: 10 }} flexWrap='wrap' justify='center'>
-                        <JuiciestRecipes />
+                        <JuiciestRecipes juciestRecipes={juciestRecipes} />
                     </HStack>
                     <Box pt={isMobile ? 8 : 10}>
                         <BlogSection />

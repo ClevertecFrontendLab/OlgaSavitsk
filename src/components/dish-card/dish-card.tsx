@@ -79,12 +79,7 @@ export const DishCard: FC<DishCardProps> = ({
                         >
                             {isArrayWithItems(currentCategories) &&
                                 currentCategories.map((category, index) => (
-                                    <CustomTag
-                                        key={index}
-                                        category={category}
-                                        color='lime.50'
-                                        position={isMobile ? 'absolute' : 'static'}
-                                    />
+                                    <CustomTag key={index} category={category} color='lime.50' />
                                 ))}
                         </Flex>
 

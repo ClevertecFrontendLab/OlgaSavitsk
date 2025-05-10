@@ -30,7 +30,7 @@ export const DeliciousPage = () => {
 
     useEffect(() => {
         setPageParams({ ...pageParams, page: 1, limit: ITEMS_PER_PAGE });
-    }, [pageParams]);
+    }, []);
 
     return (
         <>

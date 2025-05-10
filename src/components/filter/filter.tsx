@@ -28,8 +28,6 @@ export const Filter = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef<HTMLButtonElement>(null);
 
-    // const [getRecipes] = useLazyGetRecipesWithFiltersQuery();
-
     const handleSearch = (text: string | null) => {
         if (text) {
             dispatch(setSearchText(text));
@@ -43,11 +41,6 @@ export const Filter = () => {
         onOpen();
         dispatch(resetFilters());
     };
-
-    // useEffect(() => {
-    //     dispatch(setAllergen(selectedAllergens));
-    //     dispatch(applyFilters());
-    // }, [selectedAllergens, dispatch]);
 
     return isLoading ? (
         <SpinnerComponent

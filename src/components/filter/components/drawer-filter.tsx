@@ -1,6 +1,8 @@
 import {
     Box,
     Button,
+    Checkbox,
+    CheckboxGroup,
     Drawer,
     DrawerBody,
     DrawerCloseButton,
@@ -8,7 +10,9 @@ import {
     DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
+    FormLabel,
     HStack,
+    Stack,
     useBreakpointValue,
     VStack,
 } from '@chakra-ui/react';
@@ -16,7 +20,7 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
-import { FilterType } from '~/shared/types/filters';
+import { FilterType, Option } from '~/shared/types/filters';
 import { selectCategories } from '~/store/category-slice';
 import {
     applyFilters,
@@ -37,7 +41,6 @@ import {
 import { MultiSelectFilter } from '../../../shared/components/multi-select';
 import { meatOptions, sideDishOptions } from '../constants';
 import { AllergensFilter } from './allergens-filter';
-import { FilterCheckboxGroup } from './filter-checkbox';
 import { ActiveFilterTags } from './filter-tag';
 
 export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
@@ -210,3 +213,46 @@ export const FilterDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
         </Drawer>
     );
 };
+
+const FilterCheckboxGroup = ({
+    title,
+    options,
+    selected,
+    onChange,
+}: {
+    title: string;
+    options: Option[];
+    selected: string[];
+    onChange: (values: string[]) => void;
+}) => (
+    <Box>
+        <FormLabel fontWeight='medium'>{title}</FormLabel>
+        <CheckboxGroup value={selected} onChange={(values: string[]) => onChange(values)}>
+            <Stack spacing={2}>
+                {options.map(({ label, value }) => (
+                    <Checkbox
+                        size='sm'
+                        colorScheme='lime'
+                        borderColor='lime.150'
+                        key={value}
+                        value={label}
+                        sx={{
+                            '& > span:first-of-type': {
+                                '&[data-checked]': {
+                                    borderColor: 'lime.400',
+                                    backgroundColor: 'lime.400',
+                                },
+                            },
+                            '& > span:first-of-type > span': {
+                                color: 'black',
+                            },
+                        }}
+                        data-test-id={label === sideDishOptions[0].label ? 'checkbox-картошка' : ''}
+                    >
+                        {label}
+                    </Checkbox>
+                ))}
+            </Stack>
+        </CheckboxGroup>
+    </Box>
+);

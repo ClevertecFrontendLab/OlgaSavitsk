@@ -19,9 +19,9 @@ import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
 import useDishNavigation from '~/shared/hooks/category.hook';
 import { Recipe } from '~/shared/types/recipe.types';
 
-interface RecipeHeaderProps {
+type RecipeHeaderProps = {
     recipe: Recipe;
-}
+};
 
 export const RecipeHeader = ({ recipe }: RecipeHeaderProps) => {
     const { _id, title, description, categoriesIds, image, bookmarks, likes, time } = { ...recipe };
