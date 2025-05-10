@@ -11,7 +11,7 @@ export const MainLayout = () => {
 
     return (
         <>
-            <SpinnerComponent isLoading={!isLoading} dataTestId={DATA_TEST_ID.APP_LOADER} />
+            <SpinnerComponent isLoading={isLoading} dataTestId={DATA_TEST_ID.APP_LOADER} />
             <Layout />
         </>
     );
