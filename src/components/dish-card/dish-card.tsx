@@ -15,44 +15,35 @@ import {
     useBreakpointValue,
 } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useNavigate } from 'react-router';
 
 import heartIcon from '~/assets/icons/heart.svg';
 import peopleIcon from '~/assets/icons/hearteyes.svg';
 import { CustomIcon } from '~/shared/components/custom-icon/custom-icon';
 import { CustomTag } from '~/shared/components/custom-tag/custom-tag';
 import { StatBadge } from '~/shared/components/stat-bage/stat-bage';
+import useDishNavigation from '~/shared/hooks/category.hook';
 import { Recipe } from '~/shared/types/recipe.types';
 import { isArrayWithItems } from '~/shared/utils/common';
 import { searchTextSelector } from '~/store/filter-slice';
 import { useAppSelector } from '~/store/hooks';
 
 import { HighlightText } from '../filter/components/highlight-text';
-import { Recipie } from '../pages/category-page/helpers';
 
-type DishCardProps = (Recipe | Recipie) & { dataTestId?: number };
+type DishCardProps = Recipe & { dataTestId?: number };
 
 export const DishCard: FC<DishCardProps> = ({
-    id,
+    _id,
     title,
     description,
-    category,
-    subcategory,
+    categoriesIds,
     image,
     bookmarks,
     likes,
-    recommended,
     dataTestId,
 }) => {
-    const navigate = useNavigate();
     const searchText = useAppSelector(searchTextSelector);
     const isMobile = useBreakpointValue({ base: true, lg: false });
-
-    const handleRecipeClick = () => {
-        const categoryRoute = category[0];
-        const subCategory = isArrayWithItems(subcategory) && subcategory[0];
-        navigate(`/${categoryRoute}/${subCategory}/${id}`);
-    };
+    const { currentCategories, handleRecipeClick } = useDishNavigation(categoriesIds, _id);
 
     return (
         <Card
@@ -74,7 +65,7 @@ export const DishCard: FC<DishCardProps> = ({
             />
 
             <Show above='lg'>
-                <CustomTag blog={recommended} color='lime.150' position='absolute' />
+                <CustomTag blog={null} color='lime.150' position='absolute' />
             </Show>
             <Stack w='full' spacing={{ md: 0 }}>
                 <CardHeader py={{ base: 2, md: 2, lg: 4 }} px={isMobile ? 2 : 6}>
@@ -86,17 +77,10 @@ export const DishCard: FC<DishCardProps> = ({
                             left={1}
                             gap={1}
                         >
-                            {Array.isArray(category) ? (
-                                category.map((cat, index) => (
-                                    <CustomTag key={index} category={cat} color='lime.50' />
-                                ))
-                            ) : (
-                                <CustomTag
-                                    category={category}
-                                    color='lime.50'
-                                    position={isMobile ? 'absolute' : 'static'}
-                                />
-                            )}
+                            {isArrayWithItems(currentCategories) &&
+                                currentCategories.map((category, index) => (
+                                    <CustomTag key={index} category={category} color='lime.50' />
+                                ))}
                         </Flex>
 
                         {!isMobile && <Spacer />}

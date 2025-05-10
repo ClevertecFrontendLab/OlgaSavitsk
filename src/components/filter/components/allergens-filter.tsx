@@ -1,5 +1,5 @@
 import { FormLabel, HStack, Stack, Switch } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 
@@ -20,6 +20,11 @@ export const AllergensFilter: FC<AllergensFilterProps> = ({
     const [isAllergens, setIsAllergens] = useState(false);
     const isFilterMode = mode === 'filter';
 
+    const handleSwitcher = (e: ChangeEvent<HTMLInputElement>) => {
+        setIsAllergens(e.target.checked);
+        setSelectedAllergens([]);
+    };
+
     return (
         <Stack
             direction={isFilterMode ? 'row' : 'column'}
@@ -33,8 +38,8 @@ export const AllergensFilter: FC<AllergensFilterProps> = ({
 
                 <Switch
                     id='allergens'
-                    isChecked={isAllergens}
-                    onChange={() => setIsAllergens(!isAllergens)}
+                    isChecked={Boolean(selectedAllergens.length) || isAllergens}
+                    onChange={handleSwitcher}
                     data-test-id={
                         isFilterMode
                             ? DATA_TEST_ID.ALLERGEN_SWITCHER

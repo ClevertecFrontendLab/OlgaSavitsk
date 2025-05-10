@@ -1,10 +1,10 @@
 import { Card, CardBody, Heading, Image, Tag, TagLabel, Text, VStack } from '@chakra-ui/react';
 
-import { RecipeStep } from '~/shared/types/recipe.types';
+import { Step } from '~/shared/types/recipe.types';
 
-interface RecipeStepsProps {
-    steps: RecipeStep[];
-}
+type RecipeStepsProps = {
+    steps: Step[];
+};
 
 export const RecipeSteps = ({ steps }: RecipeStepsProps) => (
     <VStack spacing={5} align='start' w='full'>

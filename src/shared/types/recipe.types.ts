@@ -1,4 +1,38 @@
-export type NutritionKey = 'calories' | 'proteins' | 'fats' | 'carbohydrates';
+export type NutritionKey = 'calories' | 'protein' | 'fats' | 'carbohydrates';
+
+export type Recipe = {
+    _id: string;
+    title: string;
+    description: string;
+    time: number;
+    image: string;
+    meat: string;
+    garnish: string;
+    portions: number;
+    authorId: string;
+    categoriesIds: string[];
+    steps: Step[];
+    nutritionValue: NutritionValue;
+    ingredients: Ingredient[];
+    likes: number;
+    views: number;
+    bookmarks: number;
+    createdAt: string;
+    authorData: AuthorData;
+};
+
+export type Step = {
+    stepNumber: number;
+    description: string;
+    image: string;
+};
+
+export type NutritionValue = {
+    calories: number;
+    protein: number;
+    fats: number;
+    carbohydrates: number;
+};
 
 export type Ingredient = {
     title: string;
@@ -6,33 +40,32 @@ export type Ingredient = {
     measureUnit: string;
 };
 
-export type RecipeStep = {
-    stepNumber: number;
-    description: string;
-    image?: string;
+export type AuthorData = {
+    login: string;
+    firstName: string;
+    lastName: string;
+    subscribers: string[];
 };
 
-export type RecommendedInfo = {
-    name: string;
-    avatar: string;
+export type ApiResponse<T> = {
+    data: T[];
+    meta: {
+        total: number;
+        page: number;
+        limit: number;
+        totalPages: number;
+    };
 };
 
-export type Recipe = {
+export type RecipeParams = Partial<{
     id: string;
-    title: string;
-    description: string;
-    category: string[];
-    image: string;
-    time: string;
-    portions: number;
-    nutritionValue: Record<NutritionKey, number>;
-    ingredients: Ingredient[];
-    bookmarks?: number;
-    steps: RecipeStep[];
-    subcategory?: string[];
-    likes?: number;
-    meat?: string;
-    side?: string;
-    author?: string;
-    recommended?: RecommendedInfo;
-};
+    page: number;
+    limit: number;
+    allergens: string[];
+    searchString: string | null;
+    meat: string[];
+    garnish: string[];
+    subcategoriesIds: string[];
+    sortBy: 'createdAt' | 'likes';
+    sortOrder: string;
+}>;

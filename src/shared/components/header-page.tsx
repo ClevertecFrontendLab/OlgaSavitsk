@@ -3,10 +3,10 @@ import { FC } from 'react';
 
 import { Filter } from '~/components/filter/filter';
 
-type HeaderPageProps = {
+type HeaderPageProps = Partial<{
     title: string;
-    subTitle?: string;
-};
+    subTitle: string;
+}>;
 
 export const HeaderPage: FC<HeaderPageProps> = ({ title, subTitle }) => {
     const headingSize = useBreakpointValue({ base: 'lg', md: 'lg', lg: '2xl' });

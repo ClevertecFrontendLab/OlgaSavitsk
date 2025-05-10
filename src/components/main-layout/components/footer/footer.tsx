@@ -13,7 +13,7 @@ export const FooterComponent = () => (
     <Box
         position='fixed'
         bottom={0}
-        display={{ base: 'flex', md: 'flex', '2xl': 'none' }}
+        display={{ base: 'flex', md: 'flex', xl: 'none' }}
         data-test-id={DATA_TEST_ID.footer}
         w='full'
         h={84}

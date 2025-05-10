@@ -2,11 +2,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import { Box, Heading, HStack } from '@chakra-ui/react';
+import { useMemo } from 'react';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
-import { recipes } from '~/shared/mock-data/recipes';
+import { SLIDES_PER_PAGE } from '~/constants/recipes.constants';
+import { useGetRecipesQuery } from '~/query/services/recipes';
+import { Recipe } from '~/shared/types/recipe.types';
+import { isArrayWithItems } from '~/shared/utils/common';
 
 import { useBreakpointConfig } from './config/breakpoints';
 import { SWIPER_BREAKPOINTS } from './config/swiper-config';
@@ -15,7 +19,18 @@ import { SliderCard } from './ui/slider-card';
 
 export const Slider = () => {
     const { titleSize, sliderWidth, sliderTop, sliderSide, isMobile } = useBreakpointConfig();
-    const sortedByDate = [...recipes].sort((a, b) => b.date.localeCompare(a.date));
+    const { data: sliderRecipes } = useGetRecipesQuery({
+        limit: SLIDES_PER_PAGE,
+        sortBy: 'createdAt',
+    });
+
+    const sortedRecipes = useMemo(
+        () =>
+            sliderRecipes?.data
+                ?.slice()
+                .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+        [sliderRecipes?.data],
+    );
 
     return (
         <>
@@ -53,11 +68,12 @@ export const Slider = () => {
                     breakpoints={SWIPER_BREAKPOINTS}
                     data-test-id={DATA_TEST_ID.CAROUSEL}
                 >
-                    {sortedByDate.map((recipe) => (
-                        <SwiperSlide key={recipe.id} style={{ height: 'auto' }}>
-                            <SliderCard {...recipe} />
-                        </SwiperSlide>
-                    ))}
+                    {isArrayWithItems(sortedRecipes) &&
+                        sortedRecipes.map((recipe: Recipe, index: number) => (
+                            <SwiperSlide key={recipe._id} style={{ height: 'auto' }}>
+                                <SliderCard {...recipe} index={index} />
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </HStack>
         </>

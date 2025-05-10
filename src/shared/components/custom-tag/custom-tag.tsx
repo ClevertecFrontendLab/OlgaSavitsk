@@ -1,7 +1,8 @@
 import { Avatar, Flex, Tag, TagLabel } from '@chakra-ui/react';
 import { FC } from 'react';
 
-import { Category, categoryMap } from '~/constants/menu.constants';
+import { TRUNCATE_STYLES } from '~/constants/menu.constants';
+import { CategoryItem } from '~/shared/types/category.types';
 import { Blog } from '~/shared/types/page-config.types';
 
 import { CustomIcon } from '../custom-icon/custom-icon';
@@ -9,10 +10,10 @@ import { CustomIcon } from '../custom-icon/custom-icon';
 type PositionType = 'static' | 'absolute' | undefined;
 
 type CustomTagProps = {
-    category?: string | string[];
     color: string;
+    category?: CategoryItem;
     position?: PositionType;
-    blog?: Blog;
+    blog?: Blog | null;
 };
 
 export const CustomTag: FC<CustomTagProps> = ({
@@ -22,10 +23,7 @@ export const CustomTag: FC<CustomTagProps> = ({
     position = 'static',
 }) => {
     const isBlog = Object.values({ ...blog }).length;
-
-    if (!isBlog && !category) {
-        return null;
-    }
+    if (!isBlog && !category) return;
 
     if (isBlog) {
         return (
@@ -39,18 +37,15 @@ export const CustomTag: FC<CustomTagProps> = ({
     }
 
     return (
-        <Tag
-            size='md'
-            variant='subtle'
-            bg={color}
-            position={position}
-            top={2}
-            left={2}
-            borderRadius={4}
-        >
-            <CustomIcon icon={categoryMap[category as Category]?.icon} boxSize={4} />
-            <TagLabel pl={{ md: 0.5, lg: 2 }} fontWeight={400} whiteSpace='nowrap'>
-                {categoryMap[category as Category]?.label}
+        <Tag size='md' variant='subtle' bg={color} borderRadius={4}>
+            <CustomIcon icon={category?.icon} boxSize={4} />
+            <TagLabel
+                pl={{ md: 0.5, lg: 2 }}
+                fontWeight={400}
+                whiteSpace='nowrap'
+                sx={TRUNCATE_STYLES}
+            >
+                {category?.title}
             </TagLabel>
         </Tag>
     );

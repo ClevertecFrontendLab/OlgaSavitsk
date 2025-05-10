@@ -18,9 +18,9 @@ import { useState } from 'react';
 
 import { Ingredient, Recipe } from '~/shared/types/recipe.types';
 
-interface RecipeIngredientsProps {
+type RecipeIngredientsProps = {
     recipe: Recipe;
-}
+};
 
 export const RecipeIngredients = ({ recipe }: RecipeIngredientsProps) => {
     const { ingredients, portions } = recipe;

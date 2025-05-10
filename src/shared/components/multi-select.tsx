@@ -14,27 +14,30 @@ import {
     MenuOptionGroup,
     Text,
 } from '@chakra-ui/react';
-import { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { FC, KeyboardEvent, useRef, useState } from 'react';
 
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 
 import { FilterTag } from '../../components/filter/components/filter-tag';
+import { Option } from '../types/filters';
 import { isArrayWithItems } from '../utils/common';
 
-interface MultiSelectFilterProps {
+type MultiSelectFilterProps = {
     isActive: boolean;
     selectedItems: string[];
-    options: string[];
+    options?: Option[];
     mode?: string;
+    isCategory?: boolean;
     placeholder?: string;
     dataTestId?: string;
     onSelect: (items: string[]) => void;
-}
+};
 
 export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
     isActive,
     selectedItems,
     options,
+    isCategory = false,
     mode = 'filter',
     placeholder = 'Выберите из списка...',
     dataTestId,
@@ -45,9 +48,12 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
     const inputRef = useRef<HTMLInputElement>(null);
     const isFilterMode = mode === 'filter';
 
-    const handleAdd = (item: string) => {
-        if (!selectedItems.includes(item)) {
-            onSelect([...selectedItems, item]);
+    const handleAdd = (item: Option) => {
+        if (
+            !selectedItems.some((selected) => selected === item.label) ||
+            !selectedItems.some((selected) => selected === item.value)
+        ) {
+            onSelect([...selectedItems, isCategory ? item.value : item.label]);
             setTimeout(() => inputRef.current?.focus(), 0);
         }
     };
@@ -59,7 +65,7 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
     const handleAddCustom = () => {
         const value = customItem.trim();
         if (value) {
-            handleAdd(value);
+            handleAdd({ label: value, value: value });
             setCustomItem('');
         }
     };
@@ -71,11 +77,7 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
         }
     };
 
-    useEffect(() => {
-        if (!isActive) {
-            onSelect([]);
-        }
-    }, [isMenuOpen]);
+    const isSelected = (value: string) => selectedItems.some((item) => item === value);
 
     return (
         <Box>
@@ -122,41 +124,42 @@ export const MultiSelectFilter: FC<MultiSelectFilterProps> = ({
                         data-test-id={isFilterMode ? 'allergens-menu' : ''}
                     >
                         <MenuOptionGroup>
-                            {options.map((option, index) => (
-                                <MenuItem
-                                    key={option}
-                                    bg={index % 2 !== 0 ? 'transparent' : 'blackAlpha.100'}
-                                >
-                                    <Checkbox
-                                        size='sm'
-                                        colorScheme='lime'
-                                        isChecked={selectedItems.includes(option)}
-                                        onChange={() => {
-                                            selectedItems.includes(option)
-                                                ? handleRemove(option)
-                                                : handleAdd(option);
-                                        }}
-                                        sx={{
-                                            '& > span:first-of-type': {
-                                                '&[data-checked]': {
-                                                    borderColor: 'lime.400',
-                                                    backgroundColor: 'lime.400',
-                                                },
-                                            },
-                                            '& > span:first-of-type > span': {
-                                                color: 'black',
-                                            },
-                                        }}
-                                        data-test-id={
-                                            option === 'Веганская кухня'
-                                                ? 'checkbox-веганская кухня'
-                                                : `allergen-${index}`
-                                        }
+                            {isArrayWithItems(options) &&
+                                options.map((option, index) => (
+                                    <MenuItem
+                                        key={option.value}
+                                        bg={index % 2 !== 0 ? 'transparent' : 'blackAlpha.100'}
                                     >
-                                        {option}
-                                    </Checkbox>
-                                </MenuItem>
-                            ))}
+                                        <Checkbox
+                                            size='sm'
+                                            colorScheme='lime'
+                                            isChecked={isSelected(option.value)}
+                                            onChange={() => {
+                                                isSelected(option.value)
+                                                    ? handleRemove(option.value)
+                                                    : handleAdd(option);
+                                            }}
+                                            sx={{
+                                                '& > span:first-of-type': {
+                                                    '&[data-checked]': {
+                                                        borderColor: 'lime.400',
+                                                        backgroundColor: 'lime.400',
+                                                    },
+                                                },
+                                                '& > span:first-of-type > span': {
+                                                    color: 'black',
+                                                },
+                                            }}
+                                            data-test-id={
+                                                option.label === 'Веганская кухня'
+                                                    ? 'checkbox-веганская кухня'
+                                                    : `allergen-${index}`
+                                            }
+                                        >
+                                            {option.label}
+                                        </Checkbox>
+                                    </MenuItem>
+                                ))}
                             <InputGroup alignItems='center' pl={6} pr={2} gap={2} py={2}>
                                 <Input
                                     ref={inputRef}

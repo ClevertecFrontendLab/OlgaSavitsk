@@ -24,4 +24,10 @@ export const DATA_TEST_ID = {
     ADD_OTHER_ALLERGEN: 'add-other-allergen',
     ADD_ALLERGEN_BUTTON: 'add-allergen-button',
     FILTER_TAG: 'filter-tag',
+    APP_LOADER: 'app-loader',
+    ERROR_NOTIFICATION: 'error-notification',
+    CLOSE_ALERT: 'close-alert-button',
+    LOAD_MORE_BTN: 'load-more-button',
+    LOADER_SEARCH: 'loader-search-block',
+    ERROR_PAGE: 'error-page-go-home',
 };

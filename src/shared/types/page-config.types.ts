@@ -1,20 +1,17 @@
-import { AdditionalRecipieInfo } from '~/components/pages/category-page/helpers';
-import { Category } from '~/constants/menu.constants';
-
-import { SubCategoryType } from './navigation.types';
+import { SubCategory } from './category.types';
 import { Recipe } from './recipe.types';
 
 export type AdditionalInfo = {
-    title: string;
-    description: string;
-    recipes: AdditionalRecipieInfo;
+    title?: string;
+    description?: string;
+    recipes?: Recipe[];
 };
 
 export type PageConfig = {
     path: string;
     title: string;
     subTitle: string;
-    subMenus?: SubCategoryType[Category];
+    subMenus?: SubCategory[];
     recipes: Recipe[];
     additionalInfo: AdditionalInfo;
 };
@@ -25,15 +22,4 @@ export type Blog = {
     avatar: string;
     username?: string;
     content?: string;
-};
-
-export type SliderType = {
-    id: string;
-    title: string;
-    description: string;
-    category: Array<string>;
-    subcategory: Array<string>;
-    image: string;
-    bookmarks?: number;
-    likes?: number;
 };

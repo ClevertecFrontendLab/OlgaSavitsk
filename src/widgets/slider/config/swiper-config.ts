@@ -7,7 +7,7 @@ export const SWIPER_BREAKPOINTS = {
         slidesPerView: 4.3,
         spaceBetween: 12,
     },
-    1024: {
+    1440: {
         slidesPerView: 3.1,
         spaceBetween: 12,
     },
