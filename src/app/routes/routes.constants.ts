@@ -4,6 +4,10 @@ export const RoutePath = {
     delicious: '/the-juiciest',
     category: '/:category/:subcategory',
     recipe: '/:category/:subcategory/:id',
+    auth: '/auth',
+    signin: '/auth/signin',
+    signup: '/auth/signup',
+    forgotPassword: '/forgotPassword',
     notFound: '/not-found',
 };
 

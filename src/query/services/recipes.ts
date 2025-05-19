@@ -53,7 +53,7 @@ export const RecipeapiSlice = apiSlice
             }),
             getRecipeByCategory: builder.query<Recipe[], RecipeParams>({
                 query: ({ id, ...params }) => ({
-                    url: `/recipe/category/${id}`,
+                    url: `${ApiEndpoints.RECIPES_BY_CATEGORY}/${id}`,
                     method: 'GET',
                     params: getParams(params),
                     name: EndpointNames.GET_RECIPE_BY_CATEGORY,
@@ -71,7 +71,7 @@ export const RecipeapiSlice = apiSlice
             }),
             getRecipeById: builder.query<Recipe, string>({
                 query: (id) => ({
-                    url: `/recipe/${id}`,
+                    url: `${ApiEndpoints.RECIPES}/${id}`,
                     method: 'GET',
                     name: EndpointNames.GET_RECIPE_BY_ID,
                 }),

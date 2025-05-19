@@ -10,7 +10,7 @@ import { FooterComponent } from './components/footer/footer';
 import { HeaderComponent } from './components/header/header';
 import { SideBar } from './components/sidebar/sidebar';
 
-export const Layout = () => {
+export const MainLayout = () => {
     useGetCategoriesQuery();
     const [collapsed, setCollapsed] = useState(false);
     const isMobile = useBreakpointValue({ base: true, xl: false });

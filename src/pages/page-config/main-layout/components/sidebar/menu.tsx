@@ -2,13 +2,13 @@ import { Box, Collapse, VStack } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { NavItem } from '~/components/nav-item/nav-item';
 import { DATA_TEST_ID } from '~/constants/data-test-id';
 import { Category } from '~/constants/menu.constants';
 import { CategoryItem, SubCategory } from '~/shared/types/category.types';
 import { isArrayWithItems } from '~/shared/utils/common';
 import { getCurrentRoute } from '~/shared/utils/get-current-route';
 
-import { NavItem } from '../../../nav-item/nav-item';
 import classes from './index.module.css';
 
 type MenuProps = {

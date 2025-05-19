@@ -1,10 +1,10 @@
 import { type RouteObject } from 'react-router';
 
 import { RoutePath } from '~/app/routes/routes.constants';
-import { CategoryPage } from '~/components/pages/category-page/category-page';
-import { DeliciousPage } from '~/components/pages/delicious-page/delicious-page';
-import { NotFoundPage } from '~/components/pages/not-found/not-found-page';
-import { RecipePage } from '~/components/pages/recipe-page/recipe-page';
+import { CategoryPage } from '~/pages/category-page/category-page';
+import { DeliciousPage } from '~/pages/delicious-page/delicious-page';
+import { NotFoundPage } from '~/pages/not-found/not-found-page';
+import { RecipePage } from '~/pages/recipe-page/recipe-page';
 
 export const categoryRoot: RouteObject = {
     path: RoutePath.category,
